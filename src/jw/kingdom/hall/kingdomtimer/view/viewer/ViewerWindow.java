@@ -9,10 +9,10 @@ import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorEventHandler;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorObservableList;
-import jw.kingdom.hall.kingdomtimer.view.utils.StageWindow;
-import jw.kingdom.hall.kingdomtimer.view.utils.WindowSettings;
-import jw.kingdom.hall.kingdomtimer.view.utils.Screens;
-import jw.kingdom.hall.kingdomtimer.view.utils.WindowController;
+import jw.kingdom.hall.kingdomtimer.view.utils.view.StageWindow;
+import jw.kingdom.hall.kingdomtimer.view.utils.view.WindowSettings;
+import jw.kingdom.hall.kingdomtimer.view.utils.view.Screens;
+import jw.kingdom.hall.kingdomtimer.view.utils.view.WindowController;
 
 import java.awt.*;
 

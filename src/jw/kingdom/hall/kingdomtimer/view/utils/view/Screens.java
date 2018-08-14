@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.view.utils;
+package jw.kingdom.hall.kingdomtimer.view.utils.view;
 
 /**
  * All rights reserved & copyright ©

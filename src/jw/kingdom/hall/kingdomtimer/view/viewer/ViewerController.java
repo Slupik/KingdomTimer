@@ -8,14 +8,13 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import jw.kingdom.hall.kingdomtimer.model.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.view.common.ControlledScreenImpl;
 import jw.kingdom.hall.kingdomtimer.view.common.controller.TimeDisplayController;
-import jw.kingdom.hall.kingdomtimer.view.utils.ScreensController;
+import jw.kingdom.hall.kingdomtimer.view.utils.view.ScreensController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,7 +30,7 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
     @FXML
     Label tvTime;
 
-    private TimeDisplayController timeDisplayer;
+    private TimeDisplayController timeDisplay;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,20 +48,18 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
     }
 
     private void setupTimeView() {
-        timeDisplayer = new TimeDisplayController(tvTime);
-        timeDisplayer.setTime(0);
-        timeDisplayer.setColor(Color.BLACK);
+        timeDisplay = new TimeDisplayController(tvTime);
+        timeDisplay.setTime(0);
+        timeDisplay.setColor(Color.BLACK);
+        TimerCountdown.getInstance().addController(timeDisplay);
 
-        mainContainer.heightProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                tvTime.setPadding(new Insets((int)(mainContainer.heightProperty().get()*0.2),0,0,0));
+        mainContainer.heightProperty().addListener((observable, oldValue, newValue) -> {
+            tvTime.setPadding(new Insets((int)(mainContainer.heightProperty().get()*0.2),0,0,0));
 
-                Font font = tvTime.getFont();
-                double newSize = findFontSizeThatCanFit(font, tvTime.getText(), (int) (mainContainer.widthProperty().get()*0.5));
-                Font newFont = new Font(font.getName(), newSize);
-                tvTime.setFont(newFont);
-            }
+            Font font = tvTime.getFont();
+            double newSize = findFontSizeThatCanFit(font, tvTime.getText(), (int) (mainContainer.widthProperty().get()*0.5));
+            Font newFont = new Font(font.getName(), newSize);
+            tvTime.setFont(newFont);
         });
     }
 

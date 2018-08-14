@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.view.utils;
+package jw.kingdom.hall.kingdomtimer.view.utils.view;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -12,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import jw.kingdom.hall.kingdomtimer.view.panel.PanelWindow;
 
 import java.io.IOException;
 import java.util.HashMap;

@@ -1,12 +1,8 @@
 package jw.kingdom.hall.kingdomtimer.view.common;
 
-import javafx.scene.Parent;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import jw.kingdom.hall.kingdomtimer.view.utils.ControlledScreen;
-import jw.kingdom.hall.kingdomtimer.view.utils.ScreensController;
-
-import javax.xml.soap.Node;
+import jw.kingdom.hall.kingdomtimer.view.utils.view.ControlledScreen;
+import jw.kingdom.hall.kingdomtimer.view.utils.view.ScreensController;
 
 /**
  * All rights reserved & copyright ©

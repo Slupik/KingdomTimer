@@ -1,13 +1,12 @@
 package jw.kingdom.hall.kingdomtimer.view.panel;
 
-import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import jw.kingdom.hall.kingdomtimer.view.utils.Screens;
-import jw.kingdom.hall.kingdomtimer.view.utils.StageWindow;
-import jw.kingdom.hall.kingdomtimer.view.utils.WindowController;
-import jw.kingdom.hall.kingdomtimer.view.utils.WindowSettings;
+import jw.kingdom.hall.kingdomtimer.view.utils.view.Screens;
+import jw.kingdom.hall.kingdomtimer.view.utils.view.StageWindow;
+import jw.kingdom.hall.kingdomtimer.view.utils.view.WindowController;
+import jw.kingdom.hall.kingdomtimer.view.utils.view.WindowSettings;
 
 /**
  * All rights reserved & copyright ©
