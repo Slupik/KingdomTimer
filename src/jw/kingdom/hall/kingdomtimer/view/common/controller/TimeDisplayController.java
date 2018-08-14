@@ -40,7 +40,7 @@ public class TimeDisplayController {
             time = Math.abs(time);
         }
         int hours = time/3600;
-        int minutes = time/60;
+        int minutes = (time%3600)/60;
         int seconds = time%60;
         String basic = getFormattedNumber(hours)+":"+getFormattedNumber(minutes)+":"+getFormattedNumber(seconds);
         if(isSmallerThanZero) {
