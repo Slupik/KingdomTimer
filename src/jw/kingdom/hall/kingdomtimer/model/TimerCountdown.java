@@ -9,6 +9,11 @@ import java.util.List;
 /**
  * All rights reserved & copyright ©
  */
+
+//TODO add buzzer sound
+//TODO add changing color
+//TODO background of timer should gleam
+//TODO add countdown from 0 to up
 public class TimerCountdown {
     private List<TimeDisplayController> controllers = new ArrayList<>();
     private boolean pause = true;

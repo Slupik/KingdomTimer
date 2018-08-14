@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.HBox?>
 
-<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.view.panel.ControllingController">
-   <children>
-      <Label alignment="TOP_CENTER" text="Controlling" />
-   </children>
-</VBox>
+<TabPane fx:id="mainContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.view.panel.ControllingController">
+   <tabs>
+      <Tab fx:id="tabTimeControl" text="Sterowanie czasem">
+        <content>
+          <HBox fx:id="hbTimeControl" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
+      <Tab fx:id="tabSpeakerScreen" text="Ekran mówcy">
+        <content>
+          <HBox fx:id="hbSpeakerScreen" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
+   </tabs>
+</TabPane>
