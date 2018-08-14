@@ -6,13 +6,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
+import jw.kingdom.hall.kingdomtimer.model.MultimediaPreviewer;
 import jw.kingdom.hall.kingdomtimer.model.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.view.common.ControlledScreenImpl;
+import jw.kingdom.hall.kingdomtimer.view.common.controller.MultimediaPreviewController;
 import jw.kingdom.hall.kingdomtimer.view.common.controller.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.view.utils.view.ScreensController;
 
@@ -30,11 +35,18 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
     @FXML
     Label tvTime;
 
+    @FXML
+    VBox vbMultimediaPreview;
+
+    @FXML
+    ImageView imgMultimediaPreview;
+
     private TimeDisplayController timeDisplay;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupTimeView();
+        setupMultimediaPreview();
     }
 
     @Override
@@ -63,6 +75,16 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
         });
     }
 
+    private void setupMultimediaPreview() {
+        vbMultimediaPreview.minWidthProperty().bind(getMainContainer().widthProperty());
+        vbMultimediaPreview.minHeightProperty().bind(getMainContainer().heightProperty());
+
+        imgMultimediaPreview.fitWidthProperty().bind(getMainContainer().widthProperty().multiply(3).divide(7));
+        imgMultimediaPreview.fitHeightProperty().bind(imgMultimediaPreview.fitWidthProperty().divide(9).multiply(16));
+
+        getMultiPreviewer().addController(new MultimediaPreviewController(imgMultimediaPreview));
+    }
+
     private static double findFontSizeThatCanFit(Font font, String s, int maxWidth) {
         double fontSize = font.getSize();
         double width = textWidth(font, s);
@@ -76,5 +98,9 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
         Text text = new Text(s);
         text.setFont(font);
         return text.getBoundsInLocal().getWidth();
+    }
+
+    private static MultimediaPreviewer getMultiPreviewer() {
+        return MultimediaPreviewer.getInstance();
     }
 }
