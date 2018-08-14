@@ -34,6 +34,11 @@ public class TimerCountdown {
         }
     }
 
+    public void stop() {
+        setPause(true);
+        setTime(0);
+    }
+
     public void startTime(int time) {
         setTime(time);
         setPause(false);
