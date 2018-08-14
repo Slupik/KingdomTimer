@@ -17,6 +17,7 @@ import java.util.List;
 public class TimerCountdown {
     private List<TimeDisplayController> controllers = new ArrayList<>();
     private boolean pause = true;
+    private boolean stop = true;
     private int lastMaxTime = 0;
     private int time = 0;
     private Thread countdown;
@@ -36,12 +37,18 @@ public class TimerCountdown {
 
     public void stop() {
         setPause(true);
+        stop = true;
         setTime(0);
     }
 
     public void startTime(int time) {
         setTime(time);
         setPause(false);
+        stop = false;
+    }
+
+    public boolean isStop() {
+        return stop;
     }
 
     public boolean isPause() {
@@ -51,6 +58,7 @@ public class TimerCountdown {
     public void setPause(boolean pause) {
         this.pause = pause;
         if(!pause) {
+            reloadThread();
             countdown.start();
         }
     }
@@ -92,10 +100,16 @@ public class TimerCountdown {
         return null;
     }
 
+    private void reloadThread() {
+        if(countdown!=null) {
+            countdown.stop();
+        }
+        countdown = null;
+        countdown = getThread();
+    }
 
-    private static TimerCountdown instance;
-    private TimerCountdown(){
-        countdown = new Thread(()->{
+    private Thread getThread() {
+        return new Thread(() -> {
             while (!pause) {
                 try {
                     Thread.sleep(1000);
@@ -105,6 +119,11 @@ public class TimerCountdown {
                 countDown();
             }
         });
+    }
+
+    private static TimerCountdown instance;
+    private TimerCountdown(){
+        reloadThread();
     }
     public static TimerCountdown getInstance(){
         if(instance==null) {
