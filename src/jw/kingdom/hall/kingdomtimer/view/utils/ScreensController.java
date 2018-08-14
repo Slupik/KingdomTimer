@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import jw.kingdom.hall.kingdomtimer.view.panel.PanelWindow;
 
@@ -17,12 +18,14 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class ScreensController extends StackPane {
-    private static final PanelWindow ControllingWindow = new PanelWindow();
+//    private static final PanelWindow ControllingWindow = new PanelWindow();
+    private final StageWindow stageWindow;
 
     private HashMap<String, Node> screens = new HashMap<>();
 
-    ScreensController() {
+    ScreensController(StageWindow stageWindow) {
         super();
+        this.stageWindow = stageWindow;
     }
 
     void addScreen(String name, Node screen){
@@ -100,7 +103,7 @@ public class ScreensController extends StackPane {
     }
 
     void doAutoSize(){
-        ControllingWindow.getStage().sizeToScene();
+//        stageWindow.getStage().sizeToScene();
     }
 
     void addAnimation(Timeline animation){
@@ -111,5 +114,9 @@ public class ScreensController extends StackPane {
 
             }
         });
+    }
+
+    public Stage getStage(){
+        return stageWindow.getStage();
     }
 }

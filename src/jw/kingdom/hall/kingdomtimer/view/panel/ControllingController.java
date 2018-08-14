@@ -1,6 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.view.panel;
 
 import javafx.fxml.Initializable;
+import javafx.scene.layout.Region;
 import jw.kingdom.hall.kingdomtimer.view.common.ControlledScreenImpl;
 import jw.kingdom.hall.kingdomtimer.view.utils.ControlledScreen;
 import jw.kingdom.hall.kingdomtimer.view.utils.ScreensController;
@@ -15,5 +16,10 @@ public class ControllingController extends ControlledScreenImpl implements Initi
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    @Override
+    protected Region getMainContainer() {
+        return null;
     }
 }

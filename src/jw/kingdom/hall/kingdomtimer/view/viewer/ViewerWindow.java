@@ -9,6 +9,7 @@ import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorEventHandler;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorObservableList;
+import jw.kingdom.hall.kingdomtimer.view.utils.StageWindow;
 import jw.kingdom.hall.kingdomtimer.view.utils.WindowSettings;
 import jw.kingdom.hall.kingdomtimer.view.utils.Screens;
 import jw.kingdom.hall.kingdomtimer.view.utils.WindowController;
@@ -18,13 +19,17 @@ import java.awt.*;
 /**
  * All rights reserved & copyright ©
  */
-public class ViewerWindow {
-    public final static WindowController CONTROLLER = new WindowController();
+public class ViewerWindow implements StageWindow {
+    public final WindowController CONTROLLER;
     private static Monitor actualDevice;
 
     private static Stage stage;
     private static Scene scene;
     private static Group root;
+
+    public ViewerWindow() {
+        CONTROLLER = new WindowController(this);
+    }
 
     public void build(Stage primaryStage){
         stage = primaryStage;
@@ -77,6 +82,7 @@ public class ViewerWindow {
         CONTROLLER.loadScreen(Screens.VIEWER);
     }
 
+    @Override
     public Stage getStage() {
         return stage;
     }
@@ -119,6 +125,7 @@ public class ViewerWindow {
             getStage().setY(
                     monitor.getDefaultConfiguration().getBounds().getY()
             );
+//            getStage().getScene().wid
         });
     }
 }

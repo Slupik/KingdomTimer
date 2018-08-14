@@ -11,8 +11,8 @@ public class WindowController {
         return CONTROLLER;
     }
 
-    public WindowController(){
-        CONTROLLER = new ScreensController();
+    public WindowController(StageWindow stageWindow){
+        CONTROLLER = new ScreensController(stageWindow);
     }
 
     public void addScreen(String name, Node screen){
