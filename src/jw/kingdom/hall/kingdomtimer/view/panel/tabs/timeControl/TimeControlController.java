@@ -85,12 +85,6 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
                 tcBuzzer,
                 tcName,
                 tcTime);
-
-        MeetingTask example = new MeetingTask();
-        example.setName("Test name");
-        example.setUseBuzzer(true);
-        example.setTimeInSeconds(2*3600+5*60+23);
-        tableController.getList().add(example);
     }
 
     private void loadImage(Button button, String imgPath) {
