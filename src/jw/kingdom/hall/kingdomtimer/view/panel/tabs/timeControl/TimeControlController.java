@@ -109,6 +109,22 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
     }
 
     @FXML
+    private void handleAddTask(ActionEvent event) {
+        MeetingTask task = new MeetingTask();
+
+        task.setName(tfName.getText());
+        tfName.clear();
+
+        task.setTimeInSeconds(atfTime.getAllSeconds());
+        atfTime.clear();
+
+        task.setUseBuzzer(cbBuzzer.isSelected());
+        cbBuzzer.setSelected(false);
+
+        tableController.getList().add(task);
+    }
+
+    @FXML
     private void handleLoadTimeAction(ActionEvent event) {
         getTimer().startTime(tfFastTime.getAllSeconds());
     }

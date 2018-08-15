@@ -111,7 +111,7 @@
                <Insets left="8.0" />
             </HBox.margin>
             <children>
-               <Button mnemonicParsing="false" text="Dodaj" />
+               <Button mnemonicParsing="false" onAction="#handleAddTask" text="Dodaj" />
             </children>
          </VBox>
       </children>
