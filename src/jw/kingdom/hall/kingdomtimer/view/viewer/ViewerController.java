@@ -1,7 +1,5 @@
 package jw.kingdom.hall.kingdomtimer.view.viewer;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -13,9 +11,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
-import jw.kingdom.hall.kingdomtimer.model.MultimediaPreviewer;
-import jw.kingdom.hall.kingdomtimer.model.TimerCountdown;
+import jw.kingdom.hall.kingdomtimer.domain.MultimediaPreviewer;
+import jw.kingdom.hall.kingdomtimer.domain.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.view.common.ControlledScreenImpl;
 import jw.kingdom.hall.kingdomtimer.view.common.controller.MultimediaPreviewController;
 import jw.kingdom.hall.kingdomtimer.view.common.controller.TimeDisplayController;

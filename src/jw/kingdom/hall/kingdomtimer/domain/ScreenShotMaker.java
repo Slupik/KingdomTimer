@@ -1,12 +1,10 @@
-package jw.kingdom.hall.kingdomtimer.model;
+package jw.kingdom.hall.kingdomtimer.domain;
 
 import com.google.common.io.Resources;
-import sun.rmi.runtime.Log;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 

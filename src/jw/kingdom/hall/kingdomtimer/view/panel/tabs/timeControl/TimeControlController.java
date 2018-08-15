@@ -1,29 +1,23 @@
 package jw.kingdom.hall.kingdomtimer.view.panel.tabs.timeControl;
 
-import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
-import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
-import javafx.scene.shape.SVGPath;
+import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
-import jw.kingdom.hall.kingdomtimer.model.TimerCountdown;
+import jw.kingdom.hall.kingdomtimer.domain.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.view.common.ControlledScreenImpl;
 import jw.kingdom.hall.kingdomtimer.view.common.controller.TimeDisplayController;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -47,7 +41,32 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
     @FXML
     TimeField tfFastTime;
 
+    @FXML
+    private TextField tfName;
+
+    @FXML
+    private TimeField atfTime;
+
+    @FXML
+    private CheckBox cbBuzzer;
+
+    @FXML
+    private TableView<MeetingTask> tvList;
+
+    @FXML
+    private TableColumn<MeetingTask, Button> tcDelete;
+
+    @FXML
+    private TableColumn<MeetingTask, Button> tcBuzzer;
+
+    @FXML
+    private TableColumn<MeetingTask, String> tcName;
+
+    @FXML
+    private TableColumn<MeetingTask, TimeField> tcTime;
+
     private TimeDisplayController timeDisplay;
+    private TaskTableController tableController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -58,6 +77,11 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
         timeDisplay = new TimeDisplayController(lblTime);
         timeDisplay.setTime(0);
         getTimer().addController(timeDisplay);
+        tableController = new TaskTableController(tvList,
+                tcDelete,
+                tcBuzzer,
+                tcName,
+                tcTime);
     }
 
     private void loadImage(Button button, String imgPath) {

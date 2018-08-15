@@ -3,7 +3,7 @@ package jw.kingdom.hall.kingdomtimer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
-import jw.kingdom.hall.kingdomtimer.model.MultimediaPreviewer;
+import jw.kingdom.hall.kingdomtimer.domain.MultimediaPreviewer;
 import jw.kingdom.hall.kingdomtimer.view.panel.PanelWindow;
 import jw.kingdom.hall.kingdomtimer.view.viewer.ViewerWindow;
 

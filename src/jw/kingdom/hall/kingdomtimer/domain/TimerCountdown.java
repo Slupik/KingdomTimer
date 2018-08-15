@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.model;
+package jw.kingdom.hall.kingdomtimer.domain;
 
 import jw.kingdom.hall.kingdomtimer.view.common.controller.TimeDisplayController;
 import org.jetbrains.annotations.Nullable;

@@ -2,15 +2,18 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.view.panel.tabs.timeControl.TimeControlController">
+<VBox prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.view.panel.tabs.timeControl.TimeControlController">
    <HBox>
       <children>
          <Label fx:id="lblTime" text="12:43:02">
@@ -59,15 +62,60 @@
          <Label text="Wczytuje czas poza kolejką (ingoruje tabelkę i obecny czas)" />
       </children>
       <VBox.margin>
-         <Insets bottom="16.0" />
+         <Insets />
       </VBox.margin>
    </VBox>
-   <TableView prefHeight="200.0" prefWidth="200.0">
+   <Separator prefWidth="200.0">
+      <VBox.margin>
+         <Insets bottom="8.0" top="8.0" />
+      </VBox.margin>
+   </Separator>
+   <HBox>
+      <children>
+         <VBox>
+            <children>
+               <HBox alignment="CENTER_LEFT">
+                  <children>
+                     <Label text="Nazwa: " />
+                     <TextField fx:id="tfName" prefWidth="500.0" />
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0">
+                  <children>
+                     <Label text="Czas: " />
+                     <TimeField fx:id="atfTime" />
+                  </children>
+                  <VBox.margin>
+                     <Insets top="4.0" />
+                  </VBox.margin>
+               </HBox>
+               <CheckBox fx:id="cbBuzzer" mnemonicParsing="false" text="Włącz sygnał">
+                  <padding>
+                     <Insets top="8.0" />
+                  </padding>
+               </CheckBox>
+            </children>
+         </VBox>
+         <VBox alignment="CENTER_LEFT">
+            <HBox.margin>
+               <Insets left="8.0" />
+            </HBox.margin>
+            <children>
+               <Button mnemonicParsing="false" text="Dodaj" />
+            </children>
+         </VBox>
+      </children>
+   </HBox>
+   <TableView fx:id="tvList">
      <columns>
-         <TableColumn prefWidth="75.0" text="Syngał" />
-       <TableColumn prefWidth="75.0" text="Punkt" />
-       <TableColumn prefWidth="75.0" text="Czas" />
+         <TableColumn fx:id="tcDelete" prefWidth="75.0" text="Usuń" />
+         <TableColumn fx:id="tcBuzzer" prefWidth="75.0" text="Syngał" />
+       <TableColumn fx:id="tcName" prefWidth="75.0" text="Punkt" />
+       <TableColumn fx:id="tcTime" prefWidth="75.0" text="Czas" />
      </columns>
+      <VBox.margin>
+         <Insets top="16.0" />
+      </VBox.margin>
    </TableView>
    <padding>
       <Insets bottom="16.0" left="16.0" right="16.0" top="8.0" />

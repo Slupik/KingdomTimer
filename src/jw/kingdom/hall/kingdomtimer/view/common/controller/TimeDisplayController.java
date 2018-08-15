@@ -34,7 +34,7 @@ public class TimeDisplayController {
         this.text.setText(text);
     }
 
-    private static String secondsToText(int time) {
+    public static String secondsToText(int time) {
         boolean isSmallerThanZero = time<0;
         if(isSmallerThanZero) {
             time = Math.abs(time);
