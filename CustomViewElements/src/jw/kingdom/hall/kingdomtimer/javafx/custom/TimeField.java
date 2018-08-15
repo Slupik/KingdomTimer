@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
  */
 public class TimeField extends TextField {
 
-
     public TimeField(){
         setText("00:00:00");
         setPrefColumnCount(8);
@@ -48,5 +47,9 @@ public class TimeField extends TextField {
 
     public int getAllSeconds() {
         return TimeFieldUtils.getAllSeconds(getText());
+    }
+
+    public void setSeconds(int time) {
+        setText(TimeFieldUtils.secondsToText(time));
     }
 }

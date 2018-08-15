@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="KingdomTimer">
+    <output-path>$PROJECT_DIR$/out/artifacts/KingdomTimer</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="jw.kingdom.hall.kingdomtimer.Main" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="" />
+        <option name="vendor" value="" />
+        <option name="version" value="0.1" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="KingdomTimer.jar">
+        <element id="module-output" name="KingdomTimer" />
+        <element id="module-output" name="CustomViewElements" />
+        <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0.jar" path-in-jar="/" />
+      </element>
+    </root>
+  </artifact>
+</component>

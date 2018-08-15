@@ -1,6 +1,9 @@
 package jw.kingdom.hall.kingdomtimer.view.panel.tabs.timeControl;
 
 import com.google.common.io.Resources;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,10 +57,10 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
     private TableView<MeetingTask> tvList;
 
     @FXML
-    private TableColumn<MeetingTask, Button> tcDelete;
+    private TableColumn<MeetingTask, String> tcDelete;
 
     @FXML
-    private TableColumn<MeetingTask, Button> tcBuzzer;
+    private TableColumn<MeetingTask, String> tcBuzzer;
 
     @FXML
     private TableColumn<MeetingTask, String> tcName;
@@ -82,6 +85,12 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
                 tcBuzzer,
                 tcName,
                 tcTime);
+
+        MeetingTask example = new MeetingTask();
+        example.setName("Test name");
+        example.setUseBuzzer(true);
+        example.setTimeInSeconds(2*3600+5*60+23);
+        tableController.getList().add(example);
     }
 
     private void loadImage(Button button, String imgPath) {

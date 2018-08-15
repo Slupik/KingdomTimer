@@ -3,7 +3,7 @@ package jw.kingdom.hall.kingdomtimer.javafx.custom;
 /**
  * All rights reserved & copyright ©
  */
-class TimeFieldUtils {
+public class TimeFieldUtils {
 
     static String getFormattedText(String text) {
         String[] elements = text.split(":");
@@ -90,7 +90,7 @@ class TimeFieldUtils {
         return -1 != getAllSeconds(text);
     }
 
-    static int getAllSeconds(String text) {
+    public static int getAllSeconds(String text) {
         String[] parts = text.split(":");
         if(parts.length!=3) {
             return -1;
@@ -121,5 +121,32 @@ class TimeFieldUtils {
             return false;
         }
         return true;
+    }
+
+    /*
+    FROM SECONDS TO TEXT
+     */
+
+    static String secondsToText(int time) {
+        boolean isSmallerThanZero = time<0;
+        if(isSmallerThanZero) {
+            time = Math.abs(time);
+        }
+        int hours = time/3600;
+        int minutes = (time%3600)/60;
+        int seconds = time%60;
+        String basic = getFormattedNumber(hours)+":"+getFormattedNumber(minutes)+":"+getFormattedNumber(seconds);
+        if(isSmallerThanZero) {
+            return "-"+basic;
+        } else {
+            return basic;
+        }
+    }
+
+    static String getFormattedNumber(int number) {
+        if(number<10) {
+            return "0"+Integer.toString(number);
+        }
+        return Integer.toString(number);
     }
 }
