@@ -10,6 +10,8 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * All rights reserved & copyright ©
@@ -21,6 +23,7 @@ public class MultimediaPreviewer {
     private boolean deadPause = false;//pause because nothing showing changes
     private Monitor monitor;
     private int refreshInterval = 500;
+    private ExecutorService executor = Executors.newFixedThreadPool(5);
 
     public void setRefreshInterval(int interval) {
         refreshInterval = interval;
@@ -28,8 +31,10 @@ public class MultimediaPreviewer {
 
     private void makeSS() {
         if(!pause && !deadPause) {
-            Image image = getMonitorScreen();
-            notifyControllers(image);
+            executor.submit(() -> {
+                Image image = getMonitorScreen();
+                notifyControllers(image);
+            });
         }
     }
 
