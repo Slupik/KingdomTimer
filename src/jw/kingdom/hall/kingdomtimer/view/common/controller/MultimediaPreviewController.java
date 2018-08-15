@@ -12,6 +12,7 @@ import jw.kingdom.hall.kingdomtimer.view.utils.Randomizer;
  */
 public class MultimediaPreviewController {
     private String id = Randomizer.randomStandardString(10);
+    private boolean disableHiding = false;
 
     private ImageView view;
 
@@ -29,5 +30,19 @@ public class MultimediaPreviewController {
 
     public String getId(){
         return id;
+    }
+
+    public void showPreview(boolean value) {
+        if(!disableHiding) {
+            view.setVisible(value);
+        }
+    }
+
+    public boolean isShowing() {
+        return view.isVisible();
+    }
+
+    public void setDisableHiding(boolean disableHiding) {
+        this.disableHiding = disableHiding;
     }
 }

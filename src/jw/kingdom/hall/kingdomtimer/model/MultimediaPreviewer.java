@@ -15,15 +15,19 @@ import java.util.List;
  * All rights reserved & copyright ©
  */
 public class MultimediaPreviewer {
-    private static int REFRESH_INTERVAL = 500;
-
     private List<MultimediaPreviewController> controllers = new ArrayList<>();
     private Thread countdown;
     private boolean pause = true;
+    private boolean deadPause = false;//pause because nothing showing changes
     private Monitor monitor;
+    private int refreshInterval = 500;
 
-    private void countDown() {
-        if(!pause) {
+    public void setRefreshInterval(int interval) {
+        refreshInterval = interval;
+    }
+
+    private void makeSS() {
+        if(!pause && !deadPause) {
             Image image = getMonitorScreen();
             notifyControllers(image);
         }
@@ -87,11 +91,11 @@ public class MultimediaPreviewer {
         return new Thread(() -> {
             while (!pause) {
                 try {
-                    Thread.sleep(REFRESH_INTERVAL);
+                    Thread.sleep(refreshInterval);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                countDown();
+                makeSS();
             }
         });
     }
@@ -125,5 +129,22 @@ public class MultimediaPreviewer {
             instance = new MultimediaPreviewer();
         }
         return instance;
+    }
+
+    public void showPreviews(boolean value) {
+        for(MultimediaPreviewController controller:controllers) {
+            controller.showPreview(value);
+        }
+        improvePerformance();
+    }
+
+    private void improvePerformance() {
+        boolean shouldRefresh = false;
+        for(MultimediaPreviewController controller:controllers) {
+            if(controller.isShowing()) {
+                shouldRefresh = true;
+            }
+        }
+        deadPause = !shouldRefresh;
     }
 }

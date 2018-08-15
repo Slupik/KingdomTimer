@@ -13,7 +13,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         MonitorManager.initialize();
         new PanelWindow().build(primaryStage);
-        new ViewerWindow().build(new Stage());
+        ViewerWindow.getInstance().build(new Stage());
 
         MultimediaPreviewer.getInstance().setPause(false);
     }

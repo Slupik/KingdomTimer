@@ -15,11 +15,15 @@ import jw.kingdom.hall.kingdomtimer.view.utils.view.Screens;
 import jw.kingdom.hall.kingdomtimer.view.utils.view.WindowController;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * All rights reserved & copyright ©
  */
 public class ViewerWindow implements StageWindow {
+    private static ViewerWindow instance
+            ;
     public final WindowController CONTROLLER;
     private static Monitor actualDevice;
 
@@ -27,8 +31,14 @@ public class ViewerWindow implements StageWindow {
     private static Scene scene;
     private static Group root;
 
-    public ViewerWindow() {
+    private ViewerWindow() {
         CONTROLLER = new WindowController(this);
+    }
+    public static ViewerWindow getInstance(){
+        if(null == instance) {
+            instance = new ViewerWindow();
+        }
+        return instance;
     }
 
     public void build(Stage primaryStage){
@@ -104,9 +114,10 @@ public class ViewerWindow implements StageWindow {
         }
     }
 
-    private void setMonitor(Monitor monitor) {
+    public void setMonitor(Monitor monitor) {
+        actualDevice = monitor;
+        notifyListeners(monitor);
         Platform.runLater(()->{
-            actualDevice = monitor;
             if(monitor==null){
                 getStage().hide();
                 return;
@@ -115,6 +126,7 @@ public class ViewerWindow implements StageWindow {
             if(!getStage().isShowing()){
                 getStage().show();
             }
+            stage.setMaximized(false);
 
             getStage().setWidth(monitor.getDisplayMode().getWidth());
             getStage().setHeight(monitor.getDisplayMode().getHeight());
@@ -125,7 +137,37 @@ public class ViewerWindow implements StageWindow {
             getStage().setY(
                     monitor.getDefaultConfiguration().getBounds().getY()
             );
-//            getStage().getScene().wid
+            stage.setMaximized(true);
         });
+    }
+
+    public Monitor getMonitor() {
+        return actualDevice;
+    }
+
+    /*
+    Listeners
+     */
+    private List<Listener> monitorChangeListenerList = new ArrayList<>();
+    public void addOnMonitorChangeListener(Listener listener) {
+        monitorChangeListenerList.add(listener);
+    }
+    public void removeOnMonitorChangeListener(Listener listener) {
+        for(Listener value:monitorChangeListenerList) {
+            if(value.getId().equals(listener.getId())) {
+                monitorChangeListenerList.remove(value);
+            }
+        }
+    }
+
+    private void notifyListeners(Monitor monitor) {
+        for(Listener listener:monitorChangeListenerList) {
+            listener.onMonitorChange(monitor);
+        }
+    }
+
+    public interface Listener {
+        void onMonitorChange(Monitor monitor);
+        String getId();
     }
 }
