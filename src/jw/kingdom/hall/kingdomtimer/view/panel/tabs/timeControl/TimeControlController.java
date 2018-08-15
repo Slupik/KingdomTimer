@@ -1,28 +1,20 @@
 package jw.kingdom.hall.kingdomtimer.view.panel.tabs.timeControl;
 
-import com.google.common.io.Resources;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
+import jw.kingdom.hall.kingdomtimer.domain.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
-import jw.kingdom.hall.kingdomtimer.domain.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.view.common.ControlledScreenImpl;
 import jw.kingdom.hall.kingdomtimer.view.common.controller.TimeDisplayController;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static jw.kingdom.hall.kingdomtimer.view.utils.ButtonUtils.loadImage;
 
 /**
  * All rights reserved & copyright ©
@@ -40,6 +32,9 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
 
     @FXML
     Button btnStop;
+
+    @FXML
+    Button btnBuzzer;
 
     @FXML
     TimeField tfFastTime;
@@ -70,12 +65,14 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
 
     private TimeDisplayController timeDisplay;
     private TaskTableController tableController;
+    private BtnBuzzerController buzzerController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadImage(btnStart, "icons/baseline_play_arrow_black_48dp.png");
         loadImage(btnPause, "icons/baseline_pause_black_48dp.png");
         loadImage(btnStop, "icons/baseline_stop_black_48dp.png");
+        buzzerController = new BtnBuzzerController(btnBuzzer);
 
         timeDisplay = new TimeDisplayController(lblTime);
         timeDisplay.setTime(0);
@@ -85,21 +82,6 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
                 tcBuzzer,
                 tcName,
                 tcTime);
-    }
-
-    private void loadImage(Button button, String imgPath) {
-        URL url = Resources.getResource(imgPath);
-        try {
-            BufferedImage bufferedImage = ImageIO.read(url);
-            Image graphic = SwingFXUtils.toFXImage(bufferedImage, null);
-            ImageView image = new ImageView(graphic);
-            image.setPreserveRatio(true);
-            image.setFitHeight(30);
-            button.setGraphic(image);
-            button.setText("");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
@@ -141,6 +123,7 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
             MeetingTask task = tvList.getItems().get(0);
             getTimer().startTime(task.getTimeInSeconds());
             tableController.getList().remove(task);
+            buzzerController.loadTask(task);
         }
     }
 
@@ -152,6 +135,7 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
     @FXML
     private void onStopAction(ActionEvent event) {
         getTimer().stop();
+        buzzerController.loadTask(null);
     }
 
     @Override

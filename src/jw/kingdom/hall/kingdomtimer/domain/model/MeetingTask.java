@@ -1,5 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.domain.model;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Button;
@@ -11,7 +13,7 @@ import jw.kingdom.hall.kingdomtimer.view.utils.Randomizer;
  */
 public class MeetingTask {
     public final String ID = Randomizer.randomStandardString(16);
-    private boolean useBuzzer = false;
+    private BooleanProperty useBuzzer = new SimpleBooleanProperty(false);
     private StringProperty name = new SimpleStringProperty("???");
     private StringProperty formattedTime = new SimpleStringProperty("00:00:00");
     private TimeField tfTime = new TimeField();
@@ -24,12 +26,16 @@ public class MeetingTask {
         this.tfTime = tfTime;
     }
 
-    public boolean isUseBuzzer() {
+    public BooleanProperty useBuzzerProperty() {
         return useBuzzer;
     }
 
+    public boolean isUseBuzzer() {
+        return useBuzzer.getValue();
+    }
+
     public void setUseBuzzer(boolean useBuzzer) {
-        this.useBuzzer = useBuzzer;
+        this.useBuzzer.setValue(useBuzzer);
     }
 
     public StringProperty nameProperty() {
