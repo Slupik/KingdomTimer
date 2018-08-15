@@ -57,6 +57,16 @@
                      <Insets left="16.0" />
                   </HBox.margin>
                </Button>
+               <Button layoutX="130.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleAddTime" text="Dodaj">
+                  <HBox.margin>
+                     <Insets left="8.0" />
+                  </HBox.margin>
+               </Button>
+               <Button layoutX="188.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleRemoveTime" text="Odejmij">
+                  <HBox.margin>
+                     <Insets left="8.0" />
+                  </HBox.margin>
+               </Button>
             </children>
          </HBox>
          <Label text="Wczytuje czas poza kolejką (ingoruje tabelkę i obecny czas)" />

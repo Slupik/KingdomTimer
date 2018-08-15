@@ -105,6 +105,16 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
     }
 
     @FXML
+    private void handleAddTime(ActionEvent event) {
+        getTimer().setTime(getTimer().getTime()+tfFastTime.getAllSeconds());
+    }
+
+    @FXML
+    private void handleRemoveTime(ActionEvent event) {
+        getTimer().setTime(getTimer().getTime()-tfFastTime.getAllSeconds());
+    }
+
+    @FXML
     private void onStartAction(ActionEvent event) {
         if(getTimer().isPause() && !getTimer().isStop()){
             getTimer().startTime(getTimer().getTime());
