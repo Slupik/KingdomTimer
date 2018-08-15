@@ -138,7 +138,9 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
         if(getTimer().isPause() && !getTimer().isStop()){
             getTimer().startTime(getTimer().getTime());
         } else {
-            //TODO full implement in the future (is needs table to working)
+            MeetingTask task = tvList.getItems().get(0);
+            getTimer().startTime(task.getTimeInSeconds());
+            tableController.getList().remove(task);
         }
     }
 
