@@ -126,7 +126,7 @@
          <TableColumn fx:id="tcDelete" minWidth="50.0" prefWidth="-1.0" text="Usuń" />
          <TableColumn fx:id="tcBuzzer" minWidth="75.0" prefWidth="-1.0" text="Syngał" />
        <TableColumn fx:id="tcTime" minWidth="75.0" prefWidth="-1.0" text="Czas" />
-       <TableColumn fx:id="tcName" minWidth="100.0" prefWidth="-1.0" text="Punkt" />
+       <TableColumn fx:id="tcName" minWidth="100.0" prefWidth="552.0" text="Punkt" />
      </columns>
       <VBox.margin>
          <Insets top="16.0" />

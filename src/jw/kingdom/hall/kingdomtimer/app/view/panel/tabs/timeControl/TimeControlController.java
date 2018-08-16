@@ -1,10 +1,12 @@
 package jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
+import jw.kingdom.hall.kingdomtimer.data.PredefinedTaskList;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
@@ -12,6 +14,9 @@ import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
 import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
 
 import java.net.URL;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static jw.kingdom.hall.kingdomtimer.app.view.utils.ButtonUtils.loadImage;
@@ -82,6 +87,23 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
                 tcBuzzer,
                 tcName,
                 tcTime);
+
+        new Thread(() -> {
+            List<MeetingTask> tasks;
+            if(isWeekend()) {
+                tasks = PredefinedTaskList.getWeekendTasks();
+            } else {
+                tasks = PredefinedTaskList.getWeekTasks();
+            }
+            tableController.getList().addAll(tasks);
+        }).start();
+    }
+
+    private boolean isWeekend() {
+        Calendar cl = Calendar.getInstance();
+        cl.setTime(new Date());
+        return (cl.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY ||
+                cl.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY);
     }
 
     @FXML

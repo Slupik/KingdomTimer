@@ -16,6 +16,7 @@
         <element id="module-output" name="KingdomTimer" />
         <element id="module-output" name="CustomViewElements" />
         <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar" path-in-jar="/" />
       </element>
     </root>
   </artifact>
