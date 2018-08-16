@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
-import jw.kingdom.hall.kingdomtimer.domain.TimerCountdown;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 import jw.kingdom.hall.kingdomtimer.view.common.ControlledScreenImpl;
@@ -102,26 +102,28 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
 
     @FXML
     private void handleLoadTimeAction(ActionEvent event) {
-        getTimer().startTime(tfFastTime.getAllSeconds());
+        MeetingTask task = new MeetingTask();
+        task.setTimeInSeconds(tfFastTime.getAllSeconds());
+        getTimer().start(task);
     }
 
     @FXML
     private void handleAddTime(ActionEvent event) {
-        getTimer().setTime(getTimer().getTime()+tfFastTime.getAllSeconds());
+        getTimer().addTime(tfFastTime.getAllSeconds());
     }
 
     @FXML
     private void handleRemoveTime(ActionEvent event) {
-        getTimer().setTime(getTimer().getTime()-tfFastTime.getAllSeconds());
+        getTimer().removeTime(tfFastTime.getAllSeconds());
     }
 
     @FXML
     private void onStartAction(ActionEvent event) {
         if(getTimer().isPause() && !getTimer().isStop()){
-            getTimer().startTime(getTimer().getTime());
+            getTimer().resume();
         } else {
             MeetingTask task = tvList.getItems().get(0);
-            getTimer().startTime(task.getTimeInSeconds());
+            getTimer().start(task);
             tableController.getList().remove(task);
             buzzerController.loadTask(task);
         }
@@ -129,7 +131,7 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
 
     @FXML
     private void onPauseAction(ActionEvent event) {
-        getTimer().setPause(true);
+        getTimer().pause();
     }
 
     @FXML

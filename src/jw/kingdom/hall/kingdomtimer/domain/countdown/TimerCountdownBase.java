@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.domain;
+package jw.kingdom.hall.kingdomtimer.domain.countdown;
 
 import jw.kingdom.hall.kingdomtimer.view.common.controller.TimeDisplayController;
 import org.jetbrains.annotations.Nullable;
@@ -10,11 +10,7 @@ import java.util.List;
  * All rights reserved & copyright ©
  */
 
-//TODO add buzzer sound
-//TODO add changing color
-//TODO background of timer should gleam
-//TODO add countdown from 0 to up
-public class TimerCountdown {
+abstract class TimerCountdownBase {
     private List<TimeDisplayController> controllers = new ArrayList<>();
     private boolean pause = true;
     private boolean stop = true;
@@ -35,27 +31,27 @@ public class TimerCountdown {
         }
     }
 
-    public void stop() {
+    protected void stop() {
         setPause(true);
         stop = true;
         setTime(0);
     }
 
-    public void startTime(int time) {
+    protected void startTime(int time) {
         setTime(time);
         setPause(false);
         stop = false;
     }
 
-    public boolean isStop() {
+    protected boolean isStop() {
         return stop;
     }
 
-    public boolean isPause() {
+    protected boolean isPause() {
         return pause;
     }
 
-    public void setPause(boolean pause) {
+    protected void setPause(boolean pause) {
         this.pause = pause;
         if(!pause) {
             reloadThread();
@@ -63,23 +59,23 @@ public class TimerCountdown {
         }
     }
 
-    public int getTime() {
+    protected int getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    protected void setTime(int time) {
         this.lastMaxTime = time;
         this.time = time;
         notifyControllers();
     }
 
-    public void addController(TimeDisplayController controller) {
+    protected void addController(TimeDisplayController controller) {
         if(!isOnList(controller)) {
             controllers.add(controller);
         }
     }
 
-    public void removeController(TimeDisplayController controller) {
+    protected void removeController(TimeDisplayController controller) {
         TimeDisplayController display = getControllerById(controller.getId());
         if(display!=null) {
             controllers.remove(display);
@@ -100,7 +96,7 @@ public class TimerCountdown {
         return null;
     }
 
-    private void reloadThread() {
+    void reloadThread() {
         if(countdown!=null) {
             countdown.stop();
         }
@@ -119,16 +115,5 @@ public class TimerCountdown {
                 countDown();
             }
         });
-    }
-
-    private static TimerCountdown instance;
-    private TimerCountdown(){
-        reloadThread();
-    }
-    public static TimerCountdown getInstance(){
-        if(instance==null) {
-            instance = new TimerCountdown();
-        }
-        return instance;
     }
 }

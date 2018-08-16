@@ -3,6 +3,8 @@ package jw.kingdom.hall.kingdomtimer.view.panel.tabs.timeControl;
 
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.Button;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
 import static jw.kingdom.hall.kingdomtimer.view.utils.ButtonUtils.loadImage;
@@ -29,13 +31,32 @@ public class BtnBuzzerController {
                 setImageForCurrentCondition();
             }
         });
+        TimerCountdown.getInstance().addListener(new TimerCountdownListener() {
+            @Override
+            public void onStart(MeetingTask task) {
+                super.onStart(task);
+                BtnBuzzerController.this.task = task;
+                setImageForCurrentCondition();
+            }
+
+            @Override
+            public void onStop() {
+                super.onStop();
+                BtnBuzzerController.this.task = null;
+                setImageForCurrentCondition();
+            }
+        });
     }
 
     public void loadTask(MeetingTask task) {
-        task.useBuzzerProperty().removeListener(buzzerConditionListener);
+        if(null != this.task) {
+            this.task.useBuzzerProperty().removeListener(buzzerConditionListener);
+        }
         this.task = task;
-        this.task.useBuzzerProperty().addListener(buzzerConditionListener);
         setImageForCurrentCondition();
+        if(null != this.task) {
+            this.task.useBuzzerProperty().addListener(buzzerConditionListener);
+        }
     }
 
     private void setImageForCurrentCondition() {

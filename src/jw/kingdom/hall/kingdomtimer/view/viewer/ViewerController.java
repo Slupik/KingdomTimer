@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import jw.kingdom.hall.kingdomtimer.domain.MultimediaPreviewer;
-import jw.kingdom.hall.kingdomtimer.domain.TimerCountdown;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.view.common.ControlledScreenImpl;
 import jw.kingdom.hall.kingdomtimer.view.common.controller.MultimediaPreviewController;
 import jw.kingdom.hall.kingdomtimer.view.common.controller.TimeDisplayController;
