@@ -1,9 +1,11 @@
 package jw.kingdom.hall.kingdomtimer.domain.countdown;
 
 import javafx.beans.value.ChangeListener;
+import jw.kingdom.hall.kingdomtimer.device.sound.Buzzer;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,6 @@ import java.util.List;
  * All rights reserved & copyright ©
  */
 
-//TODO add buzzer sound
 //TODO add changing color
 //TODO background of timer should gleam
 //TODO add countdown from 0 to up
@@ -25,6 +26,15 @@ public class TimerCountdown extends TimerCountdownBase {
         setTask(task);
         for(Listener listener:listeners) {
             listener.onStart(task);
+        }
+    }
+
+    @Override
+    protected void onTimeChange(int time) {
+        if(null != task && task.isUseBuzzer()) {
+            if((Math.abs(time)%10)==0) {
+                Buzzer.play();
+            }
         }
     }
 

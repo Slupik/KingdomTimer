@@ -21,9 +21,12 @@ abstract class TimerCountdownBase {
     private void countDown() {
         if(!pause) {
             time--;
+            onTimeChange(time);
             notifyControllers();
         }
     }
+
+    protected abstract void onTimeChange(int time);
 
     private void notifyControllers() {
         for(TimeDisplayController display:controllers){
