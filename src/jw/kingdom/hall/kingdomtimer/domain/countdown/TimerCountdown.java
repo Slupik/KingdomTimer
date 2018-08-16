@@ -2,7 +2,7 @@ package jw.kingdom.hall.kingdomtimer.domain.countdown;
 
 import javafx.beans.value.ChangeListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.view.common.controller.TimeDisplayController;
+import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
 
 import java.util.ArrayList;
 import java.util.List;

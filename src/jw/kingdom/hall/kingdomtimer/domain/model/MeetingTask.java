@@ -4,9 +4,8 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.control.Button;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
-import jw.kingdom.hall.kingdomtimer.view.utils.Randomizer;
+import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
 
 /**
  * All rights reserved & copyright ©

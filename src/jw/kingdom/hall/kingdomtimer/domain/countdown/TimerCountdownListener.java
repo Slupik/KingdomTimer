@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.domain.countdown;
 
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.view.utils.Randomizer;
+import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
 
 /**
  * All rights reserved & copyright ©

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import jw.kingdom.hall.kingdomtimer.javafx.custom.AdvancedTextField?>
 
-<VBox fx:id="mainContainer" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.view.panel.tabs.speakerScreen.SpeakerScreenController">
+<VBox fx:id="mainContainer" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.speakerScreen.SpeakerScreenController">
    <padding>
       <Insets bottom="16.0" left="16.0" right="16.0" top="8.0" />
    </padding>

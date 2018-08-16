@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField?>
 
-<VBox prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.view.panel.tabs.timeControl.TimeControlController">
+<VBox prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.TimeControlController">
    <HBox>
       <children>
          <Label fx:id="lblTime" text="12:43:02">
