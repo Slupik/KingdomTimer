@@ -56,7 +56,7 @@ public class ViewerWindow implements StageWindow {
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.setAlwaysOnTop(true);
-//        stage.show();
+        stage.show();
 
         stage.setOnCloseRequest(event -> System.exit(0));
 
@@ -124,7 +124,7 @@ public class ViewerWindow implements StageWindow {
             }
 
             if(!getStage().isShowing()){
-//                getStage().show();
+                getStage().show();
             }
             stage.setMaximized(false);
 
