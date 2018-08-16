@@ -74,7 +74,10 @@
                </Button>
             </children>
          </HBox>
-         <Label text="Wczytuje czas poza kolejką (ingoruje tabelkę i obecny czas)" />
+         <Label text="Wczytuje czas poza kolejką (ingoruje tabelkę i obecny czas)">
+            <padding>
+               <Insets top="4.0" />
+            </padding></Label>
       </children>
       <VBox.margin>
          <Insets />
@@ -101,13 +104,13 @@
                      <TimeField fx:id="atfTime" />
                   </children>
                   <VBox.margin>
-                     <Insets top="4.0" />
+                     <Insets top="8.0" />
                   </VBox.margin>
                </HBox>
                <CheckBox fx:id="cbBuzzer" mnemonicParsing="false" text="Włącz sygnał">
-                  <padding>
+                  <VBox.margin>
                      <Insets top="8.0" />
-                  </padding>
+                  </VBox.margin>
                </CheckBox>
             </children>
          </VBox>
@@ -118,6 +121,14 @@
             <children>
                <Button mnemonicParsing="false" onAction="#handleAddTask" text="Dodaj" />
             </children>
+         </VBox>
+         <VBox alignment="BOTTOM_CENTER" layoutX="560.0" layoutY="10.0">
+            <children>
+               <Button mnemonicParsing="false" onAction="#loadTasksOnline" text="Wczytaj online" />
+            </children>
+            <HBox.margin>
+               <Insets left="56.0" />
+            </HBox.margin>
          </VBox>
       </children>
    </HBox>

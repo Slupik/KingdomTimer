@@ -87,16 +87,6 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
                 tcBuzzer,
                 tcName,
                 tcTime);
-
-        new Thread(() -> {
-            List<MeetingTask> tasks;
-            if(isWeekend()) {
-                tasks = PredefinedTaskList.getWeekendTasks();
-            } else {
-                tasks = PredefinedTaskList.getWeekTasks();
-            }
-            tableController.getList().addAll(tasks);
-        }).start();
     }
 
     private boolean isWeekend() {
@@ -127,6 +117,20 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
         MeetingTask task = new MeetingTask();
         task.setTimeInSeconds(tfFastTime.getAllSeconds());
         getTimer().start(task);
+    }
+
+    @FXML
+    private void loadTasksOnline(ActionEvent event) {
+        new Thread(() -> {
+            List<MeetingTask> tasks;
+            if(isWeekend()) {
+                tasks = PredefinedTaskList.getWeekendTasks();
+            } else {
+                tasks = PredefinedTaskList.getWeekTasks();
+            }
+            tableController.getList().clear();
+            tableController.getList().addAll(tasks);
+        }).start();
     }
 
     @FXML
