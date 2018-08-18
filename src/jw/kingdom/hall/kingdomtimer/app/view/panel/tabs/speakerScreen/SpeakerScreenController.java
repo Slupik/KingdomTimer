@@ -13,6 +13,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.gleam.GlobalGleamController;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.AdvancedTextField;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MultimediaPreviewer;
 import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
@@ -36,6 +37,9 @@ public class SpeakerScreenController extends ControlledScreenImpl implements Ini
     CheckBox cbShowPreview;
 
     @FXML
+    CheckBox cbEnableGleaming;
+
+    @FXML
     AdvancedTextField atfRefreshInterval;
 
     @FXML
@@ -48,15 +52,22 @@ public class SpeakerScreenController extends ControlledScreenImpl implements Ini
     public void initialize(URL location, ResourceBundle resources) {
         setupScreenSelectors();
         setupPreviewHidder();
+        setupGleamController();
+    }
+
+    private void setupGleamController() {
+        GlobalGleamController.getInstance().setEnable(cbEnableGleaming.isSelected());
+        cbEnableGleaming.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if(oldValue!=newValue) {
+                GlobalGleamController.getInstance().setEnable(newValue);
+            }
+        });
     }
 
     private void setupPreviewHidder() {
-        cbShowPreview.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(oldValue!=newValue) {
-                    MultimediaPreviewer.getInstance().showPreviews(newValue);
-                }
+        cbShowPreview.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if(oldValue!=newValue) {
+                MultimediaPreviewer.getInstance().showPreviews(newValue);
             }
         });
     }

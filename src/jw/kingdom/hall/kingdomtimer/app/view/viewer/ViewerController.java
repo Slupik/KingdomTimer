@@ -11,6 +11,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.gleam.GlobalGleamController;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MultimediaPreviewer;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
@@ -39,6 +41,7 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
     ImageView imgMultimediaPreview;
 
     private TimeDisplayController timeDisplay;
+    private GleamController gleammer;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -69,6 +72,17 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
             double newSize = findFontSizeThatCanFit(font, tvTime.getText(), (int) (mainContainer.widthProperty().get()*0.5));
             Font newFont = new Font(font.getName(), newSize);
             tvTime.setFont(newFont);
+        });
+
+        gleammer = new GleamController(mainContainer);
+        TimerCountdown.getInstance().addListener(new TimerCountdownListener() {
+            @Override
+            public void onTimeOut() {
+                super.onTimeOut();
+                if(GlobalGleamController.getInstance().isEnable()) {
+                    gleammer.play();
+                }
+            }
         });
     }
 

@@ -14,7 +14,6 @@ import java.util.List;
  * All rights reserved & copyright ©
  */
 
-//TODO background of timer should gleam
 public class TimerCountdown extends TimerCountdownBase {
     private List<Listener> listeners = new ArrayList<>();
     private MeetingTask task;
@@ -37,6 +36,11 @@ public class TimerCountdown extends TimerCountdownBase {
         if(null != task && task.isUseBuzzer()) {
             if(time <= 0 && (Math.abs(time)%10)==0) {
                 Buzzer.play();
+            }
+        }
+        if(0 == time) {
+            for(Listener listener:listeners) {
+                listener.onTimeOut();
             }
         }
     }
@@ -159,6 +163,7 @@ public class TimerCountdown extends TimerCountdownBase {
         void onStart(MeetingTask task);
         void onPause();
         void onStop();
+        void onTimeOut();
         void onVolumeChange(boolean isVolumeUp);
         String getID();
     }

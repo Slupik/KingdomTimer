@@ -25,6 +25,11 @@ public abstract class TimerCountdownListener implements TimerCountdown.Listener 
     }
 
     @Override
+    public void onTimeOut() {
+
+    }
+
+    @Override
     public void onVolumeChange(boolean isVolumeUp) {
 
     }

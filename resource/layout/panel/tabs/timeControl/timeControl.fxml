@@ -122,6 +122,15 @@
                      <Insets top="8.0" />
                   </VBox.margin>
                </CheckBox>
+               <HBox alignment="CENTER_LEFT">
+                  <children>
+                     <Label text="Kierunek odliczania: " />
+                     <Button fx:id="btnCountdownDirect" mnemonicParsing="false" text="Dół" />
+                  </children>
+                  <VBox.margin>
+                     <Insets top="8.0" />
+                  </VBox.margin>
+               </HBox>
             </children>
          </VBox>
          <VBox alignment="CENTER_LEFT">
@@ -140,12 +149,6 @@
                <Insets left="56.0" />
             </HBox.margin>
          </VBox>
-      </children>
-   </HBox>
-   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-      <children>
-         <Label text="Kierunek odliczania: " />
-         <Button fx:id="btnCountdownDirect" mnemonicParsing="false" text="Dół" />
       </children>
    </HBox>
    <TableView fx:id="tvList">
