@@ -35,6 +35,7 @@ abstract class TimerCountdownBase {
                 int adjustedTime = getAddedTime()+getStartTime()-time;
                 display.setTime(adjustedTime);
             }
+            display.setColorCode(TimerColor.getColorCode(getStartTime(), isDirectDown(), time));
         }
     }
 

@@ -3,6 +3,7 @@ package jw.kingdom.hall.kingdomtimer.app.view.common.controller;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Paint;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerColor;
 import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
 
 /**
@@ -12,12 +13,21 @@ public class TimeDisplayController {
     private String id = Randomizer.randomStandardString(10);
 
     private Label text;
+    private boolean isLightBackground = true;
+    private int lastColorCode = -1;
 
     public TimeDisplayController(Label text) {
         this.text = text;
     }
 
-    public void setColor(Paint paint) {
+    public void setColorCode(int paintCode) {
+        if(lastColorCode!=paintCode) {
+            setColor(TimerColor.getColor(paintCode, isLightBackground));
+            lastColorCode = paintCode;
+        }
+    }
+
+    private void setColor(Paint paint) {
         text.setTextFill(paint);
     }
 
@@ -58,6 +68,10 @@ public class TimeDisplayController {
             return "0"+Integer.toString(number);
         }
         return Integer.toString(number);
+    }
+
+    public void setLightBackground(boolean lightBackground) {
+        isLightBackground = lightBackground;
     }
 
     public String getId(){

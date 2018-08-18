@@ -58,8 +58,8 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
 
     private void setupTimeView() {
         timeDisplay = new TimeDisplayController(tvTime);
+        timeDisplay.setLightBackground(true);
         timeDisplay.setTime(0);
-        timeDisplay.setColor(Color.BLACK);
         TimerCountdown.getInstance().addController(timeDisplay);
 
         mainContainer.heightProperty().addListener((observable, oldValue, newValue) -> {
