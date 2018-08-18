@@ -51,11 +51,13 @@ public class PredefinedTaskList {
         lecture.setName("Wykład biblijny");
         lecture.setTimeInSeconds(30 * 60);
         lecture.setUseBuzzer(false);
+        list.add(lecture);
 
         MeetingTask watchtower = new MeetingTask();
         watchtower.setName("Strażnica");
         watchtower.setTimeInSeconds(60 * 60);
         watchtower.setUseBuzzer(false);
+        list.add(watchtower);
 
         return list;
     }
