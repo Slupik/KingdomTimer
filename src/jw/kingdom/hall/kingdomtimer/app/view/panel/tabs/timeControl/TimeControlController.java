@@ -1,11 +1,13 @@
 package jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
+import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectBase;
+import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectForInstantController;
+import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectForPanel;
 import jw.kingdom.hall.kingdomtimer.data.PredefinedTaskList;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
@@ -19,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static jw.kingdom.hall.kingdomtimer.app.view.utils.ButtonUtils.loadImage;
+import static jw.kingdom.hall.kingdomtimer.app.view.utils.ButtonUtils.loadMediumImage;
 
 /**
  * All rights reserved & copyright ©
@@ -27,22 +29,28 @@ import static jw.kingdom.hall.kingdomtimer.app.view.utils.ButtonUtils.loadImage;
 public class TimeControlController extends ControlledScreenImpl implements Initializable {
 
     @FXML
-    Label lblTime;
+    private Label lblTime;
 
     @FXML
-    Button btnStart;
+    private Button btnFastDirect;
 
     @FXML
-    Button btnPause;
+    private Button btnInstantDirect;
 
     @FXML
-    Button btnStop;
+    private Button btnStart;
 
     @FXML
-    Button btnBuzzer;
+    private Button btnPause;
 
     @FXML
-    TimeField tfFastTime;
+    private Button btnStop;
+
+    @FXML
+    private Button btnBuzzer;
+
+    @FXML
+    private TimeField tfFastTime;
 
     @FXML
     private TextField tfName;
@@ -54,6 +62,9 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
     private CheckBox cbBuzzer;
 
     @FXML
+    private Button btnCountdownDirect;
+
+    @FXML
     private TableView<MeetingTask> tvList;
 
     @FXML
@@ -61,6 +72,9 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
 
     @FXML
     private TableColumn<MeetingTask, String> tcBuzzer;
+
+    @FXML
+    private TableColumn<MeetingTask, String> tcDirect;
 
     @FXML
     private TableColumn<MeetingTask, String> tcName;
@@ -71,13 +85,25 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
     private TimeDisplayController timeDisplay;
     private TaskTableController tableController;
     private BtnBuzzerController buzzerController;
+    private BtnTimeDirectForPanel timeDirectController;
+    private BtnTimeDirectForInstantController instantDirectController;
+    private BtnTimeDirectForPanel fastDirectController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadImage(btnStart, "icons/baseline_play_arrow_black_48dp.png");
-        loadImage(btnPause, "icons/baseline_pause_black_48dp.png");
-        loadImage(btnStop, "icons/baseline_stop_black_48dp.png");
+        loadMediumImage(btnStart, "icons/baseline_play_arrow_black_48dp.png");
+        loadMediumImage(btnPause, "icons/baseline_pause_black_48dp.png");
+        loadMediumImage(btnStop, "icons/baseline_stop_black_48dp.png");
         buzzerController = new BtnBuzzerController(btnBuzzer);
+
+        timeDirectController = new BtnTimeDirectForPanel(btnCountdownDirect);
+        timeDirectController.setMedium(false);
+
+        fastDirectController = new BtnTimeDirectForPanel(btnFastDirect);
+        fastDirectController.setMedium(false);
+
+        instantDirectController = new BtnTimeDirectForInstantController(btnInstantDirect);
+        instantDirectController.setMedium(true);
 
         timeDisplay = new TimeDisplayController(lblTime);
         timeDisplay.setTime(0);
@@ -85,8 +111,20 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
         tableController = new TaskTableController(tvList,
                 tcDelete,
                 tcBuzzer,
+                tcDirect,
                 tcName,
                 tcTime);
+
+        setupInstantDirectController();
+    }
+
+    private void setupInstantDirectController() {
+        instantDirectController.addListener(new BtnTimeDirectBase.ListenerImpl() {
+            @Override
+            public void onDirectChange(boolean isDirectDown) {
+//                TimerCountdown.getInstance().setDirectTimeDown(isDirectDown);
+            }
+        });
     }
 
     private boolean isWeekend() {
@@ -109,6 +147,9 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
         task.setUseBuzzer(cbBuzzer.isSelected());
         cbBuzzer.setSelected(false);
 
+        task.setCountdownDown(timeDirectController.isDirectDown());
+        timeDirectController.reset();
+
         tableController.getList().add(task);
     }
 
@@ -116,6 +157,9 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
     private void handleLoadTimeAction(ActionEvent event) {
         MeetingTask task = new MeetingTask();
         task.setTimeInSeconds(tfFastTime.getAllSeconds());
+        tfFastTime.setSeconds(0);
+        task.setCountdownDown(fastDirectController.isDirectDown());
+        fastDirectController.reset();
         getTimer().start(task);
     }
 

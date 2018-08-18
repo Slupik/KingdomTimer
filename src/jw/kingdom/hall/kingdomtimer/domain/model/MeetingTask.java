@@ -15,6 +15,7 @@ public class MeetingTask {
     private BooleanProperty useBuzzer = new SimpleBooleanProperty(false);
     private StringProperty name = new SimpleStringProperty("???");
     private StringProperty formattedTime = new SimpleStringProperty("00:00:00");
+    private BooleanProperty countdownDown = new SimpleBooleanProperty(true);
     private TimeField tfTime = new TimeField();
 
     public TimeField getTfTime() {
@@ -59,5 +60,17 @@ public class MeetingTask {
 
     public StringProperty formattedTimeProperty(){
         return formattedTime;
+    }
+
+    public BooleanProperty countdownProperty() {
+        return countdownDown;
+    }
+
+    public boolean isCountdownDown() {
+        return countdownDown.getValue();
+    }
+
+    public void setCountdownDown(boolean countdownDown) {
+        this.countdownDown.setValue(countdownDown);
     }
 }

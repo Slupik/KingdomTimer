@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import jw.kingdom.hall.kingdomtimer.device.sound.Buzzer;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -15,15 +16,18 @@ import java.util.List;
 
 //TODO add changing color
 //TODO background of timer should gleam
-//TODO add countdown from 0 to up
 public class TimerCountdown extends TimerCountdownBase {
     private List<Listener> listeners = new ArrayList<>();
     private MeetingTask task;
+    private int addedTime = 0;
+    private int startTime = 0;
     private final ChangeListener<Boolean> buzzerConditionListener = (observable, oldValue, newValue) -> setVolumeUp(newValue);
 
-    public void start(MeetingTask task) {
-        super.startTime(task.getTimeInSeconds());
+    public void start(@NotNull MeetingTask task) {
+        startTime = task.getTimeInSeconds();
+        addedTime = 0;
         setTask(task);
+        super.startTime(task.getTimeInSeconds());
         for(Listener listener:listeners) {
             listener.onStart(task);
         }
@@ -38,9 +42,29 @@ public class TimerCountdown extends TimerCountdownBase {
         }
     }
 
+    @Override
+    protected int getAddedTime() {
+        return addedTime;
+    }
+
+    @Override
+    protected int getStartTime() {
+        return startTime;
+    }
+
+    @Override
+    protected boolean isDirectDown() {
+        if(null != task) {
+            return task.isCountdownDown();
+        } else {
+            return true;
+        }
+    }
+
     public void stop() {
         super.stop();
         setTask(null);
+        setTime(0);
         for(Listener listener:listeners) {
             listener.onStop();
         }
@@ -65,10 +89,12 @@ public class TimerCountdown extends TimerCountdownBase {
 
     public void addTime(int time) {
         setTime(getTime()+time);
+        addedTime += time;
     }
 
     public void removeTime(int time) {
         setTime(getTime()-time);
+        addedTime -= time;
     }
 
     /*

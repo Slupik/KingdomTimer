@@ -43,6 +43,11 @@
                      <Insets left="16.0" />
                   </HBox.margin>
                </Button>
+               <Button fx:id="btnInstantDirect" mnemonicParsing="false" text="Dół">
+                  <HBox.margin>
+                     <Insets left="16.0" />
+                  </HBox.margin>
+               </Button>
             </children>
          </HBox>
       </children>
@@ -68,6 +73,11 @@
                   </HBox.margin>
                </Button>
                <Button layoutX="188.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleRemoveTime" text="Odejmij">
+                  <HBox.margin>
+                     <Insets left="8.0" />
+                  </HBox.margin>
+               </Button>
+               <Button fx:id="btnFastDirect" mnemonicParsing="false" text="Dół">
                   <HBox.margin>
                      <Insets left="8.0" />
                   </HBox.margin>
@@ -132,12 +142,19 @@
          </VBox>
       </children>
    </HBox>
+   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+      <children>
+         <Label text="Kierunek odliczania: " />
+         <Button fx:id="btnCountdownDirect" mnemonicParsing="false" text="Dół" />
+      </children>
+   </HBox>
    <TableView fx:id="tvList">
      <columns>
          <TableColumn fx:id="tcDelete" minWidth="50.0" prefWidth="-1.0" text="Usuń" />
          <TableColumn fx:id="tcBuzzer" minWidth="75.0" prefWidth="-1.0" text="Syngał" />
+         <TableColumn fx:id="tcDirect" minWidth="75.0" prefWidth="-1.0" text="Kierunek odliczania" />
        <TableColumn fx:id="tcTime" minWidth="75.0" prefWidth="-1.0" text="Czas" />
-       <TableColumn fx:id="tcName" minWidth="100.0" prefWidth="552.0" text="Punkt" />
+       <TableColumn fx:id="tcName" minWidth="100.0" prefWidth="492.0" text="Punkt" />
      </columns>
       <VBox.margin>
          <Insets top="16.0" />

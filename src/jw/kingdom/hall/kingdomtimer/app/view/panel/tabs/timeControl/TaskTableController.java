@@ -11,6 +11,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.cell.CellDirect;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.cell.CellBuzzer;
@@ -27,17 +28,20 @@ public class TaskTableController {
     private final TableView<MeetingTask> TABLE;
     private TableColumn<MeetingTask, String> tcDelete;
     private TableColumn<MeetingTask, String> tcBuzzer;
+    private TableColumn<MeetingTask, String> tcDirect;
     private TableColumn<MeetingTask, String> tcName;
     private TableColumn<MeetingTask, TimeField> tcTime;
 
     public TaskTableController(TableView<MeetingTask> table,
                                TableColumn<MeetingTask, String> tcDelete,
                                TableColumn<MeetingTask, String> tcBuzzer,
+                               TableColumn<MeetingTask, String> tcDirect,
                                TableColumn<MeetingTask, String> tcName,
                                TableColumn<MeetingTask, TimeField> tcTime) {
         TABLE = table;
         this.tcDelete = tcDelete;
         this.tcBuzzer = tcBuzzer;
+        this.tcDirect = tcDirect;
         this.tcName = tcName;
         this.tcTime = tcTime;
         init();
@@ -64,6 +68,9 @@ public class TaskTableController {
 
         tcBuzzer.setEditable(false);
         tcBuzzer.setCellFactory(new CellBuzzer());
+
+        tcDirect.setEditable(false);
+        tcDirect.setCellFactory(new CellDirect());
 
         makeRowsDraggable();
     }

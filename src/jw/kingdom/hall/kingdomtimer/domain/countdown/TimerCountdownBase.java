@@ -14,7 +14,6 @@ abstract class TimerCountdownBase {
     private List<TimeDisplayController> controllers = new ArrayList<>();
     private boolean pause = true;
     private boolean stop = true;
-    private int lastMaxTime = 0;
     private int time = 0;
     private Thread countdown;
 
@@ -30,9 +29,18 @@ abstract class TimerCountdownBase {
 
     private void notifyControllers() {
         for(TimeDisplayController display:controllers){
-            display.setTime(time);
+            if(isDirectDown()) {
+                display.setTime(time);
+            } else {
+                int adjustedTime = getAddedTime()+getStartTime()-time;
+                display.setTime(adjustedTime);
+            }
         }
     }
+
+    protected abstract int getAddedTime();
+    protected abstract int getStartTime();
+    protected abstract boolean isDirectDown();
 
     protected void stop() {
         setPause(true);
@@ -67,7 +75,6 @@ abstract class TimerCountdownBase {
     }
 
     protected void setTime(int time) {
-        this.lastMaxTime = time;
         this.time = time;
         notifyControllers();
     }

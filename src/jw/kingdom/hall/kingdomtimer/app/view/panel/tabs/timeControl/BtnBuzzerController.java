@@ -7,7 +7,7 @@ import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
-import static jw.kingdom.hall.kingdomtimer.app.view.utils.ButtonUtils.loadImage;
+import static jw.kingdom.hall.kingdomtimer.app.view.utils.ButtonUtils.loadMediumImage;
 
 /**
  * All rights reserved & copyright ©
@@ -65,9 +65,9 @@ public class BtnBuzzerController {
 
     private void setImageForVolumeUp(boolean isVolumeUp) {
         if(isVolumeUp) {
-            loadImage(button, "icons/baseline_volume_up_black_48dp.png");
+            loadMediumImage(button, "icons/baseline_volume_up_black_48dp.png");
         } else {
-            loadImage(button, "icons/baseline_volume_off_black_48dp.png");
+            loadMediumImage(button, "icons/baseline_volume_off_black_48dp.png");
         }
     }
 }
