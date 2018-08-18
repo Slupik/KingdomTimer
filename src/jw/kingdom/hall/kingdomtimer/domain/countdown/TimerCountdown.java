@@ -32,7 +32,7 @@ public class TimerCountdown extends TimerCountdownBase {
     @Override
     protected void onTimeChange(int time) {
         if(null != task && task.isUseBuzzer()) {
-            if((Math.abs(time)%10)==0) {
+            if(time <= 0 && (Math.abs(time)%10)==0) {
                 Buzzer.play();
             }
         }
