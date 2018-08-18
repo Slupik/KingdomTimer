@@ -14,7 +14,6 @@ import java.util.List;
  * All rights reserved & copyright ©
  */
 
-//TODO add changing color
 //TODO background of timer should gleam
 public class TimerCountdown extends TimerCountdownBase {
     private List<Listener> listeners = new ArrayList<>();
