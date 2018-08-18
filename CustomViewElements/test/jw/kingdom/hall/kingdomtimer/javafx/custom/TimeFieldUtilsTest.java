@@ -12,10 +12,10 @@ public class TimeFieldUtilsTest {
 
     @Test
     public void getFormattedText() {
-        assertEquals("00:00:00", TimeFieldUtils.getFormattedText("00:00:00"));
-        assertEquals("43:02:43", TimeFieldUtils.getFormattedText("43:020:43"));
-        assertEquals("43:02:43", TimeFieldUtils.getFormattedText("4$^3:02gbe0000:4gfsd3"));
-        assertEquals("43:02:43", TimeFieldUtils.getFormattedText("43:2000:43"));
+        assertEquals("00:00:00", TimeFieldUtils.getFormattedText("00:00:00", "00:00:00"));
+        assertEquals("43:02:43", TimeFieldUtils.getFormattedText("00:00:00", "43:020:43"));
+        assertEquals("43:02:43", TimeFieldUtils.getFormattedText("00:00:00", "4$^3:02gbe0000:4gfsd3"));
+        assertEquals("43:02:43", TimeFieldUtils.getFormattedText("00:00:00", "43:2000:43"));
     }
 
     @Test

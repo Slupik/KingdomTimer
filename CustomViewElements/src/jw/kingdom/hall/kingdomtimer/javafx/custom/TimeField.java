@@ -3,12 +3,27 @@ package jw.kingdom.hall.kingdomtimer.javafx.custom;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.Border;
+import javafx.util.converter.DateTimeStringConverter;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * All rights reserved & copyright ©
  */
 public class TimeField extends TextField {
+    //Alternative - 3 fields instead only one
+//    setAlignment(Pos.CENTER);
+//    setBackground(Background.EMPTY);
+//    setBorder(Border.EMPTY);
+//    setPadding(Insets.EMPTY);
+//    setPrefColumnCount(2);
 
     public TimeField(){
         clear();
@@ -25,7 +40,7 @@ public class TimeField extends TextField {
                 if (ignore)
                     return;
                 ignore=true;
-                String formattedText = TimeFieldUtils.getFormattedText(newValue);
+                String formattedText = TimeFieldUtils.getFormattedText(oldValue, newValue);
                 setText(formattedText);
                 Platform.runLater(()-> TimeField.this.positionCaret(
                         calculateCaretPosition(getCaretPosition(), oldValue, formattedText))

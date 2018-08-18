@@ -1,13 +1,20 @@
 package jw.kingdom.hall.kingdomtimer.javafx.custom;
 
+import java.sql.SQLOutput;
+
 /**
  * All rights reserved & copyright ©
  */
 public class TimeFieldUtils {
 
-    static String getFormattedText(String text) {
-        String[] elements = text.split(":");
-        return getFormattedElement(elements[0])+":"+getFormattedElement(elements[1])+":"+getFormattedElement(elements[2]);
+    static String getFormattedText(String oldText, String text) {
+        try {
+            String[] elements = text.split(":");
+            return getFormattedElement(elements[0])+":"+getFormattedElement(elements[1])+":"+getFormattedElement(elements[2]);
+        } catch (Exception e) {
+            //ex. ArrayIndexOutOfBoundsException if is less than 3 characters like ":"
+            return oldText;
+        }
     }
 
     static String getFormattedElement(String text) {
