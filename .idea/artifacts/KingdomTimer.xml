@@ -12,6 +12,7 @@
             <option name="windowsIcon" value="$PROJECT_DIR$/app/Timer.ico" />
           </JavaFxApplicationIcons>
         </option>
+        <option name="paramFile" value="-Dprism.maxvram=10M -Dprism.order=sw BigTextureRenderTest" />
         <option name="title" value="" />
         <option name="vendor" value="" />
         <option name="version" value="0.2" />
@@ -23,6 +24,16 @@
         <element id="module-output" name="CustomViewElements" />
         <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jfxtras/jfxtras-agenda/9.0-r1/jfxtras-agenda-9.0-r1.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jfxtras/jfxtras-icalendarfx/9.0-r1/jfxtras-icalendarfx-9.0-r1.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jfxtras/jfxtras-menu/9.0-r1/jfxtras-menu-9.0-r1.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jfxtras/jfxtras-icalendaragenda/9.0-r1/jfxtras-icalendaragenda-9.0-r1.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jfxtras/jfxtras-gauge-linear/9.0-r1/jfxtras-gauge-linear-9.0-r1.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jfxtras/jfxtras-fxml/9.0-r1/jfxtras-fxml-9.0-r1.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jfxtras/jfxtras-font-roboto/9.0-r1/jfxtras-font-roboto-9.0-r1.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jfxtras/jfxtras-controls/9.0-r1/jfxtras-controls-9.0-r1.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jfxtras/jfxtras-common/9.0-r1/jfxtras-common-9.0-r1.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jfxtras/jfxtras-all/9.0-r1/jfxtras-all-9.0-r1.jar" path-in-jar="/" />
       </element>
     </root>
   </artifact>

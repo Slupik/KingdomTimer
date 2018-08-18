@@ -43,6 +43,9 @@ public class TimeDisplayController {
         int minutes = (time%3600)/60;
         int seconds = time%60;
         String basic = getFormattedNumber(hours)+":"+getFormattedNumber(minutes)+":"+getFormattedNumber(seconds);
+        if(basic.startsWith("00:")) {
+            basic = basic.substring(3);
+        }
         if(isSmallerThanZero) {
             return "-"+basic;
         } else {
