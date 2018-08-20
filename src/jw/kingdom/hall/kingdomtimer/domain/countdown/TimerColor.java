@@ -37,7 +37,12 @@ public class TimerColor {
     public static Paint getColor(int code, boolean isLightBackground) {
         switch (code) {
             case END_OF_TIME: {
-                return Color.RED;
+                if(isLightBackground) {
+                    return Color.RED;
+                } else {
+//                    return Color.ORANGERED;
+                    return Color.rgb(255, 97, 97);
+                }
             }
             case WARNING: {
                 if(isLightBackground) {
