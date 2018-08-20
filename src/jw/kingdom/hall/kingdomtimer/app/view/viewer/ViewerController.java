@@ -57,7 +57,7 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
     }
 
     private void setupGleam() {
-        gleammer = new GleamController(mainContainer);
+        gleammer = new GleamController(mainContainer, timeDisplay);
         TimerCountdown.getInstance().addListener(new TimerCountdownListener() {
             @Override
             public void onTimeOut() {

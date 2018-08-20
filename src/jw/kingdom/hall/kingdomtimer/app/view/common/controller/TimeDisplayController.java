@@ -2,6 +2,7 @@ package jw.kingdom.hall.kingdomtimer.app.view.common.controller;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerColor;
 import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
@@ -34,8 +35,12 @@ public class TimeDisplayController {
         }
     }
 
-    private void setColor(Paint paint) {
+    public void setColor(Paint paint) {
         text.setTextFill(paint);
+    }
+
+    public void resetColorToLast(){
+        setColor(TimerColor.getColor(lastColorCode, isLightBackground));
     }
 
     public void setTime(int seconds){
@@ -105,6 +110,7 @@ public class TimeDisplayController {
     public void removeListener(Listener listener) {
         listeners.remove(listener);
     }
+
     public interface Listener {
         void onTextSizeChanged();
     }
