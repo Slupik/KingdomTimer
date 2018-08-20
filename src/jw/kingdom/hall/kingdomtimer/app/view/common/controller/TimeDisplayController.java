@@ -6,15 +6,22 @@ import javafx.scene.paint.Paint;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerColor;
 import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * All rights reserved & copyright ©
  */
 public class TimeDisplayController {
-    private String id = Randomizer.randomStandardString(10);
+    private final String ID = Randomizer.randomStandardString(10);
+    private final List<Listener> listeners = new ArrayList<>();
 
     private Label text;
+
     private boolean isLightBackground = true;
     private int lastColorCode = -1;
+
+    private int lastTextSize = -1;
 
     public TimeDisplayController(Label text) {
         this.text = text;
@@ -35,8 +42,21 @@ public class TimeDisplayController {
         String data = secondsToText(seconds);
         if(Platform.isFxApplicationThread()) {
             setText(data);
+            notifyTextSizeChanged(data.length());
         } else {
-            Platform.runLater(()-> setText(data));
+            Platform.runLater(()-> {
+                setText(data);
+                notifyTextSizeChanged(data.length());
+            });
+        }
+    }
+
+    private void notifyTextSizeChanged(int length) {
+        if(lastTextSize!=length) {
+            lastTextSize = length;
+            for(Listener listener:listeners) {
+                listener.onTextSizeChanged();
+            }
         }
     }
 
@@ -76,6 +96,16 @@ public class TimeDisplayController {
     }
 
     public String getId(){
-        return id;
+        return ID;
+    }
+
+    public void addListener(Listener listener) {
+        listeners.add(listener);
+    }
+    public void removeListener(Listener listener) {
+        listeners.remove(listener);
+    }
+    public interface Listener {
+        void onTextSizeChanged();
     }
 }
