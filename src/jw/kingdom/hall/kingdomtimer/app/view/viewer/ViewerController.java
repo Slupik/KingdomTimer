@@ -1,12 +1,16 @@
 package jw.kingdom.hall.kingdomtimer.app.view.viewer;
 
+import javafx.application.Platform;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
@@ -43,11 +47,12 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
 
     private TimeDisplayController timeDisplay;
     private GleamController gleammer;
+    private MultimediaPreviewController multimediaPreview;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setupTimeView();
         setupMultimediaPreview();
+        setupTimeView();
     }
 
     @Override
@@ -61,7 +66,9 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
     }
 
     private void setupTimeView() {
-        bindTimerContainerSize();
+        vbTimer.minWidthProperty().bind(getMainContainer().widthProperty());
+        vbTimer.minHeightProperty().bind(getMainContainer().heightProperty().add(tvTime.heightProperty().divide(7)));
+
         timeDisplay = new TimeDisplayController(tvTime);
         timeDisplay.setTime(0);
         TimerCountdown.getInstance().addController(timeDisplay);
@@ -71,12 +78,7 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
         tvTime.setMinWidth(Region.USE_COMPUTED_SIZE);
         tvTime.setMaxWidth(Region.USE_COMPUTED_SIZE);
         mainContainer.heightProperty().addListener((observable, oldValue, newValue) -> {
-            tvTime.setPadding(new Insets(0,(int)(mainContainer.widthProperty().get()*0.01),0,0));
-
-            Font font = tvTime.getFont();
-            double newSize = findFontSizeThatCanFit(font, tvTime.getText(), (int) (mainContainer.heightProperty().get()*0.32));
-            Font newFont = new Font(font.getName(), newSize);
-            tvTime.setFont(newFont);
+            updateTimerText();
         });
 
         gleammer = new GleamController(mainContainer);
@@ -89,6 +91,42 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
                 }
             }
         });
+        multimediaPreview.addListener(()->{
+            updateTimerText();
+//            new Thread(()->{
+//                try {
+//                    Thread.sleep(30);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                Platform.runLater(this::bindTimerContainerSize);
+//            }).start();
+            bindTimerContainerSize();
+        });
+    }
+
+    private void updateTimerText() {
+        if(multimediaPreview.isShowing()) {
+            System.out.println("IS SHOWING");
+            tvTime.setPadding(new Insets(0,(int)(mainContainer.widthProperty().get()*0.01),0,0));
+            setupFontForTimerText(mainContainer.heightProperty().get()*0.32);
+            System.out.println("tvTime.heightProperty().get() = " + tvTime.heightProperty().get());
+            vbTimer.setAlignment(Pos.BOTTOM_RIGHT);
+        } else {
+            tvTime.setPadding(new Insets(0, 0,0,0));
+            setupFontForTimerText(mainContainer.heightProperty().get());
+            vbTimer.setAlignment(Pos.CENTER);
+        }
+    }
+
+    private void setupFontForTimerText(double height) {
+        int integerHeight = (int) height;
+        System.out.println("integerHeight = " + integerHeight);
+        Font font = tvTime.getFont();
+        double newSize = findFontSizeThatCanFit(font, tvTime.getText(), integerHeight);
+        System.out.println("newSize = " + newSize);
+        Font newFont = new Font(font.getName(), newSize);
+        tvTime.setFont(newFont);
     }
 
     private void setupBackground() {
@@ -97,8 +135,20 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
     }
 
     private void bindTimerContainerSize() {
-        vbTimer.minWidthProperty().bind(getMainContainer().widthProperty());
-        vbTimer.minHeightProperty().bind(getMainContainer().heightProperty().add(tvTime.heightProperty().divide(7)));
+        if(multimediaPreview.isShowing()) {
+            System.out.println("IF BIND");
+            vbTimer.minWidthProperty().bind(getMainContainer().widthProperty());
+//            vbTimer.minHeightProperty().bind(getMainContainer().heightProperty());
+//            vbTimer.minHeightProperty().bind(getMainContainer().heightProperty().add(tvTime.heightProperty().divide(7)));
+            vbTimer.minHeightProperty().bind(getMainContainer().heightProperty().add(new SimpleDoubleProperty(textHeight(tvTime.getFont(), tvTime.getText())).divide(7)));
+            System.out.println("tvTime.heightProperty().getValue() = " + tvTime.heightProperty().getValue());
+            System.out.println("calculated = " + textHeight(tvTime.getFont(), tvTime.getText()));
+            System.out.println("tvTime.getFont().getSize() = " + tvTime.getFont().getSize());
+        } else {
+            System.out.println("ELSE BIND");
+            vbTimer.minWidthProperty().bind(getMainContainer().widthProperty());
+            vbTimer.minHeightProperty().bind(getMainContainer().heightProperty());
+        }
     }
 
     private void setupMultimediaPreview() {
@@ -108,17 +158,19 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
         imgMultimediaPreview.fitHeightProperty().bind(getMainContainer().heightProperty().divide(10).multiply(8));
         imgMultimediaPreview.fitWidthProperty().bind(imgMultimediaPreview.fitHeightProperty().multiply(16).divide(9));
 
-        getMultiPreviewer().addController(new MultimediaPreviewController(imgMultimediaPreview));
+        multimediaPreview = new MultimediaPreviewController(imgMultimediaPreview);
+        getMultiPreviewer().addController(multimediaPreview);
     }
 
-    //TODO after multimedia screen preview off timer should be bigger
     private static double findFontSizeThatCanFit(Font font, String s, int maxHeight) {
         double fontSize = font.getSize();
         double height = textHeight(font, s);
         if (maxHeight > height) {
             return fontSize * maxHeight / height;
+        } else {
+            return fontSize * maxHeight / height;
         }
-        return fontSize;
+//        return fontSize;
     }
 
     private static double textHeight(Font font, String s) {

@@ -5,12 +5,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * All rights reserved & copyright ©
  */
 public class MultimediaPreviewController {
     private String id = Randomizer.randomStandardString(10);
     private boolean disableHiding = false;
+    private final List<Listener> listeners = new ArrayList<>();
 
     private ImageView view;
 
@@ -33,6 +37,9 @@ public class MultimediaPreviewController {
     public void showPreview(boolean value) {
         if(!disableHiding) {
             view.setVisible(value);
+            for(Listener listener:listeners) {
+                listener.onVisibilityChange();
+            }
         }
     }
 
@@ -42,5 +49,17 @@ public class MultimediaPreviewController {
 
     public void setDisableHiding(boolean disableHiding) {
         this.disableHiding = disableHiding;
+    }
+
+    public void addListener(Listener listener) {
+        listeners.add(listener);
+    }
+
+    public void removeListener(Listener listener) {
+        listeners.remove(listener);
+    }
+
+    public interface Listener {
+        void onVisibilityChange();
     }
 }
