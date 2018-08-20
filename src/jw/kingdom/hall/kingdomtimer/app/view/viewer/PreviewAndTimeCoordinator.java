@@ -1,7 +1,11 @@
 package jw.kingdom.hall.kingdomtimer.app.view.viewer;
 
+import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.beans.value.ObservableValueBase;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -56,8 +60,31 @@ class PreviewAndTimeCoordinator {
         multimediaContainer.minWidthProperty().bind(mainContainer.widthProperty());
         multimediaContainer.minHeightProperty().bind(mainContainer.heightProperty());
 
-        multimediaView.fitHeightProperty().bind(mainContainer.heightProperty().divide(5).multiply(4));
-        multimediaView.fitWidthProperty().bind(multimediaView.fitHeightProperty().multiply(16).divide(9));
+        multimediaView.setPreserveRatio(false);
+        mainContainer.widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(()->{
+            double height = mainContainer.heightProperty().doubleValue();
+            double width = mainContainer.widthProperty().doubleValue();
+
+            double heightPropose = height/5*4;
+            double widthPropose = heightPropose/9*16;
+
+            double viewSize = heightPropose;
+
+            if(widthPropose > width) {
+                multimediaView.setFitWidth(width);
+                viewSize = width/16*9;
+                multimediaView.setFitHeight(viewSize);
+            } else {
+                multimediaView.setFitWidth(widthPropose);
+                multimediaView.setFitHeight(viewSize);
+            }
+
+            if(previewController.isShowing()) {
+                double ratio = 1-(viewSize/height)+0.1;
+                double freeSpace = ratio*height;
+                setupFontForTimerText(freeSpace);
+            }
+        }));
     }
     /*
             START LOGIC
