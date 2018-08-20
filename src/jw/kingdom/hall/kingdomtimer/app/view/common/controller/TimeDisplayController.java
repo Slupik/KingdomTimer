@@ -72,6 +72,7 @@ public class TimeDisplayController {
 
     public void setLightBackground(boolean lightBackground) {
         isLightBackground = lightBackground;
+        setColor(TimerColor.getColor(lastColorCode, isLightBackground));
     }
 
     public String getId(){

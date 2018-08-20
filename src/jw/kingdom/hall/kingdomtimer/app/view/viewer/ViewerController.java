@@ -5,9 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -38,6 +36,9 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
     VBox vbMultimediaPreview;
 
     @FXML
+    VBox vbTimer;
+
+    @FXML
     ImageView imgMultimediaPreview;
 
     private TimeDisplayController timeDisplay;
@@ -60,16 +61,20 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
     }
 
     private void setupTimeView() {
+        bindTimerContainerSize();
         timeDisplay = new TimeDisplayController(tvTime);
-        timeDisplay.setLightBackground(true);
         timeDisplay.setTime(0);
         TimerCountdown.getInstance().addController(timeDisplay);
 
+        setupBackground();
+
+        tvTime.setMinWidth(Region.USE_COMPUTED_SIZE);
+        tvTime.setMaxWidth(Region.USE_COMPUTED_SIZE);
         mainContainer.heightProperty().addListener((observable, oldValue, newValue) -> {
-            tvTime.setPadding(new Insets((int)(mainContainer.heightProperty().get()*0.2),0,0,0));
+            tvTime.setPadding(new Insets(0,(int)(mainContainer.widthProperty().get()*0.01),0,0));
 
             Font font = tvTime.getFont();
-            double newSize = findFontSizeThatCanFit(font, tvTime.getText(), (int) (mainContainer.widthProperty().get()*0.5));
+            double newSize = findFontSizeThatCanFit(font, tvTime.getText(), (int) (mainContainer.heightProperty().get()*0.32));
             Font newFont = new Font(font.getName(), newSize);
             tvTime.setFont(newFont);
         });
@@ -86,29 +91,40 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
         });
     }
 
+    private void setupBackground() {
+        timeDisplay.setLightBackground(false);
+        mainContainer.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+    }
+
+    private void bindTimerContainerSize() {
+        vbTimer.minWidthProperty().bind(getMainContainer().widthProperty());
+        vbTimer.minHeightProperty().bind(getMainContainer().heightProperty().add(tvTime.heightProperty().divide(7)));
+    }
+
     private void setupMultimediaPreview() {
         vbMultimediaPreview.minWidthProperty().bind(getMainContainer().widthProperty());
         vbMultimediaPreview.minHeightProperty().bind(getMainContainer().heightProperty());
 
-        imgMultimediaPreview.fitWidthProperty().bind(getMainContainer().widthProperty().multiply(3).divide(7));
-        imgMultimediaPreview.fitHeightProperty().bind(imgMultimediaPreview.fitWidthProperty().divide(9).multiply(16));
+        imgMultimediaPreview.fitHeightProperty().bind(getMainContainer().heightProperty().divide(10).multiply(8));
+        imgMultimediaPreview.fitWidthProperty().bind(imgMultimediaPreview.fitHeightProperty().multiply(16).divide(9));
 
         getMultiPreviewer().addController(new MultimediaPreviewController(imgMultimediaPreview));
     }
 
-    private static double findFontSizeThatCanFit(Font font, String s, int maxWidth) {
+    //TODO after multimedia screen preview off timer should be bigger
+    private static double findFontSizeThatCanFit(Font font, String s, int maxHeight) {
         double fontSize = font.getSize();
-        double width = textWidth(font, s);
-        if (maxWidth > width) {
-            return fontSize * maxWidth / width;
+        double height = textHeight(font, s);
+        if (maxHeight > height) {
+            return fontSize * maxHeight / height;
         }
         return fontSize;
     }
 
-    private static double textWidth(Font font, String s) {
+    private static double textHeight(Font font, String s) {
         Text text = new Text(s);
         text.setFont(font);
-        return text.getBoundsInLocal().getWidth();
+        return text.getBoundsInLocal().getHeight();
     }
 
     private static MultimediaPreviewer getMultiPreviewer() {
