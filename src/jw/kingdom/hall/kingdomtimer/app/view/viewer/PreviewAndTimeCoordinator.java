@@ -98,7 +98,7 @@ class PreviewAndTimeCoordinator {
         if(isShowing) {
             setupFontForTimerText(mainContainer.heightProperty().get()*0.3);
             timeView.setPadding(new Insets(0,(int)(mainContainer.widthProperty().get()*0.01),0,0));
-            timeContainer.setAlignment(Pos.BOTTOM_RIGHT);
+            timeContainer.setAlignment(Pos.BOTTOM_CENTER);
         } else {
             setupFontForTimerText(mainContainer.heightProperty().get());
             timeView.setPadding(new Insets(0, 0,0,0));
