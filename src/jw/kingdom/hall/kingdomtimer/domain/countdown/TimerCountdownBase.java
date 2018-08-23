@@ -1,5 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.countdown;
 
+import javafx.application.Platform;
 import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,14 +29,26 @@ abstract class TimerCountdownBase {
     protected abstract void onTimeChange(int time);
 
     private void notifyControllers() {
+        int timeToSet = getTimeToSet();
         for(TimeDisplayController display:controllers){
-            if(isDirectDown()) {
-                display.setTime(time);
+            display.setTime(timeToSet);
+            if(stop) {
+                display.setColorCode(TimerColor.getDefaultColorCode());
             } else {
-                int adjustedTime = getAddedTime()+getStartTime()-time;
-                display.setTime(adjustedTime);
+                display.setColorCode(TimerColor.getColorCode(getStartTime(), time));
             }
-            display.setColorCode(TimerColor.getColorCode(getStartTime(), isDirectDown(), time));
+        }
+    }
+
+    private int getTimeToSet() {
+        if(isDirectDown()) {
+            return time;
+        } else {
+            if(time<0){
+                return time;
+            } else {
+                return getAddedTime()+getStartTime()-time;
+            }
         }
     }
 

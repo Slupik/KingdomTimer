@@ -12,16 +12,22 @@ public class TimerColor {
     private final static int WARNING = 1;
     private final static int END_OF_TIME = 2;
 
-    static int getColorCode(int maxTime, boolean isDirectDown, int time){
-        if(!isDirectDown) {
-            time = maxTime-time;
-        }
+    /**
+     * @param maxTime Total amount of available time at the start
+     * @param time Actual time in direct down mode (only)
+     * @return Code of color. Color can be get by function getColor
+     */
+    static int getColorCode(int maxTime, int time){
         if(time <= 0) {
             return END_OF_TIME;
         }
         if (time <= getWarningTime(maxTime)) {
             return WARNING;
         }
+        return getDefaultColorCode();
+    }
+
+    static int getDefaultColorCode(){
         return NORMAL;
     }
 
