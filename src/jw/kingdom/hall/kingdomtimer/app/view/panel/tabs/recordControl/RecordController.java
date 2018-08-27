@@ -11,6 +11,7 @@ import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
 import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.view.common.custom.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
+import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,7 +19,7 @@ import java.util.ResourceBundle;
 /**
  * All rights reserved & copyright ©
  */
-public class RecordController extends ControlledScreenImpl implements Initializable, StartPauseStopView.Listener {
+public class RecordController extends ControlledScreenImpl implements Initializable, StartPauseStopView.Listener, Recorder.Listener {
     //TODO move meeting plan to special object
     //TODO add auto starting and ending of recording
 
@@ -55,7 +56,7 @@ public class RecordController extends ControlledScreenImpl implements Initializa
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        VoiceRecorder.getInstance().addListener(this);
     }
 
     @Override
@@ -81,5 +82,10 @@ public class RecordController extends ControlledScreenImpl implements Initializa
     @Override
     public void onStop() {
         VoiceRecorder.getInstance().stop();
+    }
+
+    @Override
+    public void onNewTime(int seconds) {
+        controller.setTime(seconds);
     }
 }

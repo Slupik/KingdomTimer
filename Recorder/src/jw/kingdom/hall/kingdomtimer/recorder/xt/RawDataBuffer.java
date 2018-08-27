@@ -2,35 +2,27 @@ package jw.kingdom.hall.kingdomtimer.recorder.xt;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * All rights reserved & copyright ©
  */
 class RawDataBuffer extends ByteArrayOutputStream {
-    private boolean pause;
-
-    void setPause(boolean isPause) {
-        pause = isPause;
-    }
-
     @Override
     public void write(byte[] b) throws IOException {
-        if(!pause) {
-            super.write(b);
-        }
+        super.write(b);
     }
 
     @Override
     public synchronized void write(int b) {
-        if(!pause) {
-            super.write(b);
-        }
+        super.write(b);
     }
 
     @Override
     public synchronized void write(byte[] b, int off, int len) {
-        if(!pause) {
-            super.write(b, off, len);
-        }
+        super.write(b, off, len);
     }
 }

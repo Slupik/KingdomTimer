@@ -30,6 +30,13 @@ public class VoiceRecorder {
         recorder.setPause(isPause);
     }
 
+    public void addListener(Recorder.Listener listener) {
+        recorder.addListener(listener);
+    }
+    public void removeListener(Recorder.Listener listener) {
+        recorder.removeListener(listener);
+    }
+
     private static VoiceRecorder instance;
     public static VoiceRecorder getInstance() {
         if(null == instance) {
