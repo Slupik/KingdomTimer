@@ -37,6 +37,12 @@ public class ControllingController extends ControlledScreenImpl implements Initi
     @FXML
     public HBox hbSpeakerScreen;
 
+    @FXML
+    private Tab tabRecording;
+
+    @FXML
+    private HBox hbRecording;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setScreens();
@@ -45,6 +51,7 @@ public class ControllingController extends ControlledScreenImpl implements Initi
     private void setScreens() {
         setScreenToElement(hbTimeControl, TabScreens.TIME_CONTROL);
         setScreenToElement(hbSpeakerScreen, TabScreens.SPEAKER_SCREEN);
+        setScreenToElement(hbRecording, TabScreens.RECORDING);
     }
 
     private void setScreenToElement(HBox container, TabScreens screen) {

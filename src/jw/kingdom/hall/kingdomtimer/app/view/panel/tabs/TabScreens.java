@@ -13,7 +13,8 @@ package jw.kingdom.hall.kingdomtimer.app.view.panel.tabs;
  */
 public enum TabScreens {
 	TIME_CONTROL("timeControl"),
-	SPEAKER_SCREEN("speakerScreen");
+	SPEAKER_SCREEN("speakerScreen"),
+	RECORDING("recordControl");
 
 	public final String NAME;
 	TabScreens(String name){
