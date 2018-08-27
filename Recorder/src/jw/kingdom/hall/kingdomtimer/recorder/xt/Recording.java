@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 import static jw.kingdom.hall.kingdomtimer.recorder.utils.ByteUtils.convertToByteArray;
 
@@ -55,7 +54,9 @@ class Recording {
 
     void stop(){
         stream.stop();
-        device.close();
+        stream = null;
+        //After close device recording again from the same object is impossible
+//        device.close();
     }
 
     void setPause(boolean isPause) {
