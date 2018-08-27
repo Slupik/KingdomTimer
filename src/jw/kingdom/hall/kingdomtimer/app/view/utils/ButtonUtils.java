@@ -1,6 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.app.view.utils;
 
 import com.google.common.io.Resources;
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -36,8 +37,16 @@ public class ButtonUtils {
             ImageView image = new ImageView(graphic);
             image.setPreserveRatio(true);
             image.setFitHeight(size);
-            button.setGraphic(image);
-            button.setText("");
+
+            if(Platform.isFxApplicationThread()) {
+                button.setGraphic(image);
+                button.setText("");
+            } else {
+                Platform.runLater(()->{
+                    button.setGraphic(image);
+                    button.setText("");
+                });
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

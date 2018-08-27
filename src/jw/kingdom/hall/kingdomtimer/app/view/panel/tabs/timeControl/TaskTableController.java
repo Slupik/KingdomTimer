@@ -1,6 +1,5 @@
 package jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -11,11 +10,12 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.cell.CellDirect;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.cell.CellBuzzer;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.cell.CellDelete;
+import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.cell.CellDirect;
+import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
+import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 
 /**
  * All rights reserved & copyright ©
@@ -23,7 +23,7 @@ import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.cell.CellDel
 public class TaskTableController {
     private static final DataFormat SERIALIZED_MIME_TYPE = new DataFormat("application/x-java-serialized-object");
 
-    private ObservableList<MeetingTask> tableData = FXCollections.observableArrayList();
+    private ObservableList<MeetingTask> tableData = MeetingSchedule.getInstance().getList();
 
     private final TableView<MeetingTask> TABLE;
     private TableColumn<MeetingTask, String> tcDelete;
@@ -125,9 +125,5 @@ public class TaskTableController {
 
             return row ;
         });
-    }
-
-    public ObservableList<MeetingTask> getList() {
-        return tableData;
     }
 }

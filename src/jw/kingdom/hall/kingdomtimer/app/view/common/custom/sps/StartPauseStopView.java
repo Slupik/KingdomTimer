@@ -84,7 +84,7 @@ public class StartPauseStopView extends HBox {
         loadMediumImage(btnStart, "icons/baseline_play_arrow_black_48dp.png");
     }
 
-    private void pause() {
+    public void pause() {
         pause = true;
         stop = false;
         setupView();
@@ -94,7 +94,7 @@ public class StartPauseStopView extends HBox {
         }
     }
 
-    private void unPause() {
+    public void unPause() {
         pause = false;
         stop = false;
         setupView();
@@ -104,7 +104,7 @@ public class StartPauseStopView extends HBox {
         }
     }
 
-    private void stop() {
+    public void stop() {
         pause = false;
         stop = true;
         setupView();
@@ -114,7 +114,7 @@ public class StartPauseStopView extends HBox {
         }
     }
 
-    private void start() {
+    public void start() {
         pause = false;
         stop = false;
         setupView();

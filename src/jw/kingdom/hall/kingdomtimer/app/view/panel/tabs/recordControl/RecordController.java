@@ -11,6 +11,8 @@ import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
 import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.view.common.custom.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
+import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
+import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingScheduleListener;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 
 import java.net.URL;
@@ -20,8 +22,6 @@ import java.util.ResourceBundle;
  * All rights reserved & copyright ©
  */
 public class RecordController extends ControlledScreenImpl implements Initializable, StartPauseStopView.Listener, Recorder.Listener {
-    //TODO move meeting plan to special object
-    //TODO add auto starting and ending of recording
 
     @FXML
     private VBox vbMainContainer;
@@ -33,7 +33,7 @@ public class RecordController extends ControlledScreenImpl implements Initializa
     private HBox hbControlsContainer;
 
     @FXML
-    private CheckBox cbAutopStart;
+    private CheckBox cbAutopilot;
 
     private TimeDisplayController controller;
     private StartPauseStopView spsView;
@@ -48,6 +48,24 @@ public class RecordController extends ControlledScreenImpl implements Initializa
 
         controller = new TimeDisplayController(lblTime);
         controller.setTime(0);
+
+        MeetingSchedule.getInstance().addListener(new MeetingScheduleListener() {
+            @Override
+            public void onMeetingStart() {
+                super.onMeetingStart();
+                if(isAutopilotOn()) {
+                    spsView.start();
+                }
+            }
+
+            @Override
+            public void onMeetingEnd() {
+                super.onMeetingEnd();
+                if(isAutopilotOn()) {
+                    spsView.stop();
+                }
+            }
+        });
     }
 
     private void initVoiceRecordInstance() {
@@ -57,6 +75,10 @@ public class RecordController extends ControlledScreenImpl implements Initializa
             e.printStackTrace();
         }
         VoiceRecorder.getInstance().addListener(this);
+    }
+
+    private boolean isAutopilotOn(){
+        return cbAutopilot.isSelected();
     }
 
     @Override

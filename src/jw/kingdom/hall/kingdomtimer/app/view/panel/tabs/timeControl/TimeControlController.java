@@ -11,6 +11,8 @@ import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.B
 import jw.kingdom.hall.kingdomtimer.data.PredefinedTaskList;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
+import jw.kingdom.hall.kingdomtimer.domain.schedule.NotEnoughTasksException;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
 import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
@@ -150,7 +152,7 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
         task.setCountdownDown(timeDirectController.isDirectDown());
         timeDirectController.reset();
 
-        tableController.getList().add(task);
+        MeetingSchedule.getInstance().addTask(task);
     }
 
     @FXML
@@ -172,8 +174,8 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
             } else {
                 tasks = PredefinedTaskList.getWeekTasks();
             }
-            tableController.getList().clear();
-            tableController.getList().addAll(tasks);
+            MeetingSchedule.getInstance().clear();
+            MeetingSchedule.getInstance().addTask(tasks);
         }).start();
     }
 
@@ -192,10 +194,11 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
         if(getTimer().isPause() && !getTimer().isStop()){
             getTimer().resume();
         } else {
-            MeetingTask task = tvList.getItems().get(0);
-            getTimer().start(task);
-            tableController.getList().remove(task);
-            buzzerController.loadTask(task);
+            try {
+                MeetingTask task = MeetingSchedule.getInstance().bringOutFirstTask();
+                getTimer().start(task);
+                buzzerController.loadTask(task);
+            } catch (NotEnoughTasksException ignore) {}
         }
     }
 
