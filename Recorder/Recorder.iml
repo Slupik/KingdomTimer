@@ -7,7 +7,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="com.xt-audio.xt-1.0.5" level="project" />
-    <orderEntry type="library" name="jave-1.0.2" level="project" />
+    <orderEntry type="library" exported="" name="com.xt-audio.xt-1.0.5" level="project" />
+    <orderEntry type="library" exported="" name="jave-1.0.2" level="project" />
+    <orderEntry type="library" exported="" name="jl1.0.1" level="project" />
+    <orderEntry type="library" exported="" name="net.java.dev.jna:jna:4.5.2" level="project" />
   </component>
 </module>
