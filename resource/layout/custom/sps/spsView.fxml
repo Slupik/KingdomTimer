@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root alignment="CENTER_LEFT" type="HBox" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="btnStart" mnemonicParsing="false" onAction="#onStartPauseAction" text="Start">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+      </Button>
+      <Button fx:id="btnStop" mnemonicParsing="false" onAction="#onStopAction" text="Stop">
+         <HBox.margin>
+            <Insets left="16.0" />
+         </HBox.margin>
+      </Button>
+   </children>
+</fx:root>

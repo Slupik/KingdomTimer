@@ -20,12 +20,12 @@ public class VoiceRecorder {
         setPause(false);
     }
 
-    public void pause(){
+    public void pauseChange(){
         isPause = !isPause;
         recorder.setPause(isPause);
     }
 
-    private void setPause(boolean isPause){
+    public void setPause(boolean isPause){
         this.isPause = isPause;
         recorder.setPause(isPause);
     }
