@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -20,6 +21,9 @@
             <font>
                <Font size="53.0" />
             </font>
+            <tooltip>
+               <Tooltip text="Czas wyświetlany dla mówcy w formacie godziny:minuty:sekundy. Kolory mogą się różnić." wrapText="true" />
+            </tooltip>
          </Label>
          <HBox alignment="CENTER_LEFT">
             <children>
@@ -27,6 +31,9 @@
                   <HBox.margin>
                      <Insets left="16.0" />
                   </HBox.margin>
+                  <tooltip>
+                     <Tooltip text="Wybiera pierwszy punkt z tabelki, a następnie automatycznie uruchamia odliczanie. Zaznaczenie w tabelce nie ma wpływu!" wrapText="true" />
+                  </tooltip>
                </Button>
                <Button fx:id="btnPause" mnemonicParsing="false" onAction="#onPauseAction" text="Pauza">
                   <HBox.margin>

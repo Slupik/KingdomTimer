@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -18,6 +19,9 @@
                <font>
                   <Font size="53.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Czas trwania nagrania." wrapText="true" />
+               </tooltip>
             </Label>
             <HBox fx:id="hbControlsContainer" alignment="CENTER_LEFT">
                <HBox.margin>
