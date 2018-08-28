@@ -39,6 +39,7 @@
         <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Libraries/xt-audio/jna-4.1.0.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Libraries/JLayer1.0.1/jl1.0.1.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Libraries/xt-audio/com.xt-audio.xt-1.0.5.jar" path-in-jar="/" />
+        <element id="module-output" name="Config" />
       </element>
     </root>
   </artifact>
