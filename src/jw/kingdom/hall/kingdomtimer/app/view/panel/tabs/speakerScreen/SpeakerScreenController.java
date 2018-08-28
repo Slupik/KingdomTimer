@@ -100,6 +100,9 @@ public class SpeakerScreenController extends ControlledScreenImpl implements Ini
 
             @Override
             public void onMonitorChange(Monitor monitor) {
+                if(monitor==null) {
+                    return;
+                }
                 if(ignore) return;
                 ignore = true;//fire only once
                 cbPreviewScreen.setValue(getMonitorFromList(cbPreviewScreen.getItems(), monitor.ID));
