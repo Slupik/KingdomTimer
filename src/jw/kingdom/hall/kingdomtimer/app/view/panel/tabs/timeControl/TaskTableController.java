@@ -53,6 +53,7 @@ public class TaskTableController {
 
         tcTime.setEditable(true);
         tcTime.setCellValueFactory(new PropertyValueFactory<>("tfTime"));
+        tcTime.setSortable(false);
 
         tcName.setEditable(true);
         tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -62,15 +63,19 @@ public class TaskTableController {
             MeetingTask task = t.getTableView().getItems().get(t.getTablePosition().getRow());
             task.setName(t.getNewValue());
         });
+        tcName.setSortable(false);
 
         tcDelete.setEditable(false);
         tcDelete.setCellFactory(new CellDelete());
+        tcDelete.setSortable(false);
 
         tcBuzzer.setEditable(false);
         tcBuzzer.setCellFactory(new CellBuzzer());
+        tcBuzzer.setSortable(false);
 
         tcDirect.setEditable(false);
         tcDirect.setCellFactory(new CellDirect());
+        tcDirect.setSortable(false);
 
         makeRowsDraggable();
     }
