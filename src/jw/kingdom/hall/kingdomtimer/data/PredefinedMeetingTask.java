@@ -1,6 +1,5 @@
 package jw.kingdom.hall.kingdomtimer.data;
 
-import jw.kingdom.hall.kingdomtimer.data.online.model.Meeting;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
 /**

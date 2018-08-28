@@ -11,7 +11,7 @@ import jw.kingdom.hall.kingdomtimer.app.view.viewer.ViewerWindow;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) {
         MonitorManager.initialize();
         new PanelWindow().build(primaryStage);
         ViewerWindow.getInstance().build(new Stage());

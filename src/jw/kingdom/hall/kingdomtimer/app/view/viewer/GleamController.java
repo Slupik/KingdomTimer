@@ -1,13 +1,11 @@
 package jw.kingdom.hall.kingdomtimer.app.view.viewer;
 
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
 
 /**

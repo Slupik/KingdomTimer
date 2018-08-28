@@ -1,7 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.data;
 
 import jw.kingdom.hall.kingdomtimer.data.online.StaticServer;
-import jw.kingdom.hall.kingdomtimer.data.online.WebPageUtils;
 import jw.kingdom.hall.kingdomtimer.data.online.model.Meeting;
 import jw.kingdom.hall.kingdomtimer.data.online.model.Talk;
 import jw.kingdom.hall.kingdomtimer.data.online.model.TalkConverter;

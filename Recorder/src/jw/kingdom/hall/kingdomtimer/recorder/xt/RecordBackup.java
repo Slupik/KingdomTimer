@@ -33,6 +33,7 @@ class RecordBackup {
         backupThread.start();
     }
 
+    @SuppressWarnings("deprecation")
     void stop(){
         running = false;
         backupThread.stop();

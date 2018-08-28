@@ -1,6 +1,5 @@
 package jw.kingdom.hall.kingdomtimer.data.config;
 
-import com.google.gson.Gson;
 import jw.kingdom.hall.kingdomtimer.config.json.JsonConfig;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.config.model.ConfigWriteable;

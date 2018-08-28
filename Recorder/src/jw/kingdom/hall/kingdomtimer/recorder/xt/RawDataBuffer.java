@@ -2,10 +2,6 @@ package jw.kingdom.hall.kingdomtimer.recorder.xt;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * All rights reserved & copyright ©

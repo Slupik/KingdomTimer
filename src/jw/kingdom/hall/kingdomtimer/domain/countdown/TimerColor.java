@@ -2,7 +2,6 @@ package jw.kingdom.hall.kingdomtimer.domain.countdown;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import sun.rmi.runtime.Log;
 
 /**
  * All rights reserved & copyright ©

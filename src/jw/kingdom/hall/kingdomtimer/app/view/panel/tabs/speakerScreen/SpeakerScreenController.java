@@ -76,12 +76,9 @@ public class SpeakerScreenController extends ControlledScreenImpl implements Ini
         cbMultimediaScreen.setItems(MonitorManager.monitors);
         cbPreviewScreen.setItems(MonitorManager.monitors);
 
-        cbMultimediaScreen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-                Monitor monitor = cbPreviewScreen.getItems().get((Integer) newValue);
-                MultimediaPreviewer.getInstance().setMonitor(monitor);
-            }
+        cbMultimediaScreen.getSelectionModel().selectedIndexProperty().addListener((observableValue, oldValue, newValue) -> {
+            Monitor monitor = cbPreviewScreen.getItems().get((Integer) newValue);
+            MultimediaPreviewer.getInstance().setMonitor(monitor);
         });
         if(cbMultimediaScreen.getItems().size()>2) {
             for(int i=0;i<cbMultimediaScreen.getItems().size();i++){

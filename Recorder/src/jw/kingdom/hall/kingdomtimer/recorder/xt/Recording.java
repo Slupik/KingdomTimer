@@ -33,6 +33,7 @@ class Recording {
         stream.start();
     }
 
+    @SuppressWarnings("Convert2Lambda")
     private void init(OutputStream output) {
         XtBuffer buffer = device.getBuffer(format);
         stream = device.openStream(format, true, false, buffer.current, new XtStreamCallback() {

@@ -3,16 +3,7 @@ package jw.kingdom.hall.kingdomtimer.javafx.custom;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.Border;
-import javafx.util.converter.DateTimeStringConverter;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 /**
  * All rights reserved & copyright ©

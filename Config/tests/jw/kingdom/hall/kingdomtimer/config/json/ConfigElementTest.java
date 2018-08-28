@@ -69,9 +69,7 @@ public class ConfigElementTest extends ConfigElement {
             e.printStackTrace();
         }
 
-        assertThrows(DataParseException.class, () -> {
-            assertTrue(toBoolean("maybe"));
-        });
+        assertThrows(DataParseException.class, () -> assertTrue(toBoolean("maybe")));
     }
 
     @Test

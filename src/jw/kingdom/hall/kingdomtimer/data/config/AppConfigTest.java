@@ -1,7 +1,5 @@
 package jw.kingdom.hall.kingdomtimer.data.config;
 
-import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
-
 import java.io.IOException;
 
 /**

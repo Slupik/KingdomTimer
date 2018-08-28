@@ -3,9 +3,6 @@ package jw.kingdom.hall.kingdomtimer.app.view.viewer;
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.beans.value.ObservableValueBase;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -50,9 +47,8 @@ class PreviewAndTimeCoordinator {
         timeView.setMinWidth(Region.USE_COMPUTED_SIZE);
         timeView.setMaxWidth(Region.USE_COMPUTED_SIZE);
 
-        mainContainer.heightProperty().addListener((observable, oldValue, newValue) -> {
-            onMultimediaVisibilityChange(previewController.isShowing());
-        });
+        mainContainer.heightProperty().addListener((observable, oldValue, newValue) ->
+                onMultimediaVisibilityChange(previewController.isShowing()));
         bindTimerContainerSize(previewController.isShowing());
     }
 

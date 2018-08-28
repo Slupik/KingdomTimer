@@ -1,7 +1,5 @@
 package jw.kingdom.hall.kingdomtimer.app.view.viewer;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -9,9 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import jw.kingdom.hall.kingdomtimer.app.view.utils.TextUtils;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.gleam.GlobalGleamController;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MultimediaPreviewer;

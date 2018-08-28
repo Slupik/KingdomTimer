@@ -5,6 +5,7 @@
 
 package jw.kingdom.hall.kingdomtimer.device.local;
 
+@SuppressWarnings("InfiniteLoopStatement")
 public class AutoRAMCleaner {
 	private static boolean isRunning = false;
 	/*

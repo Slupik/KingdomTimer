@@ -85,6 +85,7 @@ public class MultimediaPreviewer {
         return null;
     }
 
+    @SuppressWarnings("deprecation")
     private void reloadThread() {
         if(countdown!=null) {
             countdown.stop();

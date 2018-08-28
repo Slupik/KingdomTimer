@@ -1,7 +1,5 @@
 package jw.kingdom.hall.kingdomtimer.javafx.custom;
 
-import java.sql.SQLOutput;
-
 /**
  * All rights reserved & copyright ©
  */

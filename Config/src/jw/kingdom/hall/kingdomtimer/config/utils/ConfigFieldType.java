@@ -6,5 +6,5 @@ package jw.kingdom.hall.kingdomtimer.config.utils;
 public enum  ConfigFieldType {
     BOOLEAN,
     STRING,
-    INTEGER;
+    INTEGER
 }

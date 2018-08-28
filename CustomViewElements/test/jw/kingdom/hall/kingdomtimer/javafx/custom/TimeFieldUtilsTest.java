@@ -60,14 +60,14 @@ public class TimeFieldUtilsTest {
 
     @Test
     public void isTextNormal() {
-        assertEquals(true, TimeFieldUtils.isTextNormal("00:00:00"));
-        assertEquals(true, TimeFieldUtils.isTextNormal("00:01:00"));
-        assertEquals(true, TimeFieldUtils.isTextNormal("43:23:43"));
-        assertEquals(true, TimeFieldUtils.isTextNormal("43:23:4"));
-        assertEquals(false, TimeFieldUtils.isTextNormal("23:24:"));
-        assertEquals(false, TimeFieldUtils.isTextNormal("23:24:423"));
-        assertEquals(false, TimeFieldUtils.isTextNormal("23:234:42"));
-        assertEquals(false, TimeFieldUtils.isTextNormal("233:24:42"));
+        assertTrue(TimeFieldUtils.isTextNormal("00:00:00"));
+        assertTrue(TimeFieldUtils.isTextNormal("00:01:00"));
+        assertTrue(TimeFieldUtils.isTextNormal("43:23:43"));
+        assertTrue(TimeFieldUtils.isTextNormal("43:23:4"));
+        assertFalse(TimeFieldUtils.isTextNormal("23:24:"));
+        assertFalse(TimeFieldUtils.isTextNormal("23:24:423"));
+        assertFalse(TimeFieldUtils.isTextNormal("23:234:42"));
+        assertFalse(TimeFieldUtils.isTextNormal("233:24:42"));
     }
 
     @Test
@@ -82,14 +82,14 @@ public class TimeFieldUtilsTest {
 
     @Test
     public void isNormalInt() {
-        Assert.assertEquals(true, TimeFieldUtils.isNormalInt("0"));
-        Assert.assertEquals(true, TimeFieldUtils.isNormalInt("01"));
-        Assert.assertEquals(true, TimeFieldUtils.isNormalInt("010"));
-        Assert.assertEquals(true, TimeFieldUtils.isNormalInt("-10"));
-        Assert.assertEquals(true, TimeFieldUtils.isNormalInt("-010"));
+        Assert.assertTrue(TimeFieldUtils.isNormalInt("0"));
+        Assert.assertTrue(TimeFieldUtils.isNormalInt("01"));
+        Assert.assertTrue(TimeFieldUtils.isNormalInt("010"));
+        Assert.assertTrue(TimeFieldUtils.isNormalInt("-10"));
+        Assert.assertTrue(TimeFieldUtils.isNormalInt("-010"));
 
-        Assert.assertEquals(false, TimeFieldUtils.isNormalInt("0.1"));//double
-        Assert.assertEquals(false, TimeFieldUtils.isNormalInt("0,1"));// , instead of .
-        Assert.assertEquals(false, TimeFieldUtils.isNormalInt("0a10"));//wrong character
+        Assert.assertFalse(TimeFieldUtils.isNormalInt("0.1"));//double
+        Assert.assertFalse(TimeFieldUtils.isNormalInt("0,1"));// , instead of .
+        Assert.assertFalse(TimeFieldUtils.isNormalInt("0a10"));//wrong character
     }
 }

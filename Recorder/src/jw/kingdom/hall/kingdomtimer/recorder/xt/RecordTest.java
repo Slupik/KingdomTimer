@@ -6,7 +6,7 @@ package jw.kingdom.hall.kingdomtimer.recorder.xt;
 public class RecordTest {
     static XtRecorder recorder;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         new Thread(()->{
             recorder = new XtRecorder();
             recorder.onStart();

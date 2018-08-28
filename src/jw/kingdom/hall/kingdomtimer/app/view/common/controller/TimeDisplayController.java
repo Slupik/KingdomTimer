@@ -2,7 +2,6 @@ package jw.kingdom.hall.kingdomtimer.app.view.common.controller;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerColor;
 import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;

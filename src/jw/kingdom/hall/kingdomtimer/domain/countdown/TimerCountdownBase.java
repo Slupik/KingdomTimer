@@ -1,6 +1,5 @@
 package jw.kingdom.hall.kingdomtimer.domain.countdown;
 
-import javafx.application.Platform;
 import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
 import org.jetbrains.annotations.Nullable;
 
@@ -120,6 +119,7 @@ abstract class TimerCountdownBase {
         return null;
     }
 
+    @SuppressWarnings("deprecation")
     void reloadThread() {
         if(countdown!=null) {
             countdown.stop();

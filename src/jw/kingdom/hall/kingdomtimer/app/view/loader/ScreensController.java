@@ -66,26 +66,16 @@ public class ScreensController extends StackPane {
             if(!getChildren().isEmpty()) { //if there is more than one screen
                 Timeline fade = new Timeline(
                         new KeyFrame(Duration.ZERO, new KeyValue(opacity, 1.0)),
-                        new KeyFrame(new Duration(1000), new EventHandler<ActionEvent>(){
-
-                            @Override
-                            public void handle(ActionEvent t){
-                                getChildren().remove(0); //remove the displayed screen
-                                getChildren().add(0, screens.get(name)); //add the screen
-                                Timeline fadeIn = new Timeline(
-                                        new KeyFrame(Duration.ZERO, new KeyValue(opacity, 0.0)),
-                                        new KeyFrame(new Duration(800), new KeyValue(opacity, 1.0)));
-                                fadeIn.play();
-                            }
+                        new KeyFrame(new Duration(1000), t -> {
+                            getChildren().remove(0); //remove the displayed screen
+                            getChildren().add(0, screens.get(name)); //add the screen
+                            Timeline fadeIn = new Timeline(
+                                    new KeyFrame(Duration.ZERO, new KeyValue(opacity, 0.0)),
+                                    new KeyFrame(new Duration(800), new KeyValue(opacity, 1.0)));
+                            fadeIn.play();
                         }, new KeyValue(opacity, 0.0)));
                 fade.play();
-                fade.setOnFinished(new EventHandler<ActionEvent>() {
-
-                    @Override
-                    public void handle(ActionEvent paramT) {
-                        doAutoSize();
-                    }
-                });
+                fade.setOnFinished(paramT -> doAutoSize());
             }else{
                 setOpacity(0.0);
                 getChildren().add(screens.get(name)); //no one else been displayed, then just show
@@ -107,11 +97,8 @@ public class ScreensController extends StackPane {
 
     void addAnimation(Timeline animation){
         animation.play();
-        animation.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
+        animation.setOnFinished(event -> {
 
-            }
         });
     }
 

@@ -25,12 +25,7 @@ public abstract class BtnTimeDirectBase {
 
     protected void init() {
         updateImage();
-        button.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                changeDirect();
-            }
-        });
+        button.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> changeDirect());
     }
 
     protected abstract void changeDirect();

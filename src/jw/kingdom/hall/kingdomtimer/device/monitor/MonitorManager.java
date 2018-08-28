@@ -61,6 +61,6 @@ public class MonitorManager {
 	}
 
 	public static Monitor[] getMonitorsArray() {
-		return monitors.toArray(new Monitor[monitors.size()]);
+		return monitors.toArray(new Monitor[0]);
 	}
 }

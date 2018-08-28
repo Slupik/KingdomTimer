@@ -2,7 +2,6 @@ package jw.kingdom.hall.kingdomtimer.domain.schedule;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import jw.kingdom.hall.kingdomtimer.data.online.model.Meeting;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
 import java.util.List;
