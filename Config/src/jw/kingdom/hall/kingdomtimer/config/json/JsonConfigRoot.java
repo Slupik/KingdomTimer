@@ -1,8 +1,9 @@
 package jw.kingdom.hall.kingdomtimer.config.json;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.sun.istack.internal.Nullable;
-import jw.kingdom.hall.kingdomtimer.config.Config;
+import jw.kingdom.hall.kingdomtimer.config.model.Config;
 
 /**
  * All rights reserved & copyright ©
@@ -10,18 +11,22 @@ import jw.kingdom.hall.kingdomtimer.config.Config;
 class JsonConfigRoot extends ConfigElement {
     @SerializedName("mowca")
     @Nullable
+    @Expose
     private ElementSpeaker speaker;
 
     @SerializedName("multimedia")
     @Nullable
+    @Expose
     private ElementMultimedia multimedia;
 
     @SerializedName("nagrania")
     @Nullable
+    @Expose
     private ElementRecording recording;
 
     @SerializedName("czas")
     @Nullable
+    @Expose
     private ElementTime countdown;
 
     public void applyParentConfig(Config parent) {

@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.config.json;
 
-import jw.kingdom.hall.kingdomtimer.config.Config;
-import jw.kingdom.hall.kingdomtimer.config.ConfigStatic;
+import jw.kingdom.hall.kingdomtimer.config.model.Config;
+import jw.kingdom.hall.kingdomtimer.config.ConfigUtils;
 import jw.kingdom.hall.kingdomtimer.config.common.DataParseException;
 import jw.kingdom.hall.kingdomtimer.config.utils.ConfigFieldType;
 
@@ -19,7 +19,7 @@ public abstract class ConfigElement {
         return isCallingParent(value, ConfigFieldType.STRING);
     }
     protected boolean isCallingParent(String value, ConfigFieldType type) {
-        if(null == value || value.equalsIgnoreCase(ConfigStatic.PARENT_VALUE_LINK)){
+        if(null == value || value.equalsIgnoreCase(ConfigUtils.PARENT_VALUE_LINK)){
             return true;
         }
         return !isCorrect(value, type);

@@ -1,5 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.config.json;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.sun.istack.internal.Nullable;
 import jw.kingdom.hall.kingdomtimer.config.common.DataParseException;
@@ -11,18 +12,22 @@ import jw.kingdom.hall.kingdomtimer.config.utils.ConfigFieldType;
 class ElementMultimedia extends ConfigElement {
     @SerializedName("ekran")
     @Nullable
+    @Expose
     private String screen;
 
     @SerializedName("min_refresh_rate")
     @Nullable
+    @Expose
     private String minRefreshRate;
 
     @SerializedName("warning_refresh_rate")
     @Nullable
+    @Expose
     private String warningRefreshRate;
 
     @SerializedName("default_refresh_rate")
     @Nullable
+    @Expose
     private String defaultRefreshRate;
 
     public String getScreen() {

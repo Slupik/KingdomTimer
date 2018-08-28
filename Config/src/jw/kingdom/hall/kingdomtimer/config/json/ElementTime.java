@@ -1,5 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.config.json;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.sun.istack.internal.Nullable;
 import jw.kingdom.hall.kingdomtimer.config.common.DataParseException;
@@ -11,6 +12,7 @@ import jw.kingdom.hall.kingdomtimer.config.utils.ConfigFieldType;
 class ElementTime extends ConfigElement {
     @SerializedName("odliczanie_dol")
     @Nullable
+    @Expose
     private String countdownDown;
 
     public boolean getCountdownDown() throws DataParseException {

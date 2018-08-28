@@ -1,28 +1,33 @@
 package jw.kingdom.hall.kingdomtimer.config.json;
 
 import com.google.gson.Gson;
-import jw.kingdom.hall.kingdomtimer.config.Config;
-import jw.kingdom.hall.kingdomtimer.config.ConfigStatic;
+import com.google.gson.GsonBuilder;
+import jw.kingdom.hall.kingdomtimer.config.model.Config;
+import jw.kingdom.hall.kingdomtimer.config.ConfigUtils;
+import jw.kingdom.hall.kingdomtimer.config.model.ConfigWriteable;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import static jw.kingdom.hall.kingdomtimer.config.ConfigStatic.BACKBONE;
+import static jw.kingdom.hall.kingdomtimer.config.ConfigUtils.BACKBONE;
 
 /**
  * All rights reserved & copyright ©
  */
-public class JsonConfig implements Config {
+public class JsonConfig implements ConfigWriteable {
     private Config parent;
-    private JsonConfigRoot config = new Gson().fromJson(BACKBONE, JsonConfigRoot.class);;
+    private JsonConfigRoot config = new Gson().fromJson(BACKBONE, JsonConfigRoot.class);
 
     @Override
     public void loadLocalData(String data) {
+        if(data==null || data.length()<3) {
+            data = ConfigUtils.BACKBONE;
+        }
         config = new Gson().fromJson(data, JsonConfigRoot.class);
         if(null == parent) {
-            config.applyParentConfig(ConfigStatic.DEFAULT);
+            config.applyParentConfig(ConfigUtils.DEFAULT);
         } else {
             config.applyParentConfig(parent);
         }
@@ -63,7 +68,11 @@ public class JsonConfig implements Config {
 
     @Override
     public String toString(){
-        return new Gson().toJson(config);
+        return new GsonBuilder()
+                .excludeFieldsWithoutExposeAnnotation()
+                .setPrettyPrinting()
+                .create()
+                .toJson(config);
     }
 
 
@@ -78,7 +87,7 @@ public class JsonConfig implements Config {
             return config.getSpeaker().isGleaming();
         } catch (Exception e) {
             e.printStackTrace();
-            return ConfigStatic.DEFAULT.isEnabledGleaming();
+            return ConfigUtils.DEFAULT.isEnabledGleaming();
         }
     }
 
@@ -88,7 +97,7 @@ public class JsonConfig implements Config {
             return config.getSpeaker().isShowMulti();
         } catch (Exception e) {
             e.printStackTrace();
-            return ConfigStatic.DEFAULT.isEnabledShowMultimedia();
+            return ConfigUtils.DEFAULT.isEnabledShowMultimedia();
         }
     }
 
@@ -105,7 +114,7 @@ public class JsonConfig implements Config {
             return config.getRecording().getAutopilot();
         } catch (Exception e) {
             e.printStackTrace();
-            return ConfigStatic.DEFAULT.isEnabledAutopilot();
+            return ConfigUtils.DEFAULT.isEnabledAutopilot();
         }
     }
 
@@ -122,7 +131,7 @@ public class JsonConfig implements Config {
             return config.getMultimedia().getMinRefreshRate();
         } catch (Exception e) {
             e.printStackTrace();
-            return ConfigStatic.DEFAULT.getMinRefreshRate();
+            return ConfigUtils.DEFAULT.getMinRefreshRate();
         }
     }
 
@@ -132,7 +141,7 @@ public class JsonConfig implements Config {
             return config.getMultimedia().getWarningRefreshRate();
         } catch (Exception e) {
             e.printStackTrace();
-            return ConfigStatic.DEFAULT.getWarningRefreshRate();
+            return ConfigUtils.DEFAULT.getWarningRefreshRate();
         }
     }
 
@@ -142,7 +151,7 @@ public class JsonConfig implements Config {
             return config.getMultimedia().getDefaultRefreshRate();
         } catch (Exception e) {
             e.printStackTrace();
-            return ConfigStatic.DEFAULT.getDefaultRefreshRate();
+            return ConfigUtils.DEFAULT.getDefaultRefreshRate();
         }
     }
 

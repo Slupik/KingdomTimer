@@ -1,13 +1,14 @@
 package jw.kingdom.hall.kingdomtimer.config.utils;
 
-import jw.kingdom.hall.kingdomtimer.config.Config;
+import jw.kingdom.hall.kingdomtimer.config.model.Config;
+import jw.kingdom.hall.kingdomtimer.config.model.ConfigWriteable;
 
 import java.io.File;
 
 /**
  * All rights reserved & copyright ©
  */
-public class DefaultConfig implements Config {
+public class DefaultConfig implements ConfigWriteable {
     @Override
     public void loadLocalData(String data) {}
     @Override

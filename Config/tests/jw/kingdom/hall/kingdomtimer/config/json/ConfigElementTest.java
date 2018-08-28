@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.config.json;
 
-import jw.kingdom.hall.kingdomtimer.config.Config;
-import jw.kingdom.hall.kingdomtimer.config.ConfigStatic;
+import jw.kingdom.hall.kingdomtimer.config.model.Config;
+import jw.kingdom.hall.kingdomtimer.config.ConfigUtils;
 import jw.kingdom.hall.kingdomtimer.config.TestUtils;
 import jw.kingdom.hall.kingdomtimer.config.common.DataParseException;
 import jw.kingdom.hall.kingdomtimer.config.utils.ConfigFieldType;
@@ -16,13 +16,13 @@ public class ConfigElementTest extends ConfigElement {
 
     @Test
     public void isCallingParent() {
-        assertTrue(isCallingParent(ConfigStatic.PARENT_VALUE_LINK.toLowerCase(), ConfigFieldType.STRING));
-        assertTrue(isCallingParent(ConfigStatic.PARENT_VALUE_LINK.toLowerCase(), ConfigFieldType.BOOLEAN));
-        assertTrue(isCallingParent(ConfigStatic.PARENT_VALUE_LINK.toLowerCase(), ConfigFieldType.INTEGER));
+        assertTrue(isCallingParent(ConfigUtils.PARENT_VALUE_LINK.toLowerCase(), ConfigFieldType.STRING));
+        assertTrue(isCallingParent(ConfigUtils.PARENT_VALUE_LINK.toLowerCase(), ConfigFieldType.BOOLEAN));
+        assertTrue(isCallingParent(ConfigUtils.PARENT_VALUE_LINK.toLowerCase(), ConfigFieldType.INTEGER));
 
-        assertTrue(isCallingParent(ConfigStatic.PARENT_VALUE_LINK.toUpperCase(), ConfigFieldType.STRING));
-        assertTrue(isCallingParent(ConfigStatic.PARENT_VALUE_LINK.toUpperCase(), ConfigFieldType.BOOLEAN));
-        assertTrue(isCallingParent(ConfigStatic.PARENT_VALUE_LINK.toUpperCase(), ConfigFieldType.INTEGER));
+        assertTrue(isCallingParent(ConfigUtils.PARENT_VALUE_LINK.toUpperCase(), ConfigFieldType.STRING));
+        assertTrue(isCallingParent(ConfigUtils.PARENT_VALUE_LINK.toUpperCase(), ConfigFieldType.BOOLEAN));
+        assertTrue(isCallingParent(ConfigUtils.PARENT_VALUE_LINK.toUpperCase(), ConfigFieldType.INTEGER));
 
         assertFalse(isCallingParent("dqwdqwdqw", ConfigFieldType.STRING));
         assertFalse(isCallingParent("true", ConfigFieldType.BOOLEAN));

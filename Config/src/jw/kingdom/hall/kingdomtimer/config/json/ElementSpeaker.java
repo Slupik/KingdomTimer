@@ -1,5 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.config.json;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.sun.istack.internal.Nullable;
 import jw.kingdom.hall.kingdomtimer.config.common.DataParseException;
@@ -11,14 +12,17 @@ import jw.kingdom.hall.kingdomtimer.config.utils.ConfigFieldType;
 class ElementSpeaker extends ConfigElement {
     @SerializedName("ekran")
     @Nullable
+    @Expose
     private String screen;
 
     @SerializedName("miganie")
     @Nullable
+    @Expose
     private String gleaming;
 
     @SerializedName("pokaz_multimedia")
     @Nullable
+    @Expose
     private String showMulti;
 
     public String getScreen() {
