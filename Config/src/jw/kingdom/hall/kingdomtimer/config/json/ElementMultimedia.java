@@ -30,6 +30,11 @@ class ElementMultimedia extends ConfigElement {
     @Expose
     private String defaultRefreshRate;
 
+    @SerializedName("actual_refresh_rate")
+    @Nullable
+    @Expose
+    private String actualRefreshRate;
+
     public String getScreen() {
         if(isCallingParent(screen)) {
             return parent.getMultimediaScreen();
@@ -72,5 +77,16 @@ class ElementMultimedia extends ConfigElement {
 
     public void setDefaultRefreshRate(int defaultRefreshRate) {
         this.defaultRefreshRate = Integer.toString(defaultRefreshRate);
+    }
+
+    public int getActualRefreshRate() throws DataParseException {
+        if(isCallingParent(defaultRefreshRate, ConfigFieldType.INTEGER)) {
+            return parent.getActualRefreshRate();
+        }
+        return toInteger(defaultRefreshRate);
+    }
+
+    public void setActualRefreshRate(int actualRefreshRate) {
+        this.defaultRefreshRate = Integer.toString(actualRefreshRate);
     }
 }

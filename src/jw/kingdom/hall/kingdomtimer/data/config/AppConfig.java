@@ -4,6 +4,7 @@ import jw.kingdom.hall.kingdomtimer.config.json.JsonConfig;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.config.model.ConfigWriteable;
 import jw.kingdom.hall.kingdomtimer.config.utils.DefaultConfig;
+import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -16,6 +17,7 @@ import java.nio.file.Files;
 public class AppConfig extends ConfigBase {
     private ConfigWriteable config;
 
+    @Override
     public void save() throws IOException {
         if(ConfigFiles.getLocal().exists()) {
             save(ConfigFiles.getLocal());
@@ -78,9 +80,21 @@ public class AppConfig extends ConfigBase {
 
     private static AppConfig instance;
     public static AppConfig getInstance() {
+        init();
+        return instance;
+    }
+
+    public static void init() {
         if(instance==null) {
             instance = new AppConfig();
         }
-        return instance;
+    }
+
+    public void setSpeakerScreen(Monitor monitor) {
+        super.setSpeakerScreen(monitor.ID);
+    }
+
+    public void setMultimediaScreen(Monitor monitor) {
+        super.setMultimediaScreen(monitor.ID);
     }
 }

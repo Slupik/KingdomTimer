@@ -15,6 +15,7 @@ public interface ConfigEditable {
     void setMinRefreshRate(int minRefRate);
     void setWarningRefreshRate(int warningRefRate);
     void setDefaultRefreshRate(int defaultRefRate);
+    void setActualRefreshRate(int actualRefRate);
 
     void setDirectDown(boolean isDirectDown);
 }

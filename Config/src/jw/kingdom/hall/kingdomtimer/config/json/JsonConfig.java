@@ -61,7 +61,7 @@ public class JsonConfig implements ConfigWriteable {
         setMultimediaScreen(source.getMultimediaScreen());
         setMinRefreshRate(source.getMinRefreshRate());
         setWarningRefreshRate(source.getWarningRefreshRate());
-        setDefaultRefreshRate(source.getDefaultRefreshRate());
+        setActualRefreshRate(source.getActualRefreshRate());
 
         setDirectDown(source.isDirectDown());
     }
@@ -155,6 +155,16 @@ public class JsonConfig implements ConfigWriteable {
         }
     }
 
+    @Override
+    public int getActualRefreshRate() {
+        try {
+            return config.getMultimedia().getActualRefreshRate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ConfigUtils.DEFAULT.getActualRefreshRate();
+        }
+    }
+
 
 
     @Override
@@ -227,6 +237,13 @@ public class JsonConfig implements ConfigWriteable {
     public void setDefaultRefreshRate(int defaultRefRate) {
         if(config.getMultimedia()!=null) {
             config.getMultimedia().setDefaultRefreshRate(defaultRefRate);
+        }
+    }
+
+    @Override
+    public void setActualRefreshRate(int actualRefRate) {
+        if(config.getMultimedia()!=null) {
+            config.getMultimedia().setActualRefreshRate(actualRefRate);
         }
     }
 

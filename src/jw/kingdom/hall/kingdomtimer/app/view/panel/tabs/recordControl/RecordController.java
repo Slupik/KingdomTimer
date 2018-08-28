@@ -1,5 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.recordControl;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
@@ -10,6 +12,7 @@ import javafx.scene.layout.VBox;
 import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
 import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.view.common.custom.sps.StartPauseStopView;
+import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingScheduleListener;
@@ -66,6 +69,18 @@ public class RecordController extends ControlledScreenImpl implements Initializa
                 }
             }
         });
+
+        loadConfig();
+        bindConfig();
+    }
+
+    private void bindConfig() {
+        cbAutopilot.selectedProperty().addListener((observable, oldValue, newValue) ->
+                AppConfig.getInstance().setEnabledAutopilot(newValue));
+    }
+
+    private void loadConfig() {
+        cbAutopilot.setSelected(AppConfig.getInstance().isEnabledAutopilot());
     }
 
     private void initVoiceRecordInstance() {

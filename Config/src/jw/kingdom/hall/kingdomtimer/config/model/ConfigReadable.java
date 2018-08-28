@@ -15,6 +15,7 @@ public interface ConfigReadable {
     int getMinRefreshRate();
     int getWarningRefreshRate();
     int getDefaultRefreshRate();
+    int getActualRefreshRate();
 
     boolean isDirectDown();
 }

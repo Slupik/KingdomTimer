@@ -1,12 +1,13 @@
 package jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect;
 
 import javafx.scene.control.Button;
+import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 
 /**
  * All rights reserved & copyright ©
  */
 public class BtnTimeDirectForPanel extends BtnTimeDirectBase {
-    private boolean isDirectDown = true;
+    private boolean isDirectDown = AppConfig.getInstance().isDirectDown();
 
     public BtnTimeDirectForPanel(Button button) {
         super(button);
@@ -30,6 +31,6 @@ public class BtnTimeDirectForPanel extends BtnTimeDirectBase {
     }
 
     public void reset() {
-        setDirectDown(true);
+        setDirectDown(AppConfig.getInstance().isDirectDown());
     }
 }

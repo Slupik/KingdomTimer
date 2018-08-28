@@ -64,6 +64,11 @@ public class DefaultConfig implements ConfigWriteable {
     }
 
     @Override
+    public int getActualRefreshRate() {
+        return 500;
+    }
+
+    @Override
     public boolean isDirectDown() {
         return true;
     }
@@ -96,6 +101,9 @@ public class DefaultConfig implements ConfigWriteable {
 
     @Override
     public void setDefaultRefreshRate(int defaultRefRate) {}
+
+    @Override
+    public void setActualRefreshRate(int defaultRefRate) {}
 
     @Override
     public void setDirectDown(boolean isDirectDown) {}

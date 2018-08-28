@@ -2,6 +2,7 @@ package jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect;
 
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.Button;
+import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
 /**
@@ -24,7 +25,7 @@ public class BtnTimeDirectForObj extends BtnTimeDirectBase {
     @Override
     public boolean isDirectDown() {
         if(null == task) {
-            return true;
+            return AppConfig.getInstance().isDirectDown();
         }
         return task.isCountdownDown();
     }

@@ -11,6 +11,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.gleam.GlobalGleamController;
@@ -53,6 +54,31 @@ public class SpeakerScreenController extends ControlledScreenImpl implements Ini
         setupScreenSelectors();
         setupPreviewHidder();
         setupGleamController();
+
+        bindConfig();
+        loadConfig();
+    }
+
+    private void bindConfig() {
+        cbEnableGleaming.selectedProperty().addListener((observable, oldValue, newValue) ->
+                AppConfig.getInstance().setEnabledGleaming(newValue));
+        cbShowPreview.selectedProperty().addListener((observable, oldValue, newValue) ->
+                AppConfig.getInstance().setEnabledShowMultimedia(newValue));
+        loadScreenFromConfig(cbMultimediaScreen, AppConfig.getInstance().getMultimediaScreen());
+        loadScreenFromConfig(cbPreviewScreen, AppConfig.getInstance().getSpeakerScreen());
+    }
+
+    private void loadScreenFromConfig(ChoiceBox<Monitor> choiceBox, String screenID) {
+        Monitor multiMonitor = getMonitorFromList(choiceBox.getItems(), screenID);
+        choiceBox.setValue(multiMonitor);
+    }
+
+    private void loadConfig() {
+        cbEnableGleaming.setSelected(AppConfig.getInstance().isEnabledGleaming());
+        cbShowPreview.setSelected(AppConfig.getInstance().isEnabledShowMultimedia());
+        atfRefreshInterval.setText(
+                String.valueOf(AppConfig.getInstance().getActualRefreshRate())
+        );
     }
 
     private void setupGleamController() {
@@ -79,6 +105,7 @@ public class SpeakerScreenController extends ControlledScreenImpl implements Ini
         cbMultimediaScreen.getSelectionModel().selectedIndexProperty().addListener((observableValue, oldValue, newValue) -> {
             Monitor monitor = cbPreviewScreen.getItems().get((Integer) newValue);
             MultimediaPreviewer.getInstance().setMonitor(monitor);
+            AppConfig.getInstance().setMultimediaScreen(monitor);
         });
         if(cbMultimediaScreen.getItems().size()>2) {
             for(int i=0;i<cbMultimediaScreen.getItems().size();i++){
@@ -132,6 +159,7 @@ public class SpeakerScreenController extends ControlledScreenImpl implements Ini
                 } else {
                     ViewerWindow.getInstance().setMonitor(monitor);
                     lastMonitor = monitor;
+                    AppConfig.getInstance().setSpeakerScreen(monitor);
                 }
             }
 
@@ -160,6 +188,7 @@ public class SpeakerScreenController extends ControlledScreenImpl implements Ini
     @FXML
     void loadInterval(ActionEvent event) {
         MultimediaPreviewer.getInstance().setRefreshInterval(Integer.parseInt(atfRefreshInterval.getSaveText()));
+        AppConfig.getInstance().setActualRefreshRate(Integer.parseInt(atfRefreshInterval.getSaveText()));
     }
 
     @Override
