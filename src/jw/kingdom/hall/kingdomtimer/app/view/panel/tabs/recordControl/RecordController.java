@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -37,6 +38,9 @@ public class RecordController extends ControlledScreenImpl implements Initializa
 
     @FXML
     private CheckBox cbAutopilot;
+
+    @FXML
+    private TextField tfPath;
 
     private TimeDisplayController controller;
     private StartPauseStopView spsView;
@@ -81,6 +85,7 @@ public class RecordController extends ControlledScreenImpl implements Initializa
 
     private void loadConfig() {
         cbAutopilot.setSelected(AppConfig.getInstance().isEnabledAutopilot());
+        tfPath.setText(AppConfig.getInstance().getRecordDestPath());
     }
 
     private void initVoiceRecordInstance() {

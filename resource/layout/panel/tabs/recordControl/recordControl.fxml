@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -31,5 +32,18 @@
          </children>
       </HBox>
       <CheckBox fx:id="cbAutopilot" mnemonicParsing="false" selected="true" text="Automatycznie kończ i zaczynaj nagranie według grafiku" />
+      <HBox alignment="CENTER_LEFT">
+         <children>
+            <Label text="Miejsce zapisu: " />
+            <TextField fx:id="tfPath" editable="false" prefWidth="385.0">
+               <HBox.margin>
+                  <Insets left="8.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+         <VBox.margin>
+            <Insets top="16.0" />
+         </VBox.margin>
+      </HBox>
    </children>
 </VBox>
