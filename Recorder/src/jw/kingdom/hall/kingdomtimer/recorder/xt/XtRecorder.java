@@ -23,7 +23,7 @@ public class XtRecorder implements Recorder, Recording.Listener {
             XtDevice device = DeviceSelector.getDevice(settingsBean);
             format = ObjectsFactory.getFormat(settingsBean, device);
             saver = ObjectsFactory.getSaver(data, settingsBean, format);
-            backup = new RecordBackup(saver);
+            backup = new RecordBackup(saver, settingsBean);
 
             recording = new Recording(device, format);
             recording.addListener(this);

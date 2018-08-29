@@ -30,23 +30,27 @@ class BufferDataSaver {
     }
 
     void finalSave() {
-        File destWavFile = getDestFile(".wav");
-        File destMp3File = getDestFile(".mp3");
+        new Thread(()->{
+            File destWavFile = getDestFile(".wav");
+            File destMp3File = getDestFile(".mp3");
 
-        createRootPath();
-        saveTo(destWavFile);
-        try {
-            //TODO problem with convert float32 wav to mp3, maybe library doesn't support this?
-            convertToMp3(destWavFile, destMp3File);
-            destWavFile.delete();
-        } catch (EncoderException e) {
-            e.printStackTrace();
-        }
+            createRootPath();
+            saveTo(destWavFile);
+            try {
+                //TODO problem with convert float32 wav to mp3, maybe library doesn't support this?
+                convertToMp3(destWavFile, destMp3File);
+                destWavFile.delete();
+            } catch (EncoderException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     void saveTo(File dest) {
         if(!dest.exists()) {
             try {
+                createRootPath();
+                System.out.println("dest.getAbsolutePath() = " + dest.getAbsolutePath());
                 dest.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();

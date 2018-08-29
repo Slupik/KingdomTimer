@@ -1,5 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.recorder.xt;
 
+import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
+
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -10,12 +12,14 @@ import java.util.Date;
  */
 class RecordBackup {
     private final BufferDataSaver saver;
+    private final AudioSettingsBean bean;
     private Thread backupThread;
     private boolean running = false;
     private File lastBackup;
 
-    RecordBackup(BufferDataSaver saver) {
+    RecordBackup(BufferDataSaver saver, AudioSettingsBean bean) {
         this.saver = saver;
+        this.bean = bean;
     }
 
     void start(int intervalInSeconds) {
@@ -46,16 +50,34 @@ class RecordBackup {
     }
 
     private void saveDataToWav() {
-        File backup = new File(getBackupName());
+        File backup = getDestFile();
         saver.saveTo(backup);
         lastBackup = backup;
     }
 
-    private String getBackupName() {
-        //return UUID.randomUUID() + ".wav";
-        DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd_HH:mm:ss");
+    private File getDestFile() {
+        String withoutExtension = getFilenameWithoutExtension();
+        File file = new File(getRootPath() + withoutExtension + ".wav");
+        int index = 1;
+        while (file.exists()) {
+            file = new File(getRootPath() + withoutExtension + "[" + Integer.toString(index) + "]" + ".wav");
+            index++;
+        }
+        return file;
+    }
+
+    private String getRootPath() {
+        if(bean.getDestinationFolder()==null || bean.getDestinationFolder().length()==0) {
+            return "";
+        } else {
+            return bean.getDestinationFolder() + File.separator;
+        }
+    }
+
+    private String getFilenameWithoutExtension() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd_HH.mm.ss");
         Date date = new Date();
-        return "BACKUP_"+dateFormat.format(date) + ".wav";
+        return "BACKUP_"+dateFormat.format(date);
     }
 
     void deleteLastBackupFile() {
