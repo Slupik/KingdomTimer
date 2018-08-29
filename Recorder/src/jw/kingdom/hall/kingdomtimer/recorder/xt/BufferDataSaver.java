@@ -19,18 +19,21 @@ class BufferDataSaver {
     private final int srate;
     private final int channel;
     private final int format;
+    private final String destPath;
 
-    BufferDataSaver(ByteArrayOutputStream stream, int srate, int channel, int format) {
+    BufferDataSaver(ByteArrayOutputStream stream, int srate, int channel, int format, String destPath) {
         this.stream = stream;
         this.srate = srate;
         this.channel = channel;
         this.format = format;
+        this.destPath = destPath;
     }
 
     void finalSave() {
         File destWavFile = getDestFile(".wav");
         File destMp3File = getDestFile(".mp3");
 
+        createRootPath();
         saveTo(destWavFile);
         try {
             convertToMp3(destWavFile, destMp3File);
@@ -73,13 +76,26 @@ class BufferDataSaver {
 
     private File getDestFile(String extension) {
         String withoutExtension = getFilenameWithoutExtension();
-        File file = new File(withoutExtension + extension);
+        File file = new File(getRootPath() + withoutExtension+ extension);
         int index = 1;
         while (file.exists()) {
-            file = new File(withoutExtension + "[" + Integer.toString(index) + "]" + extension);
+            file = new File(getRootPath() + withoutExtension + "[" + Integer.toString(index) + "]" + extension);
             index++;
         }
         return file;
+    }
+
+    private void createRootPath() {
+        File rootDir = new File(getRootPath());
+        rootDir.mkdirs();
+    }
+
+    private String getRootPath() {
+        if(destPath==null || destPath.length()==0) {
+            return "";
+        } else {
+            return destPath + File.separator;
+        }
     }
 
     private String getFilenameWithoutExtension() {

@@ -2,6 +2,7 @@ package jw.kingdom.hall.kingdomtimer.recorder.xt;
 
 import com.xtaudio.xt.*;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
+import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,19 +11,21 @@ import java.util.List;
  * All rights reserved & copyright ©
  */
 public class XtRecorder implements Recorder, Recording.Listener {
-    private static final int SAMPLE_SIZE = 3;
-    private static final XtFormat FORMAT = new XtFormat(new XtMix(44100, XtSample.INT24), 1, 0, 0, 0);
-
+    private static XtFormat format;
     private Recording recording;
     private RawDataBuffer data = new RawDataBuffer();
-    private BufferDataSaver saver = new BufferDataSaver(data, 44100, 1, 24);
-    private RecordBackup backup = new RecordBackup(saver);
+    private BufferDataSaver saver;
+    private RecordBackup backup;
 
-    public XtRecorder(){
+    public XtRecorder(AudioSettingsBean settingsBean){
         try {
             initXtPlatform();
-            XtDevice device = DeviceSelector.getDevice();
-            recording = new Recording(device, FORMAT, SAMPLE_SIZE);
+            XtDevice device = DeviceSelector.getDevice(settingsBean);
+            format = ObjectsFactory.getFormat(settingsBean, device);
+            saver = ObjectsFactory.getSaver(data, settingsBean, format);
+            backup = new RecordBackup(saver);
+
+            recording = new Recording(device, format);
             recording.addListener(this);
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,7 +73,7 @@ public class XtRecorder implements Recorder, Recording.Listener {
     }
     private void setTotalFrames(long framesCount) {
         totalFrames = framesCount;
-        int time = (int) (totalFrames/FORMAT.mix.rate);
+        int time = (int) (totalFrames/format.mix.rate);
         for(Listener listener:listeners) {
             listener.onNewTime(time);
         }

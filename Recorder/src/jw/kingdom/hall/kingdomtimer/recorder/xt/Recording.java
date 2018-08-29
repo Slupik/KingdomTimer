@@ -22,10 +22,10 @@ class Recording {
     private ExecutorService executor = Executors.newSingleThreadExecutor();
     private boolean pause;
 
-    Recording(XtDevice device, XtFormat format, int sampleSize) {
+    Recording(XtDevice device, XtFormat format) {
         this.device = device;
         this.format = format;
-        this.sampleSize = sampleSize;
+        this.sampleSize = XtAudio.getSampleAttributes(format.mix.sample).size;
     }
 
     void start(OutputStream output){

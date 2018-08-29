@@ -1,13 +1,16 @@
 package jw.kingdom.hall.kingdomtimer.domain.record.voice;
 
+import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
+import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
+import jw.kingdom.hall.kingdomtimer.recorder.common.settings.DefaultAudioSettingsBean;
 import jw.kingdom.hall.kingdomtimer.recorder.xt.XtRecorder;
 
 /**
  * All rights reserved & copyright ©
  */
 public class VoiceRecorder {
-    private Recorder recorder = new XtRecorder();
+    private Recorder recorder;
     private boolean isPause = false;
 
     public void start(){
@@ -44,5 +47,9 @@ public class VoiceRecorder {
         }
         return instance;
     }
-    private VoiceRecorder(){}
+    private VoiceRecorder(){
+        DefaultAudioSettingsBean bean = new DefaultAudioSettingsBean();
+        bean.setDestinationFolder(AppConfig.getInstance().getRecordDestPath());
+        recorder = new XtRecorder(bean);
+    }
 }
