@@ -23,8 +23,7 @@ import java.util.List;
  * All rights reserved & copyright ©
  */
 public class ViewerWindow implements StageWindow {
-    private static ViewerWindow instance
-            ;
+    private static ViewerWindow instance;
     public final WindowController CONTROLLER;
     private static Monitor actualDevice;
 

@@ -5,7 +5,8 @@ package jw.kingdom.hall.kingdomtimer.app.view.loader;
  */
 public enum Screens {
     PANEL_CONTROLLING("controlling", ScreenPaths.PANEL_LAYOUTS +"controlling.fxml"),
-    VIEWER("viewer", ScreenPaths.VIEWER_LAYOUTS +"viewer.fxml");
+    VIEWER("viewer", ScreenPaths.VIEWER_LAYOUTS +"viewer.fxml"),
+    HANDY_PANEL("handy", ScreenPaths.HANDY_PANEL_LAYOUTS +"handy.fxml");
 
     public final String NAME;
     public final String PATH;
