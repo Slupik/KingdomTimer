@@ -1,6 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.recorder.xt;
 
 import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
+import jw.kingdom.hall.kingdomtimer.recorder.utils.UniqueFileUtils;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -42,6 +43,8 @@ class RecordBackup {
         running = false;
         backupThread.stop();
         backupThread = null;
+        deleteLastBackupFile();
+        lastBackup=null;
     }
 
     private void backupData() {
@@ -56,22 +59,7 @@ class RecordBackup {
     }
 
     private File getDestFile() {
-        String withoutExtension = getFilenameWithoutExtension();
-        File file = new File(getRootPath() + withoutExtension + ".wav");
-        int index = 1;
-        while (file.exists()) {
-            file = new File(getRootPath() + withoutExtension + "[" + Integer.toString(index) + "]" + ".wav");
-            index++;
-        }
-        return file;
-    }
-
-    private String getRootPath() {
-        if(bean.getDestinationFolder()==null || bean.getDestinationFolder().length()==0) {
-            return "";
-        } else {
-            return bean.getDestinationFolder() + File.separator;
-        }
+        return UniqueFileUtils.buildFile(bean.getDestinationFolder(), getFilenameWithoutExtension(), ".wav");
     }
 
     private String getFilenameWithoutExtension() {
@@ -80,7 +68,7 @@ class RecordBackup {
         return "BACKUP_"+dateFormat.format(date);
     }
 
-    void deleteLastBackupFile() {
+    private void deleteLastBackupFile() {
         if(null != lastBackup && lastBackup.exists()) {
             lastBackup.delete();
             lastBackup = null;
