@@ -1,6 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.recorder.utils;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 /**
  * All rights reserved & copyright ©
@@ -19,7 +20,7 @@ public class ByteUtils {
     }
 
     public static byte[] FloatArray2ByteArray(float[] values){
-        ByteBuffer buffer = ByteBuffer.allocate(4 * values.length);
+        ByteBuffer buffer = ByteBuffer.allocate(4 * values.length).order(ByteOrder.LITTLE_ENDIAN);
 
         for (float value : values){
             buffer.putFloat(value);

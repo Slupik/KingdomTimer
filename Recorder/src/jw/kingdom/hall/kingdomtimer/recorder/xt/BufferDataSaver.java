@@ -36,6 +36,7 @@ class BufferDataSaver {
         createRootPath();
         saveTo(destWavFile);
         try {
+            //TODO problem with convert float32 wav to mp3, maybe library doesn't support this?
             convertToMp3(destWavFile, destMp3File);
             destWavFile.delete();
         } catch (EncoderException e) {

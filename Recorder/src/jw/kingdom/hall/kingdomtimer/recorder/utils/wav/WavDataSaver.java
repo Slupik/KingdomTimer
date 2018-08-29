@@ -10,7 +10,6 @@ import java.io.OutputStream;
 //http://www.onicos.com/staff/iz/formats/wav.html
 //http://www.neurophys.wisc.edu/auditory/riff-format.txt
 public class WavDataSaver {
-    //TODO add support for float32
     public static void savePCM(OutputStream os, byte[] data, int srate, int channel, int format) throws IOException {
         byte[] header;
         if(!isFloat(format)) {

@@ -1,11 +1,10 @@
 package jw.kingdom.hall.kingdomtimer.recorder.xt;
 
+import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import jw.kingdom.hall.kingdomtimer.recorder.common.settings.DefaultAudioSettingsBean;
+import jw.kingdom.hall.kingdomtimer.recorder.utils.wav.WavDataSaver;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
 
@@ -27,7 +26,7 @@ public class RecordTest {
         System.out.println("END MAIN");
 //        try {
 //
-//            byte[] content = Files.readAllBytes(new File("M1F1-float32-AFsp.wav").toPath());//sample clean video from web
+//            byte[] content = Files.readAllBytes(new File("IEEE float mono 8kHz.wav").toPath());//sample clean video from web
 ////            for(int i=0;i<content.length;i++) {
 //            System.out.println("size: "+content[16]);
 //            System.out.println("type: "+content[20]);
@@ -35,7 +34,7 @@ public class RecordTest {
 //            System.out.println("format 0: "+content[35]);
 //            System.out.println("36: "+content[36]);
 //            System.out.println("37: "+content[37]);
-//            for(int i=0;i<100;i++) {
+//            for(int i=0;i<5200;i++) {
 //                byte value = content[i];
 //                System.out.println(i+": "+(char)value + "("+value+")");
 ////                if(value == (byte)'d') {
@@ -54,6 +53,21 @@ public class RecordTest {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
+
+        experimentThatIndicatesThatHeaderIsCorrect();
+    }
+
+    private static void experimentThatIndicatesThatHeaderIsCorrect() {
+        try {
+            byte[] content = Files.readAllBytes(new File("IEEE float mono 8kHz.wav").toPath());
+            ByteOutputStream stream = new ByteOutputStream();
+            stream.write(content, 150000, content.length-150000);//736 for PCM
+            byte[] data = stream.getBytes();
+            WavDataSaver.savePCM(new FileOutputStream(new File("test 2 copy.wav")), data, 8000, 1, 32);
+//            new FileOutputStream(new File("test 2 copy.wav")).write(data, 0, data.length);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static byte [] float2ByteArray (float value)
