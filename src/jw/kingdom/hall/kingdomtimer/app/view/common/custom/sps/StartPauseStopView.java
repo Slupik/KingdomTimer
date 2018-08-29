@@ -18,6 +18,7 @@ import static jw.kingdom.hall.kingdomtimer.app.view.utils.ButtonUtils.loadMedium
  * All rights reserved & copyright ©
  */
 public class StartPauseStopView extends HBox {
+    private Controller controller;
     private List<Listener> listeners = new ArrayList<>();
 
     private boolean pause = false;
@@ -85,6 +86,9 @@ public class StartPauseStopView extends HBox {
     }
 
     public void pause() {
+        if(isActionToStop(ActionType.PAUSE)) {
+            return;
+        }
         pause = true;
         stop = false;
         setupView();
@@ -95,6 +99,9 @@ public class StartPauseStopView extends HBox {
     }
 
     public void unPause() {
+        if(isActionToStop(ActionType.UNPAUSE)) {
+            return;
+        }
         pause = false;
         stop = false;
         setupView();
@@ -105,6 +112,9 @@ public class StartPauseStopView extends HBox {
     }
 
     public void stop() {
+        if(isActionToStop(ActionType.STOP)) {
+            return;
+        }
         pause = false;
         stop = true;
         setupView();
@@ -115,6 +125,9 @@ public class StartPauseStopView extends HBox {
     }
 
     public void start() {
+        if(isActionToStop(ActionType.START)) {
+            return;
+        }
         pause = false;
         stop = false;
         setupView();
@@ -122,6 +135,10 @@ public class StartPauseStopView extends HBox {
         for(Listener listener:listeners) {
             listener.onStart();
         }
+    }
+
+    private boolean isActionToStop(ActionType type) {
+        return (controller != null && !controller.isToExecuteSPSAction(type));
     }
 
     private void bindView() {
@@ -135,6 +152,21 @@ public class StartPauseStopView extends HBox {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+    }
+
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+
+    public interface Controller {
+        boolean isToExecuteSPSAction(ActionType type);
+    }
+
+    public enum ActionType {
+        START,
+        STOP,
+        PAUSE,
+        UNPAUSE
     }
 
     public void addListener(Listener listener){

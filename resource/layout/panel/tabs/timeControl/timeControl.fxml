@@ -27,25 +27,12 @@
          </Label>
          <HBox alignment="CENTER_LEFT">
             <children>
-               <Button fx:id="btnStart" mnemonicParsing="false" onAction="#onStartAction" text="Start">
+               <HBox fx:id="hbTimeControlsContainer" alignment="CENTER_LEFT">
                   <HBox.margin>
                      <Insets left="16.0" />
                   </HBox.margin>
-                  <tooltip>
-                     <Tooltip text="Wybiera pierwszy punkt z tabelki, a następnie automatycznie uruchamia odliczanie. Zaznaczenie w tabelce nie ma wpływu!" wrapText="true" />
-                  </tooltip>
-               </Button>
-               <Button fx:id="btnPause" mnemonicParsing="false" onAction="#onPauseAction" text="Pauza">
-                  <HBox.margin>
-                     <Insets left="16.0" />
-                  </HBox.margin>
-               </Button>
-               <Button fx:id="btnStop" mnemonicParsing="false" onAction="#onStopAction" text="Stop">
-                  <HBox.margin>
-                     <Insets left="16.0" />
-                  </HBox.margin>
-               </Button>
-               <Button fx:id="btnBuzzer" layoutX="147.0" layoutY="36.0" mnemonicParsing="false" onAction="#onStopAction" text="Dzwonek">
+               </HBox>
+               <Button fx:id="btnBuzzer" layoutX="147.0" layoutY="36.0" mnemonicParsing="false" text="Dzwonek">
                   <HBox.margin>
                      <Insets left="16.0" />
                   </HBox.margin>

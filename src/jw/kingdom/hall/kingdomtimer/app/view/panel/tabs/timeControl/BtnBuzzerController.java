@@ -35,20 +35,20 @@ public class BtnBuzzerController {
             @Override
             public void onStart(MeetingTask task) {
                 super.onStart(task);
-                BtnBuzzerController.this.task = task;
+                loadTask(task);
                 setImageForCurrentCondition();
             }
 
             @Override
             public void onStop() {
                 super.onStop();
-                BtnBuzzerController.this.task = null;
+                loadTask(null);
                 setImageForCurrentCondition();
             }
         });
     }
 
-    public void loadTask(MeetingTask task) {
+    private void loadTask(MeetingTask task) {
         if(null != this.task) {
             this.task.useBuzzerProperty().removeListener(buzzerConditionListener);
         }

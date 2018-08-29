@@ -4,7 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import jw.kingdom.hall.kingdomtimer.app.view.common.custom.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectBase;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectForInstantController;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectForPanel;
@@ -28,7 +30,8 @@ import static jw.kingdom.hall.kingdomtimer.app.view.utils.ButtonUtils.loadMedium
 /**
  * All rights reserved & copyright ©
  */
-public class TimeControlController extends ControlledScreenImpl implements Initializable {
+public class TimeControlController extends ControlledScreenImpl implements Initializable, StartPauseStopView.Listener,
+StartPauseStopView.Controller {
 
     @FXML
     private Label lblTime;
@@ -40,13 +43,7 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
     private Button btnInstantDirect;
 
     @FXML
-    private Button btnStart;
-
-    @FXML
-    private Button btnPause;
-
-    @FXML
-    private Button btnStop;
+    private HBox hbTimeControlsContainer;
 
     @FXML
     private Button btnBuzzer;
@@ -90,12 +87,15 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
     private BtnTimeDirectForPanel timeDirectController;
     private BtnTimeDirectForInstantController instantDirectController;
     private BtnTimeDirectForPanel fastDirectController;
+    private StartPauseStopView spsView;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadMediumImage(btnStart, "icons/baseline_play_arrow_black_48dp.png");
-        loadMediumImage(btnPause, "icons/baseline_pause_black_48dp.png");
-        loadMediumImage(btnStop, "icons/baseline_stop_black_48dp.png");
+        spsView = new StartPauseStopView();
+        hbTimeControlsContainer.getChildren().add(spsView);
+        spsView.addListener(this);
+        spsView.setController(this);
+
         buzzerController = new BtnBuzzerController(btnBuzzer);
 
         timeDirectController = new BtnTimeDirectForPanel(btnCountdownDirect);
@@ -189,30 +189,6 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
         getTimer().removeTime(tfFastTime.getAllSeconds());
     }
 
-    @FXML
-    private void onStartAction(ActionEvent event) {
-        if(getTimer().isPause() && !getTimer().isStop()){
-            getTimer().resume();
-        } else {
-            try {
-                MeetingTask task = MeetingSchedule.getInstance().bringOutFirstTask();
-                getTimer().start(task);
-                buzzerController.loadTask(task);
-            } catch (NotEnoughTasksException ignore) {}
-        }
-    }
-
-    @FXML
-    private void onPauseAction(ActionEvent event) {
-        getTimer().pause();
-    }
-
-    @FXML
-    private void onStopAction(ActionEvent event) {
-        getTimer().stop();
-        buzzerController.loadTask(null);
-    }
-
     @Override
     protected Region getMainContainer() {
         return null;
@@ -220,5 +196,36 @@ public class TimeControlController extends ControlledScreenImpl implements Initi
 
     private TimerCountdown getTimer() {
         return TimerCountdown.getInstance();
+    }
+
+    @Override
+    public void onStart() {
+        try {
+            MeetingTask task = MeetingSchedule.getInstance().bringOutFirstTask();
+            getTimer().start(task);
+        } catch (NotEnoughTasksException ignore) {}
+    }
+
+    @Override
+    public void onPause() {
+        getTimer().pause();
+    }
+
+    @Override
+    public void onUnPause() {
+        getTimer().resume();
+    }
+
+    @Override
+    public void onStop() {
+        getTimer().stop();
+    }
+
+    @Override
+    public boolean isToExecuteSPSAction(StartPauseStopView.ActionType type) {
+        if(type==StartPauseStopView.ActionType.START) {
+            return MeetingSchedule.getInstance().getList().size()!=0;
+        }
+        return true;
     }
 }
