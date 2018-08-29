@@ -25,6 +25,11 @@ class ElementSpeaker extends ConfigElement {
     @Expose
     private String showMulti;
 
+    @SerializedName("pokaz_ekran")
+    @Nullable
+    @Expose
+    private boolean isVisible;
+
     public String getScreen() {
         if(isCallingParent(screen)) {
             return parent.getSpeakerScreen();
@@ -56,5 +61,13 @@ class ElementSpeaker extends ConfigElement {
 
     public void setShowMulti(boolean showMulti) {
         this.showMulti = Boolean.toString(showMulti);
+    }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisibility(boolean isVisible) {
+        this.isVisible = isVisible;
     }
 }

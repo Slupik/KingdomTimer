@@ -38,6 +38,9 @@ public class SpeakerScreenController extends ControlledScreenImpl implements Ini
     CheckBox cbShowPreview;
 
     @FXML
+    CheckBox cbVisibilitySpeakerScreen;
+
+    @FXML
     CheckBox cbEnableGleaming;
 
     @FXML
@@ -54,9 +57,42 @@ public class SpeakerScreenController extends ControlledScreenImpl implements Ini
         setupScreenSelectors();
         setupPreviewHidder();
         setupGleamController();
+        setupHidingScreen();
 
         bindConfig();
         loadConfig();
+    }
+
+    private void setupHidingScreen() {
+        cbVisibilitySpeakerScreen.setSelected(isVisible());
+        cbVisibilitySpeakerScreen.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            private boolean ignore = false;
+
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(ignore) return;
+                ignore = true;
+                boolean success = ViewerWindow.getInstance().setVisibility(newValue);
+                if(!success) {
+                    cbVisibilitySpeakerScreen.setSelected(oldValue);
+                }
+                AppConfig.getInstance().setVisibilitySpeakerScreen(newValue);
+                ignore = false;
+            }
+        });
+        ViewerWindow.getInstance().addOnMonitorChangeListener(new ViewerWindow.Listener() {
+            private String ID = Randomizer.randomStandardString(10);
+
+            @Override
+            public void onMonitorChange(Monitor monitor) {
+                cbVisibilitySpeakerScreen.setSelected(isVisible());
+            }
+
+            @Override
+            public String getId() {
+                return ID;
+            }
+        });
     }
 
     private void bindConfig() {
@@ -64,8 +100,6 @@ public class SpeakerScreenController extends ControlledScreenImpl implements Ini
                 AppConfig.getInstance().setEnabledGleaming(newValue));
         cbShowPreview.selectedProperty().addListener((observable, oldValue, newValue) ->
                 AppConfig.getInstance().setEnabledShowMultimedia(newValue));
-        loadScreenFromConfig(cbMultimediaScreen, AppConfig.getInstance().getMultimediaScreen());
-        loadScreenFromConfig(cbPreviewScreen, AppConfig.getInstance().getSpeakerScreen());
     }
 
     private void loadScreenFromConfig(ChoiceBox<Monitor> choiceBox, String screenID) {
@@ -74,11 +108,21 @@ public class SpeakerScreenController extends ControlledScreenImpl implements Ini
     }
 
     private void loadConfig() {
+        loadScreenFromConfig(cbMultimediaScreen, AppConfig.getInstance().getMultimediaScreen());
+        loadScreenFromConfig(cbPreviewScreen, AppConfig.getInstance().getSpeakerScreen());
+
         cbEnableGleaming.setSelected(AppConfig.getInstance().isEnabledGleaming());
         cbShowPreview.setSelected(AppConfig.getInstance().isEnabledShowMultimedia());
         atfRefreshInterval.setText(
                 String.valueOf(AppConfig.getInstance().getActualRefreshRate())
         );
+    }
+
+    private boolean isVisible() {
+        if(ViewerWindow.getInstance().getMonitor()!=null) {
+            return AppConfig.getInstance().isVisibleSpeakerScreen();
+        }
+        return false;
     }
 
     private void setupGleamController() {

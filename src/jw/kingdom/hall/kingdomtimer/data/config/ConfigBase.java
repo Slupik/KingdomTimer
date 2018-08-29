@@ -38,6 +38,12 @@ abstract class ConfigBase implements Config {
     }
 
     @Override
+    public void setVisibilitySpeakerScreen(boolean isVisible) {
+        getConfig().setVisibilitySpeakerScreen(isVisible);
+        autoSave();
+    }
+
+    @Override
     public void setEnabledShowMultimedia(boolean isShow) {
         getConfig().setEnabledShowMultimedia(isShow);
         autoSave();
@@ -99,6 +105,11 @@ abstract class ConfigBase implements Config {
     @Override
     public boolean isEnabledGleaming() {
         return getConfig().isEnabledGleaming();
+    }
+
+    @Override
+    public boolean isVisibleSpeakerScreen() {
+        return getConfig().isVisibleSpeakerScreen();
     }
 
     @Override

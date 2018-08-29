@@ -15,6 +15,11 @@
    </padding>
    <children>
       <CheckBox fx:id="cbShowPreview" mnemonicParsing="false" selected="true" text="Pokaż podgląd multimediów" />
+      <CheckBox fx:id="cbVisibilitySpeakerScreen" mnemonicParsing="false" selected="true" text="Pokaż ekran dla mówcy">
+         <VBox.margin>
+            <Insets top="8.0" />
+         </VBox.margin>
+      </CheckBox>
       <CheckBox fx:id="cbEnableGleaming" mnemonicParsing="false" selected="true" text="Zamigaj ekranem gdy upłynie czas">
          <VBox.margin>
             <Insets top="8.0" />

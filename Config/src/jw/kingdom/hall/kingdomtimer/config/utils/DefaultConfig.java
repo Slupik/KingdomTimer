@@ -29,6 +29,11 @@ public class DefaultConfig implements ConfigWriteable {
     }
 
     @Override
+    public boolean isVisibleSpeakerScreen() {
+        return false;
+    }
+
+    @Override
     public boolean isEnabledShowMultimedia() {
         return true;
     }
@@ -80,6 +85,9 @@ public class DefaultConfig implements ConfigWriteable {
 
     @Override
     public void setEnabledGleaming(boolean isGleaming) {}
+
+    @Override
+    public void setVisibilitySpeakerScreen(boolean isVisible) {}
 
     @Override
     public void setEnabledShowMultimedia(boolean isShow) {}

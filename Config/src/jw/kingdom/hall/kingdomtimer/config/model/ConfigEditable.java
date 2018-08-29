@@ -6,6 +6,7 @@ package jw.kingdom.hall.kingdomtimer.config.model;
 public interface ConfigEditable {
     void setSpeakerScreen(String screen);
     void setEnabledGleaming(boolean isGleaming);
+    void setVisibilitySpeakerScreen(boolean isVisible);
     void setEnabledShowMultimedia(boolean isShow);
 
     void setRecordDestPath(String path);

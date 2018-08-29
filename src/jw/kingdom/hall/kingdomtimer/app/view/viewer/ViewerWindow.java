@@ -5,6 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorEventHandler;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
@@ -86,10 +87,27 @@ public class ViewerWindow implements StageWindow {
             }
         });
         autoSelectScreen();
+        if(AppConfig.getInstance().isVisibleSpeakerScreen()) {
+            getStage().show();
+        } else {
+            getStage().hide();
+        }
     }
 
     public void loadScreens() {
         CONTROLLER.loadScreen(Screens.VIEWER);
+    }
+
+    public boolean setVisibility(boolean isVisible) {
+        if(actualDevice!=null)  {
+            if(isVisible) {
+                getStage().show();
+            } else {
+                getStage().hide();
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -92,6 +92,16 @@ public class JsonConfig implements ConfigWriteable {
     }
 
     @Override
+    public boolean isVisibleSpeakerScreen() {
+        try {
+            return config.getSpeaker().isVisible();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ConfigUtils.DEFAULT.isVisibleSpeakerScreen();
+        }
+    }
+
+    @Override
     public boolean isEnabledShowMultimedia() {
         try {
             return config.getSpeaker().isShowMulti();
@@ -188,6 +198,13 @@ public class JsonConfig implements ConfigWriteable {
     public void setEnabledGleaming(boolean isGleaming) {
         if(config.getSpeaker()!=null) {
             config.getSpeaker().setGleaming(isGleaming);
+        }
+    }
+
+    @Override
+    public void setVisibilitySpeakerScreen(boolean isVisible) {
+        if(config.getSpeaker()!=null) {
+            config.getSpeaker().setVisibility(isVisible);
         }
     }
 
