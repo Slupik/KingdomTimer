@@ -6,17 +6,17 @@
 
 <TabPane fx:id="mainContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.app.view.panel.ControllingController">
    <tabs>
-      <Tab fx:id="tabTimeControl" text="Sterowanie czasem">
+      <Tab fx:id="tabTimeControl" closable="false" text="Sterowanie czasem">
         <content>
           <HBox fx:id="hbTimeControl" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
         </content>
       </Tab>
-      <Tab fx:id="tabSpeakerScreen" text="Ekran mówcy">
+      <Tab fx:id="tabSpeakerScreen" closable="false" text="Ekran mówcy">
         <content>
           <HBox fx:id="hbSpeakerScreen" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
         </content>
       </Tab>
-      <Tab fx:id="tabRecording" text="Nagrywanie">
+      <Tab fx:id="tabRecording" closable="false" text="Nagrywanie">
          <content>
             <HBox fx:id="hbRecording" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
          </content>
