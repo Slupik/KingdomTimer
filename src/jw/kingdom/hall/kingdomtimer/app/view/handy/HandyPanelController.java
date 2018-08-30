@@ -1,14 +1,17 @@
 package jw.kingdom.hall.kingdomtimer.app.view.handy;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import jw.kingdom.hall.kingdomtimer.app.view.common.AnimatedZoomOperator;
 import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
 import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.view.common.custom.sps.StartPauseStopView;
@@ -21,6 +24,7 @@ import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.NotEnoughTasksException;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,6 +41,9 @@ public class HandyPanelController extends ControlledScreenImpl implements Initia
     private Label lblTime;
 
     @FXML
+    private Label lblNow;
+
+    @FXML
     private HBox hbTimeControlsContainer;
     private StartPauseStopView spsView;
     private TimeDisplayController timeDisplay;
@@ -45,6 +52,17 @@ public class HandyPanelController extends ControlledScreenImpl implements Initia
     public void initialize(URL location, ResourceBundle resources) {
         initSps();
         initTimeController();
+        lblNow.setText("");
+
+        AnimatedZoomOperator zoomOperator = new AnimatedZoomOperator();
+        getMainContainer().setOnScroll(event -> {
+            double zoomFactor = 1.1;
+            if (event.getDeltaY() <= 0) {
+                // zoom out
+                zoomFactor = 1 / zoomFactor;
+            }
+            zoomOperator.zoom(getMainContainer(), zoomFactor);
+        });
     }
 
     private void initTimeController() {
@@ -64,6 +82,7 @@ public class HandyPanelController extends ControlledScreenImpl implements Initia
             public void onStart(MeetingTask task) {
                 super.onStart(task);
                 spsView.setupForStart();
+                lblNow.setText(task.getName());
             }
 
             @Override
@@ -82,6 +101,7 @@ public class HandyPanelController extends ControlledScreenImpl implements Initia
             public void onStop() {
                 super.onStop();
                 spsView.setupForStop();
+                lblNow.setText("");
             }
         });
     }

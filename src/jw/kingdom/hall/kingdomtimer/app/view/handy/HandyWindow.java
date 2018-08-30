@@ -1,17 +1,14 @@
 package jw.kingdom.hall.kingdomtimer.app.view.handy;
 
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.Screens;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.StageWindow;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowController;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowSettings;
-import jw.kingdom.hall.kingdomtimer.app.view.viewer.ViewerWindow;
 
 /**
  * All rights reserved & copyright ©
@@ -30,7 +27,7 @@ public class HandyWindow implements StageWindow {
 
     public void build(Stage primaryStage){
         stage = primaryStage;
-        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initStyle(StageStyle.TRANSPARENT);
         root = new Group();
 
         stage.setTitle(WindowSettings.TITLE);
@@ -41,11 +38,13 @@ public class HandyWindow implements StageWindow {
         CONTROLLER.setScreen(Screens.HANDY_PANEL);
 
         scene = new Scene(root);
+        scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         stage.show();
 
-        stage.setWidth(400);
-        stage.setHeight(80);
+        stage.setWidth(380);
+        stage.setHeight(110);
+
         new WindowMovingController(stage, root);
     }
 
