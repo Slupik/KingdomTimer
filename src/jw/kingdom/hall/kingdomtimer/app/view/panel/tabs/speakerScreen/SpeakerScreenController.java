@@ -52,6 +52,8 @@ public class SpeakerScreenController extends ControlledScreenImpl implements Ini
     @FXML
     ChoiceBox<Monitor> cbPreviewScreen;
 
+    private int lastSavedInterval = -1;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupScreenSelectors();
@@ -61,6 +63,8 @@ public class SpeakerScreenController extends ControlledScreenImpl implements Ini
 
         bindConfig();
         loadConfig();
+
+        lastSavedInterval = Integer.parseInt(atfRefreshInterval.getSaveText());
     }
 
     private void setupHidingScreen() {
@@ -230,9 +234,36 @@ public class SpeakerScreenController extends ControlledScreenImpl implements Ini
     }
 
     @FXML
+    void loadDefaultInterval(ActionEvent event) {
+        atfRefreshInterval.setText(String.valueOf(AppConfig.getInstance().getDefaultRefreshRate()));
+        saveInterval();
+    }
+
+    @FXML
     void loadInterval(ActionEvent event) {
-        MultimediaPreviewer.getInstance().setRefreshInterval(Integer.parseInt(atfRefreshInterval.getSaveText()));
-        AppConfig.getInstance().setActualRefreshRate(Integer.parseInt(atfRefreshInterval.getSaveText()));
+        int current = Integer.parseInt(atfRefreshInterval.getSaveText());
+        if(current<AppConfig.getInstance().getMinRefreshRate()) {
+            RefreshRateDialogs.showTooLowValue();
+            repairInterval();
+        } else if(current<AppConfig.getInstance().getWarningRefreshRate()) {
+            RefreshRateDialogs.showWarning(
+                    this::saveInterval,
+                    this::repairInterval
+            );
+        } else {
+            saveInterval();
+        }
+    }
+
+    private void repairInterval() {
+        atfRefreshInterval.setText(String.valueOf(lastSavedInterval));
+    }
+
+    private void saveInterval() {
+        int current = Integer.parseInt(atfRefreshInterval.getSaveText());
+        lastSavedInterval = current;
+        MultimediaPreviewer.getInstance().setRefreshInterval(current);
+        AppConfig.getInstance().setActualRefreshRate(current);
     }
 
     @Override

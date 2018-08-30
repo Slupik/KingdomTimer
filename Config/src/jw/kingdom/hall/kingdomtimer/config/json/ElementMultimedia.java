@@ -80,13 +80,13 @@ class ElementMultimedia extends ConfigElement {
     }
 
     public int getActualRefreshRate() throws DataParseException {
-        if(isCallingParent(defaultRefreshRate, ConfigFieldType.INTEGER)) {
+        if(isCallingParent(actualRefreshRate, ConfigFieldType.INTEGER)) {
             return parent.getActualRefreshRate();
         }
-        return toInteger(defaultRefreshRate);
+        return toInteger(actualRefreshRate);
     }
 
     public void setActualRefreshRate(int actualRefreshRate) {
-        this.defaultRefreshRate = Integer.toString(actualRefreshRate);
+        this.actualRefreshRate = Integer.toString(actualRefreshRate);
     }
 }
