@@ -1,6 +1,5 @@
 package jw.kingdom.hall.kingdomtimer.domain.record.voice;
 
-import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 import jw.kingdom.hall.kingdomtimer.recorder.xt.XtRecorder;
 
