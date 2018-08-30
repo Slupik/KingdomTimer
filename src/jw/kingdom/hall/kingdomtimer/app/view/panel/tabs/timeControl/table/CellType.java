@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.cell;
+package jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.table;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.ChoiceBox;

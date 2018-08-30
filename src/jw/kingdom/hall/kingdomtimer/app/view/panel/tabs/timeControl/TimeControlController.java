@@ -9,6 +9,7 @@ import javafx.scene.layout.Region;
 import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
 import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.view.common.custom.sps.StartPauseStopView;
+import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.table.TaskTableController;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectBase;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectForInstantController;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectForPanel;

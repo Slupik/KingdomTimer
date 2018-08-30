@@ -1,23 +1,21 @@
-package jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.cell;
+package jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.table;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
-import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectForObj;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
 /**
  * All rights reserved & copyright ©
  */
-public class CellDirect implements Callback<TableColumn<MeetingTask, String>, TableCell<MeetingTask, String>> {
+public class CellDelete implements Callback<TableColumn<MeetingTask, String>, TableCell<MeetingTask, String>> {
 
     @Override
     public TableCell<MeetingTask, String> call(TableColumn<MeetingTask, String> param) {
         return new TableCell<MeetingTask, String>() {
 
-            final Button btn = new Button("Dół");
-            BtnTimeDirectForObj controller = new BtnTimeDirectForObj(btn);
+            final Button btn = new Button("Usuń");
 
             @Override
             public void updateItem(String item, boolean empty) {
@@ -26,9 +24,10 @@ public class CellDirect implements Callback<TableColumn<MeetingTask, String>, Ta
                     setGraphic(null);
                     setText(null);
                 } else {
-                    MeetingTask task = getTableView().getItems().get(getIndex());
-                    controller.loadTask(task);
-                    controller.setMedium(false);
+                    btn.setOnAction(event -> {
+                        MeetingTask task = getTableView().getItems().get(getIndex());
+                        getTableView().getItems().remove(task);
+                    });
                     setGraphic(btn);
                     setText(null);
                 }
