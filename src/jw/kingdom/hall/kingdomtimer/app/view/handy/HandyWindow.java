@@ -1,8 +1,12 @@
 package jw.kingdom.hall.kingdomtimer.app.view.handy;
 
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.Screens;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.StageWindow;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowController;
@@ -26,6 +30,7 @@ public class HandyWindow implements StageWindow {
 
     public void build(Stage primaryStage){
         stage = primaryStage;
+        stage.initStyle(StageStyle.UNDECORATED);
         root = new Group();
 
         stage.setTitle(WindowSettings.TITLE);
@@ -39,7 +44,9 @@ public class HandyWindow implements StageWindow {
         stage.setScene(scene);
         stage.show();
 
-        stage.setOnCloseRequest(event -> System.exit(0));
+        stage.setWidth(400);
+        stage.setHeight(100);
+        new WindowMovingController(stage, root);
     }
 
     public void loadScreens() {
