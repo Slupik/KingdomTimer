@@ -138,6 +138,46 @@ public class JsonConfig implements ConfigWriteable {
         }
     }
 
+    @Override
+    public String getRawFileNameBackup() {
+        try {
+            return config.getRecording().getRawFileNameBackup();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ConfigUtils.DEFAULT.getRawFileNameBackup();
+        }
+    }
+
+    @Override
+    public String getRawFileNameBackupGroups() {
+        try {
+            return config.getRecording().getRawFileNameBackupGroups();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ConfigUtils.DEFAULT.getRawFileNameBackupGroups();
+        }
+    }
+
+    @Override
+    public String getRawFileNameFinal() {
+        try {
+            return config.getRecording().getRawFileNameFinal();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ConfigUtils.DEFAULT.getRawFileNameFinal();
+        }
+    }
+
+    @Override
+    public String getRawFileNameFinalGroups() {
+        try {
+            return config.getRecording().getRawFileNameFinalGroups();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ConfigUtils.DEFAULT.getRawFileNameFinalGroups();
+        }
+    }
+
 
     @Override
     public String getMultimediaScreen() {
@@ -242,6 +282,34 @@ public class JsonConfig implements ConfigWriteable {
     public void setEnabledAutoSeparate(boolean isEnabled) {
         if(config.getRecording()!=null) {
             config.getRecording().setAutoSeparate(isEnabled);
+        }
+    }
+
+    @Override
+    public void setRawFileNameBackup(String rawFileNameBackup) {
+        if(config.getRecording()!=null) {
+            config.getRecording().setRawFileNameBackup(rawFileNameBackup);
+        }
+    }
+
+    @Override
+    public void setRawFileNameBackupGroups(String rawFileNameBackupGroups) {
+        if(config.getRecording()!=null) {
+            config.getRecording().setRawFileNameBackupGroups(rawFileNameBackupGroups);
+        }
+    }
+
+    @Override
+    public void setRawFileNameFinal(String rawFileNameFinal) {
+        if(config.getRecording()!=null) {
+            config.getRecording().setRawFileNameFinal(rawFileNameFinal);
+        }
+    }
+
+    @Override
+    public void setRawFileNameFinalGroups(String rawFileNameFinalGroups) {
+        if(config.getRecording()!=null) {
+            config.getRecording().setRawFileNameFinalGroups(rawFileNameFinalGroups);
         }
     }
 

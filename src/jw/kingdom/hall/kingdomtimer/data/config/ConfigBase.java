@@ -104,6 +104,30 @@ abstract class ConfigBase implements Config {
     }
 
     @Override
+    public void setRawFileNameBackup(String rawFileNameBackup) {
+        getConfig().setRawFileNameBackup(rawFileNameBackup);
+        autoSave();
+    }
+
+    @Override
+    public void setRawFileNameBackupGroups(String rawFileNameBackupGroups) {
+        getConfig().setRawFileNameBackupGroups(rawFileNameBackupGroups);
+        autoSave();
+    }
+
+    @Override
+    public void setRawFileNameFinal(String rawFileNameFinal) {
+        getConfig().setRawFileNameFinal(rawFileNameFinal);
+        autoSave();
+    }
+
+    @Override
+    public void setRawFileNameFinalGroups(String rawFileNameFinalGroups) {
+        getConfig().setRawFileNameFinalGroups(rawFileNameFinalGroups);
+        autoSave();
+    }
+
+    @Override
     public String getSpeakerScreen() {
         return getConfig().getSpeakerScreen();
     }
@@ -166,5 +190,25 @@ abstract class ConfigBase implements Config {
     @Override
     public boolean isAutoSeparate() {
         return getConfig().isAutoSeparate();
+    }
+
+    @Override
+    public String getRawFileNameBackup() {
+        return getConfig().getRawFileNameBackup();
+    }
+
+    @Override
+    public String getRawFileNameBackupGroups() {
+        return getConfig().getRawFileNameBackupGroups();
+    }
+
+    @Override
+    public String getRawFileNameFinal() {
+        return getConfig().getRawFileNameFinal();
+    }
+
+    @Override
+    public String getRawFileNameFinalGroups() {
+        return getConfig().getRawFileNameFinalGroups();
     }
 }

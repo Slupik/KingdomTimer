@@ -54,6 +54,26 @@ public class DefaultConfig implements ConfigWriteable {
     }
 
     @Override
+    public String getRawFileNameBackup() {
+        return "BACKUP_{dluga_data}";
+    }
+
+    @Override
+    public String getRawFileNameBackupGroups() {
+        return "BACKUP_{dluga_data}_{blok}";
+    }
+
+    @Override
+    public String getRawFileNameFinal() {
+        return "{data}";
+    }
+
+    @Override
+    public String getRawFileNameFinalGroups() {
+        return "{data}_{blok}";
+    }
+
+    @Override
     public String getMultimediaScreen() {
         return null;
     }
@@ -105,6 +125,18 @@ public class DefaultConfig implements ConfigWriteable {
 
     @Override
     public void setEnabledAutoSeparate(boolean isEnabled) {}
+
+    @Override
+    public void setRawFileNameBackup(String rawFileNameBackup) {}
+
+    @Override
+    public void setRawFileNameBackupGroups(String rawFileNameBackupGroups) {}
+
+    @Override
+    public void setRawFileNameFinal(String rawFileNameFinal) {}
+
+    @Override
+    public void setRawFileNameFinalGroups(String rawFileNameFinalGroups) {}
 
     @Override
     public void setMultimediaScreen(String multiScreen) {}

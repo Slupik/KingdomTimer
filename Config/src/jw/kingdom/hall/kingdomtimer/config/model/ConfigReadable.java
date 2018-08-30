@@ -12,6 +12,10 @@ public interface ConfigReadable {
     String getRecordDestPath();
     boolean isEnabledAutopilot();
     boolean isAutoSeparate();
+    String getRawFileNameBackup();
+    String getRawFileNameBackupGroups();
+    String getRawFileNameFinal();
+    String getRawFileNameFinalGroups();
 
     String getMultimediaScreen();
     int getMinRefreshRate();

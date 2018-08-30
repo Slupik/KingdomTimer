@@ -14,6 +14,7 @@ import java.io.File;
  * All rights reserved & copyright ©
  */
 public class DefaultFileRecordCreator implements FileRecordCreator {
+
     private static final MeetingTask EMPTY = getEmptyTask();
     private MeetingTask lastTask = EMPTY;
 
@@ -42,8 +43,7 @@ public class DefaultFileRecordCreator implements FileRecordCreator {
         });
     }
 
-    @Override
-    public File getBackupFile(String extension) {
+    @Override public File getBackupFile(String extension) {
         createRootPath();
         return UniqueFileUtils.buildUniqueFile(getDestPath(), getBackupFileRawName(), extension);
     }
@@ -54,9 +54,9 @@ public class DefaultFileRecordCreator implements FileRecordCreator {
     private String getBackupFileRawName() {
         String raw;
         if(AppConfig.getInstance().isAutoSeparate()) {
-            raw = "BACKUP_{dluga_data}_{blok}";
+            raw = AppConfig.getInstance().getRawFileNameBackupGroups();
         } else {
-            raw = "BACKUP_{dluga_data}";
+            raw = AppConfig.getInstance().getRawFileNameBackup();
         }
         return NameParser.getParsedName(raw, lastTask);
     }
@@ -73,9 +73,9 @@ public class DefaultFileRecordCreator implements FileRecordCreator {
     private String getFinalFileRawName() {
         String raw;
         if(AppConfig.getInstance().isAutoSeparate()) {
-            raw = "{data}_{blok}";
+            raw = AppConfig.getInstance().getRawFileNameFinalGroups();
         } else {
-            raw = "{data}";
+            raw = AppConfig.getInstance().getRawFileNameFinal();
         }
         return NameParser.getParsedName(raw, lastTask);
     }

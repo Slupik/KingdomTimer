@@ -12,6 +12,10 @@ public interface ConfigEditable {
     void setRecordDestPath(String path);
     void setEnabledAutopilot(boolean isAutopilot);
     void setEnabledAutoSeparate(boolean isEnabled);
+    void setRawFileNameBackup(String rawFileNameBackup);
+    void setRawFileNameBackupGroups(String rawFileNameBackupGroups);
+    void setRawFileNameFinal(String rawFileNameFinal);
+    void setRawFileNameFinalGroups(String rawFileNameFinalGroups);
 
     void setMultimediaScreen(String multiScreen);
     void setMinRefreshRate(int minRefRate);

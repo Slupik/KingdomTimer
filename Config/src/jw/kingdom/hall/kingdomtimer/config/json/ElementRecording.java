@@ -25,6 +25,26 @@ class ElementRecording extends ConfigElement {
     @Expose
     private String autoSeparate;
 
+    @SerializedName("nazwa_backupu")
+    @Nullable
+    @Expose
+    private String rawFileNameBackup;
+
+    @SerializedName("nazwa_backupu_przy_rozbiciu")
+    @Nullable
+    @Expose
+    private String rawFileNameBackupGroups;
+
+    @SerializedName("nazwa_ostateczna")
+    @Nullable
+    @Expose
+    private String rawFileNameFinal;
+
+    @SerializedName("nazwa_ostateczna_przy_rozbiciu")
+    @Nullable
+    @Expose
+    private String rawFileNameFinalGroups;
+
     public String getPath() {
         if(isCallingParent(path)) {
             return parent.getRecordDestPath();
@@ -56,5 +76,49 @@ class ElementRecording extends ConfigElement {
 
     public void setAutoSeparate(boolean isEnabled) {
         this.autoSeparate = Boolean.toString(isEnabled);
+    }
+
+    public String getRawFileNameBackup() {
+        if(isCallingParent(rawFileNameBackup, ConfigFieldType.INTEGER)) {
+            return parent.getRawFileNameBackup();
+        }
+        return rawFileNameBackup;
+    }
+
+    public void setRawFileNameBackup(String rawFileNameBackup) {
+        this.rawFileNameBackup = rawFileNameBackup;
+    }
+
+    public String getRawFileNameBackupGroups() {
+        if(isCallingParent(rawFileNameBackupGroups, ConfigFieldType.INTEGER)) {
+            return parent.getRawFileNameBackupGroups();
+        }
+        return rawFileNameBackupGroups;
+    }
+
+    public void setRawFileNameBackupGroups(String rawFileNameBackupGroups) {
+        this.rawFileNameBackupGroups = rawFileNameBackupGroups;
+    }
+
+    public String getRawFileNameFinal() {
+        if(isCallingParent(rawFileNameFinal, ConfigFieldType.INTEGER)) {
+            return parent.getRawFileNameFinal();
+        }
+        return rawFileNameFinal;
+    }
+
+    public void setRawFileNameFinal(String rawFileNameFinal) {
+        this.rawFileNameFinal = rawFileNameFinal;
+    }
+
+    public String getRawFileNameFinalGroups() {
+        if(isCallingParent(rawFileNameFinalGroups, ConfigFieldType.INTEGER)) {
+            return parent.getRawFileNameFinalGroups();
+        }
+        return rawFileNameFinalGroups;
+    }
+
+    public void setRawFileNameFinalGroups(String rawFileNameFinalGroups) {
+        this.rawFileNameFinalGroups = rawFileNameFinalGroups;
     }
 }
