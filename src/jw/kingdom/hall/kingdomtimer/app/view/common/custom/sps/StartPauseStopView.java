@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
+import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
 import java.io.IOException;
 import java.net.URL;
@@ -89,52 +92,68 @@ public class StartPauseStopView extends HBox {
         if(isActionToStop(ActionType.PAUSE)) {
             return;
         }
-        pause = true;
-        stop = false;
-        setupView();
+        setupForPause();
 
         for(Listener listener:listeners) {
             listener.onPause();
         }
     }
 
+    public void setupForPause() {
+        pause = true;
+        stop = false;
+        setupView();
+    }
+
     public void unPause() {
         if(isActionToStop(ActionType.UNPAUSE)) {
             return;
         }
-        pause = false;
-        stop = false;
-        setupView();
+        setupForUnPause();
 
         for(Listener listener:listeners) {
             listener.onUnPause();
         }
     }
 
+    public void setupForUnPause() {
+        pause = false;
+        stop = false;
+        setupView();
+    }
+
     public void stop() {
         if(isActionToStop(ActionType.STOP)) {
             return;
         }
-        pause = false;
-        stop = true;
-        setupView();
+        setupForStop();
 
         for(Listener listener:listeners) {
             listener.onStop();
         }
     }
 
+    public void setupForStop() {
+        pause = false;
+        stop = true;
+        setupView();
+    }
+
     public void start() {
         if(isActionToStop(ActionType.START)) {
             return;
         }
-        pause = false;
-        stop = false;
-        setupView();
+        setupForStart();
 
         for(Listener listener:listeners) {
             listener.onStart();
         }
+    }
+
+    public void setupForStart() {
+        pause = false;
+        stop = false;
+        setupView();
     }
 
     private boolean isActionToStop(ActionType type) {

@@ -20,6 +20,11 @@ public abstract class TimerCountdownListener implements TimerCountdown.Listener 
     }
 
     @Override
+    public void onResume() {
+
+    }
+
+    @Override
     public void onStop() {
 
     }

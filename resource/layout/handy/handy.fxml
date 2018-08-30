@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<HBox fx:id="mainContainer" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.app.view.handy.HandyPanelController">
+<HBox fx:id="mainContainer" alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.app.view.handy.HandyPanelController">
    <children>
       <Label fx:id="lblTime" text="12:43:02">
          <font>

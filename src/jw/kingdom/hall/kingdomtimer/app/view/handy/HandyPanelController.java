@@ -16,6 +16,7 @@ import jw.kingdom.hall.kingdomtimer.app.view.loader.ScreenPaths;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.ScreenUtils;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.TabScreens;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.NotEnoughTasksException;
@@ -57,6 +58,32 @@ public class HandyPanelController extends ControlledScreenImpl implements Initia
         hbTimeControlsContainer.getChildren().add(spsView);
         spsView.addListener(this);
         spsView.setController(this);
+
+        TimerCountdown.getInstance().addListener(new TimerCountdownListener() {
+            @Override
+            public void onStart(MeetingTask task) {
+                super.onStart(task);
+                spsView.setupForStart();
+            }
+
+            @Override
+            public void onPause() {
+                super.onPause();
+                spsView.setupForPause();
+            }
+
+            @Override
+            public void onResume() {
+                super.onPause();
+                spsView.setupForUnPause();
+            }
+
+            @Override
+            public void onStop() {
+                super.onStop();
+                spsView.setupForStop();
+            }
+        });
     }
 
     @FXML

@@ -87,6 +87,9 @@ public class TimerCountdown extends TimerCountdownBase {
 
     public void resume() {
         startTime(getTime());
+        for(Listener listener:listeners) {
+            listener.onResume();
+        }
     }
 
     public void addTime(int time) {
@@ -161,6 +164,7 @@ public class TimerCountdown extends TimerCountdownBase {
     public interface Listener {
         void onStart(MeetingTask task);
         void onPause();
+        void onResume();
         void onStop();
         void onTimeOut();
         void onVolumeChange(boolean isVolumeUp);

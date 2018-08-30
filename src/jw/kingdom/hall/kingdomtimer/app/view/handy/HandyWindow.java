@@ -45,7 +45,7 @@ public class HandyWindow implements StageWindow {
         stage.show();
 
         stage.setWidth(400);
-        stage.setHeight(100);
+        stage.setHeight(80);
         new WindowMovingController(stage, root);
     }
 
