@@ -20,6 +20,11 @@ class ElementRecording extends ConfigElement {
     @Expose
     private String autopilot;
 
+    @SerializedName("rozbij_na_dzialy")
+    @Nullable
+    @Expose
+    private String autoSeparate;
+
     public String getPath() {
         if(isCallingParent(path)) {
             return parent.getRecordDestPath();
@@ -40,5 +45,16 @@ class ElementRecording extends ConfigElement {
 
     public void setAutopilot(boolean autopilot) {
         this.autopilot = Boolean.toString(autopilot);
+    }
+
+    public boolean getAutoSeparate() throws DataParseException {
+        if(isCallingParent(autoSeparate, ConfigFieldType.BOOLEAN)) {
+            return parent.isAutoSeparate();
+        }
+        return toBoolean(autoSeparate);
+    }
+
+    public void setAutoSeparate(boolean isEnabled) {
+        this.autoSeparate = Boolean.toString(isEnabled);
     }
 }

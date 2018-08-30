@@ -98,6 +98,12 @@ abstract class ConfigBase implements Config {
     }
 
     @Override
+    public void setEnabledAutoSeparate(boolean isEnabled) {
+        getConfig().setEnabledAutoSeparate(isEnabled);
+        autoSave();
+    }
+
+    @Override
     public String getSpeakerScreen() {
         return getConfig().getSpeakerScreen();
     }
@@ -155,5 +161,10 @@ abstract class ConfigBase implements Config {
     @Override
     public boolean isDirectDown() {
         return getConfig().isDirectDown();
+    }
+
+    @Override
+    public boolean isAutoSeparate() {
+        return getConfig().isAutoSeparate();
     }
 }

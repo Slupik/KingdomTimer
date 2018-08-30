@@ -32,6 +32,11 @@
          </children>
       </HBox>
       <CheckBox fx:id="cbAutopilot" mnemonicParsing="false" selected="true" text="Automatycznie kończ i zaczynaj nagranie według grafiku" />
+      <CheckBox fx:id="cbAutoSeparate" mnemonicParsing="false" text="Automatycznie dziel nagranie według podziału zebrania (kolorów w grafiku)">
+         <VBox.margin>
+            <Insets top="8.0" />
+         </VBox.margin>
+      </CheckBox>
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label text="Miejsce zapisu: " />

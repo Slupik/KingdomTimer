@@ -49,6 +49,11 @@ public class DefaultConfig implements ConfigWriteable {
     }
 
     @Override
+    public boolean isAutoSeparate() {
+        return false;
+    }
+
+    @Override
     public String getMultimediaScreen() {
         return null;
     }
@@ -97,6 +102,9 @@ public class DefaultConfig implements ConfigWriteable {
 
     @Override
     public void setEnabledAutopilot(boolean isAutopilot) {}
+
+    @Override
+    public void setEnabledAutoSeparate(boolean isEnabled) {}
 
     @Override
     public void setMultimediaScreen(String multiScreen) {}

@@ -128,6 +128,15 @@ public class JsonConfig implements ConfigWriteable {
         }
     }
 
+    @Override
+    public boolean isAutoSeparate() {
+        try {
+            return config.getRecording().getAutoSeparate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ConfigUtils.DEFAULT.isAutoSeparate();
+        }
+    }
 
 
     @Override
@@ -226,6 +235,13 @@ public class JsonConfig implements ConfigWriteable {
     public void setEnabledAutopilot(boolean isAutopilot) {
         if(config.getRecording()!=null) {
             config.getRecording().setAutopilot(isAutopilot);
+        }
+    }
+
+    @Override
+    public void setEnabledAutoSeparate(boolean isEnabled) {
+        if(config.getRecording()!=null) {
+            config.getRecording().setAutoSeparate(isEnabled);
         }
     }
 

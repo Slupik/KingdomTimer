@@ -11,6 +11,7 @@ public interface ConfigReadable {
 
     String getRecordDestPath();
     boolean isEnabledAutopilot();
+    boolean isAutoSeparate();
 
     String getMultimediaScreen();
     int getMinRefreshRate();

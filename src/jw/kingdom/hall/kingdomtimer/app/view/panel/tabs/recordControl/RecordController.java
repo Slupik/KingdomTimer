@@ -1,7 +1,5 @@
 package jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.recordControl;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
@@ -14,6 +12,7 @@ import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
 import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.view.common.custom.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
+import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingScheduleListener;
@@ -40,6 +39,9 @@ public class RecordController extends ControlledScreenImpl implements Initializa
     private CheckBox cbAutopilot;
 
     @FXML
+    private CheckBox cbAutoSeparate;
+
+    @FXML
     private TextField tfPath;
 
     private TimeDisplayController controller;
@@ -57,11 +59,27 @@ public class RecordController extends ControlledScreenImpl implements Initializa
         controller.setTime(0);
 
         MeetingSchedule.getInstance().addListener(new MeetingScheduleListener() {
+            private MeetingTask.Type lastType = null;
+
             @Override
             public void onMeetingStart() {
                 super.onMeetingStart();
                 if(isAutopilotOn()) {
                     spsView.start();
+                }
+            }
+
+            @Override
+            public void onNextTask(int index, MeetingTask task) {
+                super.onNextTask(index, task);
+                if(task!=null && !task.getType().equals(lastType) && isAutoSeparateOn()) {
+                    VoiceRecorder.getInstance().stop();
+                    VoiceRecorder.getInstance().start();
+                }
+                if(task==null) {
+                    lastType = null;
+                } else {
+                    lastType = task.getType();
                 }
             }
 
@@ -79,12 +97,17 @@ public class RecordController extends ControlledScreenImpl implements Initializa
     }
 
     private void bindConfig() {
-        cbAutopilot.selectedProperty().addListener((observable, oldValue, newValue) ->
-                AppConfig.getInstance().setEnabledAutopilot(newValue));
+        cbAutopilot.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            AppConfig.getInstance().setEnabledAutopilot(newValue);
+            cbAutoSeparate.setDisable(!newValue);
+        });
+        cbAutoSeparate.selectedProperty().addListener((observable, oldValue, newValue) ->
+                AppConfig.getInstance().setEnabledAutoSeparate(newValue));
     }
 
     private void loadConfig() {
         cbAutopilot.setSelected(AppConfig.getInstance().isEnabledAutopilot());
+        cbAutoSeparate.setSelected(AppConfig.getInstance().isAutoSeparate());
         tfPath.setText(AppConfig.getInstance().getRecordDestPath());
     }
 
@@ -95,6 +118,10 @@ public class RecordController extends ControlledScreenImpl implements Initializa
             e.printStackTrace();
         }
         VoiceRecorder.getInstance().addListener(this);
+    }
+
+    private boolean isAutoSeparateOn() {
+        return isAutopilotOn() && cbAutoSeparate.isSelected();
     }
 
     private boolean isAutopilotOn(){

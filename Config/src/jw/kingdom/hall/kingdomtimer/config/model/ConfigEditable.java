@@ -11,6 +11,7 @@ public interface ConfigEditable {
 
     void setRecordDestPath(String path);
     void setEnabledAutopilot(boolean isAutopilot);
+    void setEnabledAutoSeparate(boolean isEnabled);
 
     void setMultimediaScreen(String multiScreen);
     void setMinRefreshRate(int minRefRate);
