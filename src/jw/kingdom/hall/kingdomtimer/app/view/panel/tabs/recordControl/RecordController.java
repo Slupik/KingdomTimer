@@ -72,7 +72,7 @@ public class RecordController extends ControlledScreenImpl implements Initializa
             @Override
             public void onNextTask(int index, MeetingTask task) {
                 super.onNextTask(index, task);
-                if(task!=null && !task.getType().equals(lastType) && isAutoSeparateOn()) {
+                if(task!=null && (!task.getType().equals(lastType) && lastType!=null) && isAutoSeparateOn()) {
                     VoiceRecorder.getInstance().stop();
                     VoiceRecorder.getInstance().start();
                 }
