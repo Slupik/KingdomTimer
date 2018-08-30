@@ -22,8 +22,16 @@ public class PredefinedTaskList {
         list.add(PredefinedMeetingTask.getBibleReading());
         Meeting meeting = getWeekMeeting();
         if(meeting!=null) {
+            int i=0;
             for(Talk talk:meeting.getTalks()) {
-                list.add(TalkConverter.toMeetingTask(talk));
+                MeetingTask task = TalkConverter.toMeetingTask(talk);
+                if(i<3) {
+                    task.setType(MeetingTask.Type.MINISTRY);
+                } else {
+                    task.setType(MeetingTask.Type.LIVING);
+                }
+                list.add(task);
+                i++;
             }
         }
         list.add(PredefinedMeetingTask.getBookAnalyst());
@@ -50,12 +58,14 @@ public class PredefinedTaskList {
         lecture.setName("Wykład biblijny");
         lecture.setTimeInSeconds(30 * 60);
         lecture.setUseBuzzer(false);
+        lecture.setType(MeetingTask.Type.LECTURE);
         list.add(lecture);
 
         MeetingTask watchtower = new MeetingTask();
         watchtower.setName("Strażnica");
         watchtower.setTimeInSeconds(60 * 60);
         watchtower.setUseBuzzer(false);
+        watchtower.setType(MeetingTask.Type.WATCHTOWER);
         list.add(watchtower);
 
         return list;

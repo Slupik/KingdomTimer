@@ -1,18 +1,26 @@
 package jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl;
 
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.geometry.Insets;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
+import jw.kingdom.hall.kingdomtimer.app.view.common.translate.MeetingTaskTrans;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.cell.CellBuzzer;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.cell.CellDelete;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.cell.CellDirect;
+import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.cell.CellType;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
@@ -31,19 +39,23 @@ public class TaskTableController {
     private TableColumn<MeetingTask, String> tcDirect;
     private TableColumn<MeetingTask, String> tcName;
     private TableColumn<MeetingTask, TimeField> tcTime;
+    private TableColumn<MeetingTask, String> tcType;
 
     public TaskTableController(TableView<MeetingTask> table,
                                TableColumn<MeetingTask, String> tcDelete,
                                TableColumn<MeetingTask, String> tcBuzzer,
                                TableColumn<MeetingTask, String> tcDirect,
                                TableColumn<MeetingTask, String> tcName,
-                               TableColumn<MeetingTask, TimeField> tcTime) {
+                               TableColumn<MeetingTask, TimeField> tcTime,
+                               TableColumn<MeetingTask, String> tcType
+    ) {
         TABLE = table;
         this.tcDelete = tcDelete;
         this.tcBuzzer = tcBuzzer;
         this.tcDirect = tcDirect;
         this.tcName = tcName;
         this.tcTime = tcTime;
+        this.tcType = tcType;
         init();
     }
 
@@ -77,12 +89,38 @@ public class TaskTableController {
         tcDirect.setCellFactory(new CellDirect());
         tcDirect.setSortable(false);
 
-        makeRowsDraggable();
+        tcType.setEditable(false);
+        tcType.setCellFactory(new CellType());
+        tcType.setSortable(false);
+
+        setRowFactory();
     }
 
-    private void makeRowsDraggable() {
+    private void setRowFactory() {
         TABLE.setRowFactory(tv -> {
-            TableRow<MeetingTask> row = new TableRow<>();
+            TableRow<MeetingTask> row = new TableRow<MeetingTask>() {
+                private MeetingTask lastTask;
+                private ChangeListener<MeetingTask.Type> backgroundChanger = (observable, oldValue, newValue) -> {
+                    setRowColor(this, newValue);
+                };
+
+                @Override
+                public void updateItem(MeetingTask item, boolean empty) {
+                    super.updateItem(item, empty);
+                    Platform.runLater(()->{
+                        if(lastTask!=null) {
+                            lastTask.typeProperty().removeListener(backgroundChanger);
+                        }
+                        lastTask = item;
+                        if(item!=null) {
+                            item.typeProperty().addListener(backgroundChanger);
+                        }
+                    });
+                    if(getItem()!=null) {
+                        setRowColor(this, getItem().getType());
+                    }
+                }
+            };
 
             row.setOnDragDetected(event -> {
                 if (! row.isEmpty()) {
@@ -128,7 +166,62 @@ public class TaskTableController {
                 }
             });
 
+            final ContextMenu rowMenu = new ContextMenu();
+            MenuItem typeHeader = new MenuItem("Wybierz typ:");
+            rowMenu.getItems().add(typeHeader);
+            for(MeetingTask.Type type:MeetingTask.Type.values()) {
+                MenuItem item = new MenuItem("     "+ MeetingTaskTrans.getForTable(type));
+                item.setOnAction(event -> {
+                    row.getItem().setType(type);
+                });
+                rowMenu.getItems().add(item);
+            }
+
+            row.contextMenuProperty().bind(
+                    Bindings.when(Bindings.isNotNull(row.itemProperty()))
+                            .then(rowMenu)
+                            .otherwise((ContextMenu)null));
+
             return row ;
         });
+    }
+
+    private void setRowColor(TableRow<MeetingTask> row, MeetingTask.Type type) {
+        row.setBackground(getRowBackground(type));
+    }
+
+    private Background getRowBackground(MeetingTask.Type type) {
+        switch (type) {
+            case UNKNOWN: {
+               return new Background(new BackgroundFill(Color.web("#eeeeee"), CornerRadii.EMPTY, Insets.EMPTY));
+            }
+            case NONE: {
+                return Background.EMPTY;
+            }
+            case TREASURES: {
+                return new Background(new BackgroundFill(Color.web("#ffca28"), CornerRadii.EMPTY, Insets.EMPTY));
+            }
+            case MINISTRY: {
+                return new Background(new BackgroundFill(Color.web("#ef9a9a"), CornerRadii.EMPTY, Insets.EMPTY));
+            }
+            case LIVING: {
+                return new Background(new BackgroundFill(Color.web("#81c784"), CornerRadii.EMPTY, Insets.EMPTY));
+            }
+            case LECTURE: {
+                return new Background(new BackgroundFill(Color.web("#d1c4e9"), CornerRadii.EMPTY, Insets.EMPTY));
+            }
+            case WATCHTOWER: {
+                return new Background(new BackgroundFill(Color.web("#81d4fa"), CornerRadii.EMPTY, Insets.EMPTY));
+            }
+            case OVERSEER: {
+                return new Background(new BackgroundFill(Color.web("#ffee58"), CornerRadii.EMPTY, Insets.EMPTY));
+            }
+            case OTHER: {
+                return new Background(new BackgroundFill(Color.web("#b0bec5"), CornerRadii.EMPTY, Insets.EMPTY));
+            }
+            default: {
+                return Background.EMPTY;
+            }
+        }
     }
 }

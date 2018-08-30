@@ -1,9 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.model;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
 
@@ -16,6 +13,7 @@ public class MeetingTask {
     private StringProperty name = new SimpleStringProperty("???");
     private StringProperty formattedTime = new SimpleStringProperty("00:00:00");
     private BooleanProperty countdownDown = new SimpleBooleanProperty(true);
+    private ObjectProperty<Type> type = new SimpleObjectProperty<>(Type.UNKNOWN);
     private TimeField tfTime = new TimeField();
 
     public TimeField getTfTime() {
@@ -72,5 +70,29 @@ public class MeetingTask {
 
     public void setCountdownDown(boolean countdownDown) {
         this.countdownDown.setValue(countdownDown);
+    }
+
+    public Type getType() {
+        return type.get();
+    }
+
+    public ObjectProperty<Type> typeProperty() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type.set(type);
+    }
+
+    public enum Type {
+        UNKNOWN,
+        NONE,
+        TREASURES,
+        MINISTRY,
+        LIVING,
+        WATCHTOWER,
+        LECTURE,
+        OVERSEER,
+        OTHER
     }
 }

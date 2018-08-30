@@ -151,6 +151,7 @@
          <TableColumn fx:id="tcBuzzer" minWidth="75.0" prefWidth="-1.0" text="Syngał" />
          <TableColumn fx:id="tcDirect" minWidth="75.0" prefWidth="-1.0" text="Kierunek odliczania" />
        <TableColumn fx:id="tcTime" minWidth="75.0" prefWidth="-1.0" text="Czas" />
+         <TableColumn fx:id="tcType" editable="false" minWidth="75.0" prefWidth="-1.0" sortable="false" text="Typ" visible="false" />
        <TableColumn fx:id="tcName" minWidth="100.0" prefWidth="492.0" text="Punkt" />
      </columns>
       <VBox.margin>

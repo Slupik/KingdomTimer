@@ -6,6 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
+import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.view.common.custom.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectBase;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectForInstantController;
@@ -17,16 +19,12 @@ import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.NotEnoughTasksException;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
-import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
-import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
 
 import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import static jw.kingdom.hall.kingdomtimer.app.view.utils.ButtonUtils.loadMediumImage;
 
 /**
  * All rights reserved & copyright ©
@@ -82,6 +80,9 @@ StartPauseStopView.Controller {
     @FXML
     private TableColumn<MeetingTask, TimeField> tcTime;
 
+    @FXML
+    private TableColumn<MeetingTask, String> tcType;
+
     private TimeDisplayController timeDisplay;
     private TaskTableController tableController;
     private BtnBuzzerController buzzerController;
@@ -116,7 +117,9 @@ StartPauseStopView.Controller {
                 tcBuzzer,
                 tcDirect,
                 tcName,
-                tcTime);
+                tcTime,
+                tcType
+        );
 
         setupInstantDirectController();
         TimerCountdown.getInstance().addListener(new TimerCountdownListener() {

@@ -12,6 +12,7 @@ class PredefinedMeetingTask {
         task.setName("Uwagi wstępne");
         task.setUseBuzzer(false);
         task.setTimeInSeconds(3*60);
+        task.setType(MeetingTask.Type.TREASURES);
         return task;
     }
 
@@ -20,6 +21,7 @@ class PredefinedMeetingTask {
         task.setName("Analiza Biblii");
         task.setUseBuzzer(false);
         task.setTimeInSeconds(10*60);
+        task.setType(MeetingTask.Type.TREASURES);
         return task;
     }
 
@@ -28,6 +30,7 @@ class PredefinedMeetingTask {
         task.setName("Wyszukujemy duchowe skarby");
         task.setUseBuzzer(false);
         task.setTimeInSeconds(8*60);
+        task.setType(MeetingTask.Type.TREASURES);
         return task;
     }
 
@@ -36,6 +39,7 @@ class PredefinedMeetingTask {
         task.setName("Czytanie Biblii");
         task.setUseBuzzer(true);
         task.setTimeInSeconds(4*60);
+        task.setType(MeetingTask.Type.TREASURES);
         return task;
     }
 
@@ -48,6 +52,7 @@ class PredefinedMeetingTask {
         task.setName("Zborowe studium Biblii");
         task.setUseBuzzer(false);
         task.setTimeInSeconds(30*60);
+        task.setType(MeetingTask.Type.LIVING);
         return task;
     }
 
@@ -56,6 +61,7 @@ class PredefinedMeetingTask {
         task.setName("Powtórka i zapowiedź następnego zebrania");
         task.setUseBuzzer(false);
         task.setTimeInSeconds(3*60);
+        task.setType(MeetingTask.Type.LIVING);
         return task;
     }
 }
