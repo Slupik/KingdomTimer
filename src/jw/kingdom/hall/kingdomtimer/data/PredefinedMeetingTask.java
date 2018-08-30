@@ -64,4 +64,13 @@ class PredefinedMeetingTask {
         task.setType(MeetingTask.Type.LIVING);
         return task;
     }
+
+    static MeetingTask getOverseerLecture() {
+        MeetingTask task = new MeetingTask();
+        task.setName("Przemówienie podróżującego");
+        task.setUseBuzzer(false);
+        task.setTimeInSeconds(30*60);
+        task.setType(MeetingTask.Type.OVERSEER);
+        return task;
+    }
 }

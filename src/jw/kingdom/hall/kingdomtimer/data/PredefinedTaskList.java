@@ -14,7 +14,7 @@ import java.util.List;
  * All rights reserved & copyright ©
  */
 public class PredefinedTaskList {
-    public static List<MeetingTask> getWeekTasks(){
+    public static List<MeetingTask> getWeekTasks(boolean overseer){
         List<MeetingTask> list = new ArrayList<>();
         list.add(PredefinedMeetingTask.getPreview());
         list.add(PredefinedMeetingTask.getBibleAnalyst());
@@ -34,8 +34,13 @@ public class PredefinedTaskList {
                 i++;
             }
         }
-        list.add(PredefinedMeetingTask.getBookAnalyst());
+        if(!overseer) {
+            list.add(PredefinedMeetingTask.getBookAnalyst());
+        }
         list.add(PredefinedMeetingTask.getRepeat());
+        if(overseer) {
+            list.add(PredefinedMeetingTask.getOverseerLecture());
+        }
         return list;
     }
 
@@ -51,7 +56,7 @@ public class PredefinedTaskList {
         return null;
     }
 
-    public static List<MeetingTask> getWeekendTasks(){
+    public static List<MeetingTask> getWeekendTasks(boolean overseer){
         List<MeetingTask> list = new ArrayList<>();
 
         MeetingTask lecture = new MeetingTask();
@@ -63,10 +68,24 @@ public class PredefinedTaskList {
 
         MeetingTask watchtower = new MeetingTask();
         watchtower.setName("Strażnica");
-        watchtower.setTimeInSeconds(60 * 60);
+        if(overseer) {
+            watchtower.setTimeInSeconds(60 * 60);
+        } else {
+            watchtower.setTimeInSeconds(30 * 60);
+        }
         watchtower.setUseBuzzer(false);
         watchtower.setType(MeetingTask.Type.WATCHTOWER);
         list.add(watchtower);
+
+
+        if(overseer) {
+            MeetingTask overseerLecture = new MeetingTask();
+            overseerLecture.setName("Przemówienie podróżującego");
+            overseerLecture.setTimeInSeconds(30 * 60);
+            overseerLecture.setUseBuzzer(false);
+            overseerLecture.setType(MeetingTask.Type.OVERSEER);
+            list.add(overseerLecture);
+        }
 
         return list;
     }

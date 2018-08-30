@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField?>
 
-<VBox prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.TimeControlController">
+<VBox prefHeight="400.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.TimeControlController">
    <HBox>
       <children>
          <Label fx:id="lblTime" text="12:43:02">
@@ -143,6 +143,14 @@
                <Insets left="56.0" />
             </HBox.margin>
          </VBox>
+         <VBox alignment="BOTTOM_CENTER" layoutX="664.0" layoutY="10.0">
+            <children>
+               <Button mnemonicParsing="false" onAction="#loadOverseerTasksOnline" text="Wczytaj online obsługowy" />
+            </children>
+            <HBox.margin>
+               <Insets left="8.0" />
+            </HBox.margin>
+         </VBox>
       </children>
    </HBox>
    <TableView fx:id="tvList">
@@ -152,7 +160,7 @@
          <TableColumn fx:id="tcDirect" minWidth="75.0" prefWidth="-1.0" text="Kierunek odliczania" />
        <TableColumn fx:id="tcTime" minWidth="75.0" prefWidth="-1.0" text="Czas" />
          <TableColumn fx:id="tcType" editable="false" minWidth="75.0" prefWidth="-1.0" sortable="false" text="Typ" visible="false" />
-       <TableColumn fx:id="tcName" minWidth="100.0" prefWidth="492.0" text="Punkt" />
+       <TableColumn fx:id="tcName" minWidth="100.0" prefWidth="637.0" text="Punkt" />
      </columns>
       <VBox.margin>
          <Insets top="16.0" />

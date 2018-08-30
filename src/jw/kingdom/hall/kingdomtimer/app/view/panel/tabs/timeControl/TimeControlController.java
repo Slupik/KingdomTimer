@@ -196,13 +196,22 @@ StartPauseStopView.Controller {
     }
 
     @FXML
+    private void loadOverseerTasksOnline(ActionEvent event) {
+        setTasksOnline(true);
+    }
+
+    @FXML
     private void loadTasksOnline(ActionEvent event) {
+        setTasksOnline(false);
+    }
+
+    private void setTasksOnline(boolean overseer) {
         new Thread(() -> {
             List<MeetingTask> tasks;
             if(isWeekend()) {
-                tasks = PredefinedTaskList.getWeekendTasks();
+                tasks = PredefinedTaskList.getWeekendTasks(overseer);
             } else {
-                tasks = PredefinedTaskList.getWeekTasks();
+                tasks = PredefinedTaskList.getWeekTasks(overseer);
             }
             MeetingSchedule.getInstance().clear();
             MeetingSchedule.getInstance().addTask(tasks);
