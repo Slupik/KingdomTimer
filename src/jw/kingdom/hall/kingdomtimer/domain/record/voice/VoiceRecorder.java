@@ -2,8 +2,6 @@ package jw.kingdom.hall.kingdomtimer.domain.record.voice;
 
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
-import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
-import jw.kingdom.hall.kingdomtimer.recorder.common.settings.DefaultAudioSettingsBean;
 import jw.kingdom.hall.kingdomtimer.recorder.xt.XtRecorder;
 
 /**
@@ -49,7 +47,6 @@ public class VoiceRecorder {
     }
     private VoiceRecorder(){
         DefaultAudioSettingsBean bean = new DefaultAudioSettingsBean();
-        bean.setDestinationFolder(AppConfig.getInstance().getRecordDestPath());
         recorder = new XtRecorder(bean);
     }
 }

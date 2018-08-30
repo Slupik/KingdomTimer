@@ -1,10 +1,14 @@
-package jw.kingdom.hall.kingdomtimer.recorder.common.settings;
+package jw.kingdom.hall.kingdomtimer.domain.record.voice;
+
+import jw.kingdom.hall.kingdomtimer.data.record.DefaultFileRecordCreator;
+import jw.kingdom.hall.kingdomtimer.recorder.common.files.FileRecordCreator;
+import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
 
 /**
  * All rights reserved & copyright ©
  */
 public class DefaultAudioSettingsBean implements AudioSettingsBean {
-    private String destinationFolder = "";
+    private FileRecordCreator fileRecordCreator = new DefaultFileRecordCreator();
     private boolean readDefaultMixSettings = false;
     private int rate = 44100;//ignore if(readDefaultMixSettings == true)
     private String sample = "INT24";//ignore if(readDefaultMixSettings == true)
@@ -13,15 +17,6 @@ public class DefaultAudioSettingsBean implements AudioSettingsBean {
     private boolean selectDefaultDevice = true;
     private String deviceName = "";//ignore if(selectDefaultDevice == true)
     private String serviceSetupId = "CONSUMER_AUDIO";
-
-    @Override
-    public String getDestinationFolder() {
-        return destinationFolder;
-    }
-
-    public void setDestinationFolder(String destinationFolder) {
-        this.destinationFolder = destinationFolder;
-    }
 
     @Override
     public int getRate() {
@@ -84,6 +79,15 @@ public class DefaultAudioSettingsBean implements AudioSettingsBean {
 
     public void setServiceSetupID(String serviceSetupId) {
         this.serviceSetupId = serviceSetupId;
+    }
+
+    @Override
+    public FileRecordCreator getPaths() {
+        return fileRecordCreator;
+    }
+
+    public void setPaths(FileRecordCreator fileRecordCreator) {
+        this.fileRecordCreator = fileRecordCreator;
     }
 
     @Override

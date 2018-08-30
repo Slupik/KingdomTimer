@@ -1,10 +1,12 @@
 package jw.kingdom.hall.kingdomtimer.recorder.common.settings;
 
+import jw.kingdom.hall.kingdomtimer.recorder.common.files.FileRecordCreator;
+
 /**
  * All rights reserved & copyright ©
  */
 public interface AudioSettingsBean {
-    String getDestinationFolder();
+    FileRecordCreator getPaths();
     boolean isReadDefaultMixSettings();
     int getRate();
     String getSample();

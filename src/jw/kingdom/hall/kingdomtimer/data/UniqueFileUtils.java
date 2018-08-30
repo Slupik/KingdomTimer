@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.recorder.utils;
+package jw.kingdom.hall.kingdomtimer.data;
 
 import java.io.File;
 
@@ -8,12 +8,12 @@ import java.io.File;
 public abstract class UniqueFileUtils {
 
     public static void createPath(String path) {
-        path = getAccommodatedRootPath(path);
-        new File(UniqueFileUtils.getAccommodatedRootPath(path)).mkdirs();
+        path = getAccommodatedPath(path);
+        new File(path).mkdirs();
     }
 
-    public static File buildFile(String rootPath, String name, String extension) {
-        rootPath = getAccommodatedRootPath(rootPath);
+    public static File buildUniqueFile(String rootPath, String name, String extension) {
+        rootPath = getAccommodatedPath(rootPath);
         File file = new File(rootPath + name+ extension);
         int index = 1;
         while (file.exists()) {
@@ -23,7 +23,7 @@ public abstract class UniqueFileUtils {
         return file;
     }
 
-    private static String getAccommodatedRootPath(String path) {
+    private static String getAccommodatedPath(String path) {
         if(path==null || path.length()==0) {
             return "";
         } else if (path.endsWith(File.separator)) {

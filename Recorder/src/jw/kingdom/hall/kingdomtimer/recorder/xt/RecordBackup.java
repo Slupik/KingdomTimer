@@ -1,12 +1,8 @@
 package jw.kingdom.hall.kingdomtimer.recorder.xt;
 
 import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
-import jw.kingdom.hall.kingdomtimer.recorder.utils.UniqueFileUtils;
 
 import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * All rights reserved & copyright ©
@@ -59,13 +55,7 @@ class RecordBackup {
     }
 
     private File getDestFile() {
-        return UniqueFileUtils.buildFile(bean.getDestinationFolder(), getFilenameWithoutExtension(), ".wav");
-    }
-
-    private String getFilenameWithoutExtension() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd_HH.mm.ss");
-        Date date = new Date();
-        return "BACKUP_"+dateFormat.format(date);
+        return bean.getPaths().getBackupFile(".wav");
     }
 
     private void deleteLastBackupFile() {
