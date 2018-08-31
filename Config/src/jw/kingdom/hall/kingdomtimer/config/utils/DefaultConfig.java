@@ -30,7 +30,7 @@ public class DefaultConfig implements ConfigWriteable {
 
     @Override
     public boolean isVisibleSpeakerScreen() {
-        return false;
+        return true;
     }
 
     @Override
