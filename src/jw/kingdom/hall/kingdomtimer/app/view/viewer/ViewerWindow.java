@@ -86,11 +86,7 @@ public class ViewerWindow implements StageWindow {
             }
         });
         autoSelectScreen();
-        if(AppConfig.getInstance().isVisibleSpeakerScreen()) {
-            getStage().show();
-        } else {
-            getStage().hide();
-        }
+        setVisibility(AppConfig.getInstance().isVisibleSpeakerScreen());
     }
 
     public void loadScreens() {
@@ -140,9 +136,7 @@ public class ViewerWindow implements StageWindow {
                 return;
             }
 
-            if(!getStage().isShowing()){
-                getStage().show();
-            }
+            setVisibility(AppConfig.getInstance().isVisibleSpeakerScreen());
             stage.setMaximized(false);
 
             getStage().setWidth(monitor.getDisplayMode().getWidth());
