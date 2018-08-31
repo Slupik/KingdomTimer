@@ -40,7 +40,7 @@ public class XtRecorder implements Recorder, Recording.Listener {
     public void onStart() {
         data.reset();
         recording.start(data);
-        backup.start(10);
+        backup.start(60);
     }
 
     @Override

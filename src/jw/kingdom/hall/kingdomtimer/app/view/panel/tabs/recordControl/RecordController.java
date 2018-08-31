@@ -74,6 +74,11 @@ public class RecordController extends ControlledScreenImpl implements Initializa
                 super.onNextTask(index, task);
                 if(task!=null && (!task.getType().equals(lastType) && lastType!=null) && isAutoSeparateOn()) {
                     VoiceRecorder.getInstance().stop();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     VoiceRecorder.getInstance().start();
                 }
                 if(task==null) {
@@ -117,7 +122,7 @@ public class RecordController extends ControlledScreenImpl implements Initializa
         } catch (Exception e) {
             e.printStackTrace();
         }
-        VoiceRecorder.getInstance().addListener(this);
+        VoiceRecorder.getInstance().addListener(RecordController.this);
     }
 
     private boolean isAutoSeparateOn() {
