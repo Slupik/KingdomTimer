@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * All rights reserved & copyright ©
  */
+//TODO get all native recording into one thread using ex. ExecutorService executor = Executors.newSingleThreadExecutor();
 public class XtRecorder implements Recorder, Recording.Listener {
     private static XtFormat format;
     private final AudioSettingsBean settingsBean;

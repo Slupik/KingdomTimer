@@ -15,7 +15,7 @@
         <option name="paramFile" value="-Dprism.maxvram=10M -Dprism.order=sw BigTextureRenderTest" />
         <option name="title" value="" />
         <option name="vendor" value="" />
-        <option name="version" value="0.7.0" />
+        <option name="version" value="0.8.0" />
       </options>
     </properties>
     <root id="root">
