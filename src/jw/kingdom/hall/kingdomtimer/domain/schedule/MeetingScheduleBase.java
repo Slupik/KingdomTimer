@@ -10,6 +10,7 @@ import java.util.List;
  * All rights reserved & copyright ©
  */
 abstract class MeetingScheduleBase {
+
     protected final ObservableList<MeetingTask> list = FXCollections.observableArrayList();
     protected MeetingTask lastTask = null;
 

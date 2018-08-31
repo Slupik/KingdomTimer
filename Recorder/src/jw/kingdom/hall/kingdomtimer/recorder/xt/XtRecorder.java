@@ -12,18 +12,18 @@ import java.util.List;
  */
 public class XtRecorder implements Recorder, Recording.Listener {
     private static XtFormat format;
+    private final AudioSettingsBean settingsBean;
     private Recording recording;
     private RawDataBuffer data = new RawDataBuffer();
     private BufferDataSaver saver;
     private RecordBackup backup;
 
     public XtRecorder(AudioSettingsBean settingsBean){
+        this.settingsBean = settingsBean;
         try {
             initXtPlatform();
             XtDevice device = DeviceSelector.getDevice(settingsBean);
             format = ObjectsFactory.getFormat(settingsBean, device);
-            saver = ObjectsFactory.getSaver(data, settingsBean, format);
-            backup = new RecordBackup(saver, settingsBean);
 
             recording = new Recording(device, format);
             recording.addListener(this);
@@ -38,7 +38,10 @@ public class XtRecorder implements Recorder, Recording.Listener {
 
     @Override
     public void onStart() {
-        data.reset();
+        data = new RawDataBuffer();
+        saver = ObjectsFactory.getSaver(data, settingsBean, format);
+        backup = new RecordBackup(saver, settingsBean);
+
         recording.start(data);
         backup.start(60);
     }
@@ -50,9 +53,9 @@ public class XtRecorder implements Recorder, Recording.Listener {
 
     @Override
     public void onStop() {
-        recording.stop();
-        backup.stop();
-        saver.finalSave();
+        if(recording!=null) recording.stop();
+        if(backup!=null) backup.stop();
+        if(saver!=null) saver.finalSave();
         setTotalFrames(0);
     }
 

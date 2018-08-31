@@ -159,13 +159,6 @@ StartPauseStopView.Controller {
         });
     }
 
-    private boolean isWeekend() {
-        Calendar cl = Calendar.getInstance();
-        cl.setTime(new Date());
-        return (cl.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY ||
-                cl.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY);
-    }
-
     @FXML
     private void handleAddTask(ActionEvent event) {
         MeetingTask task = new MeetingTask();
@@ -197,25 +190,12 @@ StartPauseStopView.Controller {
 
     @FXML
     private void loadOverseerTasksOnline(ActionEvent event) {
-        setTasksOnline(true);
+        MeetingSchedule.getInstance().setTasksOnline(true);
     }
 
     @FXML
     private void loadTasksOnline(ActionEvent event) {
-        setTasksOnline(false);
-    }
-
-    private void setTasksOnline(boolean overseer) {
-        new Thread(() -> {
-            List<MeetingTask> tasks;
-            if(isWeekend()) {
-                tasks = PredefinedTaskList.getWeekendTasks(overseer);
-            } else {
-                tasks = PredefinedTaskList.getWeekTasks(overseer);
-            }
-            MeetingSchedule.getInstance().clear();
-            MeetingSchedule.getInstance().addTask(tasks);
-        }).start();
+        MeetingSchedule.getInstance().setTasksOnline(false);
     }
 
     @FXML

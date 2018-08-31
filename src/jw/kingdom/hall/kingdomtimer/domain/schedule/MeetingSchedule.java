@@ -1,10 +1,13 @@
 package jw.kingdom.hall.kingdomtimer.domain.schedule;
 
+import jw.kingdom.hall.kingdomtimer.data.PredefinedTaskList;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,6 +15,27 @@ import java.util.List;
  */
 public class MeetingSchedule extends MeetingScheduleBase {
     private final List<Listener> listeners = new ArrayList<>();
+
+    public void setTasksOnline(boolean overseer) {
+        new Thread(() -> {
+            lastTask = null;
+            List<MeetingTask> tasks;
+            if(isWeekend()) {
+                tasks = PredefinedTaskList.getWeekendTasks(overseer);
+            } else {
+                tasks = PredefinedTaskList.getWeekTasks(overseer);
+            }
+            MeetingSchedule.getInstance().clear();
+            MeetingSchedule.getInstance().addTask(tasks);
+        }).start();
+    }
+
+    private boolean isWeekend() {
+        Calendar cl = Calendar.getInstance();
+        cl.setTime(new Date());
+        return (cl.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY ||
+                cl.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY);
+    }
 
     protected void notifyAboutNextTask(int index, MeetingTask task) {
         boolean isFirstTask = null == lastTask;

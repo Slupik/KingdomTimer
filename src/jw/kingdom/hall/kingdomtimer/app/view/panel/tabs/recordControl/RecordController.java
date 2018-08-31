@@ -1,5 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.recordControl;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
@@ -64,6 +65,7 @@ public class RecordController extends ControlledScreenImpl implements Initializa
             @Override
             public void onMeetingStart() {
                 super.onMeetingStart();
+                lastType = null;
                 if(isAutopilotOn()) {
                     spsView.start();
                 }
@@ -74,11 +76,6 @@ public class RecordController extends ControlledScreenImpl implements Initializa
                 super.onNextTask(index, task);
                 if(task!=null && (!task.getType().equals(lastType) && lastType!=null) && isAutoSeparateOn()) {
                     VoiceRecorder.getInstance().stop();
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                     VoiceRecorder.getInstance().start();
                 }
                 if(task==null) {
@@ -92,7 +89,11 @@ public class RecordController extends ControlledScreenImpl implements Initializa
             public void onMeetingEnd() {
                 super.onMeetingEnd();
                 if(isAutopilotOn()) {
-                    spsView.stop();
+                    if(Platform.isFxApplicationThread()) {
+                        spsView.stop();
+                    } else {
+                        Platform.runLater(()->spsView.stop());
+                    }
                 }
             }
         });

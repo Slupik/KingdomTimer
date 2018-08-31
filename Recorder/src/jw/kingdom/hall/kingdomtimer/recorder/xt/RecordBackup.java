@@ -37,7 +37,7 @@ class RecordBackup {
     @SuppressWarnings("deprecation")
     void stop(){
         running = false;
-        backupThread.stop();
+        if(backupThread!=null) backupThread.stop();
         backupThread = null;
         deleteLastBackupFile();
         lastBackup=null;
