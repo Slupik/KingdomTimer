@@ -1,5 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.app.view.handy;
 
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -46,6 +47,17 @@ public class HandyWindow implements StageWindow {
         stage.setHeight(110);
 
         new WindowMovingController(stage, root);
+
+        new Thread(()->{
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Platform.runLater(()->{
+                getStage().sizeToScene();
+            });
+        }).start();
     }
 
     public void loadScreens() {

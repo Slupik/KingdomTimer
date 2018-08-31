@@ -1,31 +1,22 @@
 package jw.kingdom.hall.kingdomtimer.app.view.handy;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import jw.kingdom.hall.kingdomtimer.app.view.common.AnimatedZoomOperator;
 import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
 import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.view.common.custom.sps.StartPauseStopView;
-import jw.kingdom.hall.kingdomtimer.app.view.loader.ScreenPaths;
-import jw.kingdom.hall.kingdomtimer.app.view.loader.ScreenUtils;
-import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.TabScreens;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.NotEnoughTasksException;
 
-import java.awt.*;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -47,13 +38,19 @@ public class HandyPanelController extends ControlledScreenImpl implements Initia
     private HBox hbTimeControlsContainer;
     private StartPauseStopView spsView;
     private TimeDisplayController timeDisplay;
+    private double lastSize = -1;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initSps();
         initTimeController();
-        lblNow.setText("");
+        setupZoom();
+        setupAutoChangingSize();
 
+        lblNow.setText("");
+    }
+
+    private void setupZoom() {
         AnimatedZoomOperator zoomOperator = new AnimatedZoomOperator();
         getMainContainer().setOnScroll(event -> {
             double zoomFactor = 1.1;
@@ -62,6 +59,19 @@ public class HandyPanelController extends ControlledScreenImpl implements Initia
                 zoomFactor = 1 / zoomFactor;
             }
             zoomOperator.zoom(getMainContainer(), zoomFactor);
+        });
+    }
+
+    private void setupAutoChangingSize() {
+        Platform.runLater(()->{
+            lastSize = lblTime.widthProperty().doubleValue();
+            lblTime.widthProperty().addListener((observable, oldValue, newValue) -> {
+                double diff = newValue.doubleValue()-lastSize;
+                lastSize = newValue.doubleValue();
+                HandyWindow.getInstance().getStage().setWidth(
+                        HandyWindow.getInstance().getStage().getWidth()+diff
+                );
+            });
         });
     }
 
