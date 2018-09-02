@@ -69,9 +69,9 @@ public class PredefinedTaskList {
         MeetingTask watchtower = new MeetingTask();
         watchtower.setName("Strażnica");
         if(overseer) {
-            watchtower.setTimeInSeconds(60 * 60);
-        } else {
             watchtower.setTimeInSeconds(30 * 60);
+        } else {
+            watchtower.setTimeInSeconds(60 * 60);
         }
         watchtower.setUseBuzzer(false);
         watchtower.setType(MeetingTask.Type.WATCHTOWER);
