@@ -5,7 +5,7 @@ import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class MeetingTask {
     public final String ID = Randomizer.randomStandardString(16);

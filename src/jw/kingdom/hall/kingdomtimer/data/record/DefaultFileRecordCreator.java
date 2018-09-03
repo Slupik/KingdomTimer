@@ -11,7 +11,7 @@ import jw.kingdom.hall.kingdomtimer.recorder.common.files.FileRecordCreator;
 import java.io.File;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class DefaultFileRecordCreator implements FileRecordCreator {
 

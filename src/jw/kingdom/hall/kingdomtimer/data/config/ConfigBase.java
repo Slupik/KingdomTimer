@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 abstract class ConfigBase implements Config {
 

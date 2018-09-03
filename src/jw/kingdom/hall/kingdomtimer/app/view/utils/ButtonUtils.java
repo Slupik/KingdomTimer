@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class ButtonUtils {
 

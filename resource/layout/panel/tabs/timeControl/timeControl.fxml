@@ -14,6 +14,11 @@
 <?import javafx.scene.text.Font?>
 <?import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField?>
 
+<!--
+  ~ Created 03.09.18 21:09.
+  ~ Last modified 31.08.18 20:50
+  -->
+
 <VBox prefHeight="400.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.TimeControlController">
    <HBox>
       <children>

@@ -9,7 +9,7 @@ import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowController;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowSettings;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class PanelWindow implements StageWindow {
     public final WindowController CONTROLLER;

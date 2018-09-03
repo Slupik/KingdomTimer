@@ -14,7 +14,7 @@ import java.io.IOException;
 import static jw.kingdom.hall.kingdomtimer.config.ConfigUtils.BACKBONE;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class JsonConfig implements ConfigWriteable {
     private Config parent;

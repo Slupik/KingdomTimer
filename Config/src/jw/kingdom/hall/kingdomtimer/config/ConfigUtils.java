@@ -4,7 +4,7 @@ import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.config.utils.DefaultConfig;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public abstract class ConfigUtils {
     public final static String PARENT_VALUE_LINK = "{parent}";

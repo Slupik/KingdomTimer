@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class AppConfig extends ConfigBase {
     private ConfigWriteable config;

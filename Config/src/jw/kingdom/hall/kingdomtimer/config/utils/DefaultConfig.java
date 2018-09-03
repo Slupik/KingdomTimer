@@ -6,7 +6,7 @@ import jw.kingdom.hall.kingdomtimer.config.model.ConfigWriteable;
 import java.io.File;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class DefaultConfig implements ConfigWriteable {
     @Override

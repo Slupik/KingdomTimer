@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class WebPageUtils {
     public static String download(final String url) throws IOException {

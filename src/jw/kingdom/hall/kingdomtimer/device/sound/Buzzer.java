@@ -6,7 +6,7 @@ import javafx.scene.media.MediaPlayer;
 import java.net.URISyntaxException;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class Buzzer {
     public static void play(){

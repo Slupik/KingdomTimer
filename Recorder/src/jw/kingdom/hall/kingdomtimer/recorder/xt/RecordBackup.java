@@ -5,7 +5,7 @@ import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
 import java.io.File;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class RecordBackup {
     private final BufferDataSaver saver;

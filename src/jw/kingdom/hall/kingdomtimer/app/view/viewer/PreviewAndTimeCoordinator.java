@@ -16,7 +16,7 @@ import jw.kingdom.hall.kingdomtimer.app.view.utils.TextUtils;
 import static jw.kingdom.hall.kingdomtimer.app.view.utils.TextUtils.textHeight;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class PreviewAndTimeCoordinator {
     private Region mainContainer;

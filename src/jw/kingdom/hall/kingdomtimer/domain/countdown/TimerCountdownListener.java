@@ -4,7 +4,7 @@ import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public abstract class TimerCountdownListener implements TimerCountdown.Listener {
     private final String ID = Randomizer.randomStandardString(10);

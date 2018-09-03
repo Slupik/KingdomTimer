@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.app.view.loader;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class ScreenPaths {
     public static final String LAYOUTS = "/layout/";

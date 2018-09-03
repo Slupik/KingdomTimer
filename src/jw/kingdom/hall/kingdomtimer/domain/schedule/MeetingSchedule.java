@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class MeetingSchedule extends MeetingScheduleBase {
     private final List<Listener> listeners = new ArrayList<>();

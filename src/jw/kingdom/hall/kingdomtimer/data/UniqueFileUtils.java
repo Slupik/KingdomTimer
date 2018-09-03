@@ -3,7 +3,7 @@ package jw.kingdom.hall.kingdomtimer.data;
 import java.io.File;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public abstract class UniqueFileUtils {
 

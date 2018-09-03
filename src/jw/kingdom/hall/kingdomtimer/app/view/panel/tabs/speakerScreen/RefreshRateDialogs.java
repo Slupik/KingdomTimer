@@ -8,7 +8,7 @@ import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import java.util.Optional;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class RefreshRateDialogs {
     static void showTooLowValue() {

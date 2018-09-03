@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.app.view.loader;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public enum Screens {
     PANEL_CONTROLLING("controlling", ScreenPaths.PANEL_LAYOUTS +"controlling.fxml"),

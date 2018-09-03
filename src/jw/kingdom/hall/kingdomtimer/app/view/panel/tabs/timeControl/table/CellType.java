@@ -10,7 +10,7 @@ import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class CellType implements Callback<TableColumn<MeetingTask, String>, TableCell<MeetingTask, String>> {
 

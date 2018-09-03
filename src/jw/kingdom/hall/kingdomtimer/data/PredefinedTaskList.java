@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class PredefinedTaskList {
     public static List<MeetingTask> getWeekTasks(boolean overseer){

@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.config.model;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public interface ConfigEditable {
     void setSpeakerScreen(String screen);

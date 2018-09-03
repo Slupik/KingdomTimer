@@ -6,7 +6,7 @@ import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class BtnTimeDirectForObj extends BtnTimeDirectBase {
     private MeetingTask task;

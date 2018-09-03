@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class ScreenShotMaker {
     private static final String CURSOR_IMG_PATH = "images/cursor.png";

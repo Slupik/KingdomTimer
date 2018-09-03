@@ -12,7 +12,7 @@ import static jw.kingdom.hall.kingdomtimer.app.view.utils.ButtonUtils.loadMedium
 import static jw.kingdom.hall.kingdomtimer.app.view.utils.ButtonUtils.loadSmallImage;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public abstract class BtnTimeDirectBase {
     private final List<Listener> listeners = new ArrayList<>();

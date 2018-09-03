@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 //http://www-mmsp.ece.mcgill.ca/Documents/AudioFormats/WAVE/WAVE.html
 //http://www.onicos.com/staff/iz/formats/wav.html

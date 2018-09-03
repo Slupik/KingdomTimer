@@ -10,7 +10,7 @@ import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class ConfigElementTest extends ConfigElement {
 

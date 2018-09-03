@@ -5,7 +5,7 @@ import jw.kingdom.hall.kingdomtimer.app.view.loader.ControlledScreen;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.ScreensController;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public abstract class ControlledScreenImpl implements ControlledScreen {
 

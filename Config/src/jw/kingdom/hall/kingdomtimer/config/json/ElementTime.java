@@ -7,7 +7,7 @@ import jw.kingdom.hall.kingdomtimer.config.common.DataParseException;
 import jw.kingdom.hall.kingdomtimer.config.utils.ConfigFieldType;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class ElementTime extends ConfigElement {
     @SerializedName("odliczanie_dol")

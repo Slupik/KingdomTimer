@@ -4,6 +4,11 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.HBox?>
 
+<!--
+  ~ Created 03.09.18 21:09.
+  ~ Last modified 30.08.18 00:09
+  -->
+
 <TabPane fx:id="mainContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.app.view.panel.ControllingController">
    <tabs>
       <Tab fx:id="tabTimeControl" closable="false" text="Sterowanie czasem">

@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.domain.utils;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public abstract class OSValidator {
     private static String OS = System.getProperty("os.name").toLowerCase();

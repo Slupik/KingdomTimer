@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.recorder;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public interface Recorder {
     void onStart();

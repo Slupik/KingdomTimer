@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 //TODO get all native recording into one thread using ex. ExecutorService executor = Executors.newSingleThreadExecutor();
 public class XtRecorder implements Recorder, Recording.Listener {

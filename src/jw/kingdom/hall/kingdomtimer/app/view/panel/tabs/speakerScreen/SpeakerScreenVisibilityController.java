@@ -9,7 +9,7 @@ import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class SpeakerScreenVisibilityController {
     private final CheckBox box;

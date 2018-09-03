@@ -4,7 +4,7 @@ import com.xtaudio.xt.*;
 import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class ObjectsFactory {
     static XtFormat getFormat(AudioSettingsBean bean, XtDevice device){

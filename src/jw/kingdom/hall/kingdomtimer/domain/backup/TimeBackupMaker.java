@@ -1,11 +1,10 @@
 package jw.kingdom.hall.kingdomtimer.domain.backup;
 
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class TimeBackupMaker {
     TimeBackupMaker(){

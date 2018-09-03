@@ -6,7 +6,7 @@ import com.sun.istack.internal.Nullable;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class JsonConfigRoot extends ConfigElement {
     @SerializedName("mowca")

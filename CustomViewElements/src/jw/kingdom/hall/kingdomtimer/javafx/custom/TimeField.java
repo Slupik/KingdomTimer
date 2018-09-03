@@ -6,7 +6,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class TimeField extends TextField {
     //Alternative - 3 fields instead only one

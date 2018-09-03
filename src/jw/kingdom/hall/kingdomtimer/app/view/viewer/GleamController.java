@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class GleamController {
     private Pane pane;

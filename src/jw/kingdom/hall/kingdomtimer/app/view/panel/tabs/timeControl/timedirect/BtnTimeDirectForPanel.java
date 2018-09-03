@@ -4,7 +4,7 @@ import javafx.scene.control.Button;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class BtnTimeDirectForPanel extends BtnTimeDirectBase {
     private boolean isDirectDown = AppConfig.getInstance().isDirectDown();

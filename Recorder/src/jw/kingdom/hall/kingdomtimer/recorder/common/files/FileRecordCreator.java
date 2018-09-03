@@ -3,7 +3,7 @@ package jw.kingdom.hall.kingdomtimer.recorder.common.files;
 import java.io.File;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public interface FileRecordCreator {
     File getBackupFile(String extension);

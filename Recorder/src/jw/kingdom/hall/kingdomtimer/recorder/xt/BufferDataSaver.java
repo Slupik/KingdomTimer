@@ -10,7 +10,7 @@ import jw.kingdom.hall.kingdomtimer.recorder.utils.wav.WavDataSaver;
 import java.io.*;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class BufferDataSaver {
     private final ByteArrayOutputStream stream;

@@ -3,7 +3,7 @@ package jw.kingdom.hall.kingdomtimer.data.online.model;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class Talk {
     @SerializedName("talkType")

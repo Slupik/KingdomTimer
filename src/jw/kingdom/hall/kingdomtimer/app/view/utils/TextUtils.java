@@ -4,7 +4,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class TextUtils {
 

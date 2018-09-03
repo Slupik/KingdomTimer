@@ -9,7 +9,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class StaticServer {
     public static List<Meeting> getMeetings(){

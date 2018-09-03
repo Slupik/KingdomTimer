@@ -7,7 +7,7 @@ import javafx.util.Callback;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class CellDelete implements Callback<TableColumn<MeetingTask, String>, TableCell<MeetingTask, String>> {
 

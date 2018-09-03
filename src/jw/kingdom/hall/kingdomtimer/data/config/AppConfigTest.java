@@ -3,7 +3,7 @@ package jw.kingdom.hall.kingdomtimer.data.config;
 import java.io.IOException;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class AppConfigTest {
 

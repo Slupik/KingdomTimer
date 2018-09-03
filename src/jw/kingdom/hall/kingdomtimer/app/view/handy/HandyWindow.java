@@ -12,7 +12,7 @@ import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowController;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowSettings;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class HandyWindow implements StageWindow {
     private static HandyWindow instance;

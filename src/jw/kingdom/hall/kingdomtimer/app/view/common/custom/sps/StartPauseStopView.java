@@ -18,7 +18,7 @@ import java.util.List;
 import static jw.kingdom.hall.kingdomtimer.app.view.utils.ButtonUtils.loadMediumImage;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class StartPauseStopView extends HBox {
     private Controller controller;

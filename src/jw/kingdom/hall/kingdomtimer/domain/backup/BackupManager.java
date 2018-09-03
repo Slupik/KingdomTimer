@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.domain.backup;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class BackupManager {
     private static boolean running = false;

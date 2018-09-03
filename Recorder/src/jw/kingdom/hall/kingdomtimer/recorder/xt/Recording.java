@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
 import static jw.kingdom.hall.kingdomtimer.recorder.utils.ByteUtils.convertToByteArray;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class Recording {
     private final XtDevice device;

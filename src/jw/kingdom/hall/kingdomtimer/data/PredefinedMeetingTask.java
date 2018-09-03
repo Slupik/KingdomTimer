@@ -3,7 +3,7 @@ package jw.kingdom.hall.kingdomtimer.data;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class PredefinedMeetingTask {
 
