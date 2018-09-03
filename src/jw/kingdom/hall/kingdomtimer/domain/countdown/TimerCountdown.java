@@ -15,6 +15,12 @@ import java.util.List;
 
 public class TimerCountdown extends TimerCountdownBase {
     private List<Listener> listeners = new ArrayList<>();
+
+    //TODO to delete
+    public MeetingTask getTask() {
+        return task;
+    }
+
     private MeetingTask task;
     private int addedTime = 0;
     private int startTime = 0;
@@ -45,7 +51,7 @@ public class TimerCountdown extends TimerCountdownBase {
     }
 
     @Override
-    protected int getAddedTime() {
+    public int getAddedTime() {
         return addedTime;
     }
 
@@ -95,11 +101,22 @@ public class TimerCountdown extends TimerCountdownBase {
     public void addTime(int time) {
         setTime(getTime()+time);
         addedTime += time;
+        for(Listener listener:listeners) {
+            listener.onTimeManipulate(addedTime);
+        }
     }
 
     public void removeTime(int time) {
         setTime(getTime()-time);
         addedTime -= time;
+        for(Listener listener:listeners) {
+            listener.onTimeManipulate(addedTime);
+        }
+    }
+
+    public void enforceTime(int time) {
+        addedTime=0;
+        setTime(time);
     }
 
     /*
@@ -167,6 +184,7 @@ public class TimerCountdown extends TimerCountdownBase {
         void onResume();
         void onStop();
         void onTimeOut();
+        void onTimeManipulate(int totalAdded);
         void onVolumeChange(boolean isVolumeUp);
         String getID();
     }

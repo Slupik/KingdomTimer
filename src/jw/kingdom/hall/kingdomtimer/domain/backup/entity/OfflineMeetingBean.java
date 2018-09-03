@@ -10,6 +10,7 @@ public class OfflineMeetingBean {
     private boolean useBuzzer;
     private String name;
     private boolean countdownDown;
+    private int time;
     private MeetingTask.Type type;
 
     public OfflineMeetingBean() {
@@ -21,7 +22,18 @@ public class OfflineMeetingBean {
         useBuzzer = task.isUseBuzzer();
         name = task.getName();
         countdownDown = task.isCountdownDown();
+        time = task.getTimeInSeconds();
         type = task.getType();
+    }
+
+    public MeetingTask convertToMeetingTask(){
+        MeetingTask task = new MeetingTask(ID);
+        task.setUseBuzzer(useBuzzer);
+        task.setName(name);
+        task.setCountdownDown(countdownDown);
+        task.setTimeInSeconds(time);
+        task.setType(type);
+        return task;
     }
 
     public boolean isUseBuzzer() {
@@ -46,6 +58,14 @@ public class OfflineMeetingBean {
 
     public void setCountdownDown(boolean countdownDown) {
         this.countdownDown = countdownDown;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
     }
 
     public MeetingTask.Type getType() {

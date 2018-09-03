@@ -8,13 +8,21 @@ import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class MeetingTask {
-    public final String ID = Randomizer.randomStandardString(16);
+    public final String ID;
     private BooleanProperty useBuzzer = new SimpleBooleanProperty(false);
     private StringProperty name = new SimpleStringProperty("???");
     private BooleanProperty countdownDown = new SimpleBooleanProperty(true);
     private ObjectProperty<Type> type = new SimpleObjectProperty<>(Type.UNKNOWN);
     //Used by javafx in TableView
     private TimeField tfTime = new TimeField();
+
+    public MeetingTask(){
+        this(Randomizer.randomStandardString(16));
+    }
+
+    public MeetingTask(String ID) {
+        this.ID = ID;
+    }
 
     public TimeField getTfTime() {
         return tfTime;
