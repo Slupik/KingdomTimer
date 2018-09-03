@@ -11,9 +11,9 @@ public class MeetingTask {
     public final String ID = Randomizer.randomStandardString(16);
     private BooleanProperty useBuzzer = new SimpleBooleanProperty(false);
     private StringProperty name = new SimpleStringProperty("???");
-    private StringProperty formattedTime = new SimpleStringProperty("00:00:00");
     private BooleanProperty countdownDown = new SimpleBooleanProperty(true);
     private ObjectProperty<Type> type = new SimpleObjectProperty<>(Type.UNKNOWN);
+    //Used by javafx in TableView
     private TimeField tfTime = new TimeField();
 
     public TimeField getTfTime() {
@@ -54,10 +54,6 @@ public class MeetingTask {
 
     public void setTimeInSeconds(int timeInSeconds) {
         tfTime.setSeconds(timeInSeconds);
-    }
-
-    public StringProperty formattedTimeProperty(){
-        return formattedTime;
     }
 
     public BooleanProperty countdownProperty() {
