@@ -23,7 +23,7 @@ abstract class MeetingScheduleBase {
             throw new NotEnoughTasksException();
         }
         MeetingTask task = list.get(index);
-        list.remove(task);
+        removeTask(task);
         notifyAboutNextTask(index, task);
         return task;
     }
