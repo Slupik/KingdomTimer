@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.config.ConfigUtils;
 import jw.kingdom.hall.kingdomtimer.config.model.ConfigWriteable;
+import jw.kingdom.hall.kingdomtimer.config.utils.FileUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -43,10 +44,7 @@ public class JsonConfig implements ConfigWriteable {
     public void save(File file) throws IOException {
         if(file.exists()) file.delete();
         file.createNewFile();
-
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-        writer.write(this.toString());
-        writer.close();
+        FileUtils.writeToFile(file, this.toString());
     }
 
     @Override

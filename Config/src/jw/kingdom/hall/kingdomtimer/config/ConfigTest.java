@@ -2,6 +2,7 @@ package jw.kingdom.hall.kingdomtimer.config;
 
 import jw.kingdom.hall.kingdomtimer.config.json.JsonConfig;
 import jw.kingdom.hall.kingdomtimer.config.model.ConfigWriteable;
+import jw.kingdom.hall.kingdomtimer.config.utils.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class ConfigTest {
             config.save(dest);
 
             ConfigWriteable secondConfig = new JsonConfig();
-            secondConfig.loadLocalData(getFileContent(dest));
+            secondConfig.loadLocalData(FileUtils.getContent(dest));
             System.out.println("secondConfig.getMinRefreshRate() = " + secondConfig.getMinRefreshRate());
         } catch (IOException e) {
             e.printStackTrace();

@@ -11,6 +11,7 @@ import jw.kingdom.hall.kingdomtimer.domain.record.voice.DefaultVoiceRecorderList
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingScheduleListener;
+import jw.kingdom.hall.kingdomtimer.domain.utils.FileUtils;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 
 import java.io.BufferedWriter;
@@ -189,21 +190,7 @@ class TimeBackupMaker {
     private void saveData() {
         executor.execute(()->{
             File dest = FileManager.getScheduleFile();
-            BufferedWriter writer = null;
-            try {
-                writer = new BufferedWriter(new FileWriter(dest));
-                writer.write(getDataToSave());
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if(writer!=null) {
-                    try {
-                        writer.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+            FileUtils.writeToFile(dest, getDataToSave());
         });
     }
 

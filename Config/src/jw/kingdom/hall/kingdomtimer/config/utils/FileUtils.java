@@ -1,7 +1,9 @@
-package jw.kingdom.hall.kingdomtimer.domain.utils;
+package jw.kingdom.hall.kingdomtimer.config.utils;
 
-import java.io.*;
-import java.nio.charset.Charset;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import java.util.List;
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
+//TODO merge with FileUtils from domain
 public class FileUtils {
     public static String getContent(File file) {
         List<String> lines = new ArrayList<>();

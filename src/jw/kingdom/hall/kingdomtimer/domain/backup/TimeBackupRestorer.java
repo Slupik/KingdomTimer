@@ -25,7 +25,7 @@ class TimeBackupRestorer {
     private void init() {
         new Thread(()->{
             String content = FileUtils.getContent(FileManager.getScheduleFile());
-            if(content.length()!=0) {
+            if(content.length()>1) {
                 bean = new Gson().fromJson(content, TimeBackupBean.class);
             }
         }).start();

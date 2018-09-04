@@ -5,6 +5,7 @@ import jw.kingdom.hall.kingdomtimer.config.json.JsonConfig;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.config.model.ConfigWriteable;
 import jw.kingdom.hall.kingdomtimer.config.utils.DefaultConfig;
+import jw.kingdom.hall.kingdomtimer.config.utils.FileUtils;
 import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
 import org.jetbrains.annotations.NotNull;
 
@@ -63,20 +64,12 @@ public class AppConfig extends ConfigBase {
 
     private ConfigWriteable readConfig(File source) {
         if(source!=null && source.exists()) {
-            try {
-                String content = getFileContent(source);
-                ConfigWriteable cfg = new JsonConfig();
-                cfg.loadLocalData(content);
-                return cfg;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            String content = FileUtils.getContent(source);
+            ConfigWriteable cfg = new JsonConfig();
+            cfg.loadLocalData(content);
+            return cfg;
         }
         return null;
-    }
-
-    private static String getFileContent(File file) throws IOException {
-        return new String(Files.readAllBytes(file.toPath()));
     }
 
     private static AppConfig instance;
