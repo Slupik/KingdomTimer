@@ -1,5 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.app.view.panel;
 
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -7,6 +8,7 @@ import jw.kingdom.hall.kingdomtimer.app.view.loader.Screens;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.StageWindow;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowController;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowSettings;
+import jw.kingdom.hall.kingdomtimer.domain.backup.BackupManager;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -37,7 +39,32 @@ public class PanelWindow implements StageWindow {
 //        stage.setMaximized(true);
         stage.show();
 
-        stage.setOnCloseRequest(event -> System.exit(0));
+        stage.setOnCloseRequest(event -> {
+            BackupManager.delete();
+            System.exit(0);
+        });
+
+//        crashOnDemand();
+    }
+
+    /**
+     * Useful for testing backup system
+     */
+    private void crashOnDemand() {
+        new Thread(()->{
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Platform.runLater(()->{
+                Object[] o = null;
+
+                while (true) {
+                    o = new Object[] {o};
+                }
+            });
+        }).start();
     }
 
     public void loadScreens() {

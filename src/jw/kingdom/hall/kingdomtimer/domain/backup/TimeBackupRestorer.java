@@ -5,6 +5,7 @@ import jw.kingdom.hall.kingdomtimer.domain.backup.entity.OfflineMeetingBean;
 import jw.kingdom.hall.kingdomtimer.domain.backup.entity.TimeBackupBean;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.utils.FileUtils;
 
@@ -41,12 +42,19 @@ class TimeBackupRestorer {
     }
 
     void delete() {
-
+        FileManager.getScheduleFile().delete();
     }
 
     private static void restore(TimeBackupBean data) {
         restoreSchedule(data);
         restoreCountdown(data);
+        restoreRecording(data);
+    }
+
+    private static void restoreRecording(TimeBackupBean data) {
+        if(data.isRecording()) {
+            VoiceRecorder.getInstance().start();
+        }
     }
 
     private static void restoreSchedule(TimeBackupBean data) {

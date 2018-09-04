@@ -14,6 +14,7 @@ import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayContro
 import jw.kingdom.hall.kingdomtimer.app.view.common.custom.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.record.voice.DefaultVoiceRecorderListener;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingScheduleListener;
@@ -55,6 +56,29 @@ public class RecordController extends ControlledScreenImpl implements Initializa
         spsView = new StartPauseStopView();
         hbControlsContainer.getChildren().add(spsView);
         spsView.addListener(this);
+        VoiceRecorder.getInstance().addListener(new DefaultVoiceRecorderListener() {
+            @Override
+            public void onStart() {
+                super.onStart();
+                spsView.setupForStart();
+            }
+
+            @Override
+            public void onPause(boolean isPause) {
+                super.onPause(isPause);
+                if(isPause) {
+                    spsView.setupForPause();
+                } else {
+                    spsView.setupForUnPause();
+                }
+            }
+
+            @Override
+            public void onStop() {
+                super.onStop();
+                spsView.setupForStop();
+            }
+        });
 
         controller = new TimeDisplayController(lblTime);
         controller.setTime(0);

@@ -7,8 +7,11 @@ import jw.kingdom.hall.kingdomtimer.domain.backup.entity.TimeBackupBean;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.record.voice.DefaultVoiceRecorderListener;
+import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingScheduleListener;
+import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -98,6 +101,19 @@ class TimeBackupMaker {
                     lastTask.countdownProperty().removeListener(countdownDirectListener);
                 }
                 updateTask(null);
+            }
+        });
+        VoiceRecorder.getInstance().addListener(new DefaultVoiceRecorderListener() {
+            @Override
+            public void onStart() {
+                super.onStart();
+                bean.setRecording(true);
+            }
+
+            @Override
+            public void onStop() {
+                super.onStop();
+                bean.setRecording(false);
             }
         });
         updateSchedule();

@@ -12,6 +12,7 @@ public class TimeBackupBean {
     private int addedTime;
     private long lastStartTime;
     private int lastTime;
+    private boolean recording;
 
     public OfflineMeetingBean getBean() {
         return bean;
@@ -61,4 +62,11 @@ public class TimeBackupBean {
         this.lastTime = lastTime;
     }
 
+    public boolean isRecording() {
+        return recording;
+    }
+
+    public void setRecording(boolean recording) {
+        this.recording = recording;
+    }
 }
