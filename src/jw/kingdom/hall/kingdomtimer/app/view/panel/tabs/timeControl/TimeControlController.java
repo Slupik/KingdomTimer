@@ -1,5 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,7 +14,6 @@ import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.table.TaskTa
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectBase;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectForInstantController;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectForPanel;
-import jw.kingdom.hall.kingdomtimer.data.PredefinedTaskList;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
@@ -22,9 +22,6 @@ import jw.kingdom.hall.kingdomtimer.domain.schedule.NotEnoughTasksException;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 
 import java.net.URL;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -148,6 +145,8 @@ StartPauseStopView.Controller {
                 spsView.setupForStop();
             }
         });
+
+        Platform.runLater(()-> new BackupPresenter().run());
     }
 
     private void setupInstantDirectController() {

@@ -67,6 +67,12 @@ class TimeBackupMaker {
             }
 
             @Override
+            public void onEnforceTime(int time) {
+                super.onEnforceTime(time);
+                updateTime();
+            }
+
+            @Override
             public void onPause() {
                 super.onPause();
                 updatePause(true);
@@ -128,16 +134,20 @@ class TimeBackupMaker {
             bean.setBean(new OfflineMeetingBean(task));
         }
         bean.setPause(false);
-        bean.setAddedTime(0);
+        bean.setAddedTime(TimerCountdown.getInstance().getAddedTime());
         if(task!=null) {
             bean.setLastStartTime(System.currentTimeMillis());
             bean.setLastTime(task.getTimeInSeconds());
         } else {
-            bean.setBaseTime(0);
             bean.setLastStartTime(0);
             bean.setLastTime(0);
         }
         saveData();
+    }
+
+    private void updateTime() {
+        bean.setLastStartTime(System.currentTimeMillis());
+        bean.setLastTime(TimerCountdown.getInstance().getTime());
     }
 
     private void updatePause(boolean isPause) {

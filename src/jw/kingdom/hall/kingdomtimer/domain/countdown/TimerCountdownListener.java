@@ -40,6 +40,11 @@ public abstract class TimerCountdownListener implements TimerCountdown.Listener 
     }
 
     @Override
+    public void onEnforceTime(int time) {
+
+    }
+
+    @Override
     public void onVolumeChange(boolean isVolumeUp) {
 
     }

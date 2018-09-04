@@ -1,19 +1,50 @@
 package jw.kingdom.hall.kingdomtimer.domain.backup;
 
+import com.google.gson.Gson;
 import jw.kingdom.hall.kingdomtimer.domain.backup.entity.OfflineMeetingBean;
 import jw.kingdom.hall.kingdomtimer.domain.backup.entity.TimeBackupBean;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
+import jw.kingdom.hall.kingdomtimer.domain.utils.FileUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class TimeBackupRestorer {
-    static void restore(TimeBackupBean data) {
+    private TimeBackupBean bean;
+
+    TimeBackupRestorer(){
+        init();
+    }
+
+    private void init() {
+        new Thread(()->{
+            String content = FileUtils.getContent(FileManager.getScheduleFile());
+            if(content.length()!=0) {
+                bean = new Gson().fromJson(content, TimeBackupBean.class);
+            }
+        }).start();
+    }
+
+    boolean isAvailable() {
+        return bean!=null;
+    }
+
+    void restore(){
+        if(isAvailable()) {
+            restore(bean);
+        }
+    }
+
+    void delete() {
+
+    }
+
+    private static void restore(TimeBackupBean data) {
         restoreSchedule(data);
         restoreCountdown(data);
     }

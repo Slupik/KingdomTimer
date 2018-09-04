@@ -3,13 +3,12 @@ package jw.kingdom.hall.kingdomtimer.domain.backup.entity;
 import java.util.List;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class TimeBackupBean {
     private OfflineMeetingBean bean;
     private List<OfflineMeetingBean> schedule;
     private boolean pause;
-    private int baseTime;
     private int addedTime;
     private long lastStartTime;
     private int lastTime;
@@ -36,14 +35,6 @@ public class TimeBackupBean {
 
     public void setPause(boolean pause) {
         this.pause = pause;
-    }
-
-    public int getBaseTime() {
-        return baseTime;
-    }
-
-    public void setBaseTime(int baseTime) {
-        this.baseTime = baseTime;
     }
 
     public int getAddedTime() {

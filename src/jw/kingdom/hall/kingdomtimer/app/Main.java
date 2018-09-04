@@ -16,6 +16,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         AppConfig.init();
+        BackupManager.start();
         MonitorManager.initialize();
         new PanelWindow().build(primaryStage);
         HandyWindow.getInstance().build(new Stage());
@@ -24,8 +25,6 @@ public class Main extends Application {
         MultimediaPreviewer.getInstance().setPause(false);
         AutoRAMCleaner.run();
 
-        BackupManager.restore();
-        BackupManager.start();
     }
 
 
