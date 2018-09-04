@@ -39,7 +39,7 @@
                   <Insets left="8.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#loadDefaultInterval" text="Wczytaj domyślny">
+            <Button mnemonicParsing="false" onAction="#loadDefaultInterval" text="Domyślnie">
                <HBox.margin>
                   <Insets left="8.0" />
                </HBox.margin>

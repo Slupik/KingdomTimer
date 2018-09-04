@@ -142,7 +142,7 @@
          </VBox>
          <VBox alignment="BOTTOM_CENTER" layoutX="560.0" layoutY="10.0">
             <children>
-               <Button mnemonicParsing="false" onAction="#loadTasksOnline" text="Wczytaj online" />
+               <Button mnemonicParsing="false" onAction="#loadTasksOnline" text="Wczytaj punkty" />
             </children>
             <HBox.margin>
                <Insets left="56.0" />
@@ -150,7 +150,7 @@
          </VBox>
          <VBox alignment="BOTTOM_CENTER" layoutX="664.0" layoutY="10.0">
             <children>
-               <Button mnemonicParsing="false" onAction="#loadOverseerTasksOnline" text="Wczytaj online obsługowy" />
+               <Button mnemonicParsing="false" onAction="#loadOverseerTasksOnline" text="Wczytaj punkty (Obsługa)" />
             </children>
             <HBox.margin>
                <Insets left="8.0" />
