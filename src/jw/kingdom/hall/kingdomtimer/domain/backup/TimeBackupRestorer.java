@@ -43,6 +43,7 @@ class TimeBackupRestorer {
 
     void delete() {
         FileManager.getScheduleFile().delete();
+        FileManager.deleteRootPath();
     }
 
     private static void restore(TimeBackupBean data) {

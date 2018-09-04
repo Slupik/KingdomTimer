@@ -34,11 +34,15 @@ abstract class FileManager {
         UniqueFileUtils.createPath(getRootPath());
     }
 
+    static void deleteRootPath() {
+        UniqueFileUtils.deletePath(getRootPath());
+    }
+
     private static String getRootPath(){
         File file = new File(getLocalPath());
         if(!file.exists()) {
             try {
-                file.createNewFile();
+                file.mkdirs();
             } catch (Exception ignore) {}
         }
         if(file.canWrite()) {
@@ -49,18 +53,15 @@ abstract class FileManager {
     }
 
     private static String getUserPath() {
+        String path = System.getProperty("user.home");
         if(OSValidator.isWindows()) {
-            return addCatalogue(File.separator + "AppData"+ File.separator +"Local");
-        } else {
-            return addCatalogue(System.getProperty("user.home"));
+            path += File.separator + "AppData"+ File.separator +"Local";
         }
+        return path + File.separator + MAIN_CATALOGUE_NAME + File.separator + BACKUP_CATALOGUE_NAME;
     }
 
     private static String getLocalPath() {
-        return addCatalogue(System.getProperty("user.dir"));
+        return System.getProperty("user.dir") + File.separator + BACKUP_CATALOGUE_NAME;
     }
 
-    private static String addCatalogue(String root) {
-        return root + File.separator + MAIN_CATALOGUE_NAME + File.separator + BACKUP_CATALOGUE_NAME;
-    }
 }

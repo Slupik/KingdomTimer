@@ -12,6 +12,10 @@ public abstract class UniqueFileUtils {
         new File(path).mkdirs();
     }
 
+    public static void deletePath(String path) {
+        new File(path).delete();
+    }
+
     public static File buildUniqueFile(String rootPath, String name, String extension) {
         rootPath = getAccommodatedPath(rootPath);
         File file = new File(rootPath + name+ extension);
