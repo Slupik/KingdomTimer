@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.log;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 //Inspirited by https://developer.android.com/reference/android/util/Log
 public enum LogLevel {

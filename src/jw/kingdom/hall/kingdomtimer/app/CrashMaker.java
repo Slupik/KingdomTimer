@@ -5,7 +5,7 @@ import sun.misc.Unsafe;
 import java.lang.reflect.Field;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public abstract class CrashMaker {
     public static void crashApp(){

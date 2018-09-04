@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.domain.record.voice;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public abstract class DefaultVoiceRecorderListener implements VoiceRecorder.Listener {
     @Override

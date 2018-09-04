@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class LogSaver {
     private static final String ENTER = System.getProperty("line.separator");

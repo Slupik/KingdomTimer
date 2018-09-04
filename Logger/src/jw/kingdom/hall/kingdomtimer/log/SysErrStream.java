@@ -3,7 +3,7 @@ package jw.kingdom.hall.kingdomtimer.log;
 import java.io.*;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class SysErrStream extends PrintStream {
     public SysErrStream(OutputStream out) {

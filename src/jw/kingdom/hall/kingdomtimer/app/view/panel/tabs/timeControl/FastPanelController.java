@@ -7,7 +7,7 @@ import javafx.scene.control.ButtonType;
 import java.util.Optional;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class FastPanelController {
     static void executeIfSave(int seconds, Runnable callback) {

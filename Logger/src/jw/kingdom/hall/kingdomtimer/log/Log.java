@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 import java.io.PrintStream;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
 public abstract class Log {

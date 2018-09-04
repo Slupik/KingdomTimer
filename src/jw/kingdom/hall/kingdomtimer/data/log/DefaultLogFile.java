@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * All rights reserved & copyright ©
+ * This file is part of KingdomHallTimer which is released under "no licence".
  */
 //TODO merge with other files managers
 public class DefaultLogFile implements LogFile {
