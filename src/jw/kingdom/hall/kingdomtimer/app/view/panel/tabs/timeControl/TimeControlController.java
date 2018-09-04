@@ -179,12 +179,14 @@ StartPauseStopView.Controller {
 
     @FXML
     private void handleLoadTimeAction(ActionEvent event) {
-        MeetingTask task = new MeetingTask();
-        task.setTimeInSeconds(tfFastTime.getAllSeconds());
-        tfFastTime.setSeconds(0);
-        task.setCountdownDown(fastDirectController.isDirectDown());
-        fastDirectController.reset();
-        getTimer().start(task);
+        FastPanelController.executeIfSave(tfFastTime.getAllSeconds(), ()->{
+            MeetingTask task = new MeetingTask();
+            task.setTimeInSeconds(tfFastTime.getAllSeconds());
+            tfFastTime.setSeconds(0);
+            task.setCountdownDown(fastDirectController.isDirectDown());
+            fastDirectController.reset();
+            getTimer().start(task);
+        });
     }
 
     @FXML
@@ -199,12 +201,16 @@ StartPauseStopView.Controller {
 
     @FXML
     private void handleAddTime(ActionEvent event) {
-        getTimer().addTime(tfFastTime.getAllSeconds());
+        FastPanelController.executeIfSave(tfFastTime.getAllSeconds(), ()->{
+            getTimer().addTime(tfFastTime.getAllSeconds());
+        });
     }
 
     @FXML
     private void handleRemoveTime(ActionEvent event) {
-        getTimer().removeTime(tfFastTime.getAllSeconds());
+        FastPanelController.executeIfSave(tfFastTime.getAllSeconds(), ()->{
+            getTimer().removeTime(tfFastTime.getAllSeconds());
+        });
     }
 
     @Override
