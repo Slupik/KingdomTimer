@@ -7,7 +7,6 @@
 
 package jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model;
 
-import jdk.internal.util.xml.impl.Input;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleDownloader;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTask;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTaskType;
@@ -38,7 +37,9 @@ class Downloader {
         List<ScheduleTask> list = getTasksFromElement(treasures);
         for(ScheduleTask task:list) {
             task.setType(ScheduleTaskType.TREASURES);
+            task.setActiveBuzzer(false);
         }
+        list.get(list.size()-1).setActiveBuzzer(true);
         return list;
     }
 
@@ -56,6 +57,7 @@ class Downloader {
         List<ScheduleTask> list = getTasksFromElement(living);
         for(ScheduleTask task:list) {
             task.setType(ScheduleTaskType.LIVING);
+            task.setActiveBuzzer(false);
         }
         if(data.isCircuitVisit()) {
             list.remove(list.size()-2); //remove penultimate
@@ -71,9 +73,17 @@ class Downloader {
             try {
                 String s = Jsoup.parse(probablyTask.html()).text();
                 ScheduleTask task = RawTaskParser.getParsed(s);
+                task.setActiveBuzzer(!RawTaskParser.isContainsVideo(probablyTask));
                 list.add(task);
             } catch (WrongElementException ignore) {}
         }
+//        try {
+//            Element probablyTask = probablyTasks.get(0);
+//            String s = Jsoup.parse(probablyTask.html()).text();
+//            ScheduleTask task = RawTaskParser.getParsed(s);
+//            task.setActiveBuzzer(RawTaskParser.isContainsVideo(probablyTask));
+//            list.add(task);
+//        } catch (WrongElementException ignore) {}
         return list;
     }
 }

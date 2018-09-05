@@ -13,6 +13,7 @@ class ScheduleTaskToMeetingTaskConverter {
     static MeetingTask getMeetingTask(ScheduleTask schedule) {
         MeetingTask meeting = new MeetingTask();
         meeting.setName(schedule.getName());
+        meeting.setUseBuzzer(schedule.isActiveBuzzer());
         meeting.setTimeInSeconds(schedule.getTime());
         switch (schedule.getType()) {
             case UNKNOWN: {

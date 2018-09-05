@@ -8,8 +8,27 @@
 package jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model;
 
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTask;
+import org.jsoup.nodes.Element;
 
 class RawTaskParser {
+    static boolean isContainsVideo(Element elementSu){
+        Element parent = elementSu.parent();
+        for(Element toCheck:parent.getAllElements()) {
+            if(toCheck.children().size()>0) {
+                for(Element child:toCheck.children()) {
+                    if(isGoodAttribute(child)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean isGoodAttribute(Element element){
+        return element.attributes().hasKey("data-video");
+    }
+
     static ScheduleTask getParsed(String elementSu) throws WrongElementException {
         ScheduleTask task = new ScheduleTask();
         task.setName(getTitle(elementSu));

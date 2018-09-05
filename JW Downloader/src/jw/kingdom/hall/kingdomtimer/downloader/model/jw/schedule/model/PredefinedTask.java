@@ -16,6 +16,7 @@ public class PredefinedTask {
         ScheduleTask task = new ScheduleTask();
         task.setName(translator.circuitLecture());
         task.setTime(30*60);
+        task.setActiveBuzzer(false);
         task.setType(CIRCUIT);
         return task;
     }

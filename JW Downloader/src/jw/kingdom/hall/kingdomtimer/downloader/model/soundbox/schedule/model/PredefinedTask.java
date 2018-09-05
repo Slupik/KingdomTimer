@@ -19,6 +19,7 @@ class PredefinedTask {
         ScheduleTask task = new ScheduleTask();
         task.setName("Uwagi wstępne");
         task.setTime(3*60);
+        task.setActiveBuzzer(false);
         task.setType(TREASURES);
         return task;
     }
@@ -27,6 +28,7 @@ class PredefinedTask {
         ScheduleTask task = new ScheduleTask();
         task.setName("Analiza Biblii");
         task.setTime(10*60);
+        task.setActiveBuzzer(false);
         task.setType(TREASURES);
         return task;
     }
@@ -35,6 +37,7 @@ class PredefinedTask {
         ScheduleTask task = new ScheduleTask();
         task.setName("Wyszukujemy duchowe skarby");
         task.setTime(8*60);
+        task.setActiveBuzzer(false);
         task.setType(TREASURES);
         return task;
     }
@@ -43,6 +46,7 @@ class PredefinedTask {
         ScheduleTask task = new ScheduleTask();
         task.setName("Czytanie Biblii");
         task.setTime(4*60);
+        task.setActiveBuzzer(true);
         task.setType(TREASURES);
         return task;
     }
@@ -55,6 +59,7 @@ class PredefinedTask {
         ScheduleTask task = new ScheduleTask();
         task.setName("Zborowe studium Biblii");
         task.setTime(30*60);
+        task.setActiveBuzzer(false);
         task.setType(LIVING);
         return task;
     }
@@ -63,6 +68,7 @@ class PredefinedTask {
         ScheduleTask task = new ScheduleTask();
         task.setName("Powtórka i zapowiedź następnego zebrania");
         task.setTime(3*60);
+        task.setActiveBuzzer(false);
         task.setType(LIVING);
         return task;
     }
@@ -71,6 +77,7 @@ class PredefinedTask {
         ScheduleTask task = new ScheduleTask();
         task.setName("Przemówienie podróżującego");
         task.setTime(30*60);
+        task.setActiveBuzzer(false);
         task.setType(CIRCUIT);
         return task;
     }
