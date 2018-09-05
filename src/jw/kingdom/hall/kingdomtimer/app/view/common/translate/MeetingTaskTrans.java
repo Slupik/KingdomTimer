@@ -22,7 +22,7 @@ public class MeetingTaskTrans {
                 return "Wykład";
             case WATCHTOWER:
                 return "Strażnica";
-            case OVERSEER:
+            case CIRCUIT:
                 return "Obsługa";
             case OTHER:
                 return "Inny";

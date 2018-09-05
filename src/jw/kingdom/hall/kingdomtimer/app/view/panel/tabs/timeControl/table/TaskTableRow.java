@@ -95,7 +95,7 @@ public class TaskTableRow extends TableRow<MeetingTask> {
                 case WATCHTOWER: {
                     return Color.WHITE;
                 }
-                case OVERSEER: {
+                case CIRCUIT: {
                     return Color.WHITE;
                 }
                 case OTHER: {
@@ -168,7 +168,7 @@ public class TaskTableRow extends TableRow<MeetingTask> {
                 }
                 break;
             }
-            case OVERSEER: {
+            case CIRCUIT: {
                 if(isDarkLayout) {
                     toFill = Color.DARKORCHID;
                 } else {

@@ -96,7 +96,7 @@ public class MeetingTask {
         LIVING,
         WATCHTOWER,
         LECTURE,
-        OVERSEER,
+        CIRCUIT,
         OTHER
     }
 }

@@ -1,4 +1,11 @@
-package jw.kingdom.hall.kingdomtimer.data.online.model;
+
+/*
+ * Created 05.09.18 02:34.
+ * Last modified 03.09.18 21:14
+ * This file is part of KingdomHallTimer which is released under "no licence".
+ */
+
+package jw.kingdom.hall.kingdomtimer.downloader.model.soundbox.schedule.entity;
 
 import com.google.gson.annotations.SerializedName;
 
