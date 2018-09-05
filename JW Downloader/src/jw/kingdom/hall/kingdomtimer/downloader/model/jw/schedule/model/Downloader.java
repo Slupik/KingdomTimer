@@ -24,16 +24,28 @@ class Downloader {
     List<ScheduleTask> getTasks(ScheduleDownloader.InputData data, String url) throws IOException {
         List<ScheduleTask> list = new ArrayList<>();
         Document doc = Jsoup.connect(url).get();
+        Element partWithSchedule = doc.getElementsByClass("bodyTxt").get(1);
 
-        list.addAll(getFromTreasures(doc));
-        list.addAll(getFromMinistry(doc));
-        list.addAll(getFromLiving(data, doc));
+        list.addAll(getOpeningComments(partWithSchedule));
+        list.addAll(getFromTreasures(partWithSchedule));
+        list.addAll(getFromMinistry(partWithSchedule));
+        list.addAll(getFromLiving(data, partWithSchedule));
 
         return list;
     }
 
-    private List<ScheduleTask> getFromTreasures(Document doc) {
-        Element treasures = doc.getElementById("section2");
+    private List<ScheduleTask> getOpeningComments(Element element) {
+        Element treasures = element.getElementById("section1");
+        List<ScheduleTask> list = getTasksFromElement(treasures);
+        for(ScheduleTask task:list) {
+            task.setType(ScheduleTaskType.TREASURES);
+            task.setActiveBuzzer(false);
+        }
+        return list;
+    }
+
+    private List<ScheduleTask> getFromTreasures(Element element) {
+        Element treasures = element.getElementById("section2");
         List<ScheduleTask> list = getTasksFromElement(treasures);
         for(ScheduleTask task:list) {
             task.setType(ScheduleTaskType.TREASURES);
@@ -43,8 +55,8 @@ class Downloader {
         return list;
     }
 
-    private List<ScheduleTask> getFromMinistry(Document doc) {
-        Element ministry = doc.getElementById("section3");
+    private List<ScheduleTask> getFromMinistry(Element element) {
+        Element ministry = element.getElementById("section3");
         List<ScheduleTask> list = getTasksFromElement(ministry);
         for(ScheduleTask task:list) {
             task.setType(ScheduleTaskType.MINISTRY);
@@ -52,8 +64,8 @@ class Downloader {
         return list;
     }
 
-    private List<ScheduleTask> getFromLiving(ScheduleDownloader.InputData data, Document doc) {
-        Element living = doc.getElementById("section4");
+    private List<ScheduleTask> getFromLiving(ScheduleDownloader.InputData data, Element element) {
+        Element living = element.getElementById("section4");
         List<ScheduleTask> list = getTasksFromElement(living);
         for(ScheduleTask task:list) {
             task.setType(ScheduleTaskType.LIVING);
@@ -77,13 +89,6 @@ class Downloader {
                 list.add(task);
             } catch (WrongElementException ignore) {}
         }
-//        try {
-//            Element probablyTask = probablyTasks.get(0);
-//            String s = Jsoup.parse(probablyTask.html()).text();
-//            ScheduleTask task = RawTaskParser.getParsed(s);
-//            task.setActiveBuzzer(RawTaskParser.isContainsVideo(probablyTask));
-//            list.add(task);
-//        } catch (WrongElementException ignore) {}
         return list;
     }
 }
