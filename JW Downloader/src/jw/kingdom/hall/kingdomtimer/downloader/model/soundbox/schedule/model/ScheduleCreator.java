@@ -19,10 +19,10 @@ import static jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTaskType.MI
 class ScheduleCreator {
     static List<ScheduleTask> getAllWeekTasks(boolean circuit, Meeting meeting) {
         List<ScheduleTask> tasks = new ArrayList<>();
-        tasks.add(PredefinedMeetingTask.getPreview());
-        tasks.add(PredefinedMeetingTask.getBibleAnalyst());
-        tasks.add(PredefinedMeetingTask.getBibleTreasure());
-        tasks.add(PredefinedMeetingTask.getBibleReading());
+        tasks.add(PredefinedTask.getPreview());
+        tasks.add(PredefinedTask.getBibleAnalyst());
+        tasks.add(PredefinedTask.getBibleTreasure());
+        tasks.add(PredefinedTask.getBibleReading());
 
         if(meeting!=null) {
             int i=0;
@@ -38,11 +38,11 @@ class ScheduleCreator {
             }
         }
         if(!circuit) {
-            tasks.add(PredefinedMeetingTask.getBookAnalyst());
+            tasks.add(PredefinedTask.getBookAnalyst());
         }
-        tasks.add(PredefinedMeetingTask.getRepeat());
+        tasks.add(PredefinedTask.getRepeat());
         if(circuit) {
-            tasks.add(PredefinedMeetingTask.getOverseerLecture());
+            tasks.add(PredefinedTask.getCircuitLecture());
         }
         return tasks;
     }

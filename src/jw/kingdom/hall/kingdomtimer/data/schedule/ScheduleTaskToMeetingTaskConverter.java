@@ -1,10 +1,10 @@
 /*
- * Created 05.09.18 03:11.
- * Last modified 05.09.18 03:11
+ * Created 05.09.18 03:47.
+ * Last modified 05.09.18 03:21
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 
-package jw.kingdom.hall.kingdomtimer.data;
+package jw.kingdom.hall.kingdomtimer.data.schedule;
 
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTask;

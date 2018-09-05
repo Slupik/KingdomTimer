@@ -21,27 +21,17 @@ public class JwScheduleDownloader implements ScheduleDownloader {
         new Thread(() -> callback.onReturnUrl(new UrlDownloader().getUrl(languageCode))).start();
     }
 
-    //TODO implement circuit visit
-    /**
-     * @param languageCode compatible with the standard ISO 639
-     */
     @Override
-    public void autoSelectAndDownloadWeek(String languageCode, boolean circuit, DownloadCallback callback) {
+    public void downloadWeek(InputData data, DownloadCallback callback) {
         new Thread(() -> {
             try {
-                String url = new UrlDownloader().getUrl(languageCode);
-                callback.onDownload(new Downloader().getTasks(url));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
-    }
-
-    @Override
-    public void downloadWeek(String url, boolean circuit, DownloadCallback callback) {
-        new Thread(() -> {
-            try {
-                callback.onDownload(new Downloader().getTasks(url));
+                String url;
+                if(data.getDestUrl()!=null && data.getDestUrl().length()>0) {
+                    url = data.getDestUrl();
+                } else {
+                    url = new UrlDownloader().getUrl(data.getLangCode());
+                }
+                callback.onDownload(new Downloader().getTasks(data, url));
             } catch (IOException e) {
                 e.printStackTrace();
             }

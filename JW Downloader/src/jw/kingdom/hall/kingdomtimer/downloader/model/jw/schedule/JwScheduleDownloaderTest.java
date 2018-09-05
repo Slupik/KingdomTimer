@@ -7,21 +7,12 @@
 
 package jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule;
 
-import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTask;
+import jw.kingdom.hall.kingdomtimer.downloader.entity.*;
 import jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model.JwScheduleDownloader;
 
 public class JwScheduleDownloaderTest {
     public static void main(String[] args) {
-//        testDownloadingTasks();
-        testDownloadingTasksWithAutoSelect();
-    }
-
-    private static void testDownloadingTasksWithAutoSelect() {
-        new JwScheduleDownloader().autoSelectAndDownloadWeek("pl", false, tasks -> {
-            for(ScheduleTask task:tasks) {
-                System.out.println(task.getName()+" ("+task.getTime()+")");
-            }
-        });
+        testDownloadingTasks();
     }
 
     private static void testDownloadingTasks() {
@@ -32,7 +23,28 @@ public class JwScheduleDownloaderTest {
 //            url = "https://wol.jw.org/ru/wol/dt/r2/lp-u/2018/9/5";
 
             System.out.println("url = " + url);
-            new JwScheduleDownloader().downloadWeek(url, false, tasks -> {
+            ScheduleDownloader.InputData data = new ScheduleDownloader.InputData() {
+                @Override
+                public boolean isCircuitVisit() {
+                    return false;
+                }
+
+                @Override
+                public String getLangCode() {
+                    return "ru";
+                }
+
+                @Override
+                public String getDestUrl() {
+                    return url;
+                }
+
+                @Override
+                public ScheduleTranslator getTranslator() {
+                    return new DefaultScheduleTranslator();
+                }
+            };
+            new JwScheduleDownloader().downloadWeek(data, tasks -> {
                 for(ScheduleTask task:tasks) {
                     System.out.println(task.getName()+" ("+task.getTime()+")");
                 }

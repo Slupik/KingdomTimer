@@ -18,15 +18,15 @@ import java.util.List;
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class StaticServer {
-    static List<Meeting> getMeetings(){
-        String content = getPageContent();
+    static List<Meeting> getMeetings(String url){
+        String content = getPageContent(url);
         Type type = new TypeToken<List<Meeting>>() {}.getType();
         return new Gson().fromJson(content, type);
     }
 
-    private static String getPageContent() {
+    private static String getPageContent(String url) {
         try {
-            return WebPageUtils.download("https://soundbox.blob.core.windows.net/meeting-feeds/feed.json");
+            return WebPageUtils.download(url);
         } catch (IOException e) {
             e.printStackTrace();
         }

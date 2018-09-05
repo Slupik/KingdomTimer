@@ -7,7 +7,10 @@
 
 package jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model;
 
+import jdk.internal.util.xml.impl.Input;
+import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleDownloader;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTask;
+import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTaskType;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -19,30 +22,46 @@ import java.util.List;
 
 class Downloader {
 
-    List<ScheduleTask> getTasks(String url) throws IOException {
+    List<ScheduleTask> getTasks(ScheduleDownloader.InputData data, String url) throws IOException {
         List<ScheduleTask> list = new ArrayList<>();
         Document doc = Jsoup.connect(url).get();
 
         list.addAll(getFromTreasures(doc));
         list.addAll(getFromMinistry(doc));
-        list.addAll(getFromLiving(doc));
+        list.addAll(getFromLiving(data, doc));
 
         return list;
     }
 
     private List<ScheduleTask> getFromTreasures(Document doc) {
         Element treasures = doc.getElementById("section2");
-        return getTasksFromElement(treasures);
+        List<ScheduleTask> list = getTasksFromElement(treasures);
+        for(ScheduleTask task:list) {
+            task.setType(ScheduleTaskType.TREASURES);
+        }
+        return list;
     }
 
     private List<ScheduleTask> getFromMinistry(Document doc) {
-        Element treasures = doc.getElementById("section3");
-        return getTasksFromElement(treasures);
+        Element ministry = doc.getElementById("section3");
+        List<ScheduleTask> list = getTasksFromElement(ministry);
+        for(ScheduleTask task:list) {
+            task.setType(ScheduleTaskType.MINISTRY);
+        }
+        return list;
     }
 
-    private List<ScheduleTask> getFromLiving(Document doc) {
-        Element treasures = doc.getElementById("section4");
-        return getTasksFromElement(treasures);
+    private List<ScheduleTask> getFromLiving(ScheduleDownloader.InputData data, Document doc) {
+        Element living = doc.getElementById("section4");
+        List<ScheduleTask> list = getTasksFromElement(living);
+        for(ScheduleTask task:list) {
+            task.setType(ScheduleTaskType.LIVING);
+        }
+        if(data.isCircuitVisit()) {
+            list.remove(list.size()-2); //remove penultimate
+            list.add(PredefinedTask.getCircuitLecture(data.getTranslator()));
+        }
+        return list;
     }
 
     private List<ScheduleTask> getTasksFromElement(Element source) {

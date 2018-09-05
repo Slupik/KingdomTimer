@@ -1,7 +1,14 @@
-package jw.kingdom.hall.kingdomtimer.data;
+/*
+ * Created 05.09.18 03:47.
+ * Last modified 05.09.18 03:46
+ * This file is part of KingdomHallTimer which is released under "no licence".
+ */
+
+package jw.kingdom.hall.kingdomtimer.data.schedule;
 
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleDownloader;
+import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleDownloaderInputBean;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTask;
 import jw.kingdom.hall.kingdomtimer.downloader.model.ScheduleDownloaderFacade;
 
@@ -15,7 +22,11 @@ public class PredefinedTaskList {
     private static final ScheduleDownloader downloader = new ScheduleDownloaderFacade();
 
     public static void getWeekTasks(boolean circuit, Callback callback){
-        downloader.autoSelectAndDownloadWeek("", circuit, tasks -> {
+        ScheduleDownloaderInputBean data = new ScheduleDownloaderInputBean();
+        data.setCircuitVisit(circuit);
+        data.setLangCode("pl");
+        data.setTranslator(new ScheduleTranslator());
+        downloader.downloadWeek(data, tasks -> {
             List<MeetingTask> list = new ArrayList<>();
             for(ScheduleTask scheduleTask:tasks) {
                 list.add(ScheduleTaskToMeetingTaskConverter.getMeetingTask(scheduleTask));

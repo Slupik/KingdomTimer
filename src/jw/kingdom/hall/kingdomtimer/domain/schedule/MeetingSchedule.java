@@ -1,6 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.schedule;
 
-import jw.kingdom.hall.kingdomtimer.data.PredefinedTaskList;
+import jw.kingdom.hall.kingdomtimer.data.schedule.PredefinedTaskList;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;

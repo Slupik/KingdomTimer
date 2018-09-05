@@ -11,7 +11,7 @@ import jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model.JwSchedul
 import jw.kingdom.hall.kingdomtimer.downloader.model.soundbox.schedule.model.SbScheduleDownloader;
 
 public class ScheduleDownloaderFacade implements ScheduleDownloader {
-    private ScheduleDownloader defaultDownloader = new SbScheduleDownloader();
+    private ScheduleDownloader defaultDownloader = new JwScheduleDownloader();
 
     @Override
     public void getUrlForToday(String languageCode, UrlCallback callback) {
@@ -19,12 +19,7 @@ public class ScheduleDownloaderFacade implements ScheduleDownloader {
     }
 
     @Override
-    public void autoSelectAndDownloadWeek(String languageCode, boolean circuit, DownloadCallback callback) {
-        defaultDownloader.autoSelectAndDownloadWeek(languageCode, circuit, callback);
-    }
-
-    @Override
-    public void downloadWeek(String url, boolean circuit, DownloadCallback callback) {
-        defaultDownloader.downloadWeek(url, circuit, callback);
+    public void downloadWeek(InputData data, DownloadCallback callback) {
+        defaultDownloader.downloadWeek(data, callback);
     }
 }

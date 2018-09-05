@@ -13,7 +13,7 @@ import static jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTaskType.*;
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-class PredefinedMeetingTask {
+class PredefinedTask {
 
     static ScheduleTask getPreview(){
         ScheduleTask task = new ScheduleTask();
@@ -67,7 +67,7 @@ class PredefinedMeetingTask {
         return task;
     }
 
-    static ScheduleTask getOverseerLecture() {
+    static ScheduleTask getCircuitLecture() {
         ScheduleTask task = new ScheduleTask();
         task.setName("Przemówienie podróżującego");
         task.setTime(30*60);

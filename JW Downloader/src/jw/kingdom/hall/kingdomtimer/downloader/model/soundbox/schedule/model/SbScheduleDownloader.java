@@ -24,25 +24,25 @@ public class SbScheduleDownloader implements ScheduleDownloader {
         new Thread(() -> callback.onReturnUrl(URL)).start();
     }
 
-    /**
-     * @param languageCode compatible with the standard ISO 639
-     */
     @Override
-    public void autoSelectAndDownloadWeek(String languageCode, boolean circuit, DownloadCallback callback) {
-        downloadWeek(URL, circuit, callback);
-    }
-
-    @Override
-    public void downloadWeek(String url, boolean circuit, DownloadCallback callback) {
+    public void downloadWeek(InputData data, DownloadCallback callback) {
         new Thread(() -> {
-            Meeting meeting = getWeekMeeting();
-            List<ScheduleTask> list = ScheduleCreator.getAllWeekTasks(circuit, meeting);
+            Meeting meeting = getWeekMeeting(getRightUrl(data));
+            List<ScheduleTask> list = ScheduleCreator.getAllWeekTasks(data.isCircuitVisit(), meeting);
             callback.onDownload(list);
         }).start();
     }
 
-    private static Meeting getWeekMeeting() {
-        List<Meeting> meetings = StaticServer.getMeetings();
+    protected String getRightUrl(InputData data){
+        if(data.getDestUrl()!=null && data.getDestUrl().length()>0) {
+            return data.getDestUrl();
+        } else {
+            return URL;
+        }
+    }
+
+    private static Meeting getWeekMeeting(String url) {
+        List<Meeting> meetings = StaticServer.getMeetings(url);
 
         int weekOfYear = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
         for(Meeting meeting:meetings) {

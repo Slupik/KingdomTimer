@@ -12,8 +12,6 @@
 
 package jw.kingdom.hall.kingdomtimer.downloader.entity;
 
-import jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model.JwScheduleDownloader;
-
 import java.util.List;
 
 public interface ScheduleDownloader {
@@ -23,12 +21,7 @@ public interface ScheduleDownloader {
      */
     void getUrlForToday(String languageCode, UrlCallback callback);
 
-    /**
-     * @param languageCode compatible with the standard ISO 639
-     */
-    void autoSelectAndDownloadWeek(String languageCode, boolean circuit, JwScheduleDownloader.DownloadCallback callback);
-
-    void downloadWeek(String url, boolean circuit, JwScheduleDownloader.DownloadCallback callback);
+    void downloadWeek(InputData dat, DownloadCallback callback);
 
     interface DownloadCallback {
         void onDownload(List<ScheduleTask> tasks);
@@ -36,5 +29,19 @@ public interface ScheduleDownloader {
 
     interface UrlCallback {
         void onReturnUrl(String url);
+    }
+
+    interface InputData {
+
+        boolean isCircuitVisit();
+
+        /**
+         * @return language code compatible with the standard ISO 639
+         */
+        String getLangCode();
+
+        String getDestUrl();
+
+        ScheduleTranslator getTranslator();
     }
 }
