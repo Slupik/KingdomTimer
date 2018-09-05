@@ -1,4 +1,10 @@
-package jw.kingdom.hall.kingdomtimer.data.online;
+/*
+ * Created 05.09.18 02:49.
+ * Last modified 03.09.18 21:14
+ * This file is part of KingdomHallTimer which is released under "no licence".
+ */
+
+package jw.kingdom.hall.kingdomtimer.downloader.model.soundbox.schedule.model;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,8 +14,8 @@ import java.net.URL;
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class WebPageUtils {
-    public static String download(final String url) throws IOException {
+class WebPageUtils {
+    static String download(final String url) throws IOException {
         StringBuilder all = new StringBuilder();
         BufferedReader in = null;
         try {
