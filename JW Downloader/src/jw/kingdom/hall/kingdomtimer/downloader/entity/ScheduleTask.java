@@ -1,15 +1,22 @@
 /*
- * Created 05.09.18 00:39.
- * Last modified 05.09.18 00:39
+ * Created 05.09.18 02:52.
+ * Last modified 05.09.18 02:38
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 
-package jw.kingdom.hall.kingdomtimer.downloader.jw.schedule.entity;
+/*
+ * Created 05.09.18 02:37.
+ * Last modified 05.09.18 02:28
+ * This file is part of KingdomHallTimer which is released under "no licence".
+ */
 
-public class JwTask {
+
+package jw.kingdom.hall.kingdomtimer.downloader.entity;
+
+public class ScheduleTask {
     private int time = -1;
     private String name = "";
-    private JwType type = JwType.UNKNOWN;
+    private ScheduleTaskType type = ScheduleTaskType.UNKNOWN;
 
     public int getTime() {
         return time;
@@ -27,11 +34,11 @@ public class JwTask {
         this.name = name;
     }
 
-    public JwType getType() {
+    public ScheduleTaskType getType() {
         return type;
     }
 
-    public void setType(JwType type) {
+    public void setType(ScheduleTaskType type) {
         this.type = type;
     }
 

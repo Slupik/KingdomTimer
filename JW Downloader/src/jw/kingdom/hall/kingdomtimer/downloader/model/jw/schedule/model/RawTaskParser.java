@@ -1,16 +1,17 @@
+
 /*
  * Created 05.09.18 01:16.
  * Last modified 05.09.18 01:16
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 
-package jw.kingdom.hall.kingdomtimer.downloader.jw.schedule.model;
+package jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model;
 
-import jw.kingdom.hall.kingdomtimer.downloader.jw.schedule.entity.JwTask;
+import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTask;
 
 class RawTaskParser {
-    static JwTask getParsed(String elementSu) throws WrongElementException {
-        JwTask task = new JwTask();
+    static ScheduleTask getParsed(String elementSu) throws WrongElementException {
+        ScheduleTask task = new ScheduleTask();
         task.setName(getTitle(elementSu));
         task.setTime(getTime(elementSu));
         return task;

@@ -16,17 +16,18 @@ import java.util.List;
 public class MeetingSchedule extends MeetingScheduleBase {
     private final List<Listener> listeners = new ArrayList<>();
 
-    public void setTasksOnline(boolean overseer) {
+    public void setTasksOnline(boolean circuit) {
         new Thread(() -> {
             lastTask = null;
-            List<MeetingTask> tasks;
+            PredefinedTaskList.Callback callback = list -> {
+                MeetingSchedule.getInstance().clear();
+                MeetingSchedule.getInstance().addTask(list);
+            };
             if(isWeekend()) {
-                tasks = PredefinedTaskList.getWeekendTasks(overseer);
+                PredefinedTaskList.getWeekendTasks(circuit, callback);
             } else {
-                tasks = PredefinedTaskList.getWeekTasks(overseer);
+                PredefinedTaskList.getWeekTasks(circuit, callback);
             }
-            MeetingSchedule.getInstance().clear();
-            MeetingSchedule.getInstance().addTask(tasks);
         }).start();
     }
 

@@ -1,62 +1,30 @@
 package jw.kingdom.hall.kingdomtimer.data;
 
-import jw.kingdom.hall.kingdomtimer.data.online.StaticServer;
-import jw.kingdom.hall.kingdomtimer.data.online.model.Meeting;
-import jw.kingdom.hall.kingdomtimer.data.online.model.Talk;
-import jw.kingdom.hall.kingdomtimer.data.online.model.TalkConverter;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleDownloader;
+import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTask;
+import jw.kingdom.hall.kingdomtimer.downloader.model.ScheduleDownloaderFacade;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class PredefinedTaskList {
-    public static List<MeetingTask> getWeekTasks(boolean overseer){
-        List<MeetingTask> list = new ArrayList<>();
-        list.add(PredefinedMeetingTask.getPreview());
-        list.add(PredefinedMeetingTask.getBibleAnalyst());
-        list.add(PredefinedMeetingTask.getBibleTreasure());
-        list.add(PredefinedMeetingTask.getBibleReading());
-        Meeting meeting = getWeekMeeting();
-        if(meeting!=null) {
-            int i=0;
-            for(Talk talk:meeting.getTalks()) {
-                MeetingTask task = TalkConverter.toMeetingTask(talk);
-                if(i<3) {
-                    task.setType(MeetingTask.Type.MINISTRY);
-                } else {
-                    task.setType(MeetingTask.Type.LIVING);
-                }
-                list.add(task);
-                i++;
+    private static final ScheduleDownloader downloader = new ScheduleDownloaderFacade();
+
+    public static void getWeekTasks(boolean circuit, Callback callback){
+        downloader.autoSelectAndDownloadWeek("", circuit, tasks -> {
+            List<MeetingTask> list = new ArrayList<>();
+            for(ScheduleTask scheduleTask:tasks) {
+                list.add(ScheduleTaskToMeetingTaskConverter.getMeetingTask(scheduleTask));
             }
-        }
-        if(!overseer) {
-            list.add(PredefinedMeetingTask.getBookAnalyst());
-        }
-        list.add(PredefinedMeetingTask.getRepeat());
-        if(overseer) {
-            list.add(PredefinedMeetingTask.getOverseerLecture());
-        }
-        return list;
+            callback.onDataReceive(list);
+        });
     }
 
-    private static Meeting getWeekMeeting() {
-        List<Meeting> meetings = StaticServer.getMeetings();
-
-        int weekOfYear = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
-        for(Meeting meeting:meetings) {
-            if(weekOfYear == meeting.getWeekOfYear() && meeting.isWeekMeeting()) {
-                return meeting;
-            }
-        }
-        return null;
-    }
-
-    public static List<MeetingTask> getWeekendTasks(boolean overseer){
+    public static void getWeekendTasks(boolean circuit, Callback callback){
         List<MeetingTask> list = new ArrayList<>();
 
         MeetingTask lecture = new MeetingTask();
@@ -68,7 +36,7 @@ public class PredefinedTaskList {
 
         MeetingTask watchtower = new MeetingTask();
         watchtower.setName("Strażnica");
-        if(overseer) {
+        if(circuit) {
             watchtower.setTimeInSeconds(30 * 60);
         } else {
             watchtower.setTimeInSeconds(60 * 60);
@@ -78,15 +46,19 @@ public class PredefinedTaskList {
         list.add(watchtower);
 
 
-        if(overseer) {
+        if(circuit) {
             MeetingTask overseerLecture = new MeetingTask();
             overseerLecture.setName("Przemówienie podróżującego");
             overseerLecture.setTimeInSeconds(30 * 60);
             overseerLecture.setUseBuzzer(false);
-            overseerLecture.setType(MeetingTask.Type.OVERSEER);
+            overseerLecture.setType(MeetingTask.Type.CIRCUIT);
             list.add(overseerLecture);
         }
 
-        return list;
+        callback.onDataReceive(list);
+    }
+
+    public interface Callback {
+        void onDataReceive(List<MeetingTask> list);
     }
 }
