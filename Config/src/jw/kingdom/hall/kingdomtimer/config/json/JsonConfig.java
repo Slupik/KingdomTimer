@@ -26,7 +26,11 @@ public class JsonConfig implements ConfigWriteable {
         if(data==null || data.length()<3) {
             data = ConfigUtils.BACKBONE;
         }
-        config = new Gson().fromJson(data, JsonConfigRoot.class);
+        try {
+            config = new Gson().fromJson(data, JsonConfigRoot.class);
+        } catch (Exception ignore) {
+            config = new Gson().fromJson(ConfigUtils.BACKBONE, JsonConfigRoot.class);
+        }
         if(null == parent) {
             config.applyParentConfig(ConfigUtils.DEFAULT);
         } else {
