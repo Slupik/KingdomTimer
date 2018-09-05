@@ -14,6 +14,7 @@ class TalkToTaskConverter {
         ScheduleTask task = new ScheduleTask();
         task.setName(talk.getName());
         task.setTime(talk.getMinutes()*60);
+        task.setActiveBuzzer(talk.isStudentTalk());
         return task;
     }
 }
