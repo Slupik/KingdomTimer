@@ -10,6 +10,9 @@ import jw.kingdom.hall.kingdomtimer.app.view.loader.Screens;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.StageWindow;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowController;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowSettings;
+import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
+import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
+import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorObservableList;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -46,6 +49,8 @@ public class HandyWindow implements StageWindow {
         stage.setWidth(380);
         stage.setHeight(110);
 
+        Platform.runLater(()-> setPosToRightUp());
+
         new WindowMovingController(stage, root);
 
         new Thread(()->{
@@ -58,6 +63,29 @@ public class HandyWindow implements StageWindow {
                 getStage().sizeToScene();
             });
         }).start();
+    }
+
+    private void setPosToRightUp() {
+        Monitor monitor = getMainMonitor();
+        if(monitor!=null) {
+            getStage().setX(
+                    monitor.getDefaultConfiguration().getBounds().getWidth()-getStage().getWidth()
+            );
+            getStage().setY(
+                    monitor.getDefaultConfiguration().getBounds().getY()
+            );
+        }
+    }
+
+    private Monitor getMainMonitor() {
+        MonitorObservableList list = MonitorManager.monitors;
+        for(int i=list.size()-1;i>=0;i--){
+            Monitor monitor = list.get(i);
+            if(monitor.isMain()){
+                return monitor;
+            }
+        }
+        return null;
     }
 
     public void loadScreens() {
