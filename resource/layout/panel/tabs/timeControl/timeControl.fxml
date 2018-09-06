@@ -20,78 +20,95 @@
   -->
 
 <VBox prefHeight="400.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.TimeControlController">
-   <HBox>
+   <HBox prefHeight="100.0" prefWidth="200.0">
       <children>
-         <Label fx:id="lblTime" text="12:43:02">
-            <font>
-               <Font size="53.0" />
-            </font>
-            <tooltip>
-               <Tooltip text="Czas wyświetlany dla mówcy w formacie godziny:minuty:sekundy. Kolory mogą się różnić." wrapText="true" />
-            </tooltip>
-         </Label>
-         <HBox alignment="CENTER_LEFT">
+         <VBox>
             <children>
-               <HBox fx:id="hbTimeControlsContainer" alignment="CENTER_LEFT">
-                  <HBox.margin>
-                     <Insets left="16.0" />
-                  </HBox.margin>
+               <HBox>
+                  <children>
+                     <Label fx:id="lblTime" text="12:43:02">
+                        <font>
+                           <Font size="53.0" />
+                        </font>
+                        <tooltip>
+                           <Tooltip text="Czas wyświetlany dla mówcy w formacie godziny:minuty:sekundy. Kolory mogą się różnić." wrapText="true" />
+                        </tooltip>
+                     </Label>
+                     <HBox alignment="CENTER_LEFT">
+                        <children>
+                           <HBox fx:id="hbTimeControlsContainer" alignment="CENTER_LEFT">
+                              <HBox.margin>
+                                 <Insets left="16.0" />
+                              </HBox.margin>
+                           </HBox>
+                           <Button fx:id="btnBuzzer" layoutX="147.0" layoutY="36.0" mnemonicParsing="false" text="Dzwonek">
+                              <HBox.margin>
+                                 <Insets left="16.0" />
+                              </HBox.margin>
+                           </Button>
+                           <Button fx:id="btnInstantDirect" mnemonicParsing="false" text="Dół">
+                              <HBox.margin>
+                                 <Insets left="16.0" />
+                              </HBox.margin>
+                           </Button>
+                        </children>
+                     </HBox>
+                  </children>
                </HBox>
-               <Button fx:id="btnBuzzer" layoutX="147.0" layoutY="36.0" mnemonicParsing="false" text="Dzwonek">
-                  <HBox.margin>
-                     <Insets left="16.0" />
-                  </HBox.margin>
-               </Button>
-               <Button fx:id="btnInstantDirect" mnemonicParsing="false" text="Dół">
-                  <HBox.margin>
-                     <Insets left="16.0" />
-                  </HBox.margin>
-               </Button>
+               <VBox>
+                  <children>
+                     <Label text="Szybkie ustawienie czasu">
+                        <font>
+                           <Font size="16.0" />
+                        </font>
+                     </Label>
+                     <HBox>
+                        <children>
+                           <TimeField fx:id="tfFastTime" />
+                           <Button mnemonicParsing="false" onAction="#handleLoadTimeAction" text="Wczytaj">
+                              <HBox.margin>
+                                 <Insets left="16.0" />
+                              </HBox.margin>
+                           </Button>
+                           <Button layoutX="130.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleAddTime" text="Dodaj">
+                              <HBox.margin>
+                                 <Insets left="8.0" />
+                              </HBox.margin>
+                           </Button>
+                           <Button layoutX="188.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleRemoveTime" text="Odejmij">
+                              <HBox.margin>
+                                 <Insets left="8.0" />
+                              </HBox.margin>
+                           </Button>
+                           <Button fx:id="btnFastDirect" mnemonicParsing="false" text="Dół">
+                              <HBox.margin>
+                                 <Insets left="8.0" />
+                              </HBox.margin>
+                           </Button>
+                        </children>
+                     </HBox>
+                     <Label text="Wczytuje czas poza kolejką (ingoruje tabelkę i obecny czas)">
+                        <padding>
+                           <Insets top="4.0" />
+                        </padding>
+                     </Label>
+                  </children>
+                  <VBox.margin>
+                     <Insets />
+                  </VBox.margin>
+               </VBox>
             </children>
-         </HBox>
+         </VBox>
+         <VBox alignment="CENTER_LEFT">
+            <children>
+               <Button fx:id="btnWidgetVisibility" mnemonicParsing="false" text="Ukryj widget" />
+            </children>
+            <HBox.margin>
+               <Insets left="32.0" />
+            </HBox.margin>
+         </VBox>
       </children>
    </HBox>
-   <VBox>
-      <children>
-         <Label text="Szybkie ustawienie czasu">
-            <font>
-               <Font size="16.0" />
-            </font>
-         </Label>
-         <HBox>
-            <children>
-               <TimeField fx:id="tfFastTime" />
-               <Button mnemonicParsing="false" onAction="#handleLoadTimeAction" text="Wczytaj">
-                  <HBox.margin>
-                     <Insets left="16.0" />
-                  </HBox.margin>
-               </Button>
-               <Button layoutX="130.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleAddTime" text="Dodaj">
-                  <HBox.margin>
-                     <Insets left="8.0" />
-                  </HBox.margin>
-               </Button>
-               <Button layoutX="188.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleRemoveTime" text="Odejmij">
-                  <HBox.margin>
-                     <Insets left="8.0" />
-                  </HBox.margin>
-               </Button>
-               <Button fx:id="btnFastDirect" mnemonicParsing="false" text="Dół">
-                  <HBox.margin>
-                     <Insets left="8.0" />
-                  </HBox.margin>
-               </Button>
-            </children>
-         </HBox>
-         <Label text="Wczytuje czas poza kolejką (ingoruje tabelkę i obecny czas)">
-            <padding>
-               <Insets top="4.0" />
-            </padding></Label>
-      </children>
-      <VBox.margin>
-         <Insets />
-      </VBox.margin>
-   </VBox>
    <Separator prefWidth="200.0">
       <VBox.margin>
          <Insets bottom="8.0" top="8.0" />

@@ -49,7 +49,7 @@ public class HandyWindow implements StageWindow {
         stage.setWidth(380);
         stage.setHeight(110);
 
-        Platform.runLater(()-> setPosToRightUp());
+        Platform.runLater(this::setPosToRightUp);
 
         new WindowMovingController(stage, root);
 
@@ -59,9 +59,7 @@ public class HandyWindow implements StageWindow {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            Platform.runLater(()->{
-                getStage().sizeToScene();
-            });
+            Platform.runLater(()-> getStage().sizeToScene());
         }).start();
     }
 
