@@ -26,7 +26,11 @@ public class JsonConfig implements ConfigWriteable {
         if(data==null || data.length()<3) {
             data = ConfigUtils.BACKBONE;
         }
-        config = new Gson().fromJson(data, JsonConfigRoot.class);
+        try {
+            config = new Gson().fromJson(data, JsonConfigRoot.class);
+        } catch (Exception ignore) {
+            config = new Gson().fromJson(ConfigUtils.BACKBONE, JsonConfigRoot.class);
+        }
         if(null == parent) {
             config.applyParentConfig(ConfigUtils.DEFAULT);
         } else {
@@ -235,6 +239,16 @@ public class JsonConfig implements ConfigWriteable {
     }
 
     @Override
+    public int getTimeToEvaluate() {
+        try {
+            return config.getCountdown().getTimeToEvaluate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ConfigUtils.DEFAULT.getTimeToEvaluate();
+        }
+    }
+
+    @Override
     public void setSpeakerScreen(String screen) {
         if(config.getSpeaker()!=null) {
             config.getSpeaker().setScreen(screen);
@@ -350,6 +364,13 @@ public class JsonConfig implements ConfigWriteable {
     public void setDirectDown(boolean isDirectDown) {
         if(config.getCountdown()!=null) {
             config.getCountdown().setCountdownDown(isDirectDown);
+        }
+    }
+
+    @Override
+    public void setTimeToEvaluate(int seconds) {
+        if(config.getCountdown()!=null) {
+            config.getCountdown().setTimeToEvaluate(seconds);
         }
     }
 }

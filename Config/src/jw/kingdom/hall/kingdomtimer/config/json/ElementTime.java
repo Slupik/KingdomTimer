@@ -14,6 +14,10 @@ class ElementTime extends ConfigElement {
     @Nullable
     @Expose
     private String countdownDown;
+    @SerializedName("czas_na_ocene")
+    @Nullable
+    @Expose
+    private String timeToEvaluate;
 
     public boolean getCountdownDown() throws DataParseException {
         if(isCallingParent(countdownDown, ConfigFieldType.BOOLEAN)) {
@@ -24,5 +28,16 @@ class ElementTime extends ConfigElement {
 
     public void setCountdownDown(boolean countdownDown) {
         this.countdownDown = Boolean.toString(countdownDown);
+    }
+
+    public int getTimeToEvaluate() throws DataParseException {
+        if(isCallingParent(timeToEvaluate, ConfigFieldType.INTEGER)) {
+            return parent.getTimeToEvaluate();
+        }
+        return toInteger(timeToEvaluate);
+    }
+
+    public void setTimeToEvaluate(int seconds) {
+        this.timeToEvaluate = Integer.toString(seconds);
     }
 }

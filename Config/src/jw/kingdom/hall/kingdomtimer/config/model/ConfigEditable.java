@@ -24,4 +24,5 @@ public interface ConfigEditable {
     void setActualRefreshRate(int actualRefRate);
 
     void setDirectDown(boolean isDirectDown);
+    void setTimeToEvaluate(int seconds);
 }

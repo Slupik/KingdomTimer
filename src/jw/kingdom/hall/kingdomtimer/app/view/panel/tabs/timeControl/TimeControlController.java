@@ -1,6 +1,8 @@
 package jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +16,7 @@ import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.table.TaskTa
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectBase;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectForInstantController;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectForPanel;
+import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
@@ -59,6 +62,12 @@ StartPauseStopView.Controller {
 
     @FXML
     private Button btnCountdownDirect;
+
+    @FXML
+    private Button btnWidgetVisibility;
+
+    @FXML
+    private CheckBox cbTimeToEvaluate;
 
     @FXML
     private TableView<MeetingTask> tvList;
@@ -147,6 +156,19 @@ StartPauseStopView.Controller {
         });
 
         Platform.runLater(()-> new BackupPresenter().run());
+        new WidgetVisibilityController(btnWidgetVisibility);
+        setupTimeToEvaluate();
+    }
+
+    private void setupTimeToEvaluate() {
+        cbTimeToEvaluate.setSelected(AppConfig.getInstance().getTimeToEvaluate()>=0);
+        cbTimeToEvaluate.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue) {
+                AppConfig.getInstance().setTimeToEvaluate(60);
+            } else {
+                AppConfig.getInstance().setTimeToEvaluate(-1);
+            }
+        });
     }
 
     private void setupInstantDirectController() {

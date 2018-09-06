@@ -103,6 +103,10 @@ public class DefaultConfig implements ConfigWriteable {
         return true;
     }
 
+    @Override
+    public int getTimeToEvaluate() {
+        return -1;
+    }
 
 
     @Override
@@ -155,4 +159,7 @@ public class DefaultConfig implements ConfigWriteable {
 
     @Override
     public void setDirectDown(boolean isDirectDown) {}
+
+    @Override
+    public void setTimeToEvaluate(int seconds) {}
 }

@@ -36,7 +36,7 @@ public class PanelWindow implements StageWindow {
 
         scene = new Scene(root);
         stage.setScene(scene);
-//        stage.setMaximized(true);
+        stage.setMaximized(true);
         stage.show();
 
         stage.setOnCloseRequest(event -> {
