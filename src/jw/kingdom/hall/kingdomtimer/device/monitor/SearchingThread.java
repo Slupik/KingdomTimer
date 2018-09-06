@@ -6,6 +6,7 @@
 package jw.kingdom.hall.kingdomtimer.device.monitor;
 
 import java.awt.*;
+import java.util.Calendar;
 
 class SearchingThread extends Thread {
 	private Thread t;
@@ -27,18 +28,22 @@ class SearchingThread extends Thread {
 		try {
 			Thread.sleep(START_WAIT_TIME);
 			while(true){
-				GraphicsDevice[] actDeviceList = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
-				for(GraphicsDevice gp:actDeviceList){
-					if(!MonitorManager.isOldListContains(gp)){
-						MonitorManager.firePlugInEvent(gp);
+				try {
+					GraphicsDevice[] actDeviceList = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
+					for(GraphicsDevice gp:actDeviceList){
+						if(!MonitorManager.isOldListContains(gp)){
+							MonitorManager.firePlugInEvent(gp);
+						}
 					}
-				}
-				for(GraphicsDevice gp:MonitorManager.lastDevicesList){
-					if(!MonitorManager.listContains(actDeviceList, gp)){
-						MonitorManager.firePlugOutEvent(gp);
+					for(GraphicsDevice gp:MonitorManager.lastDevicesList){
+						if(!MonitorManager.listContains(actDeviceList, gp)){
+							MonitorManager.firePlugOutEvent(gp);
+						}
 					}
+					MonitorManager.lastDevicesList = actDeviceList;
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				MonitorManager.lastDevicesList = actDeviceList;
 				Thread.sleep(SEARCHING_INTERVAL);
 			}
 		}catch (InterruptedException e) {

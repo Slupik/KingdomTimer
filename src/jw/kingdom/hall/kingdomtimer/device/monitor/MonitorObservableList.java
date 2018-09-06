@@ -6,6 +6,7 @@
 package jw.kingdom.hall.kingdomtimer.device.monitor;
 
 import com.sun.javafx.collections.ObservableListWrapper;
+import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 
 import java.awt.*;
@@ -29,13 +30,13 @@ public class MonitorObservableList extends ObservableListWrapper<Monitor> {
 			@Override
 			public void onPlugIn(GraphicsDevice device) {
 				Monitor monitor = new Monitor(device);
-				add(monitor);
+                Platform.runLater(()->add(monitor));
 			}
 
 			@Override
 			public void onPlugOut(GraphicsDevice device) {
 				Monitor monitor = new Monitor(device);
-				remove(monitor.ID);
+                Platform.runLater(()->remove(monitor.ID));
 			}
 		});
 
@@ -49,11 +50,15 @@ public class MonitorObservableList extends ObservableListWrapper<Monitor> {
 
 	public boolean remove(String ID) {
 		boolean isRemoved = false;
+		Monitor toRemove = null;
 		for(Monitor monitor:this){
 			if(monitor.ID.equals(ID)){
-				remove(monitor);
-				isRemoved=true;
+				toRemove = monitor;
 			}
+		}
+		if(toRemove!=null) {
+			remove(toRemove);
+			isRemoved=true;
 		}
 		return isRemoved;
 	}
