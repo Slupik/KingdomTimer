@@ -46,7 +46,7 @@ public class HandyWindow implements StageWindow {
         stage.setScene(scene);
         stage.show();
 
-        stage.setWidth(380);
+        stage.setWidth(300);
         stage.setHeight(110);
 
         Platform.runLater(this::setPosToRightUp);
