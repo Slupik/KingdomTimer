@@ -39,7 +39,7 @@ public class PredefinedTaskList {
         List<MeetingTask> list = new ArrayList<>();
 
         MeetingTask lecture = new MeetingTask();
-        lecture.setName("Wykład biblijny");
+        lecture.setName("Wykład publiczny");
         lecture.setTimeInSeconds(30 * 60);
         lecture.setUseBuzzer(false);
         lecture.setType(MeetingTask.Type.LECTURE);
@@ -59,7 +59,7 @@ public class PredefinedTaskList {
 
         if(circuit) {
             MeetingTask overseerLecture = new MeetingTask();
-            overseerLecture.setName("Przemówienie podróżującego");
+            overseerLecture.setName("Przemówienie nadzorcy obwodu");
             overseerLecture.setTimeInSeconds(30 * 60);
             overseerLecture.setUseBuzzer(false);
             overseerLecture.setType(MeetingTask.Type.CIRCUIT);

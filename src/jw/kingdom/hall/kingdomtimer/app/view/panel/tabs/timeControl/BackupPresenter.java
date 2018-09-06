@@ -20,10 +20,10 @@ class BackupPresenter {
 
     private void showAskDialog() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Wykryto backup!");
-        alert.setHeaderText("Program wykrył kopię zapasową ostatnich działań, czy chcesz je wczytać do programu?");
+        alert.setTitle("Wykryto kopię zapasową!");
+        alert.setHeaderText("Program wykrył kopię zapasową ostatnich działań, czy chcesz ją przywrócić?");
         alert.setContentText("Program automatycznie sporządza kopię zapasową wykonywanych działań. Jeżeli zostanie " +
-                "zamknięty w nieprawidłowy sposób możliwe jest przywrócenie poprzedniego stanu.");
+                "zamknięty w nieprawidłowy sposób, możliwe jest przywrócenie poprzedniego stanu.");
 
         ButtonType btnYes = new ButtonType("Tak", ButtonBar.ButtonData.YES);
         ButtonType btnNo = new ButtonType("Nie", ButtonBar.ButtonData.CANCEL_CLOSE);
