@@ -4,6 +4,7 @@ import javafx.stage.Stage;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.entity.time.buzzer.BuzzerPlayer;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
+import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleProvider;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.bussines.BackupController;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.AppWindow;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.WindowInput;
@@ -99,6 +100,11 @@ public class App {
             }
 
             @Override
+            public ScheduleProvider getScheduleProvider() {
+                return input.getScheduleProvider();
+            }
+
+            @Override
             public BackupController getBackup() {
                 return input.getBackup();
             }
@@ -122,5 +128,6 @@ public class App {
         ScheduleController getSchedule();
         CountdownController getCountdown();
         BuzzerPlayer getBuzzer();
+        ScheduleProvider getScheduleProvider();
     }
 }

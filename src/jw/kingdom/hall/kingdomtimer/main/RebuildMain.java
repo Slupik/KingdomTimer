@@ -7,6 +7,8 @@ import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.entity.time.buzzer.BuzzerController;
 import jw.kingdom.hall.kingdomtimer.entity.time.buzzer.BuzzerPlayer;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
+import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleProvider;
+import jw.kingdom.hall.kingdomtimer.main.schedule.provider.SProvider;
 import jw.kingdom.hall.kingdomtimer.usecase.time.buzzer.BuzzerControllerImpl;
 import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownControllerImpl;
 import jw.kingdom.hall.kingdomtimer.usecase.time.schedule.ScheduleControllerImpl;
@@ -64,6 +66,11 @@ public class RebuildMain extends Application {
             @Override
             public BuzzerPlayer getBuzzer() {
                 return new jw.kingdom.hall.kingdomtimer.main.buzzer.BuzzerPlayer();
+            }
+
+            @Override
+            public ScheduleProvider getScheduleProvider() {
+                return new SProvider();
             }
         }).start(primaryStage);
     }
