@@ -67,10 +67,10 @@ public class HandyWindow implements StageWindow {
         Monitor monitor = getMainMonitor();
         if(monitor!=null) {
             getStage().setX(
-                    monitor.getDefaultConfiguration().getBounds().getWidth()-getStage().getWidth()
+                    monitor.getDefaultConfiguration().getBounds().getWidth()-getStage().getWidth()-75
             );
             getStage().setY(
-                    monitor.getDefaultConfiguration().getBounds().getY()
+                    monitor.getDefaultConfiguration().getBounds().getY()+75
             );
         }
     }
