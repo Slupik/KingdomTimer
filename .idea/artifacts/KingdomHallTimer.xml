@@ -44,7 +44,10 @@
         <element id="module-output" name="Download Schedule" />
         <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jsoup/jsoup/1.11.3/jsoup-1.11.3.jar" path-in-jar="/" />
         <element id="module-output" name="JavaFx" />
+        <element id="module-output" name="Monitor" />
       </element>
+      <element id="module-output" name="Domain" />
+      <element id="module-output" name="Model" />
     </root>
   </artifact>
 </component>
