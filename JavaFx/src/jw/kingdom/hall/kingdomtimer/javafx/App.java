@@ -36,20 +36,6 @@ public class App {
 
     public void start(Stage primaryStage) throws Exception {
         initWindows(primaryStage);
-        initBuzzer();
-
-        new Thread(()->{
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            getWindowInput().getSchedule().addTask(getTestsTask());
-        }).start();
-    }
-
-    private void initBuzzer() {
-
     }
 
     private void initWindows(Stage primaryStage) {
@@ -67,14 +53,6 @@ public class App {
         } catch (NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
-    }
-
-    private ObservableTask getTestsTask() {
-        TaskBean task = new TaskBean();
-        task.setName("Example of a simple task");
-        task.setSeconds(120);
-        task.setUseBuzzer(true);
-        return task;
     }
 
     private WindowInput getWindowInput() {
