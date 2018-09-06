@@ -132,7 +132,7 @@ public class TaskTableRow extends TableRow<MeetingTask> {
                 if(isDarkLayout) {
                     toFill = Color.web("#5a6a70");
                 } else {
-                    toFill = Color.web("#ffca28");
+                    toFill = Color.web("#9FADB2");
                 }
                 break;
             }
@@ -140,7 +140,7 @@ public class TaskTableRow extends TableRow<MeetingTask> {
                 if(isDarkLayout) {
                     toFill = Color.web("#c18626");
                 } else {
-                    toFill = Color.web("#ef9a9a");
+                    toFill = Color.web("#ffca28");
                 }
                 break;
             }
@@ -148,7 +148,7 @@ public class TaskTableRow extends TableRow<MeetingTask> {
                 if(isDarkLayout) {
                     toFill = Color.web("#961526");
                 } else {
-                    toFill = Color.web("#81c784");
+                    toFill = Color.web("#E87878");
                 }
                 break;
             }
@@ -172,7 +172,7 @@ public class TaskTableRow extends TableRow<MeetingTask> {
                 if(isDarkLayout) {
                     toFill = Color.DARKORCHID;
                 } else {
-                    toFill = Color.web("ffee58");
+                    toFill = Color.web("#81c784");//old: ffee58
                 }
                 break;
             }

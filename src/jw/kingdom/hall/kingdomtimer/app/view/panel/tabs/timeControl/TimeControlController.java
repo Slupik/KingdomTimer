@@ -61,6 +61,9 @@ StartPauseStopView.Controller {
     private Button btnCountdownDirect;
 
     @FXML
+    private Button btnWidgetVisibility;
+
+    @FXML
     private TableView<MeetingTask> tvList;
 
     @FXML
@@ -147,6 +150,7 @@ StartPauseStopView.Controller {
         });
 
         Platform.runLater(()-> new BackupPresenter().run());
+        new WidgetVisibilityController(btnWidgetVisibility);
     }
 
     private void setupInstantDirectController() {

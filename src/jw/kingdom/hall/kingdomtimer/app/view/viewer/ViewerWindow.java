@@ -87,6 +87,46 @@ public class ViewerWindow implements StageWindow {
         });
         autoSelectScreen();
         setVisibility(AppConfig.getInstance().isVisibleSpeakerScreen());
+        runThreadPreventingByMainMonitor();
+    }
+
+
+    private void runThreadPreventingByMainMonitor() {
+        new Thread(new Runnable() {
+            private boolean errorWithMainScreen = false;
+            @Override
+            public void run() {
+                while (stage!=null) {
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Monitor monitor = getMainMonitor();
+                    if(monitor!=null && !errorWithMainScreen) {
+                        if(stage.getX()==monitor.getDefaultConfiguration().getBounds().getX() &&
+                                stage.getY()==monitor.getDefaultConfiguration().getBounds().getY()) {
+                            errorWithMainScreen = true;
+                            Platform.runLater(()-> stage.hide());
+                        } else {
+                            errorWithMainScreen = false;
+                            Platform.runLater(()-> stage.show());
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    private Monitor getMainMonitor() {
+        MonitorObservableList list = MonitorManager.monitors;
+        for(int i=list.size()-1;i>=0;i--){
+            Monitor monitor = list.get(i);
+            if(monitor.isMain()){
+                return monitor;
+            }
+        }
+        return null;
     }
 
     public void loadScreens() {
