@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.app.view.utils;
+package jw.kingdom.hall.kingdomtimer.javafx.utils;
 
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -6,7 +6,7 @@ import javafx.scene.text.Text;
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class TextUtils {
+public class FontUtils {
 
     public static double findFontSizeForHeight(Font font, String text, int maxHeight) {
         Font unitFont = new Font(font.getName(), 1);

@@ -1,6 +1,5 @@
 package jw.kingdom.hall.kingdomtimer.app.view.panel;
 
-import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -8,11 +7,8 @@ import jw.kingdom.hall.kingdomtimer.app.CrashMaker;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.Screens;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.StageWindow;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowController;
-import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowSettings;
+import jw.kingdom.hall.kingdomtimer.javafx.window.WindowSettings;
 import jw.kingdom.hall.kingdomtimer.domain.backup.BackupManager;
-import sun.misc.Unsafe;
-
-import java.lang.reflect.Field;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".

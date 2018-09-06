@@ -11,7 +11,7 @@ import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorEventHandler;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorObservableList;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.StageWindow;
-import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowSettings;
+import jw.kingdom.hall.kingdomtimer.javafx.window.WindowSettings;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.Screens;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowController;
 

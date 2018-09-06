@@ -41,6 +41,7 @@
         <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Libraries/xt-audio/com.xt-audio.xt-1.0.5.jar" path-in-jar="/" />
         <element id="module-output" name="Config" />
         <element id="module-output" name="Logger" />
+        <element id="module-output" name="JavaFx" />
       </element>
     </root>
   </artifact>

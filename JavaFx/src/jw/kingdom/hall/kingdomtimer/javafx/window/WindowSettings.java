@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.app.view.loader;
+package jw.kingdom.hall.kingdomtimer.javafx.window;
 
 public class WindowSettings {
     public static final String TITLE = "Kingdom Hall Timer";
