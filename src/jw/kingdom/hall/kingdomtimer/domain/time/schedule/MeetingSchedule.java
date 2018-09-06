@@ -1,8 +1,8 @@
-package jw.kingdom.hall.kingdomtimer.domain.schedule;
+package jw.kingdom.hall.kingdomtimer.domain.time.schedule;
 
 import jw.kingdom.hall.kingdomtimer.data.schedule.PredefinedTaskList;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
+import jw.kingdom.hall.kingdomtimer.domain.time.countdown.TimerCountdown;
+import jw.kingdom.hall.kingdomtimer.domain.time.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
 import java.util.ArrayList;

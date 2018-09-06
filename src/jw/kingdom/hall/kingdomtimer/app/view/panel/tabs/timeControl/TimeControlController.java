@@ -1,8 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,11 +15,11 @@ import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.B
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectForInstantController;
 import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect.BtnTimeDirectForPanel;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
+import jw.kingdom.hall.kingdomtimer.domain.time.countdown.TimerCountdown;
+import jw.kingdom.hall.kingdomtimer.domain.time.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
-import jw.kingdom.hall.kingdomtimer.domain.schedule.NotEnoughTasksException;
+import jw.kingdom.hall.kingdomtimer.domain.time.schedule.MeetingSchedule;
+import jw.kingdom.hall.kingdomtimer.domain.time.schedule.NotEnoughTasksException;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 
 import java.net.URL;

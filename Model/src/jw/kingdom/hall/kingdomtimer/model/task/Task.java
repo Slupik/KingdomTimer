@@ -11,8 +11,11 @@ public interface Task {
     int getSeconds();
     void setSeconds(int seconds);
 
-    boolean getDirectDown();
+    boolean isDirectDown();
     void setDirectDown(boolean directDown);
+
+    boolean isStudentTalk();
+    void setStudentTalk(boolean studentTalk);
 
     TaskType getType();
     void setType(TaskType type);

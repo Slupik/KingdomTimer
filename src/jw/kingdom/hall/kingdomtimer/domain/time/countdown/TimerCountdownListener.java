@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.domain.countdown;
+package jw.kingdom.hall.kingdomtimer.domain.time.countdown;
 
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;

@@ -10,5 +10,6 @@ public interface ObservableTask extends Task {
     ObservableField<String> nameProperty();
     ObservableField<Integer> secondsProperty();
     ObservableField<Boolean> directDownProperty();
+    ObservableField<Boolean> studentTalkProperty();
     ObservableField<TaskType> typeProperty();
 }

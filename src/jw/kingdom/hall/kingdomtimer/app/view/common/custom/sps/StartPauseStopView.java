@@ -6,9 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
 import java.io.IOException;
 import java.net.URL;

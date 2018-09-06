@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.gleam.GlobalGleamController;
+import jw.kingdom.hall.kingdomtimer.domain.time.countdown.gleam.GlobalGleamController;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.AdvancedTextField;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MultimediaPreviewer;
 import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;

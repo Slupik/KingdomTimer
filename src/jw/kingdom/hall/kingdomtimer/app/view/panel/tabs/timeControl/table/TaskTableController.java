@@ -11,7 +11,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import jw.kingdom.hall.kingdomtimer.app.view.common.translate.MeetingTaskTrans;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
+import jw.kingdom.hall.kingdomtimer.domain.time.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 
 /**

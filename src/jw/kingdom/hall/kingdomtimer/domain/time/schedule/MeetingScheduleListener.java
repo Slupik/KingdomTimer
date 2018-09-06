@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.domain.schedule;
+package jw.kingdom.hall.kingdomtimer.domain.time.schedule;
 
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 

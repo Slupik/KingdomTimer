@@ -11,11 +11,11 @@ import jw.kingdom.hall.kingdomtimer.app.view.common.AnimatedZoomOperator;
 import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
 import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.view.common.custom.sps.StartPauseStopView;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
+import jw.kingdom.hall.kingdomtimer.domain.time.countdown.TimerCountdown;
+import jw.kingdom.hall.kingdomtimer.domain.time.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
-import jw.kingdom.hall.kingdomtimer.domain.schedule.NotEnoughTasksException;
+import jw.kingdom.hall.kingdomtimer.domain.time.schedule.MeetingSchedule;
+import jw.kingdom.hall.kingdomtimer.domain.time.schedule.NotEnoughTasksException;
 
 import java.net.URL;
 import java.util.ResourceBundle;

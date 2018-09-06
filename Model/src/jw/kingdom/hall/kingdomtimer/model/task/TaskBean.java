@@ -12,6 +12,7 @@ public class TaskBean implements ObservableTask {
     private final ObservableField<Integer> seconds = new ObservableField<>(0);
     private final ObservableField<Boolean> directDown = new ObservableField<>(true);
     private final ObservableField<TaskType> type = new ObservableField<>(TaskType.UNKNOWN);
+    private final ObservableField<Boolean> studentTalk = new ObservableField<>(false);
 
     @Override
     public ObservableField<String> nameProperty() {
@@ -49,13 +50,28 @@ public class TaskBean implements ObservableTask {
     }
 
     @Override
-    public boolean getDirectDown() {
+    public boolean isDirectDown() {
         return directDown.getValue();
     }
 
     @Override
     public void setDirectDown(boolean directDown) {
         this.directDown.setValue(directDown);
+    }
+
+    @Override
+    public ObservableField<Boolean> studentTalkProperty() {
+        return studentTalk;
+    }
+
+    @Override
+    public boolean isStudentTalk() {
+        return studentTalk.getValue();
+    }
+
+    @Override
+    public void setStudentTalk(boolean studentTalk) {
+        this.studentTalk.setValue(studentTalk);
     }
 
     @Override

@@ -3,10 +3,10 @@ package jw.kingdom.hall.kingdomtimer.domain.backup;
 import com.google.gson.Gson;
 import jw.kingdom.hall.kingdomtimer.domain.backup.entity.OfflineMeetingBean;
 import jw.kingdom.hall.kingdomtimer.domain.backup.entity.TimeBackupBean;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
+import jw.kingdom.hall.kingdomtimer.domain.time.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
-import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
+import jw.kingdom.hall.kingdomtimer.domain.time.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.utils.FileUtils;
 
 import java.util.ArrayList;

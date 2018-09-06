@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.domain.countdown;
+package jw.kingdom.hall.kingdomtimer.domain.time.countdown;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;

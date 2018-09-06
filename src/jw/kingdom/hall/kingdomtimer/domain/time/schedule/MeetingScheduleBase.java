@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.domain.schedule;
+package jw.kingdom.hall.kingdomtimer.domain.time.schedule;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

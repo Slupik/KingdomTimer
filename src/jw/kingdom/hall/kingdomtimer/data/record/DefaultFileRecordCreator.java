@@ -2,10 +2,10 @@ package jw.kingdom.hall.kingdomtimer.data.record;
 
 import jw.kingdom.hall.kingdomtimer.data.UniqueFileUtils;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
+import jw.kingdom.hall.kingdomtimer.domain.time.countdown.TimerCountdown;
+import jw.kingdom.hall.kingdomtimer.domain.time.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
+import jw.kingdom.hall.kingdomtimer.domain.time.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.recorder.common.files.FileRecordCreator;
 
 import java.io.File;

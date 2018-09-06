@@ -16,8 +16,8 @@ import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.DefaultVoiceRecorderListener;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
-import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
-import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingScheduleListener;
+import jw.kingdom.hall.kingdomtimer.domain.time.schedule.MeetingSchedule;
+import jw.kingdom.hall.kingdomtimer.domain.time.schedule.MeetingScheduleListener;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 
 import java.net.URL;

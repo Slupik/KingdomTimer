@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.domain.schedule;
+package jw.kingdom.hall.kingdomtimer.domain.time.schedule;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".

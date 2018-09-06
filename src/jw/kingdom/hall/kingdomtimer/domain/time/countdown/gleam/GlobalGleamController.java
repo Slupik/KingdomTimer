@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.domain.countdown.gleam;
+package jw.kingdom.hall.kingdomtimer.domain.time.countdown.gleam;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
