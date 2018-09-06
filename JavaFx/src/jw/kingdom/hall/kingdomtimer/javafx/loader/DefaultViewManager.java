@@ -42,8 +42,8 @@ public class DefaultViewManager implements ViewManager {
             FXMLLoader myLoader= new FXMLLoader(getClass().getResource(path));
             Parent loadScreen = myLoader.load();
             ControlledScreen myScreenController = myLoader.getController();
-            myScreenController.setViewManager(this);
             myScreenController.setWindow(window);
+            myScreenController.setViewManager(this);
 
             addScreen(name, loadScreen);
             return true;

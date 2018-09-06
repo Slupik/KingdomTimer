@@ -11,9 +11,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import jw.kingdom.hall.kingdomtimer.app.view.common.controller.MultimediaPreviewController;
-import jw.kingdom.hall.kingdomtimer.app.view.utils.TextUtils;
-
-import static jw.kingdom.hall.kingdomtimer.app.view.utils.TextUtils.textHeight;
+import jw.kingdom.hall.kingdomtimer.javafx.utils.FontUtils;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -105,11 +103,11 @@ class PreviewAndTimeCoordinator {
     private void setupFontForTimerText(double height) {
         int integerHeight = (int) height;
         Font font = timeView.getFont();
-        double newSize = TextUtils.findFontSizeForHeight(font, timeView.getText(), integerHeight);
+        double newSize = FontUtils.findFontSizeForHeight(font, timeView.getText(), integerHeight);
         Font newFont = new Font(font.getName(), newSize);
 
-        if(TextUtils.textWidth(newFont, timeView.getText())>mainContainer.widthProperty().getValue()*0.9) {
-            newSize = TextUtils.findFontSizeForWidth(newFont, timeView.getText(), (int) (mainContainer.widthProperty().getValue()*0.9));
+        if(FontUtils.textWidth(newFont, timeView.getText())>mainContainer.widthProperty().getValue()*0.9) {
+            newSize = FontUtils.findFontSizeForWidth(newFont, timeView.getText(), (int) (mainContainer.widthProperty().getValue()*0.9));
             newFont = new Font(font.getName(), newSize);
         }
         timeView.setFont(newFont);
@@ -127,7 +125,7 @@ class PreviewAndTimeCoordinator {
     }
 
     private DoubleProperty getMeasuredTimeTextHeight() {
-        return new SimpleDoubleProperty(textHeight(timeView.getFont(), timeView.getText()));
+        return new SimpleDoubleProperty(FontUtils.textHeight(timeView.getFont(), timeView.getText()));
     }
 
     public interface ElementsContainer extends MultimediaPreviewContainer, TimeInfoContainer {

@@ -37,7 +37,7 @@ public abstract class AppWindow extends StackPane {
         stage.setScene(scene);
         onPreShow();
         stage.show();
-        onPostInit();
+        onPostShow();
     }
 
     protected abstract void loadScreens();
@@ -45,7 +45,7 @@ public abstract class AppWindow extends StackPane {
 
     protected abstract void onPreInit();
     protected abstract void onPreShow();
-    protected abstract void onPostInit();
+    protected abstract void onPostShow();
 
     public Stage getStage() {
         return stage;

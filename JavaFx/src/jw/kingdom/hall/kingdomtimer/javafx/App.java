@@ -3,6 +3,7 @@ package jw.kingdom.hall.kingdomtimer.javafx;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.bussines.BackupController;
+import jw.kingdom.hall.kingdomtimer.javafx.window.handy.HandyWindow;
 import jw.kingdom.hall.kingdomtimer.javafx.window.speaker.SpeakerWindow;
 
 /**
@@ -23,5 +24,6 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         new SpeakerWindow(primaryStage, backup).init();
+        new HandyWindow(new Stage()).init();
     }
 }

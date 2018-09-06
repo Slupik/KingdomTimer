@@ -1,6 +1,5 @@
 package jw.kingdom.hall.kingdomtimer.javafx.window.speaker;
 
-import javafx.application.Platform;
 import javafx.stage.Stage;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.bussines.BackupController;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.AppWindow;
@@ -22,7 +21,6 @@ public class SpeakerWindow extends AppWindow {
     @Override
     protected void loadScreens() {
         viewManager.loadScreen(MAIN.name, MAIN.path);
-        viewManager.loadScreen(TEST.name, TEST.path);
     }
 
     @Override
@@ -41,26 +39,15 @@ public class SpeakerWindow extends AppWindow {
     }
 
     @Override
-    protected void onPostInit() {
+    protected void onPostShow() {
         stage.setOnCloseRequest(event -> {
             backup.delete();
             System.exit(0);
         });
-        new Thread(()->{
-            try {
-                Thread.sleep(6000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Platform.runLater(()->{
-                viewManager.setScreen(TEST.name);
-            });
-        }).start();
     }
 
     public enum Screens {
-        MAIN("main", "/layout/window/speaker/speakerWindow.fxml"),
-        TEST("test", "/layout/window/speaker/test.fxml")
+        MAIN("main", "/layout/window/speaker/main.fxml"),
         ;
 
         public final String name;

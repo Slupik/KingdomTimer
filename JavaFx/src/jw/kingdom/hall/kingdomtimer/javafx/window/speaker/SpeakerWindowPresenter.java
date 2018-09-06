@@ -1,6 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.javafx.window.speaker;
 
 import javafx.fxml.Initializable;
+import javafx.scene.layout.Region;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.ControlledScreenBase;
 
 import java.net.URL;
@@ -9,11 +10,10 @@ import java.util.ResourceBundle;
 /**
  * All rights reserved & copyright ©
  */
-public class SpeakerWindowPresenter extends ControlledScreenBase implements Initializable {
+public class SpeakerWindowPresenter extends ControlledScreenBase {
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("Initialized");
+    protected Region getMainContainer() {
+        return null;
     }
-
 }
