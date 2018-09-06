@@ -157,33 +157,46 @@
                <Button mnemonicParsing="false" onAction="#handleAddTask" text="Dodaj" />
             </children>
          </VBox>
-         <VBox alignment="BOTTOM_CENTER" layoutX="560.0" layoutY="10.0">
+         <VBox alignment="BOTTOM_LEFT">
             <children>
-               <Button mnemonicParsing="false" onAction="#loadTasksOnline" text="Wczytaj punkty" />
+               <CheckBox fx:id="cbTimeToEvaluate" mnemonicParsing="false" text="Dodaj czas na ocenę">
+                  <VBox.margin>
+                     <Insets bottom="16.0" left="56.0" />
+                  </VBox.margin>
+               </CheckBox>
+               <HBox>
+                  <children>
+                     <VBox alignment="BOTTOM_CENTER">
+                        <children>
+                           <Button mnemonicParsing="false" onAction="#loadTasksOnline" text="Wczytaj punkty" />
+                        </children>
+                        <HBox.margin>
+                           <Insets left="56.0" />
+                        </HBox.margin>
+                     </VBox>
+                     <VBox alignment="BOTTOM_CENTER">
+                        <children>
+                           <Button mnemonicParsing="false" onAction="#loadOverseerTasksOnline" text="Wczytaj punkty (Obsługa)" />
+                        </children>
+                        <HBox.margin>
+                           <Insets left="8.0" />
+                        </HBox.margin>
+                     </VBox>
+                  </children>
+               </HBox>
             </children>
-            <HBox.margin>
-               <Insets left="56.0" />
-            </HBox.margin>
-         </VBox>
-         <VBox alignment="BOTTOM_CENTER" layoutX="664.0" layoutY="10.0">
-            <children>
-               <Button mnemonicParsing="false" onAction="#loadOverseerTasksOnline" text="Wczytaj punkty (Obsługa)" />
-            </children>
-            <HBox.margin>
-               <Insets left="8.0" />
-            </HBox.margin>
          </VBox>
       </children>
    </HBox>
    <TableView fx:id="tvList">
-     <columns>
+      <columns>
          <TableColumn fx:id="tcDelete" minWidth="50.0" prefWidth="-1.0" text="Usuń" />
          <TableColumn fx:id="tcBuzzer" minWidth="75.0" prefWidth="-1.0" text="Syngał" />
          <TableColumn fx:id="tcDirect" minWidth="75.0" prefWidth="-1.0" text="Kierunek odliczania" />
-       <TableColumn fx:id="tcTime" minWidth="75.0" prefWidth="-1.0" text="Czas" />
+         <TableColumn fx:id="tcTime" minWidth="75.0" prefWidth="-1.0" text="Czas" />
          <TableColumn fx:id="tcType" editable="false" minWidth="75.0" prefWidth="-1.0" sortable="false" text="Typ" visible="false" />
-       <TableColumn fx:id="tcName" minWidth="100.0" prefWidth="637.0" text="Punkt" />
-     </columns>
+         <TableColumn fx:id="tcName" minWidth="100.0" prefWidth="637.0" text="Punkt" />
+      </columns>
       <VBox.margin>
          <Insets top="16.0" />
       </VBox.margin>

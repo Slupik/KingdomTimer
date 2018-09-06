@@ -24,4 +24,5 @@ public interface ConfigReadable {
     int getActualRefreshRate();
 
     boolean isDirectDown();
+    int getTimeToEvaluate();
 }

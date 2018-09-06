@@ -11,4 +11,9 @@ public class DefaultScheduleTranslator implements ScheduleTranslator {
     public String circuitLecture() {
         return "Circuit lecture";
     }
+
+    @Override
+    public String evaluate() {
+        return "Evaluate";
+    }
 }
