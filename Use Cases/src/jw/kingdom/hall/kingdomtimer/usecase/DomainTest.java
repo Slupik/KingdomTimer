@@ -23,7 +23,7 @@ public class DomainTest {
             }
 
             @Override
-            public void display(int startTime, int time) {
+            public void display(int startTime, int time, int i) {
                 System.out.println(time);
             }
 

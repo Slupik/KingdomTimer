@@ -173,7 +173,7 @@ public class CountdownControllerImpl implements CountdownController {
 
     private void notifyOnTimeChange() {
         for(TimeDisplay display:timeDisplays) {
-            display.display(getMaxTime(), getCalculatedTimeToDisplay());
+            display.display(getMaxTime(), getCalculatedTimeToDisplay(), time);
         }
         executor.execute(()->{
             for(Listener listener:listeners) {

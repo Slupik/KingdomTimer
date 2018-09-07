@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import jw.kingdom.hall.kingdomtimer.javafx.control.time.display.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.screen.ControlledScreenBase;
 
 import java.net.URL;
@@ -31,6 +32,13 @@ public class HandyWindowPresenter extends ControlledScreenBase {
     protected void onPreCreate() {
         super.onPreCreate();
         setupZoom();
+        lblNow.setText("");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getWindowData().getCountdown().addTimeDisplay(new TimeDisplayController(lblTime));
     }
 
     private void setupZoom() {
@@ -48,12 +56,6 @@ public class HandyWindowPresenter extends ControlledScreenBase {
     @Override
     protected void onCreate(URL location, ResourceBundle resources) {
         super.onCreate(location, resources);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        lblNow.setText("");
     }
 
     public void minifyAction(ActionEvent actionEvent) {

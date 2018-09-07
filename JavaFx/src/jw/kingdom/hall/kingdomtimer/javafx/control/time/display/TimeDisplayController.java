@@ -36,10 +36,9 @@ public class TimeDisplayController implements TimeDisplay {
     public void onTaskChange(Task newTask) {}
 
     @Override
-    public void display(int startTime, int time) {
-        System.out.println("time = " + time);
-        setTime(time);
-        setColorCode(TimerColor.getColorCode(startTime, time));
+    public void display(int startTime, int timeToDisplay, int absoluteTimeLeft) {
+        setTime(timeToDisplay);
+        setColorCode(TimerColor.getColorCode(startTime, absoluteTimeLeft));
     }
 
     @Override
