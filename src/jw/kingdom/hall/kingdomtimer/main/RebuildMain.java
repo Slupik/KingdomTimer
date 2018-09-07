@@ -26,7 +26,8 @@ public class RebuildMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        ScheduleController scheduleController = new ScheduleControllerImpl();
+        ScheduleController schedule = new ScheduleControllerImpl();
+        CountdownControllerImpl countdown = new CountdownControllerImpl();
         Record record = new Record();
         Backup backup = new Backup();
 
@@ -48,12 +49,12 @@ public class RebuildMain extends Application {
 
             @Override
             public ScheduleController getSchedule() {
-                return scheduleController;
+                return schedule;
             }
 
             @Override
             public CountdownController getCountdown() {
-                return new CountdownControllerImpl();
+                return countdown;
             }
         }).start(primaryStage);
     }

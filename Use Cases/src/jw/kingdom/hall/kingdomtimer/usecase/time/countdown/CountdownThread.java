@@ -21,7 +21,9 @@ class CountdownThread extends Thread {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            task.run();
+            if(running) {
+                task.run();
+            }
         }
     }
 

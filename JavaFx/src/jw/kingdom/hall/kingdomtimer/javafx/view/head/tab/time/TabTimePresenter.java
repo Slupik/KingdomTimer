@@ -7,8 +7,9 @@ import javafx.scene.layout.HBox;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
 import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
-import jw.kingdom.hall.kingdomtimer.javafx.control.button.timedirect.BtnTimeDirectForInstantController;
-import jw.kingdom.hall.kingdomtimer.javafx.control.button.timedirect.BtnTimeDirectForPanel;
+import jw.kingdom.hall.kingdomtimer.javafx.control.time.direct.BtnTimeDirectForInstantController;
+import jw.kingdom.hall.kingdomtimer.javafx.control.time.direct.BtnTimeDirectForPanel;
+import jw.kingdom.hall.kingdomtimer.javafx.control.time.display.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.task.TaskFxBean;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.TabPresenter;
@@ -96,6 +97,8 @@ public class TabTimePresenter extends TabPresenter implements TaskTableControlle
 
         instantDirectController = new BtnTimeDirectForInstantController(getSchedule(), getConfig(), btnInstantDirect);
         instantDirectController.setMedium(true);
+
+        getCountdown().addTimeDisplay(new TimeDisplayController(lblTime));
 
         new TaskTableController(this);
         new WidgetVisibilityController(btnWidgetVisibility, getWindowsContainer());

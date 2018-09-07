@@ -5,7 +5,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
-import jw.kingdom.hall.kingdomtimer.javafx.control.button.timedirect.BtnTimeDirectForObj;
+import jw.kingdom.hall.kingdomtimer.javafx.control.time.direct.BtnTimeDirectForObj;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.task.TaskFxBean;
 
 /**

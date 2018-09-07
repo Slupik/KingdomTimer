@@ -1,10 +1,9 @@
 package jw.kingdom.hall.kingdomtimer.usecase.time.countdown;
 
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
-import jw.kingdom.hall.kingdomtimer.entity.time.TimeDisplay;
+import jw.kingdom.hall.kingdomtimer.entity.time.countdown.TimeDisplay;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownState;
-import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownThread;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +40,7 @@ public class CountdownControllerImpl implements CountdownController {
         for(TimeDisplay display:timeDisplays) {
             display.onTaskChange(task);
         }
+        notifyOnTimeChange();
         executor.execute(()->{
             for(Listener listener:listeners) {
                 listener.onTaskStart(task);
@@ -70,6 +70,9 @@ public class CountdownControllerImpl implements CountdownController {
     @Override
     public void stop() {
         changeState(CountdownState.STOP);
+        for(TimeDisplay display:timeDisplays) {
+            display.reset();
+        }
     }
 
     @Override

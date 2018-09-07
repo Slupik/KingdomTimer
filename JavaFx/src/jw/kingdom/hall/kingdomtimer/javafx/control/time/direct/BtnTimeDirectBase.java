@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.javafx.control.button.timedirect;
+package jw.kingdom.hall.kingdomtimer.javafx.control.time.direct;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;

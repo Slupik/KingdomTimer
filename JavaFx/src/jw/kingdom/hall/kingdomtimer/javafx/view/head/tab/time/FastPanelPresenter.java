@@ -6,7 +6,7 @@ import javafx.scene.control.ButtonType;
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
 import jw.kingdom.hall.kingdomtimer.entity.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
-import jw.kingdom.hall.kingdomtimer.javafx.control.button.timedirect.BtnTimeDirectForPanel;
+import jw.kingdom.hall.kingdomtimer.javafx.control.time.direct.BtnTimeDirectForPanel;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 
 import java.util.Optional;

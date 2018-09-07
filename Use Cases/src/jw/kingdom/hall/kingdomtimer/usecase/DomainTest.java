@@ -3,7 +3,7 @@ package jw.kingdom.hall.kingdomtimer.usecase;
 import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownControllerImpl;
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
 import jw.kingdom.hall.kingdomtimer.entity.task.TaskBean;
-import jw.kingdom.hall.kingdomtimer.entity.time.TimeDisplay;
+import jw.kingdom.hall.kingdomtimer.entity.time.countdown.TimeDisplay;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
 
 /**
@@ -25,6 +25,21 @@ public class DomainTest {
             @Override
             public void display(int startTime, int time) {
                 System.out.println(time);
+            }
+
+            @Override
+            public void setLightBackground(boolean lightBackground) {
+
+            }
+
+            @Override
+            public void resetColorToLast() {
+
+            }
+
+            @Override
+            public void reset() {
+
             }
         });
 
