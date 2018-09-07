@@ -11,4 +11,9 @@ public class ScheduleTranslator implements jw.kingdom.hall.kingdomtimer.download
     public String circuitLecture() {
         return "Przemówienie podróżującego";
     }
+
+    @Override
+    public String evaluate() {
+        return "Ocena";
+    }
 }

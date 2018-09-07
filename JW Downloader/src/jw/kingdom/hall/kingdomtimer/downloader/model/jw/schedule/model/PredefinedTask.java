@@ -10,6 +10,7 @@ import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTask;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTranslator;
 
 import static jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTaskType.CIRCUIT;
+import static jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTaskType.MINISTRY;
 
 public class PredefinedTask {
     static ScheduleTask getCircuitLecture(ScheduleTranslator translator) {
@@ -18,6 +19,15 @@ public class PredefinedTask {
         task.setTime(30*60);
         task.setActiveBuzzer(false);
         task.setType(CIRCUIT);
+        return task;
+    }
+
+    static ScheduleTask getTaskToEvaluate(ScheduleTranslator translator, int seconds) {
+        ScheduleTask task = new ScheduleTask();
+        task.setName(translator.evaluate());
+        task.setTime(seconds);
+        task.setActiveBuzzer(false);
+        task.setType(MINISTRY);
         return task;
     }
 }

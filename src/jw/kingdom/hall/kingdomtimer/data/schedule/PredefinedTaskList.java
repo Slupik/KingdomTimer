@@ -6,6 +6,7 @@
 
 package jw.kingdom.hall.kingdomtimer.data.schedule;
 
+import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleDownloader;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleDownloaderInputBean;
@@ -26,6 +27,7 @@ public class PredefinedTaskList {
         data.setCircuitVisit(circuit);
         data.setLangCode("pl");
         data.setTranslator(new ScheduleTranslator());
+        data.setTimeToEvaluate(AppConfig.getInstance().getTimeToEvaluate());
         downloader.downloadWeek(data, tasks -> {
             List<MeetingTask> list = new ArrayList<>();
             for(ScheduleTask scheduleTask:tasks) {

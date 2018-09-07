@@ -8,4 +8,6 @@ package jw.kingdom.hall.kingdomtimer.downloader.entity;
 
 public interface ScheduleTranslator {
     String circuitLecture();
+
+    String evaluate();
 }

@@ -37,5 +37,7 @@ public interface ScheduleDownloader {
         String getDestUrl();
 
         ScheduleTranslator getTranslator();
+
+        int getTimeToEvaluate();
     }
 }

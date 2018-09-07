@@ -128,6 +128,12 @@ abstract class ConfigBase implements Config {
     }
 
     @Override
+    public void setTimeToEvaluate(int seconds) {
+        getConfig().setTimeToEvaluate(seconds);
+        autoSave();
+    }
+
+    @Override
     public String getSpeakerScreen() {
         return getConfig().getSpeakerScreen();
     }
@@ -210,5 +216,10 @@ abstract class ConfigBase implements Config {
     @Override
     public String getRawFileNameFinalGroups() {
         return getConfig().getRawFileNameFinalGroups();
+    }
+
+    @Override
+    public int getTimeToEvaluate() {
+        return getConfig().getTimeToEvaluate();
     }
 }

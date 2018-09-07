@@ -11,6 +11,7 @@ public class ScheduleDownloaderInputBean implements ScheduleDownloader.InputData
     private String langCode = "en";
     private String destUrl = "";
     private ScheduleTranslator translator = new DefaultScheduleTranslator();
+    private int timeToEvaluate = -1;
 
     public void setCircuitVisit(boolean circuitVisit) {
         this.circuitVisit = circuitVisit;
@@ -26,6 +27,10 @@ public class ScheduleDownloaderInputBean implements ScheduleDownloader.InputData
 
     public void setTranslator(ScheduleTranslator translator) {
         this.translator = translator;
+    }
+
+    public void setTimeToEvaluate(int seconds) {
+        this.timeToEvaluate = seconds;
     }
 
     @Override
@@ -46,6 +51,11 @@ public class ScheduleDownloaderInputBean implements ScheduleDownloader.InputData
     @Override
     public ScheduleTranslator getTranslator() {
         return translator;
+    }
+
+    @Override
+    public int getTimeToEvaluate() {
+        return timeToEvaluate;
     }
 
 }

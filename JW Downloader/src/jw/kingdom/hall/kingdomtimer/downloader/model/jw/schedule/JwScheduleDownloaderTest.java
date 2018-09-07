@@ -31,7 +31,7 @@ public class JwScheduleDownloaderTest {
 
                 @Override
                 public String getLangCode() {
-                    return "ru";
+                    return "pl";
                 }
 
                 @Override
@@ -42,6 +42,11 @@ public class JwScheduleDownloaderTest {
                 @Override
                 public ScheduleTranslator getTranslator() {
                     return new DefaultScheduleTranslator();
+                }
+
+                @Override
+                public int getTimeToEvaluate() {
+                    return 60;
                 }
             };
             new JwScheduleDownloader().downloadWeek(data, tasks -> {

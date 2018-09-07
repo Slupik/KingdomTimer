@@ -27,8 +27,8 @@ class Downloader {
         Element partWithSchedule = doc.getElementsByClass("bodyTxt").get(1);
 
         list.addAll(getOpeningComments(partWithSchedule));
-        list.addAll(getFromTreasures(partWithSchedule));
-        list.addAll(getFromMinistry(partWithSchedule));
+        list.addAll(getFromTreasures(partWithSchedule, data));
+        list.addAll(getFromMinistry(partWithSchedule, data));
         list.addAll(getFromLiving(data, partWithSchedule));
 
         return list;
@@ -44,7 +44,7 @@ class Downloader {
         return list;
     }
 
-    private List<ScheduleTask> getFromTreasures(Element element) {
+    private List<ScheduleTask> getFromTreasures(Element element, ScheduleDownloader.InputData data) {
         Element treasures = element.getElementById("section2");
         List<ScheduleTask> list = getTasksFromElement(treasures);
         for(ScheduleTask task:list) {
@@ -52,16 +52,26 @@ class Downloader {
             task.setActiveBuzzer(false);
         }
         list.get(list.size()-1).setActiveBuzzer(true);
+        if(data.getTimeToEvaluate()>=0) {
+            ScheduleTask evaluation = PredefinedTask.getTaskToEvaluate(data.getTranslator(), data.getTimeToEvaluate());
+            evaluation.setType(ScheduleTaskType.TREASURES);
+            list.add(evaluation);
+        }
         return list;
     }
 
-    private List<ScheduleTask> getFromMinistry(Element element) {
+    private List<ScheduleTask> getFromMinistry(Element element, ScheduleDownloader.InputData data) {
         Element ministry = element.getElementById("section3");
         List<ScheduleTask> list = getTasksFromElement(ministry);
+        List<ScheduleTask> finalList = new ArrayList<>();
         for(ScheduleTask task:list) {
             task.setType(ScheduleTaskType.MINISTRY);
+            finalList.add(task);
+            if(task.isActiveBuzzer() && data.getTimeToEvaluate()>=0) {
+                finalList.add(PredefinedTask.getTaskToEvaluate(data.getTranslator(), data.getTimeToEvaluate()));
+            }
         }
-        return list;
+        return finalList;
     }
 
     private List<ScheduleTask> getFromLiving(ScheduleDownloader.InputData data, Element element) {
