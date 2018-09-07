@@ -26,6 +26,7 @@ public class ScheduleFxBean extends ObservableListWrapper<TaskFxBean> {
                 return;
             }
             ignoreChanges = true;
+            //TODO make this more efficient
             clear();
             addAll(getAsFxList(list));
             ignoreChanges = false;
@@ -35,22 +36,43 @@ public class ScheduleFxBean extends ObservableListWrapper<TaskFxBean> {
                 return;
             }
             ignoreChanges = true;
-            while (c.next()) {
-                if (c.wasRemoved()) {
-                    List<? extends TaskFxBean> removed = c.getRemoved();
-                    for(Task task:removed) {
-                        controller.removeTask(task);
-                    }
-                }
-                if (c.wasAdded()) {
-                    List<? extends TaskFxBean> added = c.getAddedSubList();
-                    for(TaskFxBean task:added) {
-                        controller.addTask(task.getAsObservable());
-                    }
-                }
-            }
+            controller.setTasks(getThisAsObservableList());
+            //TODO repair code below
+//            while (c.next()) {
+//                if (c.wasRemoved()) {
+//                    System.out.println("wasRemoved");
+//                    List<? extends TaskFxBean> removed = c.getRemoved();
+//                    for(Task task:removed) {
+//                        controller.removeTask(task);
+//                    }
+//                }
+//                if (c.wasAdded()) {
+//                    System.out.println("wasAdded");
+//                    List<? extends TaskFxBean> added = c.getAddedSubList();
+//                    for(TaskFxBean task:added) {
+//                        controller.addTask(task.getAsObservable());
+//                    }
+//                }
+//                if(c.wasPermutated()) {
+//                    System.out.println("wasPermutated");
+//                }
+//                if(c.wasReplaced()) {
+//                    System.out.println("wasReplaced");
+//                }
+//                if(c.wasUpdated()) {
+//                    System.out.println("wasUpdated");
+//                }
+//            }
             ignoreChanges = false;
         });
+    }
+
+    private List<ObservableTask> getThisAsObservableList() {
+        List<ObservableTask> list = new ArrayList<>();
+        for(TaskFxBean task:this) {
+            list.add(task.getAsObservable());
+        }
+        return list;
     }
 
     private static List<TaskFxBean> getAsFxList(List<ObservableTask> tasks) {
