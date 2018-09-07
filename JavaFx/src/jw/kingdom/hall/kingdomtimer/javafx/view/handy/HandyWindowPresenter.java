@@ -5,6 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
+import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
+import jw.kingdom.hall.kingdomtimer.javafx.control.sps.SpsControllerForTime;
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.display.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.screen.ControlledScreenBase;
 
@@ -14,7 +17,7 @@ import java.util.ResourceBundle;
 /**
  * All rights reserved & copyright ©
  */
-public class HandyWindowPresenter extends ControlledScreenBase {
+public class HandyWindowPresenter extends ControlledScreenBase implements SpsControllerForTime.Data {
 
     @FXML
     private HBox mainContainer;
@@ -39,6 +42,7 @@ public class HandyWindowPresenter extends ControlledScreenBase {
     protected void onStart() {
         super.onStart();
         getWindowData().getCountdown().addTimeDisplay(new TimeDisplayController(lblTime));
+        hbTimeControlsContainer.getChildren().add(new SpsControllerForTime(this).getView());
     }
 
     private void setupZoom() {
@@ -65,5 +69,15 @@ public class HandyWindowPresenter extends ControlledScreenBase {
     @Override
     protected Region getMainContainer() {
         return mainContainer;
+    }
+
+    @Override
+    public ScheduleController getSchedule() {
+        return getWindowData().getSchedule();
+    }
+
+    @Override
+    public CountdownController getCountdown() {
+        return getWindowData().getCountdown();
     }
 }
