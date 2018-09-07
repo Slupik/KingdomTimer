@@ -1,9 +1,11 @@
-package jw.kingdom.hall.kingdomtimer.javafx.entity.view;
+package jw.kingdom.hall.kingdomtimer.javafx.entity.view.screen;
 
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Region;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.AppWindow;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.container.WindowsContainer;
 import jw.kingdom.hall.kingdomtimer.javafx.loader.ViewManager;
 import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
 
@@ -17,6 +19,7 @@ public abstract class ControlledScreenBase implements ControlledScreen, Initiali
     protected AppWindow window;
     protected ViewManager viewManager;
     protected ScheduleController schedule;
+    protected WindowsContainer container;
     protected Config config;
 
     @Override
@@ -33,6 +36,12 @@ public abstract class ControlledScreenBase implements ControlledScreen, Initiali
     }
 
     @Override
+    public void setWindowsContainer(WindowsContainer container) {
+        this.container = container;
+        runSetup();
+    }
+
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
         onPreCreate();
         onCreate(location, resources);
@@ -40,7 +49,7 @@ public abstract class ControlledScreenBase implements ControlledScreen, Initiali
     }
 
     private void runSetup() {
-        if(window!=null && viewManager!=null && schedule!=null && config!=null) {
+        if(window!=null && viewManager!=null && schedule!=null && config!=null && container!=null) {
             Platform.runLater(this::setup);
         }
     }
@@ -88,6 +97,7 @@ public abstract class ControlledScreenBase implements ControlledScreen, Initiali
     @Override
     public void setConfig(Config config) {
         this.config = config;
+        runSetup();
     }
 
     @Override
@@ -96,7 +106,13 @@ public abstract class ControlledScreenBase implements ControlledScreen, Initiali
     }
 
     @Override
+    public WindowsContainer getWindowsContainer() {
+        return container;
+    }
+
+    @Override
     public void setSchedule(ScheduleController schedule) {
         this.schedule = schedule;
+        runSetup();
     }
 }

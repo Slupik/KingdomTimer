@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import jw.kingdom.hall.kingdomtimer.javafx.entity.view.ControlledScreenBase;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.view.screen.ControlledScreenBase;
 
 import java.net.URL;
 import java.util.ResourceBundle;

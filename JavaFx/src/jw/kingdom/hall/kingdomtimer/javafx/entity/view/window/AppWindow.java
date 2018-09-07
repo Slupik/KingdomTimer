@@ -1,11 +1,9 @@
-package jw.kingdom.hall.kingdomtimer.javafx.entity.view;
+package jw.kingdom.hall.kingdomtimer.javafx.entity.view.window;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
-import jw.kingdom.hall.kingdomtimer.javafx.App;
 import jw.kingdom.hall.kingdomtimer.javafx.loader.DefaultViewManager;
 import jw.kingdom.hall.kingdomtimer.javafx.loader.ViewManager;
 import jw.kingdom.hall.kingdomtimer.javafx.view.WindowSettings;
