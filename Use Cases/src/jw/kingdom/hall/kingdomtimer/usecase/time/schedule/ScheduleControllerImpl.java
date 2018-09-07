@@ -61,6 +61,13 @@ public class ScheduleControllerImpl implements ScheduleController {
         listeners.remove(listener);
     }
 
+    @Override
+    public Task bringOutFirstTask() {
+        Task task = list.get(0);
+        removeTask(task);
+        return task;
+    }
+
     private void notifyListenerAboutListChange() {
         for(Listener listener:listeners) {
             listener.onListChange(this.list);

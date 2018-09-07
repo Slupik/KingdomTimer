@@ -18,6 +18,8 @@ public interface ScheduleController {
     void addListener(Listener listener);
     void removeListener(Listener listener);
 
+    Task bringOutFirstTask();
+
     interface Listener {
         void onListChange(List<ObservableTask> list);
     }
