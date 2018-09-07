@@ -1,13 +1,12 @@
 package jw.kingdom.hall.kingdomtimer.javafx.entity.task;
 
-import javafx.beans.Observable;
 import javafx.beans.property.*;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
-import jw.kingdom.hall.kingdomtimer.model.task.ObservableTask;
-import jw.kingdom.hall.kingdomtimer.model.task.Task;
-import jw.kingdom.hall.kingdomtimer.model.task.TaskBean;
-import jw.kingdom.hall.kingdomtimer.model.task.TaskType;
-import jw.kingdom.hall.kingdomtimer.model.utils.Randomizer;
+import jw.kingdom.hall.kingdomtimer.entity.task.ObservableTask;
+import jw.kingdom.hall.kingdomtimer.entity.task.Task;
+import jw.kingdom.hall.kingdomtimer.entity.task.TaskBean;
+import jw.kingdom.hall.kingdomtimer.entity.task.TaskType;
+import jw.kingdom.hall.kingdomtimer.entity.utils.Randomizer;
 
 /**
  * All rights reserved & copyright ©

@@ -2,7 +2,7 @@ package jw.kingdom.hall.kingdomtimer.javafx.view.head.tab;
 
 import javafx.fxml.Initializable;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
-import jw.kingdom.hall.kingdomtimer.model.time.schedule.ScheduleController;
+import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
 
 import java.net.URL;
 import java.util.ResourceBundle;

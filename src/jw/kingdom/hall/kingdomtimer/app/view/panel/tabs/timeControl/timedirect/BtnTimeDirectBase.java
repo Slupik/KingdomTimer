@@ -2,7 +2,7 @@ package jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.timeControl.timedirect;
 
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import jw.kingdom.hall.kingdomtimer.model.utils.Randomizer;
+import jw.kingdom.hall.kingdomtimer.entity.utils.Randomizer;
 
 import java.util.ArrayList;
 import java.util.List;

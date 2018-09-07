@@ -1,6 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.data.config;
 
-import jw.kingdom.hall.kingdomtimer.model.utils.OSValidator;
+import jw.kingdom.hall.kingdomtimer.entity.utils.OSValidator;
 
 import java.io.File;
 

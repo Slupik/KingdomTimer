@@ -3,9 +3,9 @@ package jw.kingdom.hall.kingdomtimer.javafx.entity.schedule;
 import com.sun.javafx.collections.ObservableListWrapper;
 import javafx.collections.ListChangeListener;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.task.TaskFxBean;
-import jw.kingdom.hall.kingdomtimer.model.task.ObservableTask;
-import jw.kingdom.hall.kingdomtimer.model.task.Task;
-import jw.kingdom.hall.kingdomtimer.model.time.schedule.ScheduleController;
+import jw.kingdom.hall.kingdomtimer.entity.task.ObservableTask;
+import jw.kingdom.hall.kingdomtimer.entity.task.Task;
+import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
 
 import java.util.ArrayList;
 import java.util.List;

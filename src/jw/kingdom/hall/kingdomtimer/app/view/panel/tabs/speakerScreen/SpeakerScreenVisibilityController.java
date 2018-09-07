@@ -4,7 +4,7 @@ import javafx.scene.control.CheckBox;
 import jw.kingdom.hall.kingdomtimer.app.view.viewer.ViewerWindow;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
-import jw.kingdom.hall.kingdomtimer.model.utils.Randomizer;
+import jw.kingdom.hall.kingdomtimer.entity.utils.Randomizer;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".

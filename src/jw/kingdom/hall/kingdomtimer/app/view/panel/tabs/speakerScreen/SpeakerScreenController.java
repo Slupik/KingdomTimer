@@ -18,7 +18,7 @@ import jw.kingdom.hall.kingdomtimer.domain.time.countdown.gleam.GlobalGleamContr
 import jw.kingdom.hall.kingdomtimer.javafx.custom.AdvancedTextField;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MultimediaPreviewer;
 import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
-import jw.kingdom.hall.kingdomtimer.model.utils.Randomizer;
+import jw.kingdom.hall.kingdomtimer.entity.utils.Randomizer;
 import jw.kingdom.hall.kingdomtimer.app.view.viewer.ViewerWindow;
 import org.jetbrains.annotations.Nullable;
 

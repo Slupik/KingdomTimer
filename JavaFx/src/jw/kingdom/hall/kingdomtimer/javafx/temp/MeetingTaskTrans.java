@@ -1,6 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.javafx.temp;
 
-import jw.kingdom.hall.kingdomtimer.model.task.TaskType;
+import jw.kingdom.hall.kingdomtimer.entity.task.TaskType;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".

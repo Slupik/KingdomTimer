@@ -7,9 +7,9 @@ import jw.kingdom.hall.kingdomtimer.javafx.entity.view.WindowInput;
 import jw.kingdom.hall.kingdomtimer.javafx.view.handy.HandyWindow;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.HeadWindow;
 import jw.kingdom.hall.kingdomtimer.javafx.view.speaker.SpeakerWindow;
-import jw.kingdom.hall.kingdomtimer.model.task.ObservableTask;
-import jw.kingdom.hall.kingdomtimer.model.task.TaskBean;
-import jw.kingdom.hall.kingdomtimer.model.time.schedule.ScheduleController;
+import jw.kingdom.hall.kingdomtimer.entity.task.ObservableTask;
+import jw.kingdom.hall.kingdomtimer.entity.task.TaskBean;
+import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 
 /**

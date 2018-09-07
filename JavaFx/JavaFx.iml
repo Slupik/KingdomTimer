@@ -9,7 +9,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="CustomViewElements" exported="" />
-    <orderEntry type="module" module-name="Model" exported="" />
+    <orderEntry type="module" module-name="Entity" exported="" />
     <orderEntry type="library" name="com.google.guava:guava:18.0" level="project" />
     <orderEntry type="module" module-name="Config" />
     <orderEntry type="module" module-name="Recorder" />

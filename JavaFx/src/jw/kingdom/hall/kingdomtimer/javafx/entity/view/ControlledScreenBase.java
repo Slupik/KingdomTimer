@@ -5,7 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.Region;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.javafx.loader.ViewManager;
-import jw.kingdom.hall.kingdomtimer.model.time.schedule.ScheduleController;
+import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
 
 import java.net.URL;
 import java.util.ResourceBundle;

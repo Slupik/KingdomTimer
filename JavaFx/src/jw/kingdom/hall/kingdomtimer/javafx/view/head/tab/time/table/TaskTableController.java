@@ -1,7 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.time.table;
 
 import javafx.beans.binding.Bindings;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -15,8 +14,8 @@ import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.schedule.ScheduleFxBean;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.task.TaskFxBean;
 import jw.kingdom.hall.kingdomtimer.javafx.temp.MeetingTaskTrans;
-import jw.kingdom.hall.kingdomtimer.model.task.TaskType;
-import jw.kingdom.hall.kingdomtimer.model.time.schedule.ScheduleController;
+import jw.kingdom.hall.kingdomtimer.entity.task.TaskType;
+import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".

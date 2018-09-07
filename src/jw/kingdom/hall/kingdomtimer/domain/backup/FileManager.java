@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.domain.backup;
 
 import jw.kingdom.hall.kingdomtimer.data.UniqueFileUtils;
-import jw.kingdom.hall.kingdomtimer.model.utils.OSValidator;
+import jw.kingdom.hall.kingdomtimer.entity.utils.OSValidator;
 
 import java.io.File;
 import java.io.IOException;

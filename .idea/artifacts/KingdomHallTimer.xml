@@ -46,8 +46,8 @@
         <element id="module-output" name="JavaFx" />
         <element id="module-output" name="Monitor" />
       </element>
-      <element id="module-output" name="Domain" />
-      <element id="module-output" name="Model" />
+      <element id="module-output" name="Use Cases" />
+      <element id="module-output" name="Entity" />
     </root>
   </artifact>
 </component>

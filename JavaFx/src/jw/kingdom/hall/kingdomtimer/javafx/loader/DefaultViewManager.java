@@ -12,7 +12,7 @@ import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.AppWindow;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.ControlledScreen;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.WindowInput;
-import jw.kingdom.hall.kingdomtimer.model.time.schedule.ScheduleController;
+import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
 
 import java.io.IOException;
 import java.util.HashMap;

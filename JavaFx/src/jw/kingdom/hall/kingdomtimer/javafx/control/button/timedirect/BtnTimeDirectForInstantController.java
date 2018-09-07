@@ -2,9 +2,9 @@ package jw.kingdom.hall.kingdomtimer.javafx.control.button.timedirect;
 
 import javafx.scene.control.Button;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
-import jw.kingdom.hall.kingdomtimer.model.task.ObservableTask;
-import jw.kingdom.hall.kingdomtimer.model.time.schedule.ScheduleController;
-import jw.kingdom.hall.kingdomtimer.model.time.schedule.ScheduleListener;
+import jw.kingdom.hall.kingdomtimer.entity.task.ObservableTask;
+import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
+import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleListener;
 
 import java.util.List;
 
