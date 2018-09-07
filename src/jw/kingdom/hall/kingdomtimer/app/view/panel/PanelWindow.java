@@ -7,7 +7,7 @@ import jw.kingdom.hall.kingdomtimer.app.CrashMaker;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.Screens;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.StageWindow;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowController;
-import jw.kingdom.hall.kingdomtimer.javafx.window.WindowSettings;
+import jw.kingdom.hall.kingdomtimer.javafx.view.WindowSettings;
 import jw.kingdom.hall.kingdomtimer.domain.backup.BackupManager;
 
 /**

@@ -5,6 +5,8 @@
 package jw.kingdom.hall.kingdomtimer.model.task;
 
 public interface Task {
+    String getID();
+
     String getName();
     void setName(String name);
 
@@ -16,6 +18,9 @@ public interface Task {
 
     boolean isStudentTalk();
     void setStudentTalk(boolean studentTalk);
+
+    boolean isUseBuzzer();
+    void setUseBuzzer(boolean useBuzzer);
 
     TaskType getType();
     void setType(TaskType type);

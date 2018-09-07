@@ -1,21 +1,22 @@
-package jw.kingdom.hall.kingdomtimer.javafx.window.speaker;
+package jw.kingdom.hall.kingdomtimer.javafx.view.head;
 
 import javafx.stage.Stage;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.bussines.BackupController;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.AppWindow;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.view.WindowInput;
 
-import static jw.kingdom.hall.kingdomtimer.javafx.window.speaker.SpeakerWindow.Screens.*;
+import static jw.kingdom.hall.kingdomtimer.javafx.view.head.HeadWindow.Screens.*;
 
 /**
  * All rights reserved & copyright ©
  */
-public class SpeakerWindow extends AppWindow {
+public class HeadWindow extends AppWindow {
 
     private final BackupController backup;
 
-    public SpeakerWindow(Stage stage, BackupController backup) {
-        super(stage);
-        this.backup = backup;
+    public HeadWindow(Stage stage, WindowInput input) {
+        super(stage, input);
+        this.backup = input.getBackup();
     }
 
     @Override
@@ -47,7 +48,7 @@ public class SpeakerWindow extends AppWindow {
     }
 
     public enum Screens {
-        MAIN("main", "/layout/window/speaker/main.fxml"),
+        MAIN("main", "/layout/window/head/main.fxml"),
         ;
 
         public final String name;

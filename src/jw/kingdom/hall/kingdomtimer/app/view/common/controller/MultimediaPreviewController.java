@@ -3,7 +3,7 @@ package jw.kingdom.hall.kingdomtimer.app.view.common.controller;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
+import jw.kingdom.hall.kingdomtimer.model.utils.Randomizer;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -8,8 +8,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.util.Duration;
+import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.AppWindow;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.ControlledScreen;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.view.WindowInput;
+import jw.kingdom.hall.kingdomtimer.model.time.schedule.ScheduleController;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -18,8 +21,17 @@ import java.util.HashMap;
  * All rights reserved & copyright ©
  */
 public class DefaultViewManager implements ViewManager {
+
+    private final Config config;
+    private final ScheduleController schedule;
+
     private AppWindow window;
     private HashMap<String, Node> screens = new HashMap<>();
+
+    public DefaultViewManager(WindowInput input) {
+        this.config = input.getConfig();
+        this.schedule = input.getSchedule();
+    }
 
     @Override
     public void setWindow(AppWindow window) {
@@ -42,6 +54,8 @@ public class DefaultViewManager implements ViewManager {
             FXMLLoader myLoader= new FXMLLoader(getClass().getResource(path));
             Parent loadScreen = myLoader.load();
             ControlledScreen myScreenController = myLoader.getController();
+            myScreenController.setConfig(config);
+            myScreenController.setSchedule(schedule);
             myScreenController.setWindow(window);
             myScreenController.setViewManager(this);
 

@@ -4,9 +4,11 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+import jw.kingdom.hall.kingdomtimer.javafx.App;
 import jw.kingdom.hall.kingdomtimer.javafx.loader.DefaultViewManager;
 import jw.kingdom.hall.kingdomtimer.javafx.loader.ViewManager;
-import jw.kingdom.hall.kingdomtimer.javafx.window.WindowSettings;
+import jw.kingdom.hall.kingdomtimer.javafx.view.WindowSettings;
 
 /**
  * All rights reserved & copyright ©
@@ -17,12 +19,12 @@ public abstract class AppWindow extends StackPane {
     protected final Scene scene;
     protected final Group root;
 
-    public AppWindow(Stage stage) {
+    public AppWindow(Stage stage, WindowInput input) {
         this.stage = stage;
         root = new Group();
         scene = new Scene(root);
 
-        viewManager = new DefaultViewManager();
+        viewManager = new DefaultViewManager(input);
         viewManager.setWindow(this);
     }
 

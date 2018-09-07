@@ -17,7 +17,7 @@
   ~ Last modified 31.08.18 21:18
   -->
 
-<HBox fx:id="mainContainer" alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.javafx.window.handy.HandyWindowPresenter">
+<HBox fx:id="mainContainer" alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.javafx.view.handy.HandyWindowPresenter">
    <children>
       <VBox>
          <children>

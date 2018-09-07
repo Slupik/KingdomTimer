@@ -2,7 +2,7 @@ package jw.kingdom.hall.kingdomtimer.domain.model;
 
 import javafx.beans.property.*;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
-import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
+import jw.kingdom.hall.kingdomtimer.model.utils.Randomizer;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".

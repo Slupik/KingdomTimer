@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.javafx.window.handy;
+package jw.kingdom.hall.kingdomtimer.javafx.view.handy;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

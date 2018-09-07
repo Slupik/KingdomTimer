@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.domain.utils;
+package jw.kingdom.hall.kingdomtimer.model.utils;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".

@@ -11,7 +11,7 @@ import jw.kingdom.hall.kingdomtimer.domain.record.voice.DefaultVoiceRecorderList
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
 import jw.kingdom.hall.kingdomtimer.domain.time.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.time.schedule.MeetingScheduleListener;
-import jw.kingdom.hall.kingdomtimer.domain.utils.FileUtils;
+import jw.kingdom.hall.kingdomtimer.model.utils.FileUtils;
 
 import java.io.File;
 import java.util.ArrayList;

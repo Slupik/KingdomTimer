@@ -12,7 +12,7 @@ import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowController;
 import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorObservableList;
-import jw.kingdom.hall.kingdomtimer.javafx.window.WindowSettings;
+import jw.kingdom.hall.kingdomtimer.javafx.view.WindowSettings;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".

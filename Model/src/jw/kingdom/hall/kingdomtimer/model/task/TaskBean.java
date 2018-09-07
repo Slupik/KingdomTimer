@@ -5,18 +5,44 @@
 package jw.kingdom.hall.kingdomtimer.model.task;
 
 import jw.kingdom.hall.kingdomtimer.model.observable.field.ObservableField;
+import jw.kingdom.hall.kingdomtimer.model.utils.Randomizer;
 
 @SuppressWarnings("WeakerAccess")
 public class TaskBean implements ObservableTask {
+    private final String ID;
     private final ObservableField<String> name = new ObservableField<>("");
     private final ObservableField<Integer> seconds = new ObservableField<>(0);
     private final ObservableField<Boolean> directDown = new ObservableField<>(true);
-    private final ObservableField<TaskType> type = new ObservableField<>(TaskType.UNKNOWN);
     private final ObservableField<Boolean> studentTalk = new ObservableField<>(false);
+    private final ObservableField<Boolean> useBuzzer = new ObservableField<>(false);
+    private final ObservableField<TaskType> type = new ObservableField<>(TaskType.UNKNOWN);
+
+    public TaskBean(){
+        ID = Randomizer.randomStandardString(10);
+    }
+
+    public TaskBean(Task task){
+        ID = task.getID();
+        loadTask(task);
+    }
+
+    private void loadTask(Task task) {
+        setUseBuzzer(task.isUseBuzzer());
+        setDirectDown(task.isDirectDown());
+        setSeconds(task.getSeconds());
+        setType(task.getType());
+        setName(task.getName());
+        setStudentTalk(task.isStudentTalk());
+    }
 
     @Override
     public ObservableField<String> nameProperty() {
         return name;
+    }
+
+    @Override
+    public String getID() {
+        return ID;
     }
 
     @Override
@@ -72,6 +98,21 @@ public class TaskBean implements ObservableTask {
     @Override
     public void setStudentTalk(boolean studentTalk) {
         this.studentTalk.setValue(studentTalk);
+    }
+
+    @Override
+    public ObservableField<Boolean> useBuzzerProperty() {
+        return useBuzzer;
+    }
+
+    @Override
+    public boolean isUseBuzzer() {
+        return useBuzzer.getValue();
+    }
+
+    @Override
+    public void setUseBuzzer(boolean useBuzzer) {
+        this.useBuzzer.setValue(useBuzzer);
     }
 
     @Override

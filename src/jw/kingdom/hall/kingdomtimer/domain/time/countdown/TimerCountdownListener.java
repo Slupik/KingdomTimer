@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.domain.time.countdown;
 
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
+import jw.kingdom.hall.kingdomtimer.model.utils.Randomizer;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".

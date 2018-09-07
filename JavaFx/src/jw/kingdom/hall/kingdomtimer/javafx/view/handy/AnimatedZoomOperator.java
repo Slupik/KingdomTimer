@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.javafx.window.handy;
+package jw.kingdom.hall.kingdomtimer.javafx.view.handy;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;

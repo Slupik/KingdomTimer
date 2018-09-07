@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.domain.utils;
+package jw.kingdom.hall.kingdomtimer.model.utils;
 
 import java.io.*;
 import java.nio.charset.Charset;

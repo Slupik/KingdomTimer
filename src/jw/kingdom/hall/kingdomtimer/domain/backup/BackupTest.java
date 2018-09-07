@@ -18,7 +18,7 @@ public class BackupTest extends Application {
     public void start(Stage primaryStage) throws Exception {
         MeetingTask task = new MeetingTask();
         task.setType(MeetingTask.Type.LIVING);
-        task.setName("Cool name");
+        task.setName("Cool NAME");
 
         OfflineMeetingBean bean = new OfflineMeetingBean(task);
         String parsed = new Gson().toJson(bean);

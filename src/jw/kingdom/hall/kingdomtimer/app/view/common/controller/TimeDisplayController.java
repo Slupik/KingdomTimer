@@ -4,7 +4,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Paint;
 import jw.kingdom.hall.kingdomtimer.domain.time.countdown.TimerColor;
-import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
+import jw.kingdom.hall.kingdomtimer.model.utils.Randomizer;
 
 import java.util.ArrayList;
 import java.util.List;

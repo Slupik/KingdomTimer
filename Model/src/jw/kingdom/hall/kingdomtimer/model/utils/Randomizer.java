@@ -3,7 +3,7 @@
  * All rights reserved. No part of this application may be reproduced or be part of other software, without the prior written permission of the publisher. For permission requests, write to the author(WitasikSebastian@gmail.com).
  */
 
-package jw.kingdom.hall.kingdomtimer.domain.utils;
+package jw.kingdom.hall.kingdomtimer.model.utils;
 
 import java.security.SecureRandom;
 import java.util.concurrent.ThreadLocalRandom;

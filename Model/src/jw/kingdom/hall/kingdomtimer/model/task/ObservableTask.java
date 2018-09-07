@@ -11,5 +11,6 @@ public interface ObservableTask extends Task {
     ObservableField<Integer> secondsProperty();
     ObservableField<Boolean> directDownProperty();
     ObservableField<Boolean> studentTalkProperty();
+    ObservableField<Boolean> useBuzzerProperty();
     ObservableField<TaskType> typeProperty();
 }

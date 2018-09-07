@@ -1,6 +1,5 @@
 package jw.kingdom.hall.kingdomtimer.data.config;
 
-import jw.kingdom.hall.kingdomtimer.config.ConfigUtils;
 import jw.kingdom.hall.kingdomtimer.config.json.JsonConfig;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.config.model.ConfigWriteable;
@@ -11,7 +10,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
