@@ -5,9 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
+import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
 import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
+import jw.kingdom.hall.kingdomtimer.javafx.control.button.timedirect.BtnTimeDirectForInstantController;
+import jw.kingdom.hall.kingdomtimer.javafx.control.button.timedirect.BtnTimeDirectForPanel;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
-import jw.kingdom.hall.kingdomtimer.javafx.entity.bussines.BackupController;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.task.TaskFxBean;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.TabPresenter;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.time.table.TaskTableController;
@@ -18,7 +20,7 @@ import java.util.ResourceBundle;
 /**
  * All rights reserved & copyright ©
  */
-public class TabTimePresenter extends TabPresenter implements TaskTableController.Data {
+public class TabTimePresenter extends TabPresenter implements TaskTableController.Data, FastPanelPresenter.Data {
 
     @FXML
     private Label lblTime;
@@ -77,8 +79,24 @@ public class TabTimePresenter extends TabPresenter implements TaskTableControlle
     @FXML
     private TableColumn<TaskFxBean, String> tcType;
 
+    private FastPanelPresenter fastPanel;
+    private BtnTimeDirectForPanel timeDirectController;
+    private BtnTimeDirectForInstantController instantDirectController;
+    private BtnTimeDirectForPanel fastDirectController;
+
     @Override
     public void onStart() {
+        fastPanel = new FastPanelPresenter(this);
+
+        timeDirectController = new BtnTimeDirectForPanel(getConfig(), btnCountdownDirect);
+        timeDirectController.setMedium(false);
+
+        fastDirectController = new BtnTimeDirectForPanel(getConfig(), btnFastDirect);
+        fastDirectController.setMedium(false);
+
+        instantDirectController = new BtnTimeDirectForInstantController(getSchedule(), getConfig(), btnInstantDirect);
+        instantDirectController.setMedium(true);
+
         new TaskTableController(this);
         new WidgetVisibilityController(btnWidgetVisibility, getWindowsContainer());
         new BackupPresenter(getWindowData().getBackup());
@@ -90,15 +108,15 @@ public class TabTimePresenter extends TabPresenter implements TaskTableControlle
     }
 
     public void handleLoadTimeAction(ActionEvent actionEvent) {
-
+        fastPanel.handleLoadTime();
     }
 
     public void handleAddTime(ActionEvent actionEvent) {
-
+        fastPanel.handleAddTime();
     }
 
     public void handleRemoveTime(ActionEvent actionEvent) {
-
+        fastPanel.handleRemoveTime();
     }
 
     public void handleAddTask(ActionEvent actionEvent) {
@@ -156,5 +174,20 @@ public class TabTimePresenter extends TabPresenter implements TaskTableControlle
     @Override
     public TableColumn<TaskFxBean, String> getTcType() {
         return tcType;
+    }
+
+    @Override
+    public TimeField getFastTimeField() {
+        return tfFastTime;
+    }
+
+    @Override
+    public CountdownController getCountdown() {
+        return getWindowData().getCountdown();
+    }
+
+    @Override
+    public BtnTimeDirectForPanel getFastDirectController() {
+        return fastDirectController;
     }
 }
