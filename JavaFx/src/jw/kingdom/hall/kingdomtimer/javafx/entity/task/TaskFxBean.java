@@ -1,51 +1,86 @@
 package jw.kingdom.hall.kingdomtimer.javafx.entity.task;
 
 import javafx.beans.property.*;
-import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 import jw.kingdom.hall.kingdomtimer.entity.task.ObservableTask;
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
 import jw.kingdom.hall.kingdomtimer.entity.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.entity.task.TaskType;
 import jw.kingdom.hall.kingdomtimer.entity.utils.Randomizer;
+import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 
 /**
  * All rights reserved & copyright ©
  */
 public class TaskFxBean implements Task {
 
-    private final ObservableTask observable;
+    private final ObservableTask observableTask;
+    private final Task normalTask;
     private final String ID;
 
     private BooleanProperty useBuzzer = new SimpleBooleanProperty(false);
     private BooleanProperty studentTalk = new SimpleBooleanProperty(false);
     private StringProperty name = new SimpleStringProperty("???");
     private BooleanProperty countdownDown = new SimpleBooleanProperty(true);
+    private IntegerProperty time = new SimpleIntegerProperty(0);
     private ObjectProperty<TaskType> type = new SimpleObjectProperty<>(TaskType.UNKNOWN);
     //Used by javafx in TableView
     private TimeField tfTime = new TimeField();
 
     public TaskFxBean(){
         ID = Randomizer.randomStandardString(10);
-        observable = generateObservable();
+        observableTask = generateObservable();
+        normalTask = observableTask;
+        bindObservableTask();
     }
 
     public TaskFxBean(ObservableTask task) {
         ID = Randomizer.randomStandardString(10);
-        observable = task;
+        observableTask = task;
+        normalTask = task;
         loadTask(task);
-
-        task.directDownProperty().addListener((observableObject, oldValue, newValue) -> setDirectDown(newValue));
-        task.nameProperty().addListener((observableObject, oldValue, newValue) -> setName(newValue));
-        task.secondsProperty().addListener((observableObject, oldValue, newValue) -> setTimeInSeconds(newValue));
-        task.typeProperty().addListener((observableObject, oldValue, newValue) -> setType(newValue));
-        task.useBuzzerProperty().addListener((observableObject, oldValue, newValue) -> setUseBuzzer(newValue));
+        bindObservableTask();
     }
 
     public TaskFxBean(Task task) {
         ID = task.getID();
-        observable = generateObservable();
-
+        normalTask = task;
+        observableTask = generateObservable();
         loadTask(task);
+        bindObservableTask();
+    }
+
+    private boolean ignore = false;
+    private void bindObservableTask() {
+        observableTask.directDownProperty().addListener((observableObject, oldValue, newValue) -> {
+            if(ignore) return;
+            ignore = true;
+            setDirectDown(newValue);
+            ignore = false;
+        });
+        observableTask.nameProperty().addListener((observableObject, oldValue, newValue) -> {
+            if(ignore) return;
+            ignore = true;
+            setName(newValue);
+            ignore = false;
+        });
+        observableTask.secondsProperty().addListener((observableObject, oldValue, newValue) -> {
+            if(ignore) return;
+            ignore = true;
+            setTimeInSeconds(newValue);
+            ignore = false;
+        });
+        observableTask.typeProperty().addListener((observableObject, oldValue, newValue) -> {
+            if(ignore) return;
+            ignore = true;
+            setType(newValue);
+            ignore = false;
+        });
+        observableTask.useBuzzerProperty().addListener((observableObject, oldValue, newValue) -> {
+            if(ignore) return;
+            ignore = true;
+            setUseBuzzer(newValue);
+            ignore = false;
+        });
     }
 
     private void loadTask(Task task) {
@@ -58,12 +93,11 @@ public class TaskFxBean implements Task {
     }
 
     private ObservableTask generateObservable() {
-        ObservableTask task = new TaskBean();
-        return task;
+        return new TaskBean(this);
     }
 
     public ObservableTask getAsObservable(){
-        return observable;
+        return observableTask;
     }
 
     public TimeField getTfTime() {
@@ -84,7 +118,7 @@ public class TaskFxBean implements Task {
 
     public void setUseBuzzer(boolean useBuzzer) {
         this.useBuzzer.setValue(useBuzzer);
-        observable.setUseBuzzer(useBuzzer);
+        normalTask.setUseBuzzer(useBuzzer);
     }
 
     public StringProperty nameProperty() {
@@ -104,7 +138,8 @@ public class TaskFxBean implements Task {
     @Override
     public void setName(String name) {
         this.name.setValue(name);
-        observable.setName(name);
+        ignore = true;
+        normalTask.setName(name);
     }
 
     public int getTimeInSeconds() {
@@ -113,7 +148,7 @@ public class TaskFxBean implements Task {
 
     public void setTimeInSeconds(int timeInSeconds) {
         tfTime.setSeconds(timeInSeconds);
-        observable.setSeconds(timeInSeconds);
+        normalTask.setSeconds(timeInSeconds);
     }
 
     public BooleanProperty countdownProperty() {
@@ -126,7 +161,7 @@ public class TaskFxBean implements Task {
 
     public void setCountdownDown(boolean countdownDown) {
         this.countdownDown.setValue(countdownDown);
-        observable.setDirectDown(countdownDown);
+        normalTask.setDirectDown(countdownDown);
     }
 
     @Override
@@ -141,7 +176,7 @@ public class TaskFxBean implements Task {
     @Override
     public void setType(TaskType type) {
         this.type.set(type);
-        observable.setType(type);
+        normalTask.setType(type);
     }
 
     @Override
@@ -176,6 +211,6 @@ public class TaskFxBean implements Task {
     @Override
     public void setStudentTalk(boolean studentTalk) {
         this.studentTalk.setValue(studentTalk);
-        observable.setStudentTalk(studentTalk);
+        normalTask.setStudentTalk(studentTalk);
     }
 }
