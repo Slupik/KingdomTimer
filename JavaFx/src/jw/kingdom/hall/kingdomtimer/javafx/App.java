@@ -2,6 +2,7 @@ package jw.kingdom.hall.kingdomtimer.javafx;
 
 import javafx.stage.Stage;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
+import jw.kingdom.hall.kingdomtimer.entity.time.buzzer.BuzzerPlayer;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.bussines.BackupController;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.AppWindow;
@@ -34,6 +35,7 @@ public class App {
 
     public void start(Stage primaryStage) throws Exception {
         initWindows(primaryStage);
+        initBuzzer();
 
         new Thread(()->{
             try {
@@ -43,6 +45,10 @@ public class App {
             }
             getWindowInput().getSchedule().addTask(getTestsTask());
         }).start();
+    }
+
+    private void initBuzzer() {
+
     }
 
     private void initWindows(Stage primaryStage) {
@@ -66,6 +72,7 @@ public class App {
         TaskBean task = new TaskBean();
         task.setName("Example of a simple task");
         task.setSeconds(120);
+        task.setUseBuzzer(true);
         return task;
     }
 
@@ -84,6 +91,11 @@ public class App {
             @Override
             public CountdownController getCountdown() {
                 return input.getCountdown();
+            }
+
+            @Override
+            public BuzzerPlayer getBuzzer() {
+                return input.getBuzzer();
             }
 
             @Override
@@ -109,5 +121,6 @@ public class App {
         Recorder getRecorder();
         ScheduleController getSchedule();
         CountdownController getCountdown();
+        BuzzerPlayer getBuzzer();
     }
 }

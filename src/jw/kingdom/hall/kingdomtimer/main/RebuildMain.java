@@ -4,7 +4,10 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
+import jw.kingdom.hall.kingdomtimer.entity.time.buzzer.BuzzerController;
+import jw.kingdom.hall.kingdomtimer.entity.time.buzzer.BuzzerPlayer;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
+import jw.kingdom.hall.kingdomtimer.usecase.time.buzzer.BuzzerControllerImpl;
 import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownControllerImpl;
 import jw.kingdom.hall.kingdomtimer.usecase.time.schedule.ScheduleControllerImpl;
 import jw.kingdom.hall.kingdomtimer.javafx.App;
@@ -28,6 +31,7 @@ public class RebuildMain extends Application {
     public void start(Stage primaryStage) throws Exception {
         ScheduleController schedule = new ScheduleControllerImpl();
         CountdownControllerImpl countdown = new CountdownControllerImpl();
+        new BuzzerControllerImpl(new jw.kingdom.hall.kingdomtimer.main.buzzer.BuzzerPlayer(), countdown);
         Record record = new Record();
         Backup backup = new Backup();
 
@@ -55,6 +59,11 @@ public class RebuildMain extends Application {
             @Override
             public CountdownController getCountdown() {
                 return countdown;
+            }
+
+            @Override
+            public BuzzerPlayer getBuzzer() {
+                return new jw.kingdom.hall.kingdomtimer.main.buzzer.BuzzerPlayer();
             }
         }).start(primaryStage);
     }

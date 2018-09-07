@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
 import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
+import jw.kingdom.hall.kingdomtimer.javafx.control.time.buzzer.BtnBuzzerController;
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.direct.BtnTimeDirectForInstantController;
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.direct.BtnTimeDirectForPanel;
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.display.TimeDisplayController;
@@ -100,6 +101,7 @@ public class TabTimePresenter extends TabPresenter implements TaskTableControlle
 
         getCountdown().addTimeDisplay(new TimeDisplayController(lblTime));
 
+        new BtnBuzzerController(btnBuzzer, getCountdown());
         new TaskTableController(this);
         new WidgetVisibilityController(btnWidgetVisibility, getWindowsContainer());
         new BackupPresenter(getWindowData().getBackup());

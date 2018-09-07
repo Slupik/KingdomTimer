@@ -21,7 +21,6 @@ public class TaskFxBean implements Task {
     private BooleanProperty studentTalk = new SimpleBooleanProperty(false);
     private StringProperty name = new SimpleStringProperty("???");
     private BooleanProperty countdownDown = new SimpleBooleanProperty(true);
-    private IntegerProperty time = new SimpleIntegerProperty(0);
     private ObjectProperty<TaskType> type = new SimpleObjectProperty<>(TaskType.UNKNOWN);
     //Used by javafx in TableView
     private TimeField tfTime = new TimeField();
