@@ -7,6 +7,8 @@ import javafx.scene.layout.HBox;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
 import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
+import jw.kingdom.hall.kingdomtimer.javafx.control.sps.SpsControllerForTime;
+import jw.kingdom.hall.kingdomtimer.javafx.control.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.buzzer.BtnBuzzerController;
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.direct.BtnTimeDirectForInstantController;
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.direct.BtnTimeDirectForPanel;
@@ -23,7 +25,7 @@ import java.util.ResourceBundle;
  * All rights reserved & copyright ©
  */
 public class TabTimePresenter extends TabPresenter implements TaskTableController.Data, FastPanelPresenter.Data,
-        AddTaskPanelPresenter.Data {
+        AddTaskPanelPresenter.Data, SpsControllerForTime.Data {
 
     @FXML
     private Label lblTime;
@@ -90,6 +92,7 @@ public class TabTimePresenter extends TabPresenter implements TaskTableControlle
 
     @Override
     public void onStart() {
+        hbTimeControlsContainer.getChildren().add(new SpsControllerForTime(this).getView());
         fastPanel = new FastPanelPresenter(this);
         addTaskPanel = new AddTaskPanelPresenter(this);
 
