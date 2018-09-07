@@ -22,18 +22,12 @@ import java.util.HashMap;
  * All rights reserved & copyright ©
  */
 public class DefaultViewManager implements ViewManager {
-
-    private final Config config;
-    private final ScheduleController schedule;
-    private final WindowsContainer container;
-
+    private final WindowInput input;
     private AppWindow window;
     private HashMap<String, Node> screens = new HashMap<>();
 
     public DefaultViewManager(WindowInput input) {
-        this.config = input.getConfig();
-        this.schedule = input.getSchedule();
-        this.container = input.getWindowsContainer();
+        this.input = input;
     }
 
     @Override
@@ -57,10 +51,9 @@ public class DefaultViewManager implements ViewManager {
             FXMLLoader myLoader= new FXMLLoader(getClass().getResource(path));
             Parent loadScreen = myLoader.load();
             ControlledScreen myScreenController = myLoader.getController();
-            myScreenController.setConfig(config);
-            myScreenController.setSchedule(schedule);
             myScreenController.setWindow(window);
-            myScreenController.setWindowsContainer(container);
+            myScreenController.setWindowData(input);
+            myScreenController.setWindowsContainer(input.getWindowsContainer());
             myScreenController.setViewManager(this);
 
             addScreen(name, loadScreen);

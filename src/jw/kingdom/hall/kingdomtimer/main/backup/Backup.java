@@ -16,4 +16,14 @@ public class Backup implements BackupController {
     public void delete() {
         BackupManager.delete();
     }
+
+    @Override
+    public void restore() {
+
+    }
+
+    @Override
+    public boolean isBackupAvailable() {
+        return true;
+    }
 }

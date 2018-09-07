@@ -4,7 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import jw.kingdom.hall.kingdomtimer.config.model.Config;
+import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.bussines.BackupController;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.task.TaskFxBean;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.TabPresenter;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.time.table.TaskTableController;
@@ -78,6 +81,7 @@ public class TabTimePresenter extends TabPresenter implements TaskTableControlle
     public void onStart() {
         new TaskTableController(this);
         new WidgetVisibilityController(btnWidgetVisibility, getWindowsContainer());
+        new BackupPresenter(getWindowData().getBackup());
     }
 
     @Override
@@ -107,6 +111,16 @@ public class TabTimePresenter extends TabPresenter implements TaskTableControlle
 
     public void loadCircuitTasksOnline(ActionEvent actionEvent) {
 
+    }
+
+    @Override
+    public Config getConfig() {
+        return getWindowData().getConfig();
+    }
+
+    @Override
+    public ScheduleController getSchedule() {
+        return getWindowData().getSchedule();
     }
 
     @Override

@@ -1,7 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.javafx.view.head.tab;
 
-import jw.kingdom.hall.kingdomtimer.config.model.Config;
-import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.WindowInput;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.container.WindowsContainer;
 
 /**
@@ -9,12 +8,9 @@ import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.container.WindowsC
  */
 public interface TabPresentable {
 
-    Config getConfig();
-    void setConfig(Config config);
-
-    ScheduleController getSchedule();
-    void setSchedule(ScheduleController schedule);
-
     void setWindowsContainer(WindowsContainer windowsContainer);
     WindowsContainer getWindowsContainer();
+
+    void setWindowData(WindowInput input);
+    WindowInput getWindowData();
 }
