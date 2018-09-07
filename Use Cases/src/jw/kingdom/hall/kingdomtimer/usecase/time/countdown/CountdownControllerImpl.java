@@ -188,7 +188,7 @@ public class CountdownControllerImpl implements CountdownController {
 
     private int getCalculatedTimeToDisplay() {
         if(task == null || task.isDirectDown()) {
-            return time+addedTime;
+            return time;
         } else {
             if(time<0){
                 return time;
