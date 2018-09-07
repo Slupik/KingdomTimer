@@ -1,8 +1,8 @@
 package jw.kingdom.hall.kingdomtimer.javafx.view.speaker;
 
 import javafx.stage.Stage;
-import jw.kingdom.hall.kingdomtimer.javafx.entity.view.AppWindow;
-import jw.kingdom.hall.kingdomtimer.javafx.entity.view.WindowInput;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.AppWindow;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.WindowInput;
 
 import static jw.kingdom.hall.kingdomtimer.javafx.view.speaker.SpeakerWindow.Screens.MAIN;
 

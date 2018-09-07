@@ -3,6 +3,7 @@ package jw.kingdom.hall.kingdomtimer.javafx.view.head.tab;
 import javafx.fxml.Initializable;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.container.WindowsContainer;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,6 +14,7 @@ import java.util.ResourceBundle;
 public abstract class TabPresenter implements TabPresentable, Initializable {
     private ScheduleController schedule;
     private Config config;
+    private WindowsContainer windowsContainer;
 
     @Override
     public Config getConfig() {
@@ -36,8 +38,19 @@ public abstract class TabPresenter implements TabPresentable, Initializable {
         runPostCreateIfConditionsMet();
     }
 
+    @Override
+    public void setWindowsContainer(WindowsContainer windowsContainer) {
+        this.windowsContainer = windowsContainer;
+        runPostCreateIfConditionsMet();
+    }
+
+    @Override
+    public WindowsContainer getWindowsContainer() {
+        return windowsContainer;
+    }
+
     private void runPostCreateIfConditionsMet() {
-        if(schedule!=null && config!=null ) {
+        if(schedule!=null && config!=null && windowsContainer!=null ) {
             onStart();
         }
     }

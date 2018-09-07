@@ -10,13 +10,9 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-import jw.kingdom.hall.kingdomtimer.javafx.entity.view.ControlledScreen;
-import jw.kingdom.hall.kingdomtimer.javafx.entity.view.ControlledScreenBase;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.view.screen.ControlledScreenBase;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.TabPresentable;
-import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.TabPresenter;
-import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.record.TabRecordPresenter;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -75,6 +71,7 @@ public class HeadWindowPresenter extends ControlledScreenBase {
             TabPresentable controller = myLoader.getController();
             controller.setSchedule(getSchedule());
             controller.setConfig(getConfig());
+            controller.setWindowsContainer(getWindowsContainer());
             container.getChildren().setAll(element);
             tabPresenters.put(view, myLoader.getController());
         } catch (Exception e) {

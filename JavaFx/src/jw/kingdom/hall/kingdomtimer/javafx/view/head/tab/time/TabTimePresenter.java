@@ -77,6 +77,7 @@ public class TabTimePresenter extends TabPresenter implements TaskTableControlle
     @Override
     public void onStart() {
         new TaskTableController(this);
+        new WidgetVisibilityController(btnWidgetVisibility, getWindowsContainer());
     }
 
     @Override

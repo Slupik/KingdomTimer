@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.javafx.loader;
 
 import javafx.scene.Node;
-import jw.kingdom.hall.kingdomtimer.javafx.entity.view.AppWindow;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.AppWindow;
 
 /**
  * All rights reserved & copyright ©

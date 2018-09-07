@@ -9,10 +9,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.util.Duration;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
-import jw.kingdom.hall.kingdomtimer.javafx.entity.view.AppWindow;
-import jw.kingdom.hall.kingdomtimer.javafx.entity.view.ControlledScreen;
-import jw.kingdom.hall.kingdomtimer.javafx.entity.view.WindowInput;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.AppWindow;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.view.screen.ControlledScreen;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.WindowInput;
 import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.container.WindowsContainer;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ public class DefaultViewManager implements ViewManager {
 
     private final Config config;
     private final ScheduleController schedule;
+    private final WindowsContainer container;
 
     private AppWindow window;
     private HashMap<String, Node> screens = new HashMap<>();
@@ -31,6 +33,7 @@ public class DefaultViewManager implements ViewManager {
     public DefaultViewManager(WindowInput input) {
         this.config = input.getConfig();
         this.schedule = input.getSchedule();
+        this.container = input.getWindowsContainer();
     }
 
     @Override
@@ -57,6 +60,7 @@ public class DefaultViewManager implements ViewManager {
             myScreenController.setConfig(config);
             myScreenController.setSchedule(schedule);
             myScreenController.setWindow(window);
+            myScreenController.setWindowsContainer(container);
             myScreenController.setViewManager(this);
 
             addScreen(name, loadScreen);
