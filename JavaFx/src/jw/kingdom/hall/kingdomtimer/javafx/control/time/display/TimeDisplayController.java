@@ -43,6 +43,7 @@ public class TimeDisplayController implements TimeDisplay {
 
     @Override
     public void reset() {
+        setTime(0);
         setColorCode(TimerColor.getDefaultColorCode());
     }
 
