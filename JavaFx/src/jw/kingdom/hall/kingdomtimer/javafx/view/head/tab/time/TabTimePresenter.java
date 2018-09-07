@@ -22,7 +22,8 @@ import java.util.ResourceBundle;
 /**
  * All rights reserved & copyright ©
  */
-public class TabTimePresenter extends TabPresenter implements TaskTableController.Data, FastPanelPresenter.Data {
+public class TabTimePresenter extends TabPresenter implements TaskTableController.Data, FastPanelPresenter.Data,
+        AddTaskPanelPresenter.Data {
 
     @FXML
     private Label lblTime;
@@ -82,6 +83,7 @@ public class TabTimePresenter extends TabPresenter implements TaskTableControlle
     private TableColumn<TaskFxBean, String> tcType;
 
     private FastPanelPresenter fastPanel;
+    private AddTaskPanelPresenter addTaskPanel;
     private BtnTimeDirectForPanel timeDirectController;
     private BtnTimeDirectForInstantController instantDirectController;
     private BtnTimeDirectForPanel fastDirectController;
@@ -89,6 +91,7 @@ public class TabTimePresenter extends TabPresenter implements TaskTableControlle
     @Override
     public void onStart() {
         fastPanel = new FastPanelPresenter(this);
+        addTaskPanel = new AddTaskPanelPresenter(this);
 
         timeDirectController = new BtnTimeDirectForPanel(getConfig(), btnCountdownDirect);
         timeDirectController.setMedium(false);
@@ -125,7 +128,7 @@ public class TabTimePresenter extends TabPresenter implements TaskTableControlle
     }
 
     public void handleAddTask(ActionEvent actionEvent) {
-
+        addTaskPanel.handleAddTask();
     }
 
     public void loadTasksOnline(ActionEvent actionEvent) {
@@ -194,5 +197,25 @@ public class TabTimePresenter extends TabPresenter implements TaskTableControlle
     @Override
     public BtnTimeDirectForPanel getFastDirectController() {
         return fastDirectController;
+    }
+
+    @Override
+    public TextField getTfName() {
+        return tfName;
+    }
+
+    @Override
+    public TimeField getAtfTime() {
+        return atfTime;
+    }
+
+    @Override
+    public CheckBox getCbBuzzer() {
+        return cbBuzzer;
+    }
+
+    @Override
+    public BtnTimeDirectForPanel getTimeDirectController() {
+        return timeDirectController;
     }
 }
