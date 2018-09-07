@@ -35,7 +35,7 @@ public class SpsControllerForTime implements StartPauseStopView.Controller, Star
 
     @Override
     public void onPause() {
-        data.getCountdown().stop();
+        data.getCountdown().pause();
     }
 
     @Override
