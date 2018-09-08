@@ -1,9 +1,14 @@
 package jw.kingdom.hall.kingdomtimer.javafx.temp;
 
 import com.sun.istack.internal.Nullable;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+import jw.kingdom.hall.kingdomtimer.entity.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.javafx.control.preview.MultimediaPreviewController;
+import jw.kingdom.hall.kingdomtimer.javafx.usecase.screenshot.ScreenShotMaker;
 
+import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -12,12 +17,13 @@ import java.util.concurrent.Executors;
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
+//TODO improve efficiency
 public class MultimediaPreviewer {
     private List<MultimediaPreviewController> controllers = new ArrayList<>();
     private Thread countdown;
     private boolean pause = true;
     private boolean deadPause = false;//pause because nothing showing changes
-//    private Monitor monitor;
+    private Monitor monitor;
     private int refreshInterval = 500;
     private ExecutorService executor = Executors.newFixedThreadPool(5);
 
@@ -25,28 +31,27 @@ public class MultimediaPreviewer {
         refreshInterval = interval;
     }
 
-    //TODO repair this
     private void makeSS() {
         if(!pause && !deadPause) {
             executor.submit(() -> {
-//                Image image = getMonitorScreen();
-//                notifyControllers(image);
+                Image image = getMonitorScreen();
+                notifyControllers(image);
             });
         }
     }
 
-//    @Nullable
-//    private Image getMonitorScreen() {
-//        if(monitor!=null) {
-//            try {
-//                Rectangle areaToMakeSS = monitor.getDefaultConfiguration().getBounds();
-//                return SwingFXUtils.toFXImage(ScreenShotMaker.getSS(areaToMakeSS), null);
-//            } catch (AWTException | IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return null;
-//    }
+    @Nullable
+    private Image getMonitorScreen() {
+        if(monitor!=null) {
+            try {
+                Rectangle areaToMakeSS = monitor.getBounds();
+                return SwingFXUtils.toFXImage(ScreenShotMaker.getSS(areaToMakeSS), null);
+            } catch (AWTException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
 
     private void notifyControllers(Image image) {
         for(MultimediaPreviewController display:controllers){
@@ -57,6 +62,7 @@ public class MultimediaPreviewer {
     public void addController(MultimediaPreviewController controller) {
         if(!isOnList(controller)) {
             controllers.add(controller);
+            improvePerformance();
         }
     }
 
@@ -88,6 +94,7 @@ public class MultimediaPreviewer {
         }
         countdown = null;
         countdown = getThread();
+        countdown.start();
     }
 
     private Thread getThread() {
@@ -111,17 +118,16 @@ public class MultimediaPreviewer {
         this.pause = pause;
         if(!pause) {
             reloadThread();
-            countdown.start();
         }
     }
 
-//    public void setMonitor(Monitor monitor){
-//        this.monitor = monitor;
-//    }
-//
-//    public Monitor getMonitor(){
-//        return monitor;
-//    }
+    public void setMonitor(Monitor monitor){
+        this.monitor = monitor;
+    }
+
+    public Monitor getMonitor(){
+        return monitor;
+    }
 
     private static MultimediaPreviewer instance;
     private MultimediaPreviewer(){

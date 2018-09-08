@@ -3,7 +3,7 @@ package jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.time;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
-import jw.kingdom.hall.kingdomtimer.javafx.entity.bussines.BackupController;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.backup.BackupController;
 
 import java.util.Optional;
 

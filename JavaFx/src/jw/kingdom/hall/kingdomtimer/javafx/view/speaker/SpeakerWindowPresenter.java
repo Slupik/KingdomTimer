@@ -44,6 +44,7 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
         setupMultimediaPreview();
         setupTimeView();
         setupGleam();
+        MultimediaPreviewer.getInstance().addController(new MultimediaPreviewController(imgMultimediaPreview));
     }
 
     private void setupGleam() {

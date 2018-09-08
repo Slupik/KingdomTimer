@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.javafx.view.head;
 
 import javafx.stage.Stage;
-import jw.kingdom.hall.kingdomtimer.javafx.entity.bussines.BackupController;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.backup.BackupController;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.AppWindow;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.WindowInput;
 

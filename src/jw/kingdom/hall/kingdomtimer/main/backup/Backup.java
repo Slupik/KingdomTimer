@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.main.backup;
 
 import jw.kingdom.hall.kingdomtimer.domain.backup.BackupManager;
-import jw.kingdom.hall.kingdomtimer.javafx.entity.bussines.BackupController;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.backup.BackupController;
 
 /**
  * All rights reserved & copyright ©

@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.javafx.entity.bussines;
+package jw.kingdom.hall.kingdomtimer.javafx.entity.backup;
 
 /**
  * All rights reserved & copyright ©

@@ -2,20 +2,20 @@ package jw.kingdom.hall.kingdomtimer.javafx;
 
 import javafx.stage.Stage;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
+import jw.kingdom.hall.kingdomtimer.entity.monitor.MonitorList;
 import jw.kingdom.hall.kingdomtimer.entity.time.buzzer.BuzzerPlayer;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
 import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleProvider;
-import jw.kingdom.hall.kingdomtimer.javafx.entity.bussines.BackupController;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.backup.BackupController;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.AppWindow;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.WindowInput;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.WindowType;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.container.WindowsContainer;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.container.WindowsContainerImpl;
+import jw.kingdom.hall.kingdomtimer.javafx.temp.MultimediaPreviewer;
 import jw.kingdom.hall.kingdomtimer.javafx.view.handy.HandyWindow;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.HeadWindow;
 import jw.kingdom.hall.kingdomtimer.javafx.view.speaker.SpeakerWindow;
-import jw.kingdom.hall.kingdomtimer.entity.task.ObservableTask;
-import jw.kingdom.hall.kingdomtimer.entity.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 
@@ -27,11 +27,11 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class App {
 
-    private final Input input;
+    private final AppInput appInput;
     private final WindowsContainer container = new WindowsContainerImpl();
 
-    public App(Input input) {
-        this.input = input;
+    public App(AppInput appInput) {
+        this.appInput = appInput;
     }
 
     public void start(Stage primaryStage) throws Exception {
@@ -64,48 +64,44 @@ public class App {
 
             @Override
             public ScheduleController getSchedule() {
-                return input.getSchedule();
+                return appInput.getSchedule();
             }
 
             @Override
             public CountdownController getCountdown() {
-                return input.getCountdown();
+                return appInput.getCountdown();
             }
 
             @Override
             public BuzzerPlayer getBuzzer() {
-                return input.getBuzzer();
+                return appInput.getBuzzer();
             }
 
             @Override
             public ScheduleProvider getScheduleProvider() {
-                return input.getScheduleProvider();
+                return appInput.getScheduleProvider();
+            }
+
+            @Override
+            public MonitorList getMonitorList() {
+                return appInput.getMonitorList();
             }
 
             @Override
             public BackupController getBackup() {
-                return input.getBackup();
+                return appInput.getBackup();
             }
 
             @Override
             public Config getConfig() {
-                return input.getConfig();
+                return appInput.getConfig();
             }
 
             @Override
             public Recorder getRecorder() {
-                return input.getRecorder();
+                return appInput.getRecorder();
             }
         };
     }
 
-    public interface Input {
-        BackupController getBackup();
-        Config getConfig();
-        Recorder getRecorder();
-        ScheduleController getSchedule();
-        CountdownController getCountdown();
-        BuzzerPlayer getBuzzer();
-        ScheduleProvider getScheduleProvider();
-    }
 }

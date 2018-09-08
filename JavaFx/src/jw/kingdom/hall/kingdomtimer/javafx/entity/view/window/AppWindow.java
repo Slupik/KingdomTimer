@@ -14,11 +14,13 @@ import jw.kingdom.hall.kingdomtimer.javafx.view.WindowSettings;
 public abstract class AppWindow extends StackPane {
     protected final ViewManager viewManager;
     protected final Stage stage;
+    protected final WindowInput input;
     protected final Scene scene;
     protected final Group root;
 
     public AppWindow(Stage stage, WindowInput input) {
         this.stage = stage;
+        this.input = input;
         root = new Group();
         scene = new Scene(root);
 
