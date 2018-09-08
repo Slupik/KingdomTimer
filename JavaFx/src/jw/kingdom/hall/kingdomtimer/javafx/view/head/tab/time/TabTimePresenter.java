@@ -111,6 +111,18 @@ public class TabTimePresenter extends TabPresenter implements TaskTableControlle
         new TaskTableController(this);
         new WidgetVisibilityController(btnWidgetVisibility, getWindowsContainer());
         new BackupPresenter(getWindowData().getBackup());
+        setupTimeToEvaluate();
+    }
+
+    private void setupTimeToEvaluate() {
+        cbTimeToEvaluate.setSelected(getConfig().getTimeToEvaluate()>=0);
+        cbTimeToEvaluate.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue) {
+                getConfig().setTimeToEvaluate(60);
+            } else {
+                getConfig().setTimeToEvaluate(-1);
+            }
+        });
     }
 
     @Override
