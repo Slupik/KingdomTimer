@@ -22,7 +22,8 @@ import java.util.ResourceBundle;
  * All rights reserved & copyright ©
  */
 public class TabSpeakerPresenter extends TabPresenter implements PresenterOfPreviewMonitorSelector.Input,
-        PresenterOfMultimediaMonitorSelector.Input, ControllerOfIntervalLoading.Input {
+        PresenterOfMultimediaMonitorSelector.Input, ControllerOfIntervalLoading.Input,
+        SpeakerScreenVisibilityController.Input {
 
     @FXML
     VBox mainContainer;
@@ -51,7 +52,9 @@ public class TabSpeakerPresenter extends TabPresenter implements PresenterOfPrev
     public void onStart() {
         new PresenterOfMultimediaMonitorSelector(this);
         new PresenterOfPreviewMonitorSelector(this);
+        new SpeakerScreenVisibilityController(this);
         intervalLoading = new ControllerOfIntervalLoading(this);
+
         MultimediaPreviewer.getInstance().setRefreshInterval(500);
         MultimediaPreviewer.getInstance().setPause(false);
         MultimediaPreviewer.getInstance().showPreviews(true);
@@ -83,6 +86,11 @@ public class TabSpeakerPresenter extends TabPresenter implements PresenterOfPrev
     @Override
     public MonitorList getMonitorList() {
         return getWindowData().getMonitorList();
+    }
+
+    @Override
+    public CheckBox getSpeakerVisibilityBox() {
+        return cbVisibilitySpeakerScreen;
     }
 
     @Override

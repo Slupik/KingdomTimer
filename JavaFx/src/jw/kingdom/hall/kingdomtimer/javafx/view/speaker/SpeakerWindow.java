@@ -1,9 +1,14 @@
 package jw.kingdom.hall.kingdomtimer.javafx.view.speaker;
 
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import jw.kingdom.hall.kingdomtimer.entity.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.AppWindow;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.WindowInput;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import static jw.kingdom.hall.kingdomtimer.javafx.view.speaker.SpeakerWindow.Screens.MAIN;
 
@@ -11,7 +16,9 @@ import static jw.kingdom.hall.kingdomtimer.javafx.view.speaker.SpeakerWindow.Scr
  * All rights reserved & copyright ©
  */
 public class SpeakerWindow extends AppWindow {
+    private List<Listener> listeners = new ArrayList<>();
     private Monitor lastMonitor = null;
+    private Monitor actualDevice = null;
 
     public SpeakerWindow(Stage stage, WindowInput input) {
         super(stage, input);
@@ -42,22 +49,62 @@ public class SpeakerWindow extends AppWindow {
         setMonitor(input.getMonitorList().findById(input.getConfig().getSpeakerScreen()));
     }
 
+    public boolean setVisibility(Boolean isVisible) {
+        if(actualDevice!=null)  {
+            if(isVisible) {
+                getStage().show();
+            } else {
+                getStage().hide();
+            }
+            return true;
+        }
+        return false;
+    }
+
     /**
      * @return information about success
      */
     public boolean setMonitor(Monitor monitor) {
-        if(monitor==null) {
-            getStage().hide();
-            return true;
-        } else if(lastMonitor==null || !lastMonitor.getID().equals(monitor.getID())){
-            getStage().setX(monitor.getBounds().getX());
-            getStage().setY(monitor.getBounds().getY());
+        if(monitor!=null && lastMonitor!=null && Objects.equals(monitor.getID(), lastMonitor.getID())){
+            return false;
+        }
+        actualDevice = monitor;
+        notifyMonitorChange(monitor);
+        Platform.runLater(()->{
+            if(monitor==null){
+                getStage().hide();
+                return;
+            }
+
+            setVisibility(input.getConfig().isVisibleSpeakerScreen());
+
             getStage().setWidth(monitor.getBounds().getWidth());
             getStage().setHeight(monitor.getBounds().getHeight());
-            getStage().show();
-            return true;
+
+            getStage().setX(monitor.getBounds().getX());
+            getStage().setY(monitor.getBounds().getY());
+
+            stage.setMaximized(true);
+        });
+        return true;
+    }
+
+    private void notifyMonitorChange(Monitor monitor) {
+        for(Listener listener:listeners) {
+            listener.onMonitorChange(monitor);
         }
-        return false;
+    }
+
+    public Monitor getMonitor() {
+        return lastMonitor;
+    }
+
+    public void addListener(Listener listener) {
+        listeners.add(listener);
+    }
+
+    public void removeListener(Listener listener) {
+        listeners.remove(listener);
     }
 
     public enum Screens {
@@ -71,5 +118,9 @@ public class SpeakerWindow extends AppWindow {
             this.name = name;
             this.path = path;
         }
+    }
+
+    public interface Listener {
+        void onMonitorChange(Monitor monitor);
     }
 }
