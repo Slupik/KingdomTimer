@@ -47,6 +47,9 @@ public class SpeakerWindow extends AppWindow {
     @Override
     protected void onPostShow() {
         setMonitor(input.getMonitorList().findById(input.getConfig().getSpeakerScreen()));
+        if(actualDevice==null) {
+            getStage().hide();
+        }
     }
 
     public boolean setVisibility(Boolean isVisible) {
@@ -65,7 +68,8 @@ public class SpeakerWindow extends AppWindow {
      * @return information about success
      */
     public boolean setMonitor(Monitor monitor) {
-        if(monitor!=null && lastMonitor!=null && Objects.equals(monitor.getID(), lastMonitor.getID())){
+        if((monitor!=null && lastMonitor!=null && Objects.equals(monitor.getID(), lastMonitor.getID())) ||
+                (monitor!=null && monitor.isMain())){
             return false;
         }
         actualDevice = monitor;
