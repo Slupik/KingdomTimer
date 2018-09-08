@@ -55,31 +55,36 @@ class PreviewAndTimeCoordinator {
         multimediaContainer.minHeightProperty().bind(mainContainer.heightProperty());
 
         multimediaView.setPreserveRatio(false);
-        mainContainer.widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(()->{
-            double height = mainContainer.heightProperty().doubleValue();
-            double width = mainContainer.widthProperty().doubleValue();
-
-            double heightPropose = height/5*4;
-            double widthPropose = heightPropose/9*16;
-
-            double viewSize = heightPropose;
-
-            if(widthPropose > width) {
-                multimediaView.setFitWidth(width);
-                viewSize = width/16*9;
-                multimediaView.setFitHeight(viewSize);
-            } else {
-                multimediaView.setFitWidth(widthPropose);
-                multimediaView.setFitHeight(viewSize);
-            }
-
-            if(previewController.isShowing()) {
-                double ratio = 1-(viewSize/height)+0.1;
-                double freeSpace = ratio*height;
-                setupFontForTimerText(freeSpace);
-            }
-        }));
+        mainContainer.widthProperty().addListener((observable, oldValue, newValue) ->
+                Platform.runLater(this::rebuildSizeAndPosition));
+        rebuildSizeAndPosition();
     }
+
+    private void rebuildSizeAndPosition() {
+        double height = mainContainer.heightProperty().doubleValue();
+        double width = mainContainer.widthProperty().doubleValue();
+
+        double heightPropose = height/5*4;
+        double widthPropose = heightPropose/9*16;
+
+        double viewSize = heightPropose;
+
+        if(widthPropose > width) {
+            multimediaView.setFitWidth(width);
+            viewSize = width/16*9;
+            multimediaView.setFitHeight(viewSize);
+        } else {
+            multimediaView.setFitWidth(widthPropose);
+            multimediaView.setFitHeight(viewSize);
+        }
+
+        if(previewController.isShowing()) {
+            double ratio = 1-(viewSize/height)+0.1;
+            double freeSpace = ratio*height;
+            setupFontForTimerText(freeSpace);
+        }
+    }
+
     /*
             START LOGIC
      */
