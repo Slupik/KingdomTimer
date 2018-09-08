@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
  * All rights reserved & copyright ©
  */
 public class TabSpeakerPresenter extends TabPresenter implements PresenterOfPreviewMonitorSelector.Input,
-        PresenterOfMultimediaMonitorSelector.Input{
+        PresenterOfMultimediaMonitorSelector.Input, ControllerOfIntervalLoading.Input {
 
     @FXML
     VBox mainContainer;
@@ -45,10 +45,13 @@ public class TabSpeakerPresenter extends TabPresenter implements PresenterOfPrev
     @FXML
     ChoiceBox<Monitor> cbPreviewScreen;
 
+    private ControllerOfIntervalLoading intervalLoading;
+
     @Override
     public void onStart() {
         new PresenterOfMultimediaMonitorSelector(this);
         new PresenterOfPreviewMonitorSelector(this);
+        intervalLoading = new ControllerOfIntervalLoading(this);
         MultimediaPreviewer.getInstance().setRefreshInterval(500);
         MultimediaPreviewer.getInstance().setPause(false);
         MultimediaPreviewer.getInstance().showPreviews(true);
@@ -60,11 +63,11 @@ public class TabSpeakerPresenter extends TabPresenter implements PresenterOfPrev
     }
 
     public void loadInterval(ActionEvent actionEvent) {
-
+        intervalLoading.load();
     }
 
     public void loadDefaultInterval(ActionEvent actionEvent) {
-
+        intervalLoading.loadDefault();
     }
 
     @Override
@@ -85,5 +88,10 @@ public class TabSpeakerPresenter extends TabPresenter implements PresenterOfPrev
     @Override
     public Config getConfig() {
         return getWindowData().getConfig();
+    }
+
+    @Override
+    public AdvancedTextField getField() {
+        return atfRefreshInterval;
     }
 }
