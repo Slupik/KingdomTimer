@@ -18,6 +18,7 @@ import java.util.concurrent.Executors;
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 //TODO improve efficiency
+//TODO rebuild this from singleton
 public class MultimediaPreviewer {
     private List<MultimediaPreviewController> controllers = new ArrayList<>();
     private Thread countdown;

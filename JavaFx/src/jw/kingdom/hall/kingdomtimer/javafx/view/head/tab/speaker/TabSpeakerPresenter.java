@@ -5,7 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.VBox;
+import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.entity.monitor.Monitor;
+import jw.kingdom.hall.kingdomtimer.entity.monitor.MonitorList;
 import jw.kingdom.hall.kingdomtimer.javafx.control.monitor.MonitorChoiceBoxPresenter;
 import jw.kingdom.hall.kingdomtimer.javafx.control.preview.MultimediaPreviewController;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.AdvancedTextField;
@@ -19,7 +21,8 @@ import java.util.ResourceBundle;
 /**
  * All rights reserved & copyright ©
  */
-public class TabSpeakerPresenter extends TabPresenter {
+public class TabSpeakerPresenter extends TabPresenter implements PresenterOfPreviewMonitorSelector.Input,
+        PresenterOfMultimediaMonitorSelector.Input{
 
     @FXML
     VBox mainContainer;
@@ -44,18 +47,8 @@ public class TabSpeakerPresenter extends TabPresenter {
 
     @Override
     public void onStart() {
-        //TODO move those boxes to additional controller
-        new MonitorChoiceBoxPresenter(getWindowData().getMonitorList(), cbMultimediaScreen).addListener((last, now) ->{
-            MultimediaPreviewer.getInstance().setMonitor(now);
-            getWindowData().getConfig().setMultimediaScreen(now.getID());
-        });
-        cbMultimediaScreen.setValue(getWindowData().getMonitorList().findById(getWindowData().getConfig().getMultimediaScreen()));
-        new MonitorChoiceBoxPresenter(getWindowData().getMonitorList(), cbPreviewScreen).addListener((last, now) -> {
-            getWindowData().getWindowsContainer().getAppWindow(WindowType.SPEAKER).getStage().setX(now.getBounds().getX());
-            getWindowData().getWindowsContainer().getAppWindow(WindowType.SPEAKER).getStage().setY(now.getBounds().getY());
-            getWindowData().getConfig().setSpeakerScreen(now.getID());
-        });
-        cbPreviewScreen.setValue(getWindowData().getMonitorList().findById(getWindowData().getConfig().getSpeakerScreen()));
+        new PresenterOfMultimediaMonitorSelector(this);
+        new PresenterOfPreviewMonitorSelector(this);
         MultimediaPreviewer.getInstance().setRefreshInterval(500);
         MultimediaPreviewer.getInstance().setPause(false);
         MultimediaPreviewer.getInstance().showPreviews(true);
@@ -72,5 +65,25 @@ public class TabSpeakerPresenter extends TabPresenter {
 
     public void loadDefaultInterval(ActionEvent actionEvent) {
 
+    }
+
+    @Override
+    public ChoiceBox<Monitor> getBoxWithMonitorForPreview() {
+        return cbMultimediaScreen;
+    }
+
+    @Override
+    public ChoiceBox<Monitor> getBoxWithMonitorForSpeaker() {
+        return cbPreviewScreen;
+    }
+
+    @Override
+    public MonitorList getMonitorList() {
+        return getWindowData().getMonitorList();
+    }
+
+    @Override
+    public Config getConfig() {
+        return getWindowData().getConfig();
     }
 }
