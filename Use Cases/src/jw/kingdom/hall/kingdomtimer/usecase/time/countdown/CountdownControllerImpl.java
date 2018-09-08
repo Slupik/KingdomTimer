@@ -64,6 +64,13 @@ public class CountdownControllerImpl implements CountdownController {
                 int now = time;
                 now--;
                 setTimeAndNotify(now);
+                if(now==0) {
+                    executor.execute(()->{
+                        for(Listener listener:listeners) {
+                            listener.onTimeOut();
+                        }
+                    });
+                }
             }
         });
     }

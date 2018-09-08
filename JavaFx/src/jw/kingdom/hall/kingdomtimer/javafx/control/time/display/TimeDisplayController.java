@@ -29,7 +29,7 @@ public class TimeDisplayController implements TimeDisplay {
     @Override
     public void setLightBackground(boolean lightBackground) {
         isLightBackground = lightBackground;
-        setColor(TimerColor.getColor(lastColorCode, isLightBackground));
+        setTextColor(TimerColor.getColor(lastColorCode, isLightBackground));
     }
 
     @Override
@@ -49,18 +49,19 @@ public class TimeDisplayController implements TimeDisplay {
 
     @Override
     public void resetColorToLast(){
-        setColor(TimerColor.getColor(lastColorCode, isLightBackground));
+        setTextColor(TimerColor.getColor(lastColorCode, isLightBackground));
     }
 
     private void setColorCode(int paintCode) {
         if(lastColorCode!=paintCode) {
-            setColor(TimerColor.getColor(paintCode, isLightBackground));
+            setTextColor(TimerColor.getColor(paintCode, isLightBackground));
             lastColorCode = paintCode;
         }
     }
 
-    private void setColor(Paint paint) {
-        text.setTextFill(paint);
+    @Override
+    public void setTextColor(Paint fill) {
+        text.setTextFill(fill);
     }
 
     private void setTime(int seconds){

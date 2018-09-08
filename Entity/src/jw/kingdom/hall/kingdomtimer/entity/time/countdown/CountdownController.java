@@ -30,6 +30,7 @@ public interface CountdownController {
     interface Listener {
         void onTaskStart(Task task);
         void onTimeChange(int time);
+        void onTimeOut();
         void onStateChanged(CountdownState last, CountdownState now);
 
         void onAddedTimeChange(int addedSeconds);

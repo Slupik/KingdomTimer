@@ -1,5 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.usecase;
 
+import javafx.scene.paint.Paint;
 import jw.kingdom.hall.kingdomtimer.entity.time.buzzer.BuzzerPlayer;
 import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownControllerImpl;
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
@@ -30,6 +31,11 @@ public class DomainTest {
 
             @Override
             public void setLightBackground(boolean lightBackground) {
+
+            }
+
+            @Override
+            public void setTextColor(Paint fill) {
 
             }
 

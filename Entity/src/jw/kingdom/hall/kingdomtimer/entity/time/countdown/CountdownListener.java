@@ -56,6 +56,11 @@ public abstract class CountdownListener implements CountdownController.Listener 
     }
 
     @Override
+    public void onTimeOut() {
+
+    }
+
+    @Override
     public void onAddedTimeChange(int addedSeconds) {
 
     }
