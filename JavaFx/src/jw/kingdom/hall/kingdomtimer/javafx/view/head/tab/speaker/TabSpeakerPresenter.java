@@ -8,10 +8,7 @@ import javafx.scene.layout.VBox;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.entity.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.entity.monitor.MonitorList;
-import jw.kingdom.hall.kingdomtimer.javafx.control.monitor.MonitorChoiceBoxPresenter;
-import jw.kingdom.hall.kingdomtimer.javafx.control.preview.MultimediaPreviewController;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.AdvancedTextField;
-import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.WindowType;
 import jw.kingdom.hall.kingdomtimer.javafx.temp.MultimediaPreviewer;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.TabPresenter;
 
@@ -21,9 +18,9 @@ import java.util.ResourceBundle;
 /**
  * All rights reserved & copyright ©
  */
-public class TabSpeakerPresenter extends TabPresenter implements PresenterOfPreviewMonitorSelector.Input,
-        PresenterOfMultimediaMonitorSelector.Input, ControllerOfIntervalLoading.Input,
-        SpeakerScreenVisibilityController.Input {
+public class TabSpeakerPresenter extends TabPresenter implements PresenterOfMultimediaMonitorSelector.Input,
+        PresenterOfSpeakerMonitorSelector.Input, ControllerOfIntervalLoading.Input,
+        SpeakerScreenVisibilityController.Input, MultimediaPreviewBoxController.Input {
 
     @FXML
     VBox mainContainer;
@@ -50,9 +47,10 @@ public class TabSpeakerPresenter extends TabPresenter implements PresenterOfPrev
 
     @Override
     public void onStart() {
+        new PresenterOfSpeakerMonitorSelector(this);
         new PresenterOfMultimediaMonitorSelector(this);
-        new PresenterOfPreviewMonitorSelector(this);
         new SpeakerScreenVisibilityController(this);
+        new MultimediaPreviewBoxController(this);
         intervalLoading = new ControllerOfIntervalLoading(this);
 
         MultimediaPreviewer.getInstance().setRefreshInterval(500);
@@ -74,13 +72,13 @@ public class TabSpeakerPresenter extends TabPresenter implements PresenterOfPrev
     }
 
     @Override
-    public ChoiceBox<Monitor> getBoxWithMonitorForPreview() {
-        return cbMultimediaScreen;
+    public ChoiceBox<Monitor> getBoxWithMonitorForSpeaker() {
+        return cbPreviewScreen;
     }
 
     @Override
-    public ChoiceBox<Monitor> getBoxWithMonitorForSpeaker() {
-        return cbPreviewScreen;
+    public ChoiceBox<Monitor> getBoxWithMultimediaMonitor() {
+        return cbMultimediaScreen;
     }
 
     @Override
@@ -96,6 +94,11 @@ public class TabSpeakerPresenter extends TabPresenter implements PresenterOfPrev
     @Override
     public Config getConfig() {
         return getWindowData().getConfig();
+    }
+
+    @Override
+    public CheckBox getBoxForPreviewVisibility() {
+        return cbShowPreview;
     }
 
     @Override

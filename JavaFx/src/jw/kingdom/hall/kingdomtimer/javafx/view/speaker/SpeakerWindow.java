@@ -48,7 +48,7 @@ public class SpeakerWindow extends AppWindow {
     protected void onPostShow() {
         setMonitor(input.getMonitorList().findById(input.getConfig().getSpeakerScreen()));
         if(actualDevice==null) {
-            getStage().hide();
+//            getStage().hide();
         }
     }
 

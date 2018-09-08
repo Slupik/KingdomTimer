@@ -5,10 +5,7 @@ import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.entity.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.entity.monitor.MonitorList;
 import jw.kingdom.hall.kingdomtimer.javafx.control.monitor.MonitorChoiceBoxPresenter;
-import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.AppWindow;
-import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.WindowType;
-import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.container.WindowsContainer;
-import jw.kingdom.hall.kingdomtimer.javafx.view.speaker.SpeakerWindow;
+import jw.kingdom.hall.kingdomtimer.javafx.temp.MultimediaPreviewer;
 
 /**
  * All rights reserved & copyright ©
@@ -23,31 +20,23 @@ class PresenterOfMultimediaMonitorSelector {
     }
 
     private void init() {
-        new MonitorChoiceBoxPresenter(getMonitorList(), getBox()).addListener((last, now) -> {
-            getSpeakerWindow().setMonitor(now);
-            getConfig().setSpeakerScreen(now.getID());
+        new MonitorChoiceBoxPresenter(getMonitorList(), getBox()).addListener((last, now) ->{
+            MultimediaPreviewer.getInstance().setMonitor(now);
+            getConfig().setMultimediaScreen(now.getID());
         });
-        setValueFomConfig();
+        setValueFromConfig();
     }
 
-    private void setValueFomConfig() {
-        getBox().setValue(getMonitorList().findById(getConfig().getSpeakerScreen()));
-    }
-
-    private SpeakerWindow getSpeakerWindow() {
-        return (SpeakerWindow) getWindowsContainer().getAppWindow(WindowType.SPEAKER);
+    private void setValueFromConfig() {
+        getBox().setValue(getMonitorList().findById(getConfig().getMultimediaScreen()));
     }
 
     private ChoiceBox<Monitor> getBox() {
-        return input.getBoxWithMonitorForPreview();
+        return input.getBoxWithMultimediaMonitor();
     }
 
     private Config getConfig() {
         return input.getConfig();
-    }
-
-    private WindowsContainer getWindowsContainer() {
-        return input.getWindowsContainer();
     }
 
     private MonitorList getMonitorList() {
@@ -55,8 +44,7 @@ class PresenterOfMultimediaMonitorSelector {
     }
 
     interface Input {
-        ChoiceBox<Monitor> getBoxWithMonitorForPreview();
-        WindowsContainer getWindowsContainer();
+        ChoiceBox<Monitor> getBoxWithMultimediaMonitor();
         MonitorList getMonitorList();
         Config getConfig();
     }

@@ -3,6 +3,8 @@ package jw.kingdom.hall.kingdomtimer.javafx.control.preview;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import jw.kingdom.hall.kingdomtimer.config.model.Config;
+import jw.kingdom.hall.kingdomtimer.config.model.ConfigReadable;
 import jw.kingdom.hall.kingdomtimer.entity.utils.Randomizer;
 
 import java.util.ArrayList;
@@ -16,10 +18,21 @@ public class MultimediaPreviewController {
     private boolean disableHiding = false;
     private final List<Listener> listeners = new ArrayList<>();
 
+    private final Config config;
     private ImageView view;
 
-    public MultimediaPreviewController(ImageView view) {
+    public MultimediaPreviewController(ImageView view, Config config) {
         this.view = view;
+        this.config = config;
+        init();
+    }
+
+    private void init() {
+        showPreview(getConfig().isEnabledShowMultimedia());
+    }
+
+    private ConfigReadable getConfig() {
+        return config;
     }
 
     public void setImage(Image image){

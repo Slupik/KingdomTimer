@@ -44,7 +44,6 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
         setupMultimediaPreview();
         setupTimeView();
         setupGleam();
-        MultimediaPreviewer.getInstance().addController(new MultimediaPreviewController(imgMultimediaPreview));
     }
 
     private void setupGleam() {
@@ -78,7 +77,7 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
     }
 
     private void setupMultimediaPreview() {
-        multimediaPreview = new MultimediaPreviewController(imgMultimediaPreview);
+        multimediaPreview = new MultimediaPreviewController(imgMultimediaPreview, getWindowData().getConfig());
         getMultiPreviewer().addController(multimediaPreview);
     }
 
