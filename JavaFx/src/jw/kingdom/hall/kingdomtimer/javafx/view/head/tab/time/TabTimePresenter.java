@@ -105,7 +105,7 @@ public class TabTimePresenter extends TabPresenter implements TaskTableControlle
         fastDirectController = new BtnTimeDirectForPanel(getConfig(), btnFastDirect);
         fastDirectController.setMedium(false);
 
-        instantDirectController = new BtnTimeDirectForInstantController(getSchedule(), getConfig(), btnInstantDirect);
+        instantDirectController = new BtnTimeDirectForInstantController(getCountdown(), getConfig(), btnInstantDirect);
         instantDirectController.setMedium(true);
 
         getCountdown().addTimeDisplay(new TimeDisplayController(lblTime));
