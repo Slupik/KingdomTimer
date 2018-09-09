@@ -9,7 +9,7 @@ import java.awt.*;
  */
 public class MonitorBean implements Monitor {
     private final GraphicsDevice ORIGINAL_DEVICE;
-    private boolean isMain = false;
+    private boolean isPrimary = false;
     private int place = -1;
 
     public MonitorBean(GraphicsDevice gp){
@@ -31,18 +31,18 @@ public class MonitorBean implements Monitor {
     private void setAutoMain() {
         Rectangle bounds = getBounds();
         if(bounds.getX()==0 && bounds.getY() == 0){
-            setMain(true);
+            setPrimary(true);
         }
     }
 
     @Override
-    public boolean isMain() {
-        return isMain;
+    public boolean isPrimary() {
+        return isPrimary;
     }
 
     @Override
-    public void setMain(boolean main) {
-        isMain = main;
+    public void setPrimary(boolean isPrimary) {
+        this.isPrimary = isPrimary;
     }
 
     @Override

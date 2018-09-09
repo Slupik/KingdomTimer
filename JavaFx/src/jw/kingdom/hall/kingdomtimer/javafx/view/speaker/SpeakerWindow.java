@@ -69,7 +69,7 @@ public class SpeakerWindow extends AppWindow {
      */
     public boolean setMonitor(Monitor monitor) {
         if((monitor!=null && lastMonitor!=null && Objects.equals(monitor.getID(), lastMonitor.getID())) ||
-                (monitor!=null && monitor.isMain())){
+                (monitor!=null && monitor.isPrimary())){
             return false;
         }
         actualDevice = monitor;

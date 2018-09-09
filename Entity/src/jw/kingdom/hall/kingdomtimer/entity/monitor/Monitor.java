@@ -11,8 +11,8 @@ public interface Monitor {
     String getID();
     Type getType();
 
-    boolean isMain();
-    void setMain(boolean main);
+    boolean isPrimary();
+    void setPrimary(boolean isPrimary);
 
     int getPlace();
     void setPlace(int place);
