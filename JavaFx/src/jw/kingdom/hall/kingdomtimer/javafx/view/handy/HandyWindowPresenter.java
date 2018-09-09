@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 /**
  * All rights reserved & copyright ©
  */
-public class HandyWindowPresenter extends ControlledScreenBase implements SpsControllerForTime.Data {
+public class HandyWindowPresenter extends ControlledScreenBase implements SpsControllerForTime.Input {
 
     @FXML
     private HBox mainContainer;

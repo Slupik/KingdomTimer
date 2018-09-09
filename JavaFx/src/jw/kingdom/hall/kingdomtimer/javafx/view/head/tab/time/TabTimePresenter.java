@@ -5,12 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
-import jw.kingdom.hall.kingdomtimer.entity.task.Task;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
 import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
-import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleProvider;
 import jw.kingdom.hall.kingdomtimer.javafx.control.sps.SpsControllerForTime;
-import jw.kingdom.hall.kingdomtimer.javafx.control.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.buzzer.BtnBuzzerController;
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.direct.BtnTimeDirectForInstantController;
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.direct.BtnTimeDirectForPanel;
@@ -21,14 +18,13 @@ import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.TabPresenter;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.time.table.TaskTableController;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
  * All rights reserved & copyright ©
  */
 public class TabTimePresenter extends TabPresenter implements TaskTableController.Data, FastPanelPresenter.Data,
-        AddTaskPanelPresenter.Data, SpsControllerForTime.Data {
+        AddTaskPanelPresenter.Data, SpsControllerForTime.Input {
 
     @FXML
     private Label lblTime;

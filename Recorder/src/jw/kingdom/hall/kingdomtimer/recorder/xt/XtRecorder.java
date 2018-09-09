@@ -45,11 +45,17 @@ public class XtRecorder implements Recorder, Recording.Listener {
 
         recording.start(data);
         backup.start(60);
+        notifyAboutStart();
     }
 
     @Override
     public void setPause(boolean isPause) {
         recording.setPause(isPause);
+        if(isPause) {
+            notifyAboutPause();
+        } else {
+            notifyAboutResume();
+        }
     }
 
     @Override
@@ -58,9 +64,45 @@ public class XtRecorder implements Recorder, Recording.Listener {
         if(backup!=null) backup.stop();
         if(saver!=null) saver.finalSave();
         setTotalFrames(0);
+        notifyAboutStop();
     }
 
-    private List<Listener> listeners = new ArrayList<>();
+    private void notifyAboutStart() {
+        for(Recorder.Listener listener:listeners) {
+            listener.onStart();
+        }
+    }
+
+    private void notifyAboutResume() {
+        for(Recorder.Listener listener:listeners) {
+            listener.onResume();
+        }
+    }
+
+    private void notifyAboutPause() {
+        for(Recorder.Listener listener:listeners) {
+            listener.onPause();
+        }
+    }
+
+    private void notifyAboutStop() {
+        for(Recorder.Listener listener:listeners) {
+            listener.onStop();
+        }
+    }
+
+    private final List<Display> displays = new ArrayList<>();
+    @Override
+    public void addDisplay(Recorder.Display display) {
+        displays.add(display);
+        display.onNewTime(0);
+    }
+    @Override
+    public void removeDisplay(Recorder.Display display) {
+        displays.add(display);
+    }
+
+    private final List<Listener> listeners = new ArrayList<>();
     @Override
     public void addListener(Listener listener) {
         listeners.add(listener);
@@ -78,8 +120,8 @@ public class XtRecorder implements Recorder, Recording.Listener {
     private void setTotalFrames(long framesCount) {
         totalFrames = framesCount;
         int time = (int) (totalFrames/format.mix.rate);
-        for(Listener listener:listeners) {
-            listener.onNewTime(time);
+        for(Display display:displays) {
+            display.onNewTime(time);
         }
     }
 }

@@ -23,6 +23,16 @@ public class Record implements Recorder {
     }
 
     @Override
+    public void addDisplay(Display display) {
+        VoiceRecorder.getInstance().addDisplay(display);
+    }
+
+    @Override
+    public void removeDisplay(Display display) {
+        VoiceRecorder.getInstance().removeDisplay(display);
+    }
+
+    @Override
     public void addListener(Listener listener) {
         VoiceRecorder.getInstance().addListener(listener);
     }

@@ -48,6 +48,13 @@ public class VoiceRecorder {
         }
     }
 
+    public void addDisplay(Recorder.Display display) {
+        recorder.addDisplay(display);
+    }
+    public void removeDisplay(Recorder.Display display) {
+        recorder.removeDisplay(display);
+    }
+
     public void addListener(Recorder.Listener listener) {
         recorder.addListener(listener);
     }

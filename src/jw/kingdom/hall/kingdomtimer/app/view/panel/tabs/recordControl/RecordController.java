@@ -26,7 +26,8 @@ import java.util.ResourceBundle;
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class RecordController extends ControlledScreenImpl implements Initializable, StartPauseStopView.Listener, Recorder.Listener {
+public class RecordController extends ControlledScreenImpl implements Initializable, StartPauseStopView.Listener,
+        Recorder.Listener, Recorder.Display {
 
     @FXML
     private VBox vbMainContainer;
@@ -148,6 +149,7 @@ public class RecordController extends ControlledScreenImpl implements Initializa
             e.printStackTrace();
         }
         VoiceRecorder.getInstance().addListener(RecordController.this);
+        VoiceRecorder.getInstance().addDisplay(RecordController.this);
     }
 
     private boolean isAutoSeparateOn() {
@@ -171,6 +173,11 @@ public class RecordController extends ControlledScreenImpl implements Initializa
     @Override
     public void onPause() {
         VoiceRecorder.getInstance().setPause(true);
+    }
+
+    @Override
+    public void onResume() {
+        VoiceRecorder.getInstance().setPause(false);
     }
 
     @Override

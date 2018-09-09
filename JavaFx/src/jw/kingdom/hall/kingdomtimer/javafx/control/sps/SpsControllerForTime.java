@@ -9,19 +9,20 @@ import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
  * All rights reserved & copyright ©
  */
 public class SpsControllerForTime implements StartPauseStopView.Controller, StartPauseStopView.Listener {
-    private final StartPauseStopView view;
-    private final Data data;
 
-    public SpsControllerForTime(Data data){
+    private final StartPauseStopView view;
+    private final Input input;
+
+    public SpsControllerForTime(Input input){
         this.view = new StartPauseStopView();
-        this.data = data;
+        this.input = input;
         view.addListener(this);
         view.setController(this);
         init();
     }
 
     private void init() {
-        data.getCountdown().addListener(new CountdownListener() {
+        input.getCountdown().addListener(new CountdownListener() {
             @Override
             protected void onStart() {
                 super.onStart();
@@ -51,37 +52,37 @@ public class SpsControllerForTime implements StartPauseStopView.Controller, Star
     @Override
     public boolean isToExecuteSPSAction(StartPauseStopView.ActionType type) {
         if(type==StartPauseStopView.ActionType.START) {
-            return data.getSchedule().getTasks().size()!=0;
+            return input.getSchedule().getTasks().size()!=0;
         }
         return true;
     }
 
     @Override
     public void onStart() {
-        Task task = data.getSchedule().bringOutFirstTask();
-        data.getCountdown().start(task);
+        Task task = input.getSchedule().bringOutFirstTask();
+        input.getCountdown().start(task);
     }
 
     @Override
     public void onPause() {
-        data.getCountdown().pause();
+        input.getCountdown().pause();
     }
 
     @Override
     public void onResume() {
-        data.getCountdown().resume();
+        input.getCountdown().resume();
     }
 
     @Override
     public void onStop() {
-        data.getCountdown().stop();
+        input.getCountdown().stop();
     }
 
     public StartPauseStopView getView() {
         return view;
     }
 
-    public interface Data {
+    public interface Input {
         ScheduleController getSchedule();
         CountdownController getCountdown();
     }

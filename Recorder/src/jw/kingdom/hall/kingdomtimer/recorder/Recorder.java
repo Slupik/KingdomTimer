@@ -8,9 +8,19 @@ public interface Recorder {
     void onStop();
     void setPause(boolean isPause);
 
+    void addDisplay(Display display);
+    void removeDisplay(Display display);
+
+    interface Display {
+        void onNewTime(int seconds);
+    }
+
     void addListener(Listener listener);
     void removeListener(Listener listener);
     interface Listener {
-        void onNewTime(int seconds);
+        void onStop();
+        void onPause();
+        void onResume();
+        void onStart();
     }
 }
