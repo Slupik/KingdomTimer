@@ -1,8 +1,8 @@
 package jw.kingdom.hall.kingdomtimer.javafx.control.sps;
 
-import javafx.scene.Node;
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
+import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownListener;
 import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
 
 /**
@@ -17,6 +17,35 @@ public class SpsControllerForTime implements StartPauseStopView.Controller, Star
         this.data = data;
         view.addListener(this);
         view.setController(this);
+        init();
+    }
+
+    private void init() {
+        data.getCountdown().addListener(new CountdownListener() {
+            @Override
+            protected void onStart() {
+                super.onStart();
+                view.setupForStart();
+            }
+
+            @Override
+            protected void onPause() {
+                super.onPause();
+                view.setupForPause();
+            }
+
+            @Override
+            protected void onResume() {
+                super.onResume();
+                view.setupForUnPause();
+            }
+
+            @Override
+            protected void onStop() {
+                super.onStop();
+                view.setupForStop();
+            }
+        });
     }
 
     @Override
