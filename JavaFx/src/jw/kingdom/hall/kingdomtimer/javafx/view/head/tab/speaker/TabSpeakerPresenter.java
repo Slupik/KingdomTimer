@@ -8,6 +8,9 @@ import javafx.scene.layout.VBox;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.entity.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.entity.monitor.MonitorList;
+import jw.kingdom.hall.kingdomtimer.entity.time.gleam.GleamController;
+import jw.kingdom.hall.kingdomtimer.entity.time.gleam.GleamSwitcher;
+import jw.kingdom.hall.kingdomtimer.javafx.control.gleam.GleamControllerImpl;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.AdvancedTextField;
 import jw.kingdom.hall.kingdomtimer.javafx.temp.MultimediaPreviewer;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.TabPresenter;
@@ -20,7 +23,8 @@ import java.util.ResourceBundle;
  */
 public class TabSpeakerPresenter extends TabPresenter implements PresenterOfMultimediaMonitorSelector.Input,
         PresenterOfSpeakerMonitorSelector.Input, ControllerOfIntervalLoading.Input,
-        SpeakerScreenVisibilityController.Input, MultimediaPreviewBoxController.Input {
+        SpeakerScreenVisibilityController.Input, MultimediaPreviewBoxController.Input,
+        GleamSwitchController.Input {
 
     @FXML
     VBox mainContainer;
@@ -51,6 +55,7 @@ public class TabSpeakerPresenter extends TabPresenter implements PresenterOfMult
         new PresenterOfMultimediaMonitorSelector(this);
         new SpeakerScreenVisibilityController(this);
         new MultimediaPreviewBoxController(this);
+        new GleamSwitchController(this);
         intervalLoading = new ControllerOfIntervalLoading(this);
 
         MultimediaPreviewer.getInstance().setRefreshInterval(500);
@@ -94,6 +99,16 @@ public class TabSpeakerPresenter extends TabPresenter implements PresenterOfMult
     @Override
     public Config getConfig() {
         return getWindowData().getConfig();
+    }
+
+    @Override
+    public CheckBox getBoxForGleam() {
+        return cbEnableGleaming;
+    }
+
+    @Override
+    public GleamSwitcher getGleamSwitcher() {
+        return getWindowData().getGleamSwitcher();
     }
 
     @Override

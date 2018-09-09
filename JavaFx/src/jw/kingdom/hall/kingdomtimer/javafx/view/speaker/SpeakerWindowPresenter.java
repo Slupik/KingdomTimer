@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownListener;
-import jw.kingdom.hall.kingdomtimer.javafx.control.gleam.GleamController;
+import jw.kingdom.hall.kingdomtimer.javafx.control.gleam.GleamControllerImpl;
 import jw.kingdom.hall.kingdomtimer.javafx.control.preview.MultimediaPreviewController;
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.display.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.screen.ControlledScreenBase;
@@ -34,7 +34,7 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
     ImageView imgMultimediaPreview;
 
     private TimeDisplayController timeDisplay;
-    private GleamController gleammer;
+    private GleamControllerImpl gleammer;
     private MultimediaPreviewController multimediaPreview;
     private PreviewAndTimeCoordinator layoutCoordinator;
 
@@ -47,7 +47,7 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
     }
 
     private void setupGleam() {
-        gleammer = new GleamController(mainContainer, timeDisplay);
+        gleammer = new GleamControllerImpl(mainContainer, timeDisplay, getWindowData().getGleamSwitcher());
         getWindowData().getCountdown().addListener(new CountdownListener() {
             @Override
             public void onTimeOut() {

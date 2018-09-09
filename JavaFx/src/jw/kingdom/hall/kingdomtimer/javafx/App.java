@@ -5,6 +5,7 @@ import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.entity.monitor.MonitorList;
 import jw.kingdom.hall.kingdomtimer.entity.time.buzzer.BuzzerPlayer;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
+import jw.kingdom.hall.kingdomtimer.entity.time.gleam.GleamSwitcher;
 import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleProvider;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.backup.BackupController;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.AppWindow;
@@ -85,6 +86,11 @@ public class App {
             @Override
             public MonitorList getMonitorList() {
                 return appInput.getMonitorList();
+            }
+
+            @Override
+            public GleamSwitcher getGleamSwitcher() {
+                return appInput.getGleamSwitcher();
             }
 
             @Override

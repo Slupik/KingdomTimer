@@ -7,6 +7,7 @@ import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.entity.monitor.MonitorList;
 import jw.kingdom.hall.kingdomtimer.entity.time.buzzer.BuzzerPlayer;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
+import jw.kingdom.hall.kingdomtimer.entity.time.gleam.GleamSwitcher;
 import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
 import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleProvider;
 import jw.kingdom.hall.kingdomtimer.javafx.App;
@@ -17,8 +18,9 @@ import jw.kingdom.hall.kingdomtimer.main.record.Record;
 import jw.kingdom.hall.kingdomtimer.main.schedule.provider.SProvider;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 import jw.kingdom.hall.kingdomtimer.usecase.monitor.MonitorListImpl;
-import jw.kingdom.hall.kingdomtimer.usecase.time.buzzer.BuzzerControllerImpl;
+import jw.kingdom.hall.kingdomtimer.usecase.time.buzzer.BuzzerAutoControllerImpl;
 import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownControllerImpl;
+import jw.kingdom.hall.kingdomtimer.usecase.time.gleam.GleamSwitcherImpl;
 import jw.kingdom.hall.kingdomtimer.usecase.time.schedule.ScheduleControllerImpl;
 
 /**
@@ -34,7 +36,8 @@ public class RebuildMain extends Application {
     public void start(Stage primaryStage) throws Exception {
         ScheduleController schedule = new ScheduleControllerImpl();
         CountdownControllerImpl countdown = new CountdownControllerImpl();
-        new BuzzerControllerImpl(new jw.kingdom.hall.kingdomtimer.main.buzzer.BuzzerPlayer(), countdown);
+        GleamSwitcher gleamSwitcher = new GleamSwitcherImpl();
+        new BuzzerAutoControllerImpl(new jw.kingdom.hall.kingdomtimer.main.buzzer.BuzzerPlayer(), countdown);
         Record record = new Record();
         Backup backup = new Backup();
         MonitorList mList = new MonitorListImpl();
@@ -78,6 +81,11 @@ public class RebuildMain extends Application {
             @Override
             public MonitorList getMonitorList() {
                 return mList;
+            }
+
+            @Override
+            public GleamSwitcher getGleamSwitcher() {
+                return gleamSwitcher;
             }
         }).start(primaryStage);
     }

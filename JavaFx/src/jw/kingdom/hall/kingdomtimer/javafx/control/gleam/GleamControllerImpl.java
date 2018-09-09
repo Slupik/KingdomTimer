@@ -6,24 +6,29 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import jw.kingdom.hall.kingdomtimer.entity.observable.field.ObservableField;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.TimeDisplay;
+import jw.kingdom.hall.kingdomtimer.entity.time.gleam.GleamController;
+import jw.kingdom.hall.kingdomtimer.entity.time.gleam.GleamSwitcher;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class GleamController {
+public class GleamControllerImpl implements GleamController {
     private Pane pane;
     private TimeDisplay time;
+    private final GleamSwitcher switcher;
     private boolean isPlaying = false;
     private Background defaultBackground;
 
-    public GleamController(Pane pane, TimeDisplay time) {
+    public GleamControllerImpl(Pane pane, TimeDisplay time, GleamSwitcher switcher) {
         this.pane = pane;
         this.time = time;
+        this.switcher = switcher;
     }
 
     public void play(){
-        if(isPlaying) {
+        if(isPlaying || !switcher.isEnabled()) {
             return;
         }
         isPlaying = true;
@@ -42,15 +47,15 @@ public class GleamController {
         }).start();
     }
 
+    private Background getGleamingBackground() {
+        return new Background(new BackgroundFill(Color.ORANGERED, CornerRadii.EMPTY, Insets.EMPTY));
+    }
+
     private void sleep(int time) {
         try {
             Thread.sleep(time);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    private Background getGleamingBackground() {
-        return new Background(new BackgroundFill(Color.ORANGERED, CornerRadii.EMPTY, Insets.EMPTY));
     }
 }
