@@ -38,7 +38,6 @@ class FastPanelPresenter {
             Task task = new TaskBean();
             task.setName("???");
             task.setSeconds(time);
-            task.setUseBuzzer(true);
             task.setDirectDown(data.getFastDirectController().isDirectDown());
             getCountdown().start(task);
 
