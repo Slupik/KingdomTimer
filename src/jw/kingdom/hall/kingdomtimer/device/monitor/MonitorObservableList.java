@@ -83,16 +83,21 @@ public class MonitorObservableList extends ObservableListWrapper<Monitor> {
 
 	private void sortList() {
 		ignoreChange = true;
-		sort((screen1, screen2) -> {
-			Rectangle bounds1 = screen1.getBounds();
-			Rectangle bounds2 = screen2.getBounds();
-			int c = bounds1.y - bounds2.y;
-			if (c == 0) {
-				c = bounds1.x - bounds2.x;
+		/*
+		 * @return the value {@code 0} if {@code x == y};
+		 *         a value less than {@code 0} if {@code x < y}; and
+		 *         a value greater than {@code 0} if {@code x > y}
+		 */
+		sorted((o1, o2) -> {
+			if(o1==null && o2!=null) {
+				return -1;
+			} else if(o1!=null && o2==null) {
+				return 1;
+			} else if(o1 == null) {
+				return 0;
 			}
-			return c;
-		}
-		);
+			return Double.compare(o1.getBounds().getX(), o2.getBounds().getX());
+		});
 		for(int i=0;i<size();i++){
 			Monitor monitor = get(i);
 			monitor.setPlace(i);

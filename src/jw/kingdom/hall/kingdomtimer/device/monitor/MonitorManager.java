@@ -8,6 +8,8 @@ package jw.kingdom.hall.kingdomtimer.device.monitor;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static java.awt.GraphicsDevice.TYPE_RASTER_SCREEN;
+
 public class MonitorManager {
 	private static boolean wasInitialized = false;
 	private static ArrayList<MonitorEventHandler> listeners = new ArrayList<>();
@@ -35,7 +37,7 @@ public class MonitorManager {
 
 	static boolean listContains(GraphicsDevice[] list, GraphicsDevice gd){
 		for(GraphicsDevice checkingGD:list){
-			if(checkingGD.getIDstring().equals(gd.getIDstring())){
+			if(gd.getType()==TYPE_RASTER_SCREEN && checkingGD.getIDstring().equals(gd.getIDstring())){
 				return true;
 			}
 		}
