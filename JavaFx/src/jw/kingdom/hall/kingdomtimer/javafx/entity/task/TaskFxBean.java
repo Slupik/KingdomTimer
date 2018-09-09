@@ -33,7 +33,7 @@ public class TaskFxBean implements Task {
     }
 
     public TaskFxBean(ObservableTask task) {
-        ID = Randomizer.randomStandardString(10);
+        ID = task.getID();
         observableTask = task;
         normalTask = task;
         loadTask(task);
@@ -43,7 +43,11 @@ public class TaskFxBean implements Task {
     public TaskFxBean(Task task) {
         ID = task.getID();
         normalTask = task;
-        observableTask = generateObservable();
+        if(task instanceof ObservableTask) {
+            observableTask = ((ObservableTask) task);
+        } else {
+            observableTask = generateObservable();
+        }
         loadTask(task);
         bindObservableTask();
     }
