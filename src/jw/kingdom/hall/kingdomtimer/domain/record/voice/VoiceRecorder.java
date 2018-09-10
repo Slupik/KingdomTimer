@@ -18,8 +18,8 @@ public class VoiceRecorder {
     public void start(){
         if(!start) {
             start = true;
-            recorder.onStart();
             setPause(false);
+            recorder.onStart();
             for(Listener listener:listeners) {
                 listener.onStart();
             }
@@ -27,9 +27,9 @@ public class VoiceRecorder {
     }
 
     public void stop(){
-        recorder.onStop();
         setPause(false);
         start = false;
+        recorder.onStop();
         for(Listener listener:listeners) {
             listener.onStop();
         }

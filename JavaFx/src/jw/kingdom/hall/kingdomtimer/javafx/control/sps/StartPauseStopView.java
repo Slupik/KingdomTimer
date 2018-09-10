@@ -1,11 +1,13 @@
 package jw.kingdom.hall.kingdomtimer.javafx.control.sps;
 
 import com.google.common.io.Resources;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import jw.kingdom.hall.kingdomtimer.javafx.utils.PlatformUtils;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,19 +44,21 @@ public class StartPauseStopView extends HBox {
     }
 
     private void setupView() {
-        if(stop) {
-            btnStart.setVisible(true);
-            loadStartImage();
-            btnStop.setVisible(false);
-        } else if(pause) {
-            btnStart.setVisible(true);
-            loadStartImage();
-            btnStop.setVisible(true);
-        } else {
-            btnStart.setVisible(true);
-            loadPauseImage();
-            btnStop.setVisible(true);
-        }
+//        Platform.runLater(()->{
+            if(stop) {
+                btnStart.setVisible(true);
+                loadStartImage();
+                btnStop.setVisible(false);
+            } else if(pause) {
+                btnStart.setVisible(true);
+                loadStartImage();
+                btnStop.setVisible(true);
+            } else {
+                btnStart.setVisible(true);
+                loadPauseImage();
+                btnStop.setVisible(true);
+            }
+//        });
     }
 
     @FXML

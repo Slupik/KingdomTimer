@@ -8,6 +8,7 @@ import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 public class SpsControllerForRecord implements StartPauseStopView.Controller, StartPauseStopView.Listener {
     private final StartPauseStopView view;
     private final Input input;
+    private boolean ignore = false;
 
     public SpsControllerForRecord(Input input){
         this.view = new StartPauseStopView();
@@ -19,6 +20,42 @@ public class SpsControllerForRecord implements StartPauseStopView.Controller, St
 
     private void init() {
         input.getRecorder();
+        input.getRecorder().addListener(new Recorder.Listener() {
+            @Override
+            public void onStop() {
+                ignore = true;
+                view.setupForStop();
+                ignore = false;
+//                new Thread(()->{
+//                    PlatformUtils.runOnUiThread(()->{
+//                        System.out.println("STOP");
+//                        view.setupForStop();
+//                        ignore = false;
+//                    });
+//                }).start();
+            }
+
+            @Override
+            public void onPause() {
+                ignore = true;
+                view.setupForPause();
+                ignore = false;
+            }
+
+            @Override
+            public void onResume() {
+                ignore = true;
+                view.setupForUnPause();
+                ignore = false;
+            }
+
+            @Override
+            public void onStart() {
+                ignore = true;
+                view.setupForStart();
+                ignore = false;
+            }
+        });
     }
 
     @Override
@@ -28,22 +65,30 @@ public class SpsControllerForRecord implements StartPauseStopView.Controller, St
 
     @Override
     public void onStart() {
-        input.getRecorder().onStart();
+        if(!ignore) {
+            input.getRecorder().onStart();
+        }
     }
 
     @Override
     public void onPause() {
-        input.getRecorder().setPause(true);
+        if(!ignore) {
+            input.getRecorder().setPause(true);
+        }
     }
 
     @Override
     public void onResume() {
-        input.getRecorder().setPause(false);
+        if(!ignore) {
+            input.getRecorder().setPause(false);
+        }
     }
 
     @Override
     public void onStop() {
-        input.getRecorder().onStop();
+        if(!ignore) {
+            input.getRecorder().onStop();
+        }
     }
 
     public StartPauseStopView getView() {
