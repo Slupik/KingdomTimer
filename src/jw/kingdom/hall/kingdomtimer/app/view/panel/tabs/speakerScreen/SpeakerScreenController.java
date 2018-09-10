@@ -104,12 +104,12 @@ public class SpeakerScreenController extends ControlledScreenImpl implements Ini
 
     private void loadScreenFromConfig(ChoiceBox<Monitor> choiceBox, String screenID) {
         setMonitorFromConfig(choiceBox, screenID);
-        choiceBox.getItems().addListener((ListChangeListener<Monitor>) c -> {
+        choiceBox.getItems().addListener((ListChangeListener<Monitor>) c -> Platform.runLater(()->{
             if(choiceBox.getValue()==null) {
                 setMonitorFromConfig(choiceBox, screenID);
                 autoSetupMultimediaScreen();
             }
-        });
+        }));
     }
 
     private void setMonitorFromConfig(ChoiceBox<Monitor> choiceBox, String monitorId) {
