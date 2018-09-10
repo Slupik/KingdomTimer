@@ -159,17 +159,28 @@ public class ViewerWindow implements StageWindow {
     private void autoSelectScreen(){
         MonitorObservableList list = MonitorManager.monitors;
 
-        if(list.size() < 2){
-            setMonitor(null);
+        String fromConfig = AppConfig.getInstance().getSpeakerScreen();
+        if(fromConfig==null || fromConfig.length()<1) {
+            if(list.size() < 2){
+                setMonitor(null);
+            } else {
+                for(int i=list.size()-1;i>=0;i--){
+                    Monitor monitor = list.get(i);
+                    if(!monitor.isMain()){
+                        setMonitor(monitor);
+                        return;
+                    }
+                }
+                setMonitor(null);
+            }
         } else {
             for(int i=list.size()-1;i>=0;i--){
                 Monitor monitor = list.get(i);
-                if(!monitor.isMain()){
+                if(monitor.getIDstring().equals(fromConfig) && !monitor.isMain()){
                     setMonitor(monitor);
                     return;
                 }
             }
-            setMonitor(null);
         }
     }
 
