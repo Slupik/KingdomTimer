@@ -1,6 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.app.view.viewer;
 
 import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -56,7 +57,7 @@ public class ViewerWindow implements StageWindow {
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.setAlwaysOnTop(true);
-        stage.show();
+//        stage.show();
 
         stage.setOnCloseRequest(event -> System.exit(0));
 
@@ -85,6 +86,11 @@ public class ViewerWindow implements StageWindow {
                 }
             }
         });
+        MonitorManager.monitors.addListener((ListChangeListener<Monitor>) c -> {
+            if(actualDevice==null) {
+                autoSelectScreen();
+            }
+        });
         autoSelectScreen();
         setVisibility(AppConfig.getInstance().isVisibleSpeakerScreen());
         runThreadPreventingByMainMonitor();
@@ -110,7 +116,7 @@ public class ViewerWindow implements StageWindow {
                             Platform.runLater(()-> stage.hide());
                         } else {
                             errorWithMainScreen = false;
-                            Platform.runLater(()-> stage.show());
+                            Platform.runLater(()-> setVisibility(AppConfig.getInstance().isVisibleSpeakerScreen()));
                         }
                     }
                 }
