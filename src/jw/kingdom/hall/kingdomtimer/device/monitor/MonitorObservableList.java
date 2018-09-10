@@ -90,13 +90,13 @@ public class MonitorObservableList extends ObservableListWrapper<Monitor> {
 		 */
 		sorted((o1, o2) -> {
 			if(o1==null && o2!=null) {
-				return -1;
-			} else if(o1!=null && o2==null) {
 				return 1;
+			} else if(o1!=null && o2==null) {
+				return -1;
 			} else if(o1 == null) {
 				return 0;
 			}
-			return Double.compare(o1.getBounds().getX(), o2.getBounds().getX());
+			return Double.compare(o1.getBounds().getX(), o2.getBounds().getX())*(-1);
 		});
 		for(int i=0;i<size();i++){
 			Monitor monitor = get(i);
