@@ -2,6 +2,7 @@ package jw.kingdom.hall.kingdomtimer.javafx.entity.schedule;
 
 import com.sun.javafx.collections.ObservableListWrapper;
 import javafx.collections.ListChangeListener;
+import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleListener;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.task.TaskFxBean;
 import jw.kingdom.hall.kingdomtimer.entity.task.ObservableTask;
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
@@ -21,15 +22,19 @@ public class ScheduleFxBean extends ObservableListWrapper<TaskFxBean> {
     public ScheduleFxBean(ScheduleController controller) {
         super(getAsFxList(controller.getTasks()));
         this.controller = controller;
-        controller.addListener(list -> {
-            if(ignoreChanges) {
-                return;
+        controller.addListener(new ScheduleListener() {
+            @Override
+            public void onListChange(List<ObservableTask> list) {
+                super.onListChange(list);
+                if(ignoreChanges) {
+                    return;
+                }
+                ignoreChanges = true;
+                //TODO make this more efficient
+                clear();
+                addAll(getAsFxList(list));
+                ignoreChanges = false;
             }
-            ignoreChanges = true;
-            //TODO make this more efficient
-            clear();
-            addAll(getAsFxList(list));
-            ignoreChanges = false;
         });
         addListener((ListChangeListener<TaskFxBean>) c -> {
             if(ignoreChanges) {

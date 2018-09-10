@@ -12,4 +12,14 @@ public abstract class ScheduleListener implements ScheduleController.Listener {
     public void onListChange(List<ObservableTask> list) {
 
     }
+
+    @Override
+    public void onFirstTaskUse() {
+
+    }
+
+    @Override
+    public void onLastTaskUse() {
+
+    }
 }

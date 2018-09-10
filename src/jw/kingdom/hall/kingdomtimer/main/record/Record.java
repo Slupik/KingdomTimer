@@ -7,6 +7,15 @@ import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
  * All rights reserved & copyright ©
  */
 public class Record implements Recorder {
+
+    public Record(){
+        init();
+    }
+
+    private void init() {
+        VoiceRecorder.getInstance();
+    }
+
     @Override
     public void onStart() {
         VoiceRecorder.getInstance().start();

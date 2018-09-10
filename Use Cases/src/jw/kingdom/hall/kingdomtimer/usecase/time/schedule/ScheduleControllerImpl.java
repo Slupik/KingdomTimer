@@ -14,10 +14,12 @@ import java.util.List;
 public class ScheduleControllerImpl implements ScheduleController {
     private ArrayList<Listener> listeners = new ArrayList<>();
     private ObservableArray<ObservableTask> list = new ObservableArray<>();
+    private boolean wasFirstTask = false;
 
     @Override
     public void clear() {
         this.list.clear();
+        wasFirstTask = false;
         notifyListenerAboutListChange();
     }
 
@@ -65,12 +67,30 @@ public class ScheduleControllerImpl implements ScheduleController {
     public Task bringOutFirstTask() {
         Task task = list.get(0);
         removeTask(task);
+        if(!wasFirstTask) {
+            wasFirstTask = true;
+            notifyListenerAboutFirstTaskUse();
+        } else if(list.size()==0) {
+            notifyListenerAboutLastTaskUse();
+        }
         return task;
     }
 
     private void notifyListenerAboutListChange() {
         for(Listener listener:listeners) {
             listener.onListChange(this.list);
+        }
+    }
+
+    private void notifyListenerAboutFirstTaskUse() {
+        for(Listener listener:listeners) {
+            listener.onFirstTaskUse();
+        }
+    }
+
+    private void notifyListenerAboutLastTaskUse() {
+        for(Listener listener:listeners) {
+            listener.onLastTaskUse();
         }
     }
 }

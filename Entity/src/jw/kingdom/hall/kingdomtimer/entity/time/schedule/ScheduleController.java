@@ -22,5 +22,7 @@ public interface ScheduleController {
 
     interface Listener {
         void onListChange(List<ObservableTask> list);
+        void onFirstTaskUse();
+        void onLastTaskUse();
     }
 }
