@@ -44,14 +44,15 @@ class RecordBackup {
     }
 
     private void backupData() {
+        File newestBackup = saveDataToWav();
         deleteLastBackupFile();
-        saveDataToWav();
+        lastBackup = newestBackup;
     }
 
-    private void saveDataToWav() {
+    private File saveDataToWav() {
         File backup = getDestFile();
         saver.saveTo(backup);
-        lastBackup = backup;
+        return backup;
     }
 
     private File getDestFile() {
