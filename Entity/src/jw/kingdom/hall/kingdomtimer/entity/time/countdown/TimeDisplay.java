@@ -9,6 +9,7 @@ import jw.kingdom.hall.kingdomtimer.entity.task.Task;
 public interface TimeDisplay {
     void onTaskChange(Task newTask);
     void display(int startTime, int timeToDisplay, int absoluteTimeLeft);
+    void display(int time);
     void setLightBackground(boolean lightBackground);
     void setTextColor(Paint fill);
     void resetColorToLast();

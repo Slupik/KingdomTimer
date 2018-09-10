@@ -42,6 +42,11 @@ public class TimeDisplayController implements TimeDisplay {
     }
 
     @Override
+    public void display(int time) {
+        setTime(time);
+    }
+
+    @Override
     public void reset() {
         setTime(0);
         setColorCode(TimerColor.getDefaultColorCode());

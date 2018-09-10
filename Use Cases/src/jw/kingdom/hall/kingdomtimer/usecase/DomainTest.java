@@ -30,6 +30,11 @@ public class DomainTest {
             }
 
             @Override
+            public void display(int time) {
+                System.out.println(time);
+            }
+
+            @Override
             public void setLightBackground(boolean lightBackground) {
 
             }

@@ -6,8 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import jw.kingdom.hall.kingdomtimer.entity.time.countdown.TimeDisplay;
 import jw.kingdom.hall.kingdomtimer.javafx.control.sps.SpsControllerForRecord;
 import jw.kingdom.hall.kingdomtimer.javafx.control.sps.SpsControllerForTime;
+import jw.kingdom.hall.kingdomtimer.javafx.control.time.display.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.TabPresenter;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 
@@ -40,6 +42,7 @@ public class TabRecordPresenter extends TabPresenter implements SpsControllerFor
     @Override
     public void onStart() {
         hbControlsContainer.getChildren().add(new SpsControllerForRecord(this).getView());
+        getRecorder().addDisplay(new TimeDisplayController(lblTime)::display);
     }
 
     @Override
