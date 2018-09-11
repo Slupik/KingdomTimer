@@ -5,11 +5,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import jw.kingdom.hall.kingdomtimer.entity.task.Task;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
+import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownListener;
 import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
 import jw.kingdom.hall.kingdomtimer.javafx.control.sps.SpsControllerForTime;
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.display.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.screen.ControlledScreenBase;
+import jw.kingdom.hall.kingdomtimer.javafx.utils.PlatformUtils;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -43,6 +46,23 @@ public class HandyWindowPresenter extends ControlledScreenBase implements SpsCon
         super.onStart();
         getWindowData().getCountdown().addTimeDisplay(new TimeDisplayController(lblTime));
         hbTimeControlsContainer.getChildren().add(new SpsControllerForTime(this).getView());
+        setupTaskNameUpdating();
+    }
+
+    private void setupTaskNameUpdating() {
+        getWindowData().getCountdown().addListener(new CountdownListener() {
+            @Override
+            public void onTaskStart(Task task) {
+                super.onTaskStart(task);
+                PlatformUtils.runOnUiThread(()->lblNow.setText(task.getName()));
+            }
+
+            @Override
+            protected void onStop() {
+                super.onStop();
+                PlatformUtils.runOnUiThread(()->lblNow.setText(""));
+            }
+        });
     }
 
     private void setupZoom() {
