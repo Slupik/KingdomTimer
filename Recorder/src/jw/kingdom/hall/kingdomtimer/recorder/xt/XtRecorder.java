@@ -3,6 +3,8 @@ package jw.kingdom.hall.kingdomtimer.recorder.xt;
 import com.xtaudio.xt.*;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
+import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.AudioDataBuffer;
+import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.FileBuffer;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -16,9 +18,7 @@ public class XtRecorder implements Recorder, Recording.Listener {
     private static XtFormat format;
     private final AudioSettingsBean settingsBean;
     private Recording recording;
-//    private RawDataBuffer data = new RawDataBuffer();
-    private File storage;
-    private OutputStream data;
+    private AudioDataBuffer storage;
     private BufferDataSaver saver;
     private RecordBackup backup;
 
@@ -42,19 +42,14 @@ public class XtRecorder implements Recorder, Recording.Listener {
 
     @Override
     public void onStart() {
-        storage = settingsBean.getPaths().getBackupFile(".pcm");
-//        data = new RawDataBuffer();
-        try {
-            data = new FileOutputStream(storage);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-//        saver = ObjectsFactory.getSaver(data, settingsBean, format);
+        storage = new FileBuffer(settingsBean.getPaths().getBackupFile(".pcm"));
         saver = ObjectsFactory.getSaver(storage, settingsBean, format);
-//        backup = new RecordBackup(saver, settingsBean);
 
-        recording.start(data);
-//        backup.start(60);
+        recording.start(storage);
+        if(storage.isNeedBackup()) {
+            backup = new RecordBackup(saver, settingsBean);
+            backup.start(60);
+        }
     }
 
     @Override
@@ -66,21 +61,14 @@ public class XtRecorder implements Recorder, Recording.Listener {
     public void onStop() {
         if(recording!=null) recording.stop();
         if(backup!=null) backup.stop();
-        if(data!=null) {
-            try {
-                data.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        File storageCopy = storage;
+        AudioDataBuffer storageCopy = storage;
         if(saver!=null) saver.finalSave(() -> new Thread(()->{
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(storageCopy!=null && storageCopy.exists()) {
+            if(storageCopy!=null) {
                 storageCopy.delete();
             }
         }).start());

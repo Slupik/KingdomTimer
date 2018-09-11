@@ -2,6 +2,7 @@ package jw.kingdom.hall.kingdomtimer.recorder.xt;
 
 import com.xtaudio.xt.*;
 import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
+import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.AudioDataBuffer;
 
 import java.io.File;
 
@@ -28,7 +29,7 @@ class ObjectsFactory {
         return null;
     }
 
-    static BufferDataSaver getSaver(File storage, AudioSettingsBean bean, XtFormat format){
+    static BufferDataSaver getSaver(AudioDataBuffer storage, AudioSettingsBean bean, XtFormat format){
         XtMix mix;
         if(bean.isReadDefaultMixSettings()) {
             mix = format.mix;

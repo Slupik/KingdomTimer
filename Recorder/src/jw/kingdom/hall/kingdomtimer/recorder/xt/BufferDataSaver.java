@@ -5,6 +5,7 @@ import it.sauronsoftware.jave.Encoder;
 import it.sauronsoftware.jave.EncoderException;
 import it.sauronsoftware.jave.EncodingAttributes;
 import jw.kingdom.hall.kingdomtimer.recorder.common.files.FileRecordCreator;
+import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.AudioDataBuffer;
 import jw.kingdom.hall.kingdomtimer.recorder.utils.wav.WavDataSaver;
 
 import java.io.*;
@@ -15,7 +16,7 @@ import java.nio.file.Files;
  */
 class BufferDataSaver {
     private ByteArrayOutputStream stream;
-    private File storage;
+    private AudioDataBuffer storage;
 
     private final int srate;
     private final int channel;
@@ -30,7 +31,7 @@ class BufferDataSaver {
         this.paths = paths;
     }
 
-    BufferDataSaver(File storage, int srate, int channel, int format, FileRecordCreator paths) {
+    BufferDataSaver(AudioDataBuffer storage, int srate, int channel, int format, FileRecordCreator paths) {
         this.storage = storage;
         this.srate = srate;
         this.channel = channel;
@@ -59,7 +60,11 @@ class BufferDataSaver {
         return paths.getFinalFile(extension);
     }
 
-    void saveTo(File dest) {
+    void saveBackupTo(File dest) {
+        saveTo(dest);
+    }
+
+    private void saveTo(File dest) {
         if(!dest.exists()) {
             try {
                 dest.createNewFile();
@@ -86,16 +91,7 @@ class BufferDataSaver {
     }
 
     private byte[] getBytesToConvert() {
-        if(stream!=null) {
-            return stream.toByteArray();
-        } else {
-            try {
-                return Files.readAllBytes(storage.toPath());
-            } catch (IOException e) {
-                e.printStackTrace();
-                return new byte[0];
-            }
-        }
+        return storage.readAllBytes();
     }
 
     private void convertToMp3(File source, File target) throws EncoderException {

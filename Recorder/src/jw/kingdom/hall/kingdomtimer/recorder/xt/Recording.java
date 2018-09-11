@@ -1,6 +1,8 @@
 package jw.kingdom.hall.kingdomtimer.recorder.xt;
 
 import com.xtaudio.xt.*;
+import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.AudioDataBuffer;
+import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.FileBuffer;
 
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -28,13 +30,13 @@ class Recording {
         this.sampleSize = XtAudio.getSampleAttributes(format.mix.sample).size;
     }
 
-    void start(OutputStream output){
+    void start(AudioDataBuffer output){
         init(output);
         stream.start();
     }
 
     @SuppressWarnings("Convert2Lambda")
-    private void init(OutputStream output) {
+    private void init(AudioDataBuffer output) {
         XtBuffer buffer = device.getBuffer(format);
         stream = device.openStream(format, true, false, buffer.current, new XtStreamCallback() {
             @Override
@@ -43,7 +45,7 @@ class Recording {
                 byte[] array = convertToByteArray(input);
                 if (frames > 0) {
                     if(!pause) {
-                        ((OutputStream) user).write(array, 0, frames * sampleSize);
+                        ((AudioDataBuffer) user).write(array, 0, frames * sampleSize);
                         notifyAboutNewFrames(frames);
                     }
                 }

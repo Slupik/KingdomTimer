@@ -51,7 +51,7 @@ class RecordBackup {
 
     private File saveDataToWav() {
         File backup = getDestFile();
-        saver.saveTo(backup);
+        saver.saveBackupTo(backup);
         return backup;
     }
 
