@@ -4,6 +4,9 @@ import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import jw.kingdom.hall.kingdomtimer.entity.monitor.Monitor;
+import jw.kingdom.hall.kingdomtimer.entity.monitor.MonitorNotFoundException;
+import jw.kingdom.hall.kingdomtimer.entity.monitor.MonitorUtils;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.AppWindow;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.WindowInput;
 
@@ -48,6 +51,8 @@ public class HandyWindow extends AppWindow {
     protected void onPostShow() {
         new MobilityController(stage, root);
 
+        setPosToRightUp();
+
         new Thread(()->{
             try {
                 Thread.sleep(5000);
@@ -56,6 +61,22 @@ public class HandyWindow extends AppWindow {
             }
             Platform.runLater(()-> getStage().sizeToScene());
         }).start();
+    }
+
+    private void setPosToRightUp() {
+        try {
+            Monitor monitor = MonitorUtils.getPrimary(input.getMonitorList().getMonitors());
+            if(monitor!=null) {
+                getStage().setX(
+                        monitor.getBounds().getWidth()-getStage().getWidth()-75
+                );
+                getStage().setY(
+                        monitor.getBounds().getY()+75
+                );
+            }
+        } catch (MonitorNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public enum Screens {
