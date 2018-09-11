@@ -84,20 +84,24 @@ class PreviewAndTimeCoordinator {
             START LOGIC
      */
     void onMultimediaVisibilityChange(boolean isMultimediaShowing) {
-            updateTimerText(isMultimediaShowing);
-            bindTimerContainerSize(isMultimediaShowing);
+            updateTimerText(isMultimediaShowing,
+                    ()->bindTimerContainerSize(isMultimediaShowing)
+            );
     }
 
-    private void updateTimerText(boolean isShowing) {
-        if(isShowing) {
-            setupFontForTimerText(mainContainer.heightProperty().get()*0.3);
-            timeView.setPadding(new Insets(0,(int)(mainContainer.widthProperty().get()*0.01),0,0));
-            timeContainer.setAlignment(Pos.BOTTOM_CENTER);
-        } else {
-            setupFontForTimerText(mainContainer.heightProperty().get());
-            timeView.setPadding(new Insets(0, 0,0,0));
-            timeContainer.setAlignment(Pos.CENTER);
-        }
+    private void updateTimerText(boolean isShowing, Runnable callbackOnEnd) {
+        Platform.runLater(()->{
+            if(isShowing) {
+                setupFontForTimerText(mainContainer.heightProperty().get()*0.33);
+                timeView.setPadding(new Insets(0,(int)(mainContainer.widthProperty().get()*0.01),0,0));
+                timeContainer.setAlignment(Pos.BOTTOM_CENTER);
+            } else {
+                setupFontForTimerText(mainContainer.heightProperty().get());
+                timeView.setPadding(new Insets(0, 0,0,0));
+                timeContainer.setAlignment(Pos.CENTER);
+            }
+            callbackOnEnd.run();
+        });
     }
 
     private void setupFontForTimerText(double height) {

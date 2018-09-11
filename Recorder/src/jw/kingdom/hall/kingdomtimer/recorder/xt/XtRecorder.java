@@ -3,6 +3,9 @@ package jw.kingdom.hall.kingdomtimer.recorder.xt;
 import com.xtaudio.xt.*;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
+import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.AudioDataBuffer;
+import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.file.FileBuffer;
+import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.ram.RamBuffer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +18,7 @@ public class XtRecorder implements Recorder, Recording.Listener {
     private static XtFormat format;
     private final AudioSettingsBean settingsBean;
     private Recording recording;
-    private RawDataBuffer data = new RawDataBuffer();
+    private AudioDataBuffer storage;
     private BufferDataSaver saver;
     private RecordBackup backup;
 
@@ -39,12 +42,14 @@ public class XtRecorder implements Recorder, Recording.Listener {
 
     @Override
     public void onStart() {
-        data = new RawDataBuffer();
-        saver = ObjectsFactory.getSaver(data, settingsBean, format);
-        backup = new RecordBackup(saver, settingsBean);
+        storage = new FileBuffer(settingsBean.getPaths().getBackupFile(".pcm"));
+        saver = ObjectsFactory.getSaver(storage, settingsBean, format);
 
-        recording.start(data);
-        backup.start(60);
+        recording.start(storage);
+        if(storage.isNeedBackup()) {
+            backup = new RecordBackup(saver, settingsBean);
+            backup.start(60);
+        }
         notifyAboutStart();
     }
 
@@ -62,7 +67,17 @@ public class XtRecorder implements Recorder, Recording.Listener {
     public void onStop() {
         if(recording!=null) recording.stop();
         if(backup!=null) backup.stop();
-        if(saver!=null) saver.finalSave();
+        AudioDataBuffer storageCopy = storage;
+        if(saver!=null) saver.finalSave(() -> new Thread(()->{
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if(storageCopy!=null) {
+                storageCopy.delete();
+            }
+        }).start());
         setTotalFrames(0);
         notifyAboutStop();
     }

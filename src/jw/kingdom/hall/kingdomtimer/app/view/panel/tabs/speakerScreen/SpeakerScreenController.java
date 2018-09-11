@@ -3,6 +3,7 @@ package jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.speakerScreen;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -78,20 +79,42 @@ public class SpeakerScreenController extends ControlledScreenImpl implements Ini
                 AppConfig.getInstance().setEnabledShowMultimedia(newValue));
     }
 
-    private void loadScreenFromConfig(ChoiceBox<Monitor> choiceBox, String screenID) {
-        Monitor multiMonitor = getMonitorFromList(choiceBox.getItems(), screenID);
-        choiceBox.setValue(multiMonitor);
-    }
-
     private void loadConfig() {
         loadScreenFromConfig(cbMultimediaScreen, AppConfig.getInstance().getMultimediaScreen());
         loadScreenFromConfig(cbPreviewScreen, AppConfig.getInstance().getSpeakerScreen());
+        autoSetupMultimediaScreen();
 
         cbEnableGleaming.setSelected(AppConfig.getInstance().isEnabledGleaming());
         cbShowPreview.setSelected(AppConfig.getInstance().isEnabledShowMultimedia());
         atfRefreshInterval.setText(
                 String.valueOf(AppConfig.getInstance().getActualRefreshRate())
         );
+    }
+
+    private void autoSetupMultimediaScreen() {
+        if(AppConfig.getInstance().getMultimediaScreen()==null || AppConfig.getInstance().getMultimediaScreen().length()<1) {
+            for(Monitor monitor:cbMultimediaScreen.getItems()) {
+                if(!monitor.isMain() && cbPreviewScreen.getValue()!=null) {
+                    cbMultimediaScreen.setValue(monitor);
+                    return;
+                }
+            }
+        }
+    }
+
+    private void loadScreenFromConfig(ChoiceBox<Monitor> choiceBox, String screenID) {
+        setMonitorFromConfig(choiceBox, screenID);
+        choiceBox.getItems().addListener((ListChangeListener<Monitor>) c -> Platform.runLater(()->{
+            if(choiceBox.getValue()==null) {
+                setMonitorFromConfig(choiceBox, screenID);
+                autoSetupMultimediaScreen();
+            }
+        }));
+    }
+
+    private void setMonitorFromConfig(ChoiceBox<Monitor> choiceBox, String monitorId) {
+        Monitor multiMonitor = getMonitorFromList(choiceBox.getItems(), monitorId);
+        choiceBox.setValue(multiMonitor);
     }
 
     private void setupGleamController() {

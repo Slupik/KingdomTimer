@@ -12,7 +12,7 @@
             <option name="windowsIcon" value="$PROJECT_DIR$/app/Timer.ico" />
           </JavaFxApplicationIcons>
         </option>
-        <option name="paramFile" value="-Dprism.maxvram=10M -Dprism.order=sw BigTextureRenderTest" />
+        <option name="paramFile" value="-Xmx3g -Dprism.maxvram=10M -Dprism.order=sw BigTextureRenderTest" />
         <option name="title" value="" />
         <option name="vendor" value="" />
         <option name="version" value="1.1.2" />

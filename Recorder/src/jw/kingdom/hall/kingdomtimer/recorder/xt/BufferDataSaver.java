@@ -5,6 +5,7 @@ import it.sauronsoftware.jave.Encoder;
 import it.sauronsoftware.jave.EncoderException;
 import it.sauronsoftware.jave.EncodingAttributes;
 import jw.kingdom.hall.kingdomtimer.recorder.common.files.FileRecordCreator;
+import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.AudioDataBuffer;
 import jw.kingdom.hall.kingdomtimer.recorder.utils.wav.WavDataSaver;
 
 import java.io.*;
@@ -13,21 +14,22 @@ import java.io.*;
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class BufferDataSaver {
-    private final ByteArrayOutputStream stream;
+    private AudioDataBuffer storage;
+
     private final int srate;
     private final int channel;
     private final int format;
     private final FileRecordCreator paths;
 
-    BufferDataSaver(ByteArrayOutputStream stream, int srate, int channel, int format, FileRecordCreator paths) {
-        this.stream = stream;
+    BufferDataSaver(AudioDataBuffer storage, int srate, int channel, int format, FileRecordCreator paths) {
+        this.storage = storage;
         this.srate = srate;
         this.channel = channel;
         this.format = format;
         this.paths = paths;
     }
 
-    void finalSave() {
+    void finalSave(Runnable callbackOnEnd) {
         new Thread(()->{
             File destWavFile = getDestFile(".wav");
             File destMp3File = getDestFile(".mp3");
@@ -40,6 +42,7 @@ class BufferDataSaver {
             } catch (EncoderException e) {
                 e.printStackTrace();
             }
+            callbackOnEnd.run();
         }).start();
     }
 
@@ -47,7 +50,11 @@ class BufferDataSaver {
         return paths.getFinalFile(extension);
     }
 
-    void saveTo(File dest) {
+    void saveBackupTo(File dest) {
+        saveTo(dest);
+    }
+
+    private void saveTo(File dest) {
         if(!dest.exists()) {
             try {
                 dest.createNewFile();
@@ -55,14 +62,21 @@ class BufferDataSaver {
                 e.printStackTrace();
             }
         }
-
+        OutputStream destStream = null;
         try {
-            OutputStream destStream = new FileOutputStream(dest);
-            byte[] data = stream.toByteArray();
-            WavDataSaver.savePCM(destStream, data, srate, channel, format);
+            destStream = new FileOutputStream(dest);
+            WavDataSaver.savePCM(destStream, storage, srate, channel, format);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if (destStream != null) {
+            try {
+                destStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        System.gc();
     }
 
     private void convertToMp3(File source, File target) throws EncoderException {

@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.recorder.xt;
+package jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.ram;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.IOException;
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-class RawDataBuffer extends ByteArrayOutputStream {
+public class RawDataBuffer extends ByteArrayOutputStream {
     @Override
     public void write(byte[] b) throws IOException {
         super.write(b);

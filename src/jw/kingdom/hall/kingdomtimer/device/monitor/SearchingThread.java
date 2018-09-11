@@ -8,6 +8,8 @@ package jw.kingdom.hall.kingdomtimer.device.monitor;
 import java.awt.*;
 import java.util.Calendar;
 
+import static java.awt.GraphicsDevice.TYPE_RASTER_SCREEN;
+
 class SearchingThread extends Thread {
 	private Thread t;
 	private String threadName;
@@ -31,12 +33,12 @@ class SearchingThread extends Thread {
 				try {
 					GraphicsDevice[] actDeviceList = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
 					for(GraphicsDevice gp:actDeviceList){
-						if(!MonitorManager.isOldListContains(gp)){
+						if(gp.getType()==TYPE_RASTER_SCREEN && !MonitorManager.isOldListContains(gp)){
 							MonitorManager.firePlugInEvent(gp);
 						}
 					}
 					for(GraphicsDevice gp:MonitorManager.lastDevicesList){
-						if(!MonitorManager.listContains(actDeviceList, gp)){
+						if(gp.getType()==TYPE_RASTER_SCREEN && !MonitorManager.listContains(actDeviceList, gp)){
 							MonitorManager.firePlugOutEvent(gp);
 						}
 					}
