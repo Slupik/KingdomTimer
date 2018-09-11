@@ -2,8 +2,9 @@ package jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.ram;
 
 import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.AudioDataBuffer;
 
-import java.io.*;
-import java.nio.file.Files;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * All rights reserved & copyright ©
@@ -22,8 +23,22 @@ public class RamBuffer implements AudioDataBuffer {
     }
 
     @Override
-    public byte[] readAllBytes() {
+    public long getSize() {
+        return buffer.size();
+    }
+
+    @Override
+    public byte[] getBytes() {
         return buffer.toByteArray();
+    }
+
+    @Override
+    public void appendTo(OutputStream output) {
+        try {
+            output.write(getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

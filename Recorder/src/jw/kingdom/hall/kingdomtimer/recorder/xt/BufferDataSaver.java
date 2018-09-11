@@ -9,7 +9,6 @@ import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.AudioDataBuffer;
 import jw.kingdom.hall.kingdomtimer.recorder.utils.wav.WavDataSaver;
 
 import java.io.*;
-import java.nio.file.Files;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -66,8 +65,7 @@ class BufferDataSaver {
         OutputStream destStream = null;
         try {
             destStream = new FileOutputStream(dest);
-            byte[] data = getBytesToConvert();
-            WavDataSaver.savePCM(destStream, data, srate, channel, format);
+            WavDataSaver.savePCM(destStream, storage, srate, channel, format);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -79,10 +77,6 @@ class BufferDataSaver {
             }
         }
         System.gc();
-    }
-
-    private byte[] getBytesToConvert() {
-        return storage.readAllBytes();
     }
 
     private void convertToMp3(File source, File target) throws EncoderException {
