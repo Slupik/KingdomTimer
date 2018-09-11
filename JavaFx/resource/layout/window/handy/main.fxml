@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
-<!--
-  ~ This file is part of KingdomHallTimer which is released under "no licence".
-  -->
 
 <!--
   ~ Created 03.09.18 21:09.
@@ -36,16 +31,14 @@
                         <Insets left="16.0" />
                      </HBox.margin>
                   </HBox>
-                  <Button mnemonicParsing="false" onAction="#minifyAction" text="Minimalizuj">
-                     <HBox.margin>
-                        <Insets left="16.0" />
-                     </HBox.margin>
-                  </Button>
                </children>
             </HBox>
             <HBox fillHeight="false">
                <children>
-                  <Label text="Obecnie:" />
+                  <Label minWidth="52.0" text="Obecnie:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <Label fx:id="lblNow" text="Punkt testowy">
                      <HBox.margin>
                         <Insets left="8.0" />

@@ -82,7 +82,8 @@ public class HandyWindowPresenter extends ControlledScreenBase implements SpsCon
         super.onCreate(location, resources);
     }
 
-    public void minifyAction(ActionEvent actionEvent) {
+    //Option hide widget placed in time control has substituted this
+    public void minifyAction() {
         window.getStage().setIconified(true);
     }
 
