@@ -12,12 +12,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.file.Files;
 
 /**
  * All rights reserved & copyright ©
  */
-public class MainRecordTest {
+public class RecordBenchmark {
     //0 - SSD
     //1 - HDD
     //2 - pendrive
