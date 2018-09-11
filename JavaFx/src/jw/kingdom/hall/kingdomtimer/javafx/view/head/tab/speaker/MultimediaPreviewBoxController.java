@@ -13,23 +13,28 @@ class MultimediaPreviewBoxController {
 
     MultimediaPreviewBoxController(Input input){
         this.input = input;
-        bindConfig();
         init();
+        bindConfig();
+        initListener();
     }
 
     private void init() {
+        getBox().setSelected(getConfig().isEnabledShowMultimedia());
+        MultimediaPreviewer.getInstance().showPreviews(getConfig().isEnabledShowMultimedia());
+        MultimediaPreviewer.getInstance().setPause(false);
+    }
+
+    private void bindConfig() {
+        getBox().selectedProperty().addListener((observable, oldValue, newValue) ->
+                getConfig().setEnabledShowMultimedia(newValue));
+    }
+
+    private void initListener() {
         getBox().selectedProperty().addListener((observable, oldValue, newValue) -> {
             if(oldValue!=newValue) {
                 MultimediaPreviewer.getInstance().showPreviews(newValue);
             }
         });
-    }
-
-    private void bindConfig() {
-        getBox().setSelected(getConfig().isEnabledShowMultimedia());
-        getBox().selectedProperty().addListener((observable, oldValue, newValue) ->
-                getConfig().setEnabledShowMultimedia(newValue));
-        MultimediaPreviewer.getInstance().showPreviews(getConfig().isEnabledShowMultimedia());
     }
 
     private CheckBox getBox() {

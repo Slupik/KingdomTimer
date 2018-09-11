@@ -10,14 +10,21 @@ import jw.kingdom.hall.kingdomtimer.javafx.temp.MultimediaPreviewer;
 class ControllerOfIntervalLoading {
 
     private final Input input;
-    private int lastSavedInterval = -1;
+    private int lastSavedInterval;
 
     ControllerOfIntervalLoading(Input input){
         this.input = input;
+        init();
+    }
+
+    private void init() {
+        getField().setText(Integer.toString(getConfig().getActualRefreshRate()));
+        lastSavedInterval = getTimeFromField();
+        MultimediaPreviewer.getInstance().setRefreshInterval(lastSavedInterval);
     }
 
     void load(){
-        int current = Integer.parseInt(getField().getSaveText());
+        int current = getTimeFromField();
         if(current<getConfig().getMinRefreshRate()) {
             getDialogShower().showTooLowValue();
             repairInterval();
@@ -45,10 +52,14 @@ class ControllerOfIntervalLoading {
     }
 
     private void saveInterval() {
-        int current = Integer.parseInt(getField().getSaveText());
+        int current = getTimeFromField();
         lastSavedInterval = current;
         MultimediaPreviewer.getInstance().setRefreshInterval(current);
         getConfig().setActualRefreshRate(current);
+    }
+
+    private int getTimeFromField() {
+        return Integer.parseInt(getField().getSaveText());
     }
 
     private AdvancedTextField getField() {

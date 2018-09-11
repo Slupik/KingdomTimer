@@ -57,10 +57,6 @@ public class TabSpeakerPresenter extends TabPresenter implements PresenterOfMult
         new MultimediaPreviewBoxController(this);
         new GleamSwitchController(this);
         intervalLoading = new ControllerOfIntervalLoading(this);
-
-        MultimediaPreviewer.getInstance().setRefreshInterval(500);
-        MultimediaPreviewer.getInstance().setPause(false);
-        MultimediaPreviewer.getInstance().showPreviews(true);
     }
 
     @Override
