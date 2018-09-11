@@ -4,8 +4,6 @@ import com.xtaudio.xt.*;
 import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
 import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.AudioDataBuffer;
 
-import java.io.File;
-
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
@@ -39,13 +37,4 @@ class ObjectsFactory {
         return new BufferDataSaver(storage, mix.rate, bean.getInputs(), XtAudio.getSampleAttributes(mix.sample).size*8, bean.getPaths());
     }
 
-    static BufferDataSaver getSaver(RawDataBuffer data, AudioSettingsBean bean, XtFormat format){
-        XtMix mix;
-        if(bean.isReadDefaultMixSettings()) {
-            mix = format.mix;
-        } else {
-            mix = new XtMix(bean.getRate(), getSampleById(bean.getSample()));
-        }
-        return new BufferDataSaver(data, mix.rate, bean.getInputs(), XtAudio.getSampleAttributes(mix.sample).size*8, bean.getPaths());
-    }
 }

@@ -4,9 +4,9 @@ import com.xtaudio.xt.*;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
 import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.AudioDataBuffer;
-import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.FileBuffer;
+import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.file.FileBuffer;
+import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.ram.RamBuffer;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 

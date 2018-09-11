@@ -15,21 +15,12 @@ import java.nio.file.Files;
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class BufferDataSaver {
-    private ByteArrayOutputStream stream;
     private AudioDataBuffer storage;
 
     private final int srate;
     private final int channel;
     private final int format;
     private final FileRecordCreator paths;
-
-    BufferDataSaver(ByteArrayOutputStream stream, int srate, int channel, int format, FileRecordCreator paths) {
-        this.stream = stream;
-        this.srate = srate;
-        this.channel = channel;
-        this.format = format;
-        this.paths = paths;
-    }
 
     BufferDataSaver(AudioDataBuffer storage, int srate, int channel, int format, FileRecordCreator paths) {
         this.storage = storage;
