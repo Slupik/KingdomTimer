@@ -4,6 +4,7 @@ import com.xtaudio.xt.*;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,9 @@ public class XtRecorder implements Recorder, Recording.Listener {
     private static XtFormat format;
     private final AudioSettingsBean settingsBean;
     private Recording recording;
-    private RawDataBuffer data = new RawDataBuffer();
+//    private RawDataBuffer data = new RawDataBuffer();
+    private File storage;
+    private OutputStream data;
     private BufferDataSaver saver;
     private RecordBackup backup;
 
@@ -39,12 +42,19 @@ public class XtRecorder implements Recorder, Recording.Listener {
 
     @Override
     public void onStart() {
-        data = new RawDataBuffer();
-        saver = ObjectsFactory.getSaver(data, settingsBean, format);
-        backup = new RecordBackup(saver, settingsBean);
+        storage = settingsBean.getPaths().getBackupFile(".pcm");
+//        data = new RawDataBuffer();
+        try {
+            data = new FileOutputStream(storage);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+//        saver = ObjectsFactory.getSaver(data, settingsBean, format);
+        saver = ObjectsFactory.getSaver(storage, settingsBean, format);
+//        backup = new RecordBackup(saver, settingsBean);
 
         recording.start(data);
-        backup.start(60);
+//        backup.start(60);
     }
 
     @Override
@@ -56,7 +66,24 @@ public class XtRecorder implements Recorder, Recording.Listener {
     public void onStop() {
         if(recording!=null) recording.stop();
         if(backup!=null) backup.stop();
-        if(saver!=null) saver.finalSave();
+        if(data!=null) {
+            try {
+                data.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        File storageCopy = storage;
+        if(saver!=null) saver.finalSave(() -> new Thread(()->{
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if(storageCopy!=null && storageCopy.exists()) {
+                storageCopy.delete();
+            }
+        }).start());
         setTotalFrames(0);
     }
 

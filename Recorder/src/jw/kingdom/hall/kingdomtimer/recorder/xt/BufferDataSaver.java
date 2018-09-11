@@ -8,12 +8,15 @@ import jw.kingdom.hall.kingdomtimer.recorder.common.files.FileRecordCreator;
 import jw.kingdom.hall.kingdomtimer.recorder.utils.wav.WavDataSaver;
 
 import java.io.*;
+import java.nio.file.Files;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class BufferDataSaver {
-    private final ByteArrayOutputStream stream;
+    private ByteArrayOutputStream stream;
+    private File storage;
+
     private final int srate;
     private final int channel;
     private final int format;
@@ -27,7 +30,15 @@ class BufferDataSaver {
         this.paths = paths;
     }
 
-    void finalSave() {
+    BufferDataSaver(File storage, int srate, int channel, int format, FileRecordCreator paths) {
+        this.storage = storage;
+        this.srate = srate;
+        this.channel = channel;
+        this.format = format;
+        this.paths = paths;
+    }
+
+    void finalSave(Runnable callbackOnEnd) {
         new Thread(()->{
             File destWavFile = getDestFile(".wav");
             File destMp3File = getDestFile(".mp3");
@@ -40,6 +51,7 @@ class BufferDataSaver {
             } catch (EncoderException e) {
                 e.printStackTrace();
             }
+            callbackOnEnd.run();
         }).start();
     }
 
@@ -55,13 +67,34 @@ class BufferDataSaver {
                 e.printStackTrace();
             }
         }
-
+        OutputStream destStream = null;
         try {
-            OutputStream destStream = new FileOutputStream(dest);
-            byte[] data = stream.toByteArray();
+            destStream = new FileOutputStream(dest);
+            byte[] data = getBytesToConvert();
             WavDataSaver.savePCM(destStream, data, srate, channel, format);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        if (destStream != null) {
+            try {
+                destStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        System.gc();
+    }
+
+    private byte[] getBytesToConvert() {
+        if(stream!=null) {
+            return stream.toByteArray();
+        } else {
+            try {
+                return Files.readAllBytes(storage.toPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+                return new byte[0];
+            }
         }
     }
 
