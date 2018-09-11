@@ -8,7 +8,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -30,9 +29,6 @@
                         <font>
                            <Font size="53.0" />
                         </font>
-                        <tooltip>
-                           <Tooltip text="Czas wyświetlany dla mówcy w formacie godziny:minuty:sekundy. Kolory mogą się różnić." wrapText="true" />
-                        </tooltip>
                      </Label>
                      <HBox alignment="CENTER_LEFT">
                         <children>

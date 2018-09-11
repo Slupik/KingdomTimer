@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -22,9 +21,6 @@
                      <font>
                         <Font size="53.0" />
                      </font>
-                     <tooltip>
-                        <Tooltip text="Czas wyświetlany dla mówcy w formacie godziny:minuty:sekundy. Kolory mogą się różnić." wrapText="true" />
-                     </tooltip>
                   </Label>
                   <HBox fx:id="hbTimeControlsContainer" alignment="CENTER_LEFT" fillHeight="false">
                      <HBox.margin>
