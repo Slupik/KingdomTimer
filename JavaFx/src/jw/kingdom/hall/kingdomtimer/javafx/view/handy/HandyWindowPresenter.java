@@ -1,5 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.javafx.view.handy;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -12,6 +13,8 @@ import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
 import jw.kingdom.hall.kingdomtimer.javafx.control.sps.SpsControllerForTime;
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.display.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.screen.ControlledScreenBase;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.AppWindow;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.WindowType;
 import jw.kingdom.hall.kingdomtimer.javafx.utils.PlatformUtils;
 
 import java.net.URL;
@@ -34,6 +37,8 @@ public class HandyWindowPresenter extends ControlledScreenBase implements SpsCon
     @FXML
     private HBox hbTimeControlsContainer;
 
+    private double lastSize = -1;
+
     @Override
     protected void onPreCreate() {
         super.onPreCreate();
@@ -47,6 +52,7 @@ public class HandyWindowPresenter extends ControlledScreenBase implements SpsCon
         getWindowData().getCountdown().addTimeDisplay(new TimeDisplayController(lblTime));
         hbTimeControlsContainer.getChildren().add(new SpsControllerForTime(this).getView());
         setupTaskNameUpdating();
+        setupAutoChangingSize();
     }
 
     private void setupTaskNameUpdating() {
@@ -75,6 +81,23 @@ public class HandyWindowPresenter extends ControlledScreenBase implements SpsCon
             }
             zoomOperator.zoom(getMainContainer(), zoomFactor);
         });
+    }
+
+    private void setupAutoChangingSize() {
+        Platform.runLater(()->{
+            lastSize = lblTime.widthProperty().doubleValue();
+            lblTime.widthProperty().addListener((observable, oldValue, newValue) -> {
+                double diff = newValue.doubleValue()-lastSize;
+                lastSize = newValue.doubleValue();
+                getHandyWindow().getStage().setWidth(
+                        getHandyWindow().getStage().getWidth()+diff
+                );
+            });
+        });
+    }
+
+    private HandyWindow getHandyWindow() {
+        return ((HandyWindow) getWindowsContainer().getAppWindow(WindowType.WIDGET));
     }
 
     @Override
