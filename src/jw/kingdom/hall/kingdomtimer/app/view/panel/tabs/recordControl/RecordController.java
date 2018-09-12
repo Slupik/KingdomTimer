@@ -192,6 +192,8 @@ public class RecordController extends ControlledScreenImpl implements Initializa
 
     @Override
     public void onNewTime(int seconds) {
-        controller.setTime(seconds);
+        if(controller!=null) {
+            controller.setTime(seconds);
+        }
     }
 }

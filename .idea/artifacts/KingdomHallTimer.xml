@@ -45,9 +45,9 @@
         <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jsoup/jsoup/1.11.3/jsoup-1.11.3.jar" path-in-jar="/" />
         <element id="module-output" name="JavaFx" />
         <element id="module-output" name="Monitor" />
+        <element id="module-output" name="Use Cases" />
+        <element id="module-output" name="Entity" />
       </element>
-      <element id="module-output" name="Use Cases" />
-      <element id="module-output" name="Entity" />
     </root>
   </artifact>
 </component>
