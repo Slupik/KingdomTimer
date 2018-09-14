@@ -1,0 +1,29 @@
+package jw.kingdom.hall.kingdomtimer.usecase.time.controller;
+
+import jw.kingdom.hall.kingdomtimer.entity.task.Task;
+
+/**
+ * All rights reserved & copyright ©
+ */
+public abstract class TimeDisplayProxy implements TimeDisplay {
+
+    @Override
+    public void display(int startTime, int timeToDisplay, int absoluteTimeLeft) {
+
+    }
+
+    @Override
+    public void onTimeOut() {
+
+    }
+
+    @Override
+    public void setTask(Task task) {
+
+    }
+
+    @Override
+    public void reset() {
+
+    }
+}

@@ -8,6 +8,6 @@ import jw.kingdom.hall.kingdomtimer.entity.task.Task;
 public interface TimeDisplay {
     void display(int startTime, int timeToDisplay, int absoluteTimeLeft);
     void onTimeOut();
-    void setTask(Task tak);
+    void setTask(Task task);
     void reset();
 }
