@@ -1,7 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.usecase.time.countdown;
 
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
-import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownState;
 import jw.kingdom.hall.kingdomtimer.usecase.mapper.MapperPojoToTask;
 import jw.kingdom.hall.kingdomtimer.usecase.task.pojo.TaskPOJO;
 import jw.kingdom.hall.kingdomtimer.usecase.time.listener.TimeListener;
@@ -12,9 +11,9 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownState.COUNTDOWNING;
-import static jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownState.PAUSE;
-import static jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownState.STOP;
+import static jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownState.COUNTDOWNING;
+import static jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownState.PAUSE;
+import static jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownState.STOP;
 
 /**
  * All rights reserved & copyright ©

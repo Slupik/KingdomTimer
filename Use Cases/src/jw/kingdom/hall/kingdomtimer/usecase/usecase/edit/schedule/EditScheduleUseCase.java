@@ -50,4 +50,9 @@ public class EditScheduleUseCase extends UseCase<OBEditSchedule> implements IBEd
     public void loadSchedule(boolean isCircuitVisit, int timeForEvaluation) {
         //TODO implement (loadSchedule)
     }
+
+    @Override
+    public void setSchedule(List<TaskPOJO> list) {
+        schedule.setTasks(new MapperPojoToTask().map(list));
+    }
 }

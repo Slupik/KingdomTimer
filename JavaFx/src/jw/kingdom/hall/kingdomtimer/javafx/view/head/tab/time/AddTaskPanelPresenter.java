@@ -6,9 +6,9 @@ import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.entity.task.ObservableTask;
 import jw.kingdom.hall.kingdomtimer.entity.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.entity.task.TaskType;
-import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.direct.BtnTimeDirectForPanel;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
+import jw.kingdom.hall.kingdomtimer.usecase.time.schedule.ScheduleController;
 
 /**
  * All rights reserved & copyright ©

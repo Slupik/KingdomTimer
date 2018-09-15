@@ -6,12 +6,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownListener;
 import jw.kingdom.hall.kingdomtimer.javafx.control.gleam.GleamControllerImpl;
 import jw.kingdom.hall.kingdomtimer.javafx.control.preview.MultimediaPreviewController;
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.display.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.screen.ControlledScreenBase;
 import jw.kingdom.hall.kingdomtimer.javafx.temp.MultimediaPreviewer;
+import jw.kingdom.hall.kingdomtimer.usecase.time.display.TimeDisplayProxy;
 
 /**
  * All rights reserved & copyright ©
@@ -48,10 +48,9 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
 
     private void setupGleam() {
         gleammer = new GleamControllerImpl(mainContainer, timeDisplay, getWindowData().getGleamSwitcher());
-        getWindowData().getCountdown().addListener(new CountdownListener() {
+        getWindowData().getCountdown().addDisplay(new TimeDisplayProxy() {
             @Override
             public void onTimeOut() {
-                super.onTimeOut();
                 if(getWindowData().getConfig().isEnabledGleaming()) {
                     gleammer.play();
                 }
@@ -61,7 +60,7 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
 
     private void setupTimeView() {
         timeDisplay = new TimeDisplayController(tvTime);
-        getWindowData().getCountdown().addTimeDisplay(timeDisplay);
+        getWindowData().getCountdown().addDisplay(timeDisplay);
 
         setupBackground();
 

@@ -6,8 +6,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import jw.kingdom.hall.kingdomtimer.entity.observable.field.ObservableField;
-import jw.kingdom.hall.kingdomtimer.entity.time.countdown.TimeDisplay;
 import jw.kingdom.hall.kingdomtimer.entity.time.gleam.GleamController;
 import jw.kingdom.hall.kingdomtimer.entity.time.gleam.GleamSwitcher;
 
@@ -16,12 +14,12 @@ import jw.kingdom.hall.kingdomtimer.entity.time.gleam.GleamSwitcher;
  */
 public class GleamControllerImpl implements GleamController {
     private Pane pane;
-    private TimeDisplay time;
+    private GleammingTimeDisplay time;
     private final GleamSwitcher switcher;
     private boolean isPlaying = false;
     private Background defaultBackground;
 
-    public GleamControllerImpl(Pane pane, TimeDisplay time, GleamSwitcher switcher) {
+    public GleamControllerImpl(Pane pane, GleammingTimeDisplay time, GleamSwitcher switcher) {
         this.pane = pane;
         this.time = time;
         this.switcher = switcher;

@@ -1,6 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.usecase.time.gleam;
 
 import jw.kingdom.hall.kingdomtimer.entity.observable.field.ObservableField;
+import jw.kingdom.hall.kingdomtimer.entity.task.Task;
 import jw.kingdom.hall.kingdomtimer.usecase.time.controller.TimeController;
 import jw.kingdom.hall.kingdomtimer.usecase.time.display.TimeDisplayProxy;
 
@@ -12,7 +13,7 @@ public abstract class GleamLogic implements GleamController {
     private final ObservableField<Boolean> enabled = new ObservableField<>();
 
     public GleamLogic(TimeController timeController){
-        timeController.addDisplay(new TimeDisplayProxy() {
+        timeController.addDisplay(new TimeDisplayProxy<Task>() {
             @Override
             public void onTimeOut() {
                 startGleamming();

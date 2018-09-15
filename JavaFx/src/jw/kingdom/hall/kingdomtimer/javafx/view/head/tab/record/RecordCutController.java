@@ -1,13 +1,14 @@
 package jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.record;
 
-import jw.kingdom.hall.kingdomtimer.entity.task.Task;
 import jw.kingdom.hall.kingdomtimer.entity.task.TaskType;
-import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
-import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownListener;
-import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
-import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleListener;
+import jw.kingdom.hall.kingdomtimer.javafx.GuiTimeListener;
+import jw.kingdom.hall.kingdomtimer.javafx.entity.task.TaskFxBean;
+import jw.kingdom.hall.kingdomtimer.javafx.mapper.MapperPojoToFxTask;
 import jw.kingdom.hall.kingdomtimer.javafx.utils.PlatformUtils;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
+import jw.kingdom.hall.kingdomtimer.usecase.task.pojo.TaskPOJO;
+import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownController;
+import jw.kingdom.hall.kingdomtimer.usecase.time.schedule.ScheduleController;
 
 /**
  * All rights reserved & copyright ©
@@ -24,17 +25,15 @@ class RecordCutController {
     }
 
     private void init() {
-        input.getSchedule().addListener(new ScheduleListener() {
+        input.getSchedule().addListener(new GuiTimeListener() {
             @Override
-            public void onFirstTaskUse() {
-                super.onFirstTaskUse();
+            public void onMeetingStart() {
                 startedRecord = false;
             }
-        });
-        input.getCountdown().addListener(new CountdownListener() {
+
             @Override
-            public void onTaskStart(Task task) {
-                super.onTaskStart(task);
+            public void onStart(TaskPOJO pojo) {
+                TaskFxBean task = new MapperPojoToFxTask().map(pojo);
                 if(input.isAutoPilotOn() && !startedRecord) {
                     startedRecord = true;
                     PlatformUtils.runOnUiThread(()-> input.getRecorder().onStart());
@@ -51,8 +50,7 @@ class RecordCutController {
             }
 
             @Override
-            protected void onStop() {
-                super.onStop();
+            public void onMeetingEnd() {
                 if(input.getSchedule().getTasks().size()==0) {
                     PlatformUtils.runOnUiThread(()-> input.getRecorder().onStop());
                     startedRecord = false;

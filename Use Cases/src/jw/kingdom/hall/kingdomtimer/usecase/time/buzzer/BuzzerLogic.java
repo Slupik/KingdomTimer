@@ -3,6 +3,7 @@ package jw.kingdom.hall.kingdomtimer.usecase.time.buzzer;
 import jw.kingdom.hall.kingdomtimer.entity.observable.field.ObservableField;
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
 import jw.kingdom.hall.kingdomtimer.entity.time.buzzer.BuzzerPlayer;
+import jw.kingdom.hall.kingdomtimer.usecase.task.pojo.TaskPOJO;
 import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownController;
 import jw.kingdom.hall.kingdomtimer.usecase.time.display.TimeDisplayProxy;
 
@@ -22,7 +23,7 @@ public abstract class BuzzerLogic implements BuzzerAutoController {
     }
 
     private void addCountdownListener() {
-        countdown.addDisplay(new TimeDisplayProxy() {
+        countdown.addDisplay(new TimeDisplayProxy<Task>() {
 
             private Task task;
 

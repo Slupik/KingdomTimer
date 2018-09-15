@@ -1,14 +1,21 @@
 package jw.kingdom.hall.kingdomtimer.usecase.time.display;
 
-import jw.kingdom.hall.kingdomtimer.entity.task.Task;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 
 /**
  * All rights reserved & copyright ©
  */
-public abstract class TimeDisplayProxy implements TimeDisplay {
+public abstract class TimeDisplayProxy<T> implements TimeDisplay<T> {
 
     @Override
     public void display(int startTime, int timeToDisplay, int absoluteTimeLeft) {
+
+    }
+
+    @Override
+    public void display(int time) {
 
     }
 
@@ -18,12 +25,17 @@ public abstract class TimeDisplayProxy implements TimeDisplay {
     }
 
     @Override
-    public void setTask(Task task) {
+    public void setTask(T task) {
 
     }
 
     @Override
     public void reset() {
 
+    }
+
+    @Override
+    public Type getType() {
+        return new TypeToken<T>(){}.getType();
     }
 }

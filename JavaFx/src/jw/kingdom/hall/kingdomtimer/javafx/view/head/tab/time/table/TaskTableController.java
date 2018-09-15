@@ -15,7 +15,7 @@ import jw.kingdom.hall.kingdomtimer.javafx.entity.schedule.ScheduleFxBean;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.task.TaskFxBean;
 import jw.kingdom.hall.kingdomtimer.javafx.temp.MeetingTaskTrans;
 import jw.kingdom.hall.kingdomtimer.entity.task.TaskType;
-import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
+import jw.kingdom.hall.kingdomtimer.usecase.usecase.edit.schedule.IBEditSchedule;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -35,7 +35,7 @@ public class TaskTableController {
     private TableColumn<TaskFxBean, String> tcType;
 
     public TaskTableController(Config config,
-                               ScheduleController schedule,
+                               IBEditSchedule schedule,
                                TableView<TaskFxBean> table,
                                TableColumn<TaskFxBean, String> tcDelete,
                                TableColumn<TaskFxBean, String> tcBuzzer,
@@ -58,7 +58,7 @@ public class TaskTableController {
 
     public TaskTableController(Data data) {
         this.config = data.getConfig();
-        this.tableData = new ScheduleFxBean(data.getSchedule());
+        this.tableData = new ScheduleFxBean(data.getScheduleEditor());
         this.TABLE = data.getTable();
         this.tcDelete = data.getTcDelete();
         this.tcBuzzer = data.getTcBuzzer();
@@ -176,7 +176,7 @@ public class TaskTableController {
     
     public interface Data {
         Config getConfig();
-        ScheduleController getSchedule();
+        IBEditSchedule getScheduleEditor();
         TableView<TaskFxBean> getTable();
         TableColumn<TaskFxBean, String> getTcDelete();
         TableColumn<TaskFxBean, String> getTcBuzzer();

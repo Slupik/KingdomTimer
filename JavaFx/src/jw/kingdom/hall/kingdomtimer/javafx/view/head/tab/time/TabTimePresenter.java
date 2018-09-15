@@ -5,8 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
-import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
-import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
 import jw.kingdom.hall.kingdomtimer.javafx.control.sps.SpsControllerForTime;
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.buzzer.BtnBuzzerController;
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.direct.BtnTimeDirectForInstantController;
@@ -14,8 +12,12 @@ import jw.kingdom.hall.kingdomtimer.javafx.control.time.direct.BtnTimeDirectForP
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.display.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.task.TaskFxBean;
+import jw.kingdom.hall.kingdomtimer.javafx.mapper.MapperPojoToObservableTask;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.TabPresenter;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.time.table.TaskTableController;
+import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownController;
+import jw.kingdom.hall.kingdomtimer.usecase.time.schedule.ScheduleController;
+import jw.kingdom.hall.kingdomtimer.usecase.usecase.edit.schedule.IBEditSchedule;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -104,7 +106,7 @@ public class TabTimePresenter extends TabPresenter implements TaskTableControlle
         instantDirectController = new BtnTimeDirectForInstantController(getCountdown(), getConfig(), btnInstantDirect);
         instantDirectController.setMedium(true);
 
-        getCountdown().addTimeDisplay(new TimeDisplayController(lblTime));
+        getCountdown().addDisplay(new TimeDisplayController(lblTime));
 
         new BtnBuzzerController(btnBuzzer, getCountdown());
         new TaskTableController(this);
@@ -146,11 +148,13 @@ public class TabTimePresenter extends TabPresenter implements TaskTableControlle
     }
 
     public void loadTasksOnline(ActionEvent actionEvent) {
-        getWindowData().getScheduleProvider().getForToday(() -> false, data -> getSchedule().setTasks(data));
+        getWindowData().getScheduleProvider().getForToday(() -> false, data ->
+                getScheduleEditor().setSchedule(new MapperPojoToObservableTask().reverseMap(data)));
     }
 
     public void loadCircuitTasksOnline(ActionEvent actionEvent) {
-        getWindowData().getScheduleProvider().getForToday(() -> true, data -> getSchedule().setTasks(data));
+        getWindowData().getScheduleProvider().getForToday(() -> true, data ->
+                getScheduleEditor().setSchedule(new MapperPojoToObservableTask().reverseMap(data)));
     }
 
     @Override
@@ -159,8 +163,8 @@ public class TabTimePresenter extends TabPresenter implements TaskTableControlle
     }
 
     @Override
-    public ScheduleController getSchedule() {
-        return getWindowData().getSchedule();
+    public IBEditSchedule getScheduleEditor() {
+        return getWindowData().getScheduleEditor();
     }
 
     @Override
@@ -231,5 +235,10 @@ public class TabTimePresenter extends TabPresenter implements TaskTableControlle
     @Override
     public BtnTimeDirectForPanel getTimeDirectController() {
         return timeDirectController;
+    }
+
+    @Override
+    public ScheduleController getSchedule() {
+        return getWindowData().getSchedule();
     }
 }

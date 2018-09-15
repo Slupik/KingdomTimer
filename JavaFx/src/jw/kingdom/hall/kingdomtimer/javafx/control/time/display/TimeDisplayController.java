@@ -2,10 +2,11 @@ package jw.kingdom.hall.kingdomtimer.javafx.control.time.display;
 
 import javafx.scene.control.Label;
 import javafx.scene.paint.Paint;
-import jw.kingdom.hall.kingdomtimer.entity.task.Task;
-import jw.kingdom.hall.kingdomtimer.entity.time.countdown.TimeDisplay;
+import jw.kingdom.hall.kingdomtimer.javafx.control.gleam.GleammingTimeDisplay;
 import jw.kingdom.hall.kingdomtimer.javafx.utils.PlatformUtils;
+import jw.kingdom.hall.kingdomtimer.usecase.task.pojo.TaskPOJO;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import static jw.kingdom.hall.kingdomtimer.javafx.control.time.display.TextForma
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class TimeDisplayController implements TimeDisplay {
+public class TimeDisplayController implements GleammingTimeDisplay<TaskPOJO> {
     private final List<Listener> listeners = new ArrayList<>();
     private Label text;
     private boolean isLightBackground = true;
@@ -33,9 +34,6 @@ public class TimeDisplayController implements TimeDisplay {
     }
 
     @Override
-    public void onTaskChange(Task newTask) {}
-
-    @Override
     public void display(int startTime, int timeToDisplay, int absoluteTimeLeft) {
         setTime(timeToDisplay);
         setColorCode(TimerColor.getColorCode(startTime, absoluteTimeLeft));
@@ -47,9 +45,24 @@ public class TimeDisplayController implements TimeDisplay {
     }
 
     @Override
+    public void onTimeOut() {
+
+    }
+
+    @Override
+    public void setTask(TaskPOJO task) {
+
+    }
+
+    @Override
     public void reset() {
         setTime(0);
         setColorCode(TimerColor.getDefaultColorCode());
+    }
+
+    @Override
+    public Type getType() {
+        return null;
     }
 
     @Override

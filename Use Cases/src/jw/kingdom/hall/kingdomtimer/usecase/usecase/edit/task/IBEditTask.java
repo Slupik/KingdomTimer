@@ -6,7 +6,7 @@ import jw.kingdom.hall.kingdomtimer.usecase.usecase.InputBoundary;
 /**
  * All rights reserved & copyright ©
  */
-public interface IBEditTask extends InputBoundary {
+public interface IBEditTask extends InputBoundary<OBEditTask> {
     void addOutput(OBEditTask output);
     void removeOutput(OBEditTask output);
     void updateTask(TaskPOJO pojo);

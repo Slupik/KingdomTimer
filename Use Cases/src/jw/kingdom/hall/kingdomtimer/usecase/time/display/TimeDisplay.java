@@ -1,13 +1,15 @@
 package jw.kingdom.hall.kingdomtimer.usecase.time.display;
 
-import jw.kingdom.hall.kingdomtimer.entity.task.Task;
+import java.lang.reflect.Type;
 
 /**
  * All rights reserved & copyright ©
  */
-public interface TimeDisplay {
+public interface TimeDisplay<T> {
     void display(int startTime, int timeToDisplay, int absoluteTimeLeft);
+    void display(int time);
     void onTimeOut();
-    void setTask(Task task);
+    void setTask(T task);
     void reset();
+    Type getType();
 }

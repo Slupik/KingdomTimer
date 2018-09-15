@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.entity.time.countdown;
+package jw.kingdom.hall.kingdomtimer.usecase.time.countdown;
 
 /**
  * All rights reserved & copyright ©

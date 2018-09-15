@@ -1,7 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.usecase.time.countdown;
 
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
-import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownState;
 
 /**
  * All rights reserved & copyright ©

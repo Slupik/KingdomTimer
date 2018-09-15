@@ -3,10 +3,11 @@ package jw.kingdom.hall.kingdomtimer.javafx.control.time.buzzer;
 
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.Button;
-import jw.kingdom.hall.kingdomtimer.entity.task.Task;
-import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
-import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownListener;
+import jw.kingdom.hall.kingdomtimer.javafx.GuiTimeListener;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.task.TaskFxBean;
+import jw.kingdom.hall.kingdomtimer.javafx.mapper.MapperPojoToFxTask;
+import jw.kingdom.hall.kingdomtimer.usecase.task.pojo.TaskPOJO;
+import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownController;
 
 import static jw.kingdom.hall.kingdomtimer.javafx.utils.ButtonUtils.loadMediumImage;
 
@@ -34,17 +35,15 @@ public class BtnBuzzerController {
                 setImageForCurrentCondition();
             }
         });
-        countdown.addListener(new CountdownListener() {
+        countdown.addListener(new GuiTimeListener() {
             @Override
-            public void onTaskStart(Task task) {
-                super.onTaskStart(task);
-                loadTask(new TaskFxBean(task));
+            public void onStart(TaskPOJO task) {
+                loadTask(new MapperPojoToFxTask().map(task));
                 setImageForCurrentCondition();
             }
 
             @Override
-            protected void onStop() {
-                super.onStop();
+            public void onStop() {
                 loadTask(null);
                 setImageForCurrentCondition();
             }

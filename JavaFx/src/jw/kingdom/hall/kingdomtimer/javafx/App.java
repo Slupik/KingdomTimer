@@ -4,7 +4,6 @@ import javafx.stage.Stage;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.entity.monitor.MonitorList;
 import jw.kingdom.hall.kingdomtimer.entity.time.buzzer.BuzzerPlayer;
-import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
 import jw.kingdom.hall.kingdomtimer.entity.time.gleam.GleamSwitcher;
 import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleProvider;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.backup.BackupController;
@@ -13,12 +12,14 @@ import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.WindowInput;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.WindowType;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.container.WindowsContainer;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.container.WindowsContainerImpl;
-import jw.kingdom.hall.kingdomtimer.javafx.temp.MultimediaPreviewer;
 import jw.kingdom.hall.kingdomtimer.javafx.view.handy.HandyWindow;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.HeadWindow;
 import jw.kingdom.hall.kingdomtimer.javafx.view.speaker.SpeakerWindow;
-import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
+import jw.kingdom.hall.kingdomtimer.usecase.time.controller.TimeController;
+import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownController;
+import jw.kingdom.hall.kingdomtimer.usecase.time.schedule.ScheduleController;
+import jw.kingdom.hall.kingdomtimer.usecase.usecase.edit.schedule.IBEditSchedule;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -69,6 +70,11 @@ public class App {
             }
 
             @Override
+            public IBEditSchedule getScheduleEditor() {
+                return appInput.getScheduleEditor();
+            }
+
+            @Override
             public CountdownController getCountdown() {
                 return appInput.getCountdown();
             }
@@ -106,6 +112,11 @@ public class App {
             @Override
             public Recorder getRecorder() {
                 return appInput.getRecorder();
+            }
+
+            @Override
+            public TimeController getTimeController() {
+                return appInput.getTimeController();
             }
         };
     }

@@ -8,12 +8,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.util.Duration;
-import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.AppWindow;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.screen.ControlledScreen;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.WindowInput;
-import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
-import jw.kingdom.hall.kingdomtimer.javafx.entity.view.window.container.WindowsContainer;
 
 import java.io.IOException;
 import java.util.HashMap;

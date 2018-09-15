@@ -29,6 +29,7 @@ public class ScheduleControllerImpl extends ScheduleLogic {
     protected void onListChange(List<Task> schedule) {
         List<TaskPOJO> pojo = new MapperPojoToTask().reverseMap(schedule);
         for(TimeListener listener:listeners) {
+            //TODO repair checking type
             if(listener.getType() instanceof Task) {
                 listener.onScheduleChange(schedule);
             } else {

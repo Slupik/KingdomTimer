@@ -2,46 +2,33 @@ package jw.kingdom.hall.kingdomtimer.javafx.entity.schedule;
 
 import com.sun.javafx.collections.ObservableListWrapper;
 import javafx.collections.ListChangeListener;
-import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleListener;
 import jw.kingdom.hall.kingdomtimer.javafx.entity.task.TaskFxBean;
-import jw.kingdom.hall.kingdomtimer.entity.task.ObservableTask;
-import jw.kingdom.hall.kingdomtimer.entity.task.Task;
-import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
+import jw.kingdom.hall.kingdomtimer.javafx.mapper.MapperPojoToFxTask;
+import jw.kingdom.hall.kingdomtimer.usecase.usecase.edit.schedule.IBEditSchedule;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * All rights reserved & copyright ©
  */
 public class ScheduleFxBean extends ObservableListWrapper<TaskFxBean> {
 
-    private final ScheduleController controller;
+    private final IBEditSchedule controller;
     private boolean ignoreChanges = false;
 
-    public ScheduleFxBean(ScheduleController controller) {
-        super(getAsFxList(controller.getTasks()));
+    public ScheduleFxBean(IBEditSchedule controller) {
+        super(new ArrayList<>());
         this.controller = controller;
-        controller.addListener(new ScheduleListener() {
-            @Override
-            public void onListChange(List<ObservableTask> list) {
-                super.onListChange(list);
-                if(ignoreChanges) {
-                    return;
-                }
-                ignoreChanges = true;
-                //TODO make this more efficient
-                clear();
-                addAll(getAsFxList(list));
-                ignoreChanges = false;
-            }
+        controller.addOutput(newList -> {
+            clear();
+            addAll(new MapperPojoToFxTask().map(newList));
         });
         addListener((ListChangeListener<TaskFxBean>) c -> {
             if(ignoreChanges) {
                 return;
             }
             ignoreChanges = true;
-            controller.setTasks(getThisAsObservableList());
+            controller.setSchedule(new MapperPojoToFxTask().reverseMap(this));
             //TODO repair code below
 //            while (c.next()) {
 //                if (c.wasRemoved()) {
@@ -70,21 +57,5 @@ public class ScheduleFxBean extends ObservableListWrapper<TaskFxBean> {
 //            }
             ignoreChanges = false;
         });
-    }
-
-    private List<ObservableTask> getThisAsObservableList() {
-        List<ObservableTask> list = new ArrayList<>();
-        for(TaskFxBean task:this) {
-            list.add(task.getAsObservable());
-        }
-        return list;
-    }
-
-    private static List<TaskFxBean> getAsFxList(List<ObservableTask> tasks) {
-        List<TaskFxBean> newList = new ArrayList<>();
-        for(ObservableTask task:tasks) {
-            newList.add(new TaskFxBean(task));
-        }
-        return newList;
     }
 }

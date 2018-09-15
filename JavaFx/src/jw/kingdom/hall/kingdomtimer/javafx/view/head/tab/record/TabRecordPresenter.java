@@ -7,15 +7,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
-import jw.kingdom.hall.kingdomtimer.config.model.ConfigEditable;
-import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
-import jw.kingdom.hall.kingdomtimer.entity.time.countdown.TimeDisplay;
-import jw.kingdom.hall.kingdomtimer.entity.time.schedule.ScheduleController;
 import jw.kingdom.hall.kingdomtimer.javafx.control.sps.SpsControllerForRecord;
-import jw.kingdom.hall.kingdomtimer.javafx.control.sps.SpsControllerForTime;
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.display.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.TabPresenter;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
+import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownController;
+import jw.kingdom.hall.kingdomtimer.usecase.time.schedule.ScheduleController;
 
 import java.net.URL;
 import java.util.ResourceBundle;

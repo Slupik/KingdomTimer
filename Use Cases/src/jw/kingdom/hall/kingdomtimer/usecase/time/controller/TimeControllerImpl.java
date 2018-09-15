@@ -9,6 +9,7 @@ import jw.kingdom.hall.kingdomtimer.usecase.time.display.TimeDisplay;
 import jw.kingdom.hall.kingdomtimer.usecase.time.listener.TimeListener;
 import jw.kingdom.hall.kingdomtimer.usecase.time.schedule.ScheduleController;
 import jw.kingdom.hall.kingdomtimer.usecase.time.schedule.ScheduleControllerImpl;
+import jw.kingdom.hall.kingdomtimer.usecase.usecase.edit.schedule.EditScheduleUseCase;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -146,11 +147,16 @@ public class TimeControllerImpl implements TimeController, TimeListener<Task> {
                 listener.onMeetingStart();
             }
         }
+        TaskPOJO pojo = new MapperPojoToTask().reverseMap(task);
         for(TimeDisplay display:displays) {
-            display.setTask(task);
+            display.setTask(pojo);
         }
         for(TimeListener listener:listeners) {
-            listener.onStart(task);
+            if(listener.getType() instanceof Task) {
+                listener.onStart(task);
+            } else {
+                listener.onStart(pojo);
+            }
         }
     }
 

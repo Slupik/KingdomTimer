@@ -5,9 +5,9 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
 import jw.kingdom.hall.kingdomtimer.entity.task.TaskBean;
-import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
 import jw.kingdom.hall.kingdomtimer.javafx.control.time.direct.BtnTimeDirectForPanel;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
+import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownController;
 
 import java.util.Optional;
 
@@ -24,7 +24,7 @@ class FastPanelPresenter {
 
     void handleRemoveTime() {
         int time = getTime();
-        executeIfUserAllow(time, ()-> getCountdown().subtractTime(time));
+        executeIfUserAllow(time, ()-> getCountdown().addTime(Math.negateExact(time)));
     }
 
     void handleAddTime() {
