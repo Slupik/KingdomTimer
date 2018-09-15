@@ -26,6 +26,10 @@ public class TaskBean implements ObservableTask {
         loadTask(task);
     }
 
+    public TaskBean(String id) {
+        ID = id;
+    }
+
     private void loadTask(Task task) {
         setUseBuzzer(task.isUseBuzzer());
         setDirectDown(task.isDirectDown());
