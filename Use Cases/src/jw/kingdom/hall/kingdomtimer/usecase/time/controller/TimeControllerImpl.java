@@ -1,6 +1,12 @@
 package jw.kingdom.hall.kingdomtimer.usecase.time.controller;
 
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
+import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownController;
+import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownControllerImpl;
+import jw.kingdom.hall.kingdomtimer.usecase.time.display.TimeDisplay;
+import jw.kingdom.hall.kingdomtimer.usecase.time.listener.TimeListener;
+import jw.kingdom.hall.kingdomtimer.usecase.time.schedule.ScheduleController;
+import jw.kingdom.hall.kingdomtimer.usecase.time.schedule.ScheduleControllerImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +14,7 @@ import java.util.List;
 /**
  * All rights reserved & copyright ©
  */
-public class MeetingTimeControllerImpl implements MeetingTimeController, TimeListener {
+public class TimeControllerImpl implements TimeController, TimeListener {
 
     private final List<TimeDisplay> displays = new ArrayList<>();
     private final List<TimeListener> listeners = new ArrayList<>();
@@ -16,11 +22,11 @@ public class MeetingTimeControllerImpl implements MeetingTimeController, TimeLis
     private final CountdownController countdown;
     private boolean meetingStarted = false;
 
-    public MeetingTimeControllerImpl() {
+    public TimeControllerImpl() {
         this(new ScheduleControllerImpl(), new CountdownControllerImpl());
     }
 
-    public MeetingTimeControllerImpl(ScheduleController schedule, CountdownController countdown){
+    public TimeControllerImpl(ScheduleController schedule, CountdownController countdown){
         this.schedule = schedule;
         this.countdown = countdown;
         countdown.addListener(this);

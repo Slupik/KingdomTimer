@@ -3,8 +3,8 @@ package jw.kingdom.hall.kingdomtimer.usecase.time.buzzer;
 import jw.kingdom.hall.kingdomtimer.entity.observable.field.ObservableField;
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
 import jw.kingdom.hall.kingdomtimer.entity.time.buzzer.BuzzerPlayer;
-import jw.kingdom.hall.kingdomtimer.usecase.time.controller.CountdownController;
-import jw.kingdom.hall.kingdomtimer.usecase.time.controller.TimeDisplayProxy;
+import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownController;
+import jw.kingdom.hall.kingdomtimer.usecase.time.display.TimeDisplayProxy;
 
 /**
  * All rights reserved & copyright ©

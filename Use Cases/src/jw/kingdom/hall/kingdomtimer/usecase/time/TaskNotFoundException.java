@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.usecase.time.controller;
+package jw.kingdom.hall.kingdomtimer.usecase.time;
 
 /**
  * All rights reserved & copyright ©

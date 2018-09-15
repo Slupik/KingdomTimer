@@ -1,13 +1,15 @@
 package jw.kingdom.hall.kingdomtimer.usecase.time.controller;
 
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
+import jw.kingdom.hall.kingdomtimer.usecase.time.display.TimeDisplay;
+import jw.kingdom.hall.kingdomtimer.usecase.time.listener.TimeListener;
 
 import java.util.List;
 
 /**
  * All rights reserved & copyright ©
  */
-public interface MeetingTimeController {
+public interface TimeController {
     //Controlling the time
     void startTask(Task task);
     void pause();

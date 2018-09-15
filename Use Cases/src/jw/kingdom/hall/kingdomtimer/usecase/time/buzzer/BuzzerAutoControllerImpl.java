@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.usecase.time.buzzer;
 
 import jw.kingdom.hall.kingdomtimer.entity.time.buzzer.BuzzerPlayer;
-import jw.kingdom.hall.kingdomtimer.usecase.time.controller.CountdownController;
+import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownController;
 
 import java.util.ArrayList;
 import java.util.List;
