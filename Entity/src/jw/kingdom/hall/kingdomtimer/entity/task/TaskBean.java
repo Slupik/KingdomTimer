@@ -51,8 +51,9 @@ public class TaskBean implements ObservableTask {
     }
 
     @Override
-    public void setName(String name) {
+    public Task setName(String name) {
         this.name.setValue(name);
+        return this;
     }
 
     @Override
@@ -66,8 +67,9 @@ public class TaskBean implements ObservableTask {
     }
 
     @Override
-    public void setSeconds(int seconds) {
+    public Task setSeconds(int seconds) {
         this.seconds.setValue(seconds);
+        return this;
     }
 
     @Override
@@ -81,8 +83,9 @@ public class TaskBean implements ObservableTask {
     }
 
     @Override
-    public void setDirectDown(boolean directDown) {
+    public Task setDirectDown(boolean directDown) {
         this.directDown.setValue(directDown);
+        return this;
     }
 
     @Override
@@ -96,8 +99,9 @@ public class TaskBean implements ObservableTask {
     }
 
     @Override
-    public void setStudentTalk(boolean studentTalk) {
+    public Task setStudentTalk(boolean studentTalk) {
         this.studentTalk.setValue(studentTalk);
+        return this;
     }
 
     @Override
@@ -111,8 +115,9 @@ public class TaskBean implements ObservableTask {
     }
 
     @Override
-    public void setUseBuzzer(boolean useBuzzer) {
+    public Task setUseBuzzer(boolean useBuzzer) {
         this.useBuzzer.setValue(useBuzzer);
+        return this;
     }
 
     @Override
@@ -126,8 +131,9 @@ public class TaskBean implements ObservableTask {
     }
 
     @Override
-    public void setType(TaskType type) {
+    public Task setType(TaskType type) {
         this.type.setValue(type);
+        return this;
     }
 
 }

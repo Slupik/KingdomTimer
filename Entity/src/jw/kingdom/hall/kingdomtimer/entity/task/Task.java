@@ -8,20 +8,20 @@ public interface Task {
     String getID();
 
     String getName();
-    void setName(String name);
+    Task setName(String name);
 
     int getSeconds();
-    void setSeconds(int seconds);
+    Task setSeconds(int seconds);
 
     boolean isDirectDown();
-    void setDirectDown(boolean directDown);
+    Task setDirectDown(boolean directDown);
 
     boolean isStudentTalk();
-    void setStudentTalk(boolean studentTalk);
+    Task setStudentTalk(boolean studentTalk);
 
     boolean isUseBuzzer();
-    void setUseBuzzer(boolean useBuzzer);
+    Task setUseBuzzer(boolean useBuzzer);
 
     TaskType getType();
-    void setType(TaskType type);
+    Task setType(TaskType type);
 }

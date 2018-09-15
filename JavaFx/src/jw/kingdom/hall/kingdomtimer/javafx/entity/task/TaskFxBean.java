@@ -53,6 +53,15 @@ public class TaskFxBean implements Task {
     }
 
     private boolean ignore = false;
+
+    public TaskFxBean(String id) {
+        ID = id;
+
+
+        observableTask = generateObservable();
+        normalTask = observableTask;
+    }
+
     private void bindObservableTask() {
         observableTask.directDownProperty().addListener((observableObject, oldValue, newValue) -> {
             if(ignore) return;
@@ -119,9 +128,10 @@ public class TaskFxBean implements Task {
         return useBuzzer.getValue();
     }
 
-    public void setUseBuzzer(boolean useBuzzer) {
+    public Task setUseBuzzer(boolean useBuzzer) {
         this.useBuzzer.setValue(useBuzzer);
         normalTask.setUseBuzzer(useBuzzer);
+        return this;
     }
 
     public StringProperty nameProperty() {
@@ -139,10 +149,11 @@ public class TaskFxBean implements Task {
     }
 
     @Override
-    public void setName(String name) {
+    public Task setName(String name) {
         this.name.setValue(name);
         ignore = true;
         normalTask.setName(name);
+        return this;
     }
 
     public int getTimeInSeconds() {
@@ -177,9 +188,10 @@ public class TaskFxBean implements Task {
     }
 
     @Override
-    public void setType(TaskType type) {
+    public Task setType(TaskType type) {
         this.type.set(type);
         normalTask.setType(type);
+        return this;
     }
 
     @Override
@@ -188,8 +200,9 @@ public class TaskFxBean implements Task {
     }
 
     @Override
-    public void setSeconds(int seconds) {
+    public Task setSeconds(int seconds) {
         setTimeInSeconds(seconds);
+        return this;
     }
 
     @Override
@@ -198,8 +211,9 @@ public class TaskFxBean implements Task {
     }
 
     @Override
-    public void setDirectDown(boolean directDown) {
+    public Task setDirectDown(boolean directDown) {
         setCountdownDown(directDown);
+        return this;
     }
 
     @Override
@@ -212,8 +226,9 @@ public class TaskFxBean implements Task {
     }
 
     @Override
-    public void setStudentTalk(boolean studentTalk) {
+    public Task setStudentTalk(boolean studentTalk) {
         this.studentTalk.setValue(studentTalk);
         normalTask.setStudentTalk(studentTalk);
+        return this;
     }
 }
