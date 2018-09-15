@@ -1,6 +1,8 @@
 package jw.kingdom.hall.kingdomtimer.usecase.time.schedule;
 
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
+import jw.kingdom.hall.kingdomtimer.usecase.mapper.MapperPojoToTask;
+import jw.kingdom.hall.kingdomtimer.usecase.task.pojo.TaskPOJO;
 import jw.kingdom.hall.kingdomtimer.usecase.time.listener.TimeListener;
 
 import java.util.ArrayList;
@@ -25,8 +27,13 @@ public class ScheduleControllerImpl extends ScheduleLogic {
 
     @Override
     protected void onListChange(List<Task> schedule) {
+        List<TaskPOJO> pojo = new MapperPojoToTask().reverseMap(schedule);
         for(TimeListener listener:listeners) {
-            listener.onScheduleChange(schedule);
+            if(listener.getType() instanceof Task) {
+                listener.onScheduleChange(schedule);
+            } else {
+                listener.onScheduleChange(pojo);
+            }
         }
     }
 }

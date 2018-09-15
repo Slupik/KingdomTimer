@@ -18,7 +18,7 @@ public class EditScheduleUseCase extends UseCase<OBEditSchedule> implements IBEd
 
     public EditScheduleUseCase(ScheduleController schedule){
         this.schedule = schedule;
-        schedule.addListener(new TimeListenerProxy() {
+        schedule.addListener(new TimeListenerProxy<Task>() {
             @Override
             public void onScheduleChange(List<Task> newList) {
                 super.onScheduleChange(newList);

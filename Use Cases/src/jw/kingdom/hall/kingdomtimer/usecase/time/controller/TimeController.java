@@ -1,6 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.usecase.time.controller;
 
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
+import jw.kingdom.hall.kingdomtimer.usecase.task.pojo.TaskPOJO;
 import jw.kingdom.hall.kingdomtimer.usecase.time.display.TimeDisplay;
 import jw.kingdom.hall.kingdomtimer.usecase.time.listener.TimeListener;
 
@@ -11,7 +12,7 @@ import java.util.List;
  */
 public interface TimeController {
     //Controlling the time
-    void startTask(Task task);
+    void startTask(TaskPOJO task);
     void pause();
     void resume();
     void stop();
@@ -26,9 +27,9 @@ public interface TimeController {
 
     //Modify the schedule
     void moveTask(String id, int index);
-    void addTask(Task task);
+    void addTask(TaskPOJO task);
     void remove(String taskId);
-    void setSchedule(List<Task> list);
+    void setSchedule(List<TaskPOJO> list);
     List<Task> getSchedule();
 
     //Listeners

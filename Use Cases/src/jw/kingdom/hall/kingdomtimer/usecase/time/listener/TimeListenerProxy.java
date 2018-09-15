@@ -1,16 +1,17 @@
 package jw.kingdom.hall.kingdomtimer.usecase.time.listener;
 
-import jw.kingdom.hall.kingdomtimer.entity.task.Task;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 /**
  * All rights reserved & copyright ©
  */
-public abstract class TimeListenerProxy implements TimeListener {
+public abstract class TimeListenerProxy<T> implements TimeListener<T> {
 
     @Override
-    public void onStart(Task task) {
+    public void onStart(T task) {
 
     }
 
@@ -50,7 +51,12 @@ public abstract class TimeListenerProxy implements TimeListener {
     }
 
     @Override
-    public void onScheduleChange(List<Task> newList) {
+    public void onScheduleChange(List<T> newList) {
 
+    }
+
+    @Override
+    public Type getType() {
+        return new TypeToken<T>(){}.getType();
     }
 }

@@ -1,14 +1,13 @@
 package jw.kingdom.hall.kingdomtimer.usecase.time.listener;
 
-import jw.kingdom.hall.kingdomtimer.entity.task.Task;
-
+import java.lang.reflect.Type;
 import java.util.List;
 
 /**
  * All rights reserved & copyright ©
  */
-public interface TimeListener {
-    void onStart(Task task);
+public interface TimeListener<T> {
+    void onStart(T task);
     void onPause();
     void onResume();
     void onStop();
@@ -19,5 +18,7 @@ public interface TimeListener {
     void onMeetingStart();
     void onMeetingEnd();
 
-    void onScheduleChange(List<Task> newList);
+    void onScheduleChange(List<T> newList);
+
+    Type getType();
 }

@@ -2,6 +2,8 @@ package jw.kingdom.hall.kingdomtimer.usecase.time.countdown;
 
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownState;
+import jw.kingdom.hall.kingdomtimer.usecase.mapper.MapperPojoToTask;
+import jw.kingdom.hall.kingdomtimer.usecase.task.pojo.TaskPOJO;
 import jw.kingdom.hall.kingdomtimer.usecase.time.listener.TimeListener;
 import jw.kingdom.hall.kingdomtimer.usecase.time.display.TimeDisplay;
 
@@ -28,8 +30,13 @@ public class CountdownControllerImpl extends CountdownLogic {
             display.setTask(task);
         }
         executor.execute(()->{
+            TaskPOJO pojo = new MapperPojoToTask().reverseMap(task);
             for(TimeListener listener:listeners) {
-                listener.onStart(task);
+                if(listener.getType() instanceof Task) {
+                    listener.onStart(task);
+                } else {
+                    listener.onStart(pojo);
+                }
             }
         });
     }

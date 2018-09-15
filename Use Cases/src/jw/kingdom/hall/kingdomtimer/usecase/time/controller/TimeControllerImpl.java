@@ -1,6 +1,8 @@
 package jw.kingdom.hall.kingdomtimer.usecase.time.controller;
 
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
+import jw.kingdom.hall.kingdomtimer.usecase.mapper.MapperPojoToTask;
+import jw.kingdom.hall.kingdomtimer.usecase.task.pojo.TaskPOJO;
 import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownController;
 import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownControllerImpl;
 import jw.kingdom.hall.kingdomtimer.usecase.time.display.TimeDisplay;
@@ -8,13 +10,14 @@ import jw.kingdom.hall.kingdomtimer.usecase.time.listener.TimeListener;
 import jw.kingdom.hall.kingdomtimer.usecase.time.schedule.ScheduleController;
 import jw.kingdom.hall.kingdomtimer.usecase.time.schedule.ScheduleControllerImpl;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * All rights reserved & copyright ©
  */
-public class TimeControllerImpl implements TimeController, TimeListener {
+public class TimeControllerImpl implements TimeController, TimeListener<Task> {
 
     private final List<TimeDisplay> displays = new ArrayList<>();
     private final List<TimeListener> listeners = new ArrayList<>();
@@ -33,8 +36,8 @@ public class TimeControllerImpl implements TimeController, TimeListener {
     }
 
     @Override
-    public void startTask(Task task) {
-        countdown.start(task);
+    public void startTask(TaskPOJO task) {
+        countdown.start(new MapperPojoToTask().map(task));
     }
 
     @Override
@@ -55,7 +58,7 @@ public class TimeControllerImpl implements TimeController, TimeListener {
     @Override
     public void startNext() {
         Task task = schedule.bringOutFirstTask();
-        startTask(task);
+        countdown.start(task);
     }
 
     @Override
@@ -92,8 +95,8 @@ public class TimeControllerImpl implements TimeController, TimeListener {
     }
 
     @Override
-    public void addTask(Task task) {
-        schedule.addTask(task);
+    public void addTask(TaskPOJO task) {
+        schedule.addTask(new MapperPojoToTask().map(task));
     }
 
     @Override
@@ -102,8 +105,8 @@ public class TimeControllerImpl implements TimeController, TimeListener {
     }
 
     @Override
-    public void setSchedule(List<Task> list) {
-        schedule.setTasks(list);
+    public void setSchedule(List<TaskPOJO> list) {
+        schedule.setTasks(new MapperPojoToTask().map(list));
     }
 
     @Override
@@ -181,4 +184,9 @@ public class TimeControllerImpl implements TimeController, TimeListener {
 
     @Override
     public void onScheduleChange(List<Task> newList) {}
+
+    @Override
+    public Type getType() {
+        return Task.class;
+    }
 }
