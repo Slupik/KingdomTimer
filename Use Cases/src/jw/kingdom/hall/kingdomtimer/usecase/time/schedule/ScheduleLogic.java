@@ -28,6 +28,27 @@ public abstract class ScheduleLogic implements ScheduleController {
     }
 
     @Override
+    public void updateTask(Task task) {
+        if(task!=null) {
+            try {
+                Task taskOnList = getTaskForId(task.getID());
+                if(taskOnList!=null && !task.equals(taskOnList)) {
+                    taskOnList.setType(task.getType());
+                    taskOnList.setName(task.getName());
+                    taskOnList.setSeconds(task.getSeconds());
+                    taskOnList.setDirectDown(task.isDirectDown());
+                    taskOnList.setUseBuzzer(task.isUseBuzzer());
+                    taskOnList.setStudentTalk(task.isStudentTalk());
+
+                    onListChange(schedule);
+                }
+            } catch (TaskNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
     public void addTask(Task task) {
         schedule.add(task);
         onListChange(schedule);

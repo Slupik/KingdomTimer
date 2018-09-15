@@ -12,6 +12,7 @@ public interface ScheduleController {
     void clear();
     void setTasks(List<Task> list);
     void addTask(Task task);
+    void updateTask(Task task);
     void removeTask(String id);
     List<Task> getTasks();
 
