@@ -6,7 +6,7 @@ import jw.kingdom.hall.kingdomtimer.entity.time.gleam.GleamSwitcher;
 /**
  * All rights reserved & copyright ©
  */
-public class GleamSwitcherImpl implements GleamSwitcher {
+public class OLD_GleamSwitcherImpl implements GleamSwitcher {
     private final ObservableField<Boolean> enabled = new ObservableField<>(true);
 
     @Override

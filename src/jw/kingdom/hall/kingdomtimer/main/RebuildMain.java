@@ -20,7 +20,7 @@ import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 import jw.kingdom.hall.kingdomtimer.usecase.monitor.MonitorListImpl;
 import jw.kingdom.hall.kingdomtimer.usecase.time.buzzer.OLD_BuzzerAutoControllerImpl;
 import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.OLD_CountdownControllerImpl;
-import jw.kingdom.hall.kingdomtimer.usecase.time.gleam.GleamSwitcherImpl;
+import jw.kingdom.hall.kingdomtimer.usecase.time.gleam.OLD_GleamSwitcherImpl;
 import jw.kingdom.hall.kingdomtimer.usecase.time.schedule.OLD_ScheduleControllerImpl;
 
 /**
@@ -36,7 +36,7 @@ public class RebuildMain extends Application {
     public void start(Stage primaryStage) throws Exception {
         ScheduleController schedule = new OLD_ScheduleControllerImpl();
         OLD_CountdownControllerImpl countdown = new OLD_CountdownControllerImpl();
-        GleamSwitcher gleamSwitcher = new GleamSwitcherImpl();
+        GleamSwitcher gleamSwitcher = new OLD_GleamSwitcherImpl();
         new OLD_BuzzerAutoControllerImpl(new jw.kingdom.hall.kingdomtimer.main.buzzer.BuzzerPlayer(), countdown);
         Record record = new Record();
         Backup backup = new Backup();
