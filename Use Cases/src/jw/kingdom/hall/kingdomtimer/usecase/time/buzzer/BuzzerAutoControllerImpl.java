@@ -1,61 +1,43 @@
 package jw.kingdom.hall.kingdomtimer.usecase.time.buzzer;
 
-import jw.kingdom.hall.kingdomtimer.entity.observable.field.ObservableField;
-import jw.kingdom.hall.kingdomtimer.entity.task.Task;
-import jw.kingdom.hall.kingdomtimer.entity.time.buzzer.BuzzerAutoController;
 import jw.kingdom.hall.kingdomtimer.entity.time.buzzer.BuzzerPlayer;
-import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
-import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownListener;
+import jw.kingdom.hall.kingdomtimer.usecase.time.controller.CountdownController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * All rights reserved & copyright ©
  */
-public class BuzzerAutoControllerImpl implements BuzzerAutoController {
-    private final BuzzerPlayer player;
-    private final CountdownController countdown;
-    //Global flag
-    private final ObservableField<Boolean> isEnabled = new ObservableField<>(true);
+public class BuzzerAutoControllerImpl extends BuzzerLogic {
 
-    public BuzzerAutoControllerImpl(BuzzerPlayer player, CountdownController countdown){
-        this.player = player;
-        this.countdown = countdown;
-        init();
-    }
+    private final List<BuzzerListener> listeners = new ArrayList<>();
 
-    private void init() {
-        countdown.addListener(new CountdownListener() {
-            private Task task;
-
-            @Override
-            public void onTaskStart(Task task) {
-                super.onTaskStart(task);
-                this.task = task;
-            }
-
-            @Override
-            public void onTimeChange(int time) {
-                super.onTimeChange(time);
-                if(null != task && task.isUseBuzzer() && isEnabled()) {
-                    if(time <= 0 && (Math.abs(time)%10)==0) {
-                        player.play();
-                    }
-                }
-            }
-        });
+    public BuzzerAutoControllerImpl(BuzzerPlayer player, CountdownController countdown) {
+        super(player, countdown);
     }
 
     @Override
-    public ObservableField<Boolean> isEnabledProperty() {
-        return isEnabled;
+    protected void eventOnEnable() {
+        for(BuzzerListener listener:listeners) {
+            listener.onEnable();
+        }
     }
 
     @Override
-    public void setEnabled(Boolean isEnabled) {
-        this.isEnabled.setValue(isEnabled);
+    protected void eventOnDisable() {
+        for(BuzzerListener listener:listeners) {
+            listener.onDisable();
+        }
     }
 
     @Override
-    public boolean isEnabled() {
-        return this.isEnabled.getValue();
+    public void addListener(BuzzerListener listener) {
+        listeners.add(listener);
+    }
+
+    @Override
+    public void removeListener(BuzzerListener listener) {
+        listeners.remove(listener);
     }
 }
