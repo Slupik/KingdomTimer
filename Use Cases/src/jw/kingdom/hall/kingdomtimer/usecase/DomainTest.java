@@ -1,8 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.usecase;
 
 import javafx.scene.paint.Paint;
-import jw.kingdom.hall.kingdomtimer.entity.time.buzzer.BuzzerPlayer;
-import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownControllerImpl;
+import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.OLD_CountdownControllerImpl;
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
 import jw.kingdom.hall.kingdomtimer.entity.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.TimeDisplay;
@@ -17,7 +16,7 @@ public class DomainTest {
     }
 
     private static void testCountdown() throws Exception {
-        CountdownController controller = new CountdownControllerImpl();
+        CountdownController controller = new OLD_CountdownControllerImpl();
         controller.addTimeDisplay(new TimeDisplay() {
             @Override
             public void onTaskChange(Task newTask) {

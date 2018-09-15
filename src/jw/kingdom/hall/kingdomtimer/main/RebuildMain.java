@@ -19,9 +19,9 @@ import jw.kingdom.hall.kingdomtimer.main.schedule.provider.SProvider;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 import jw.kingdom.hall.kingdomtimer.usecase.monitor.MonitorListImpl;
 import jw.kingdom.hall.kingdomtimer.usecase.time.buzzer.OLD_BuzzerAutoControllerImpl;
-import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.CountdownControllerImpl;
+import jw.kingdom.hall.kingdomtimer.usecase.time.countdown.OLD_CountdownControllerImpl;
 import jw.kingdom.hall.kingdomtimer.usecase.time.gleam.GleamSwitcherImpl;
-import jw.kingdom.hall.kingdomtimer.usecase.time.schedule.ScheduleControllerImpl;
+import jw.kingdom.hall.kingdomtimer.usecase.time.schedule.OLD_ScheduleControllerImpl;
 
 /**
  * All rights reserved & copyright ©
@@ -34,8 +34,8 @@ public class RebuildMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        ScheduleController schedule = new ScheduleControllerImpl();
-        CountdownControllerImpl countdown = new CountdownControllerImpl();
+        ScheduleController schedule = new OLD_ScheduleControllerImpl();
+        OLD_CountdownControllerImpl countdown = new OLD_CountdownControllerImpl();
         GleamSwitcher gleamSwitcher = new GleamSwitcherImpl();
         new OLD_BuzzerAutoControllerImpl(new jw.kingdom.hall.kingdomtimer.main.buzzer.BuzzerPlayer(), countdown);
         Record record = new Record();

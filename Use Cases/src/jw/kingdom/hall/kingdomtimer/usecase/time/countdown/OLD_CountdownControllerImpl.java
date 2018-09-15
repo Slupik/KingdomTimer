@@ -1,7 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.usecase.time.countdown;
 
 import jw.kingdom.hall.kingdomtimer.entity.task.Task;
-import jw.kingdom.hall.kingdomtimer.entity.time.buzzer.BuzzerPlayer;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.TimeDisplay;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownController;
 import jw.kingdom.hall.kingdomtimer.entity.time.countdown.CountdownState;
@@ -14,7 +13,7 @@ import java.util.concurrent.Executors;
 /**
  * All rights reserved & copyright ©
  */
-public class CountdownControllerImpl implements CountdownController {
+public class OLD_CountdownControllerImpl implements CountdownController {
     private List<CountdownController.Listener> listeners = new ArrayList<>();
     private List<TimeDisplay> timeDisplays = new ArrayList<>();
     private CountdownState state = CountdownState.STOP;
@@ -24,7 +23,7 @@ public class CountdownControllerImpl implements CountdownController {
     private int addedTime = 0;
 
     private ExecutorService executor = Executors.newSingleThreadExecutor();
-    private CountdownThread countdownThread;
+    private OLD_CountdownThread countdownThread;
 
     @Override
     public void start(Task task) {
@@ -58,8 +57,8 @@ public class CountdownControllerImpl implements CountdownController {
         countdownThread.start();
     }
 
-    private CountdownThread getThread() {
-        return new CountdownThread(()->{
+    private OLD_CountdownThread getThread() {
+        return new OLD_CountdownThread(()->{
             if(state == CountdownState.COUNTDOWNING) {
                 int now = time;
                 now--;

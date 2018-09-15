@@ -3,12 +3,12 @@ package jw.kingdom.hall.kingdomtimer.usecase.time.countdown;
 /**
  * All rights reserved & copyright ©
  */
-class CountdownThread extends Thread {
+class OLD_CountdownThread extends Thread {
 
     private boolean running = true;
     private Runnable task;
 
-    CountdownThread(Runnable task) {
+    OLD_CountdownThread(Runnable task) {
         this.task = task;
     }
 

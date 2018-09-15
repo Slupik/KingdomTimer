@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * All rights reserved & copyright ©
  */
-public class ScheduleControllerImpl implements ScheduleController {
+public class OLD_ScheduleControllerImpl implements ScheduleController {
     private ArrayList<Listener> listeners = new ArrayList<>();
     private ObservableArray<ObservableTask> list = new ObservableArray<>();
     private boolean wasFirstTask = false;
