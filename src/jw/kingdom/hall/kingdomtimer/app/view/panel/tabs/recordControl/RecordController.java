@@ -18,6 +18,7 @@ import jw.kingdom.hall.kingdomtimer.domain.record.voice.DefaultVoiceRecorderList
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingScheduleListener;
+import jw.kingdom.hall.kingdomtimer.recorder.RecordListenerProxy;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 
 import java.net.URL;
@@ -26,7 +27,7 @@ import java.util.ResourceBundle;
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class RecordController extends ControlledScreenImpl implements Initializable, StartPauseStopView.Listener, Recorder.Listener {
+public class RecordController extends ControlledScreenImpl implements Initializable, StartPauseStopView.Listener {
 
     @FXML
     private VBox vbMainContainer;
@@ -66,7 +67,7 @@ public class RecordController extends ControlledScreenImpl implements Initializa
             @Override
             public void onPause(boolean isPause) {
                 super.onPause(isPause);
-                if(isPause) {
+                if (isPause) {
                     spsView.setupForPause();
                 } else {
                     spsView.setupForUnPause();
@@ -90,7 +91,7 @@ public class RecordController extends ControlledScreenImpl implements Initializa
             public void onMeetingStart() {
                 super.onMeetingStart();
                 lastType = null;
-                if(isAutopilotOn()) {
+                if (isAutopilotOn()) {
                     spsView.start();
                 }
             }
@@ -98,11 +99,11 @@ public class RecordController extends ControlledScreenImpl implements Initializa
             @Override
             public void onNextTask(int index, MeetingTask task) {
                 super.onNextTask(index, task);
-                if(task!=null && (!task.getType().equals(lastType) && lastType!=null) && isAutoSeparateOn()) {
+                if (task != null && (!task.getType().equals(lastType) && lastType != null) && isAutoSeparateOn()) {
                     VoiceRecorder.getInstance().stop();
                     VoiceRecorder.getInstance().start();
                 }
-                if(task==null) {
+                if (task == null) {
                     lastType = null;
                 } else {
                     lastType = task.getType();
@@ -112,11 +113,11 @@ public class RecordController extends ControlledScreenImpl implements Initializa
             @Override
             public void onMeetingEnd() {
                 super.onMeetingEnd();
-                if(isAutopilotOn()) {
-                    if(Platform.isFxApplicationThread()) {
+                if (isAutopilotOn()) {
+                    if (Platform.isFxApplicationThread()) {
                         spsView.stop();
                     } else {
-                        Platform.runLater(()->spsView.stop());
+                        Platform.runLater(() -> spsView.stop());
                     }
                 }
             }
@@ -147,14 +148,19 @@ public class RecordController extends ControlledScreenImpl implements Initializa
         } catch (Exception e) {
             e.printStackTrace();
         }
-        VoiceRecorder.getInstance().addListener(RecordController.this);
+        VoiceRecorder.getInstance().addListener(new RecordListenerProxy() {
+            @Override
+            public void onNewTime(int seconds) {
+                controller.setTime(seconds);
+            }
+        });
     }
 
     private boolean isAutoSeparateOn() {
         return isAutopilotOn() && cbAutoSeparate.isSelected();
     }
 
-    private boolean isAutopilotOn(){
+    private boolean isAutopilotOn() {
         return cbAutopilot.isSelected();
     }
 
@@ -183,8 +189,4 @@ public class RecordController extends ControlledScreenImpl implements Initializa
         VoiceRecorder.getInstance().stop();
     }
 
-    @Override
-    public void onNewTime(int seconds) {
-        controller.setTime(seconds);
-    }
 }

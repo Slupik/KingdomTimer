@@ -1,11 +1,11 @@
 package jw.kingdom.hall.kingdomtimer.recorder.xt;
 
 import com.xtaudio.xt.*;
+import jw.kingdom.hall.kingdomtimer.recorder.RecordListener;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
 import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.AudioDataBuffer;
 import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.file.FileBuffer;
-import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.ram.RamBuffer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +42,9 @@ public class XtRecorder implements Recorder, Recording.Listener {
 
     @Override
     public void onStart() {
+        for(RecordListener listener: recordListeners) {
+            listener.onStart();
+        }
         storage = new FileBuffer(settingsBean.getPaths().getBackupFile(".pcm"));
         saver = ObjectsFactory.getSaver(storage, settingsBean, format);
 
@@ -59,6 +62,9 @@ public class XtRecorder implements Recorder, Recording.Listener {
 
     @Override
     public void onStop() {
+        for(RecordListener listener: recordListeners) {
+            listener.onStop();
+        }
         if(recording!=null) recording.stop();
         if(backup!=null) backup.stop();
         AudioDataBuffer storageCopy = storage;
@@ -71,18 +77,21 @@ public class XtRecorder implements Recorder, Recording.Listener {
             if(storageCopy!=null) {
                 storageCopy.delete();
             }
+            for(RecordListener listener: recordListeners) {
+                listener.onEnd();
+            }
         }).start());
         setTotalFrames(0);
     }
 
-    private List<Listener> listeners = new ArrayList<>();
+    private List<RecordListener> recordListeners = new ArrayList<>();
     @Override
-    public void addListener(Listener listener) {
-        listeners.add(listener);
+    public void addListener(RecordListener recordListener) {
+        recordListeners.add(recordListener);
     }
     @Override
-    public void removeListener(Listener listener) {
-        listeners.remove(listener);
+    public void removeListener(RecordListener recordListener) {
+        recordListeners.remove(recordListener);
     }
 
     private long totalFrames = 0;
@@ -93,7 +102,7 @@ public class XtRecorder implements Recorder, Recording.Listener {
     private void setTotalFrames(long framesCount) {
         totalFrames = framesCount;
         int time = (int) (totalFrames/format.mix.rate);
-        for(Listener listener:listeners) {
+        for(RecordListener listener: recordListeners) {
             listener.onNewTime(time);
         }
     }

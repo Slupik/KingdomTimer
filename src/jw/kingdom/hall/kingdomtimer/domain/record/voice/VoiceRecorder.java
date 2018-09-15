@@ -1,5 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.record.voice;
 
+import jw.kingdom.hall.kingdomtimer.recorder.RecordListener;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 import jw.kingdom.hall.kingdomtimer.recorder.xt.XtRecorder;
 
@@ -48,11 +49,11 @@ public class VoiceRecorder {
         }
     }
 
-    public void addListener(Recorder.Listener listener) {
-        recorder.addListener(listener);
+    public void addListener(RecordListener recordListener) {
+        recorder.addListener(recordListener);
     }
-    public void removeListener(Recorder.Listener listener) {
-        recorder.removeListener(listener);
+    public void removeListener(RecordListener recordListener) {
+        recorder.removeListener(recordListener);
     }
 
     public void addListener(Listener listener) {
