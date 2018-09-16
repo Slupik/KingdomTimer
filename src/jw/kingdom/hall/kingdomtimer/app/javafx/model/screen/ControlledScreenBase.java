@@ -59,7 +59,7 @@ public abstract class ControlledScreenBase implements ControlledScreen, Initiali
     }
 
     private void setup() {
-        onStart();
+        onSetup();
     }
 
     protected void onPreCreate() {
@@ -70,7 +70,7 @@ public abstract class ControlledScreenBase implements ControlledScreen, Initiali
 
     }
 
-    protected void onStart() {
+    protected void onSetup() {
 
     }
 

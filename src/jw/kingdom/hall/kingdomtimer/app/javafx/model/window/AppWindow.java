@@ -1,5 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.app.javafx.model.window;
 
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
@@ -37,17 +38,30 @@ public abstract class AppWindow extends StackPane {
         setMainView();
 
         stage.setScene(scene);
-        onPreShow();
+        onPostLoadViews();
         stage.show();
         onPostShow();
+        Platform.runLater(()->onPostInit());
     }
 
     protected abstract void loadScreens();
     protected abstract void setMainView();
 
-    protected abstract void onPreInit();
-    protected abstract void onPreShow();
-    protected abstract void onPostShow();
+    protected void onPreInit() {
+
+    }
+
+    protected void onPostLoadViews() {
+
+    }
+
+    protected void onPostShow() {
+
+    }
+
+    protected void onPostInit() {
+
+    }
 
     public Stage getStage() {
         return stage;

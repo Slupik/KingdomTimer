@@ -1,57 +1,65 @@
-package jw.kingdom.hall.kingdomtimer.app.view.handy;
+package jw.kingdom.hall.kingdomtimer.app.javafx.model.view.widget;
 
 import javafx.application.Platform;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import jw.kingdom.hall.kingdomtimer.app.view.loader.Screens;
-import jw.kingdom.hall.kingdomtimer.app.view.loader.StageWindow;
-import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowController;
-import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowSettings;
+import jw.kingdom.hall.kingdomtimer.app.javafx.model.window.AppWindow;
+import jw.kingdom.hall.kingdomtimer.app.javafx.model.window.WindowInput;
 import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorObservableList;
 
+import static jw.kingdom.hall.kingdomtimer.app.javafx.model.view.widget.HandyWindow.Screens.MAIN;
+
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class HandyWindow implements StageWindow {
-    private static HandyWindow instance;
-    public final WindowController CONTROLLER;
+public class HandyWindow extends AppWindow {
 
-    private static Stage stage;
-    private static Scene scene;
-    private static Group root;
-
-    private HandyWindow() {
-        CONTROLLER = new WindowController(this);
+    public HandyWindow(Stage stage, WindowInput input) {
+        super(stage, input);
     }
 
-    public void build(Stage primaryStage){
-        stage = primaryStage;
+    @Override
+    protected void loadScreens() {
+        viewManager.loadScreen(MAIN.name, MAIN.path);
+    }
+
+    @Override
+    protected void setMainView() {
+        viewManager.setScreen(MAIN.name);
+    }
+
+    @Override
+    protected void onPreInit() {
+        super.onPreInit();
         stage.initStyle(StageStyle.TRANSPARENT);
-        root = new Group();
-
-        stage.setTitle(WindowSettings.TITLE);
         stage.setAlwaysOnTop(true);
+    }
 
-        loadScreens();
-        root.getChildren().addAll(CONTROLLER.getScreensPane());
-        CONTROLLER.setScreen(Screens.HANDY_PANEL);
-
-        scene = new Scene(root);
+    @Override
+    protected void onPostLoadViews() {
+        super.onPostLoadViews();
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         stage.show();
 
         stage.setWidth(300);
         stage.setHeight(110);
+    }
 
-        Platform.runLater(this::setPosToRightUp);
-
+    @Override
+    protected void onPostShow() {
+        super.onPostShow();
         new WindowMovingController(stage, root);
+    }
+
+    @Override
+    protected void onPostInit() {
+        super.onPostInit();
+
+        setPosToRightUp();
 
         new Thread(()->{
             try {
@@ -86,19 +94,16 @@ public class HandyWindow implements StageWindow {
         return null;
     }
 
-    public void loadScreens() {
-        CONTROLLER.loadScreen(Screens.HANDY_PANEL);
-    }
+    public enum Screens {
+        MAIN("main", "/layout/window/handy/main.fxml"),
+        ;
 
-    @Override
-    public Stage getStage() {
-        return stage;
-    }
+        public final String name;
+        public final String path;
 
-    public static HandyWindow getInstance(){
-        if(null == instance) {
-            instance = new HandyWindow();
+        Screens(String name, String path) {
+            this.name = name;
+            this.path = path;
         }
-        return instance;
     }
 }

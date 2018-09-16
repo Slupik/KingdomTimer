@@ -1,14 +1,14 @@
-package jw.kingdom.hall.kingdomtimer.app.view.handy;
+package jw.kingdom.hall.kingdomtimer.app.javafx.model.view.widget;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import jw.kingdom.hall.kingdomtimer.app.javafx.model.screen.ControlledScreenBase;
+import jw.kingdom.hall.kingdomtimer.app.javafx.model.window.WindowType;
 import jw.kingdom.hall.kingdomtimer.app.view.common.AnimatedZoomOperator;
-import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
 import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.view.common.custom.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
@@ -17,13 +17,10 @@ import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.NotEnoughTasksException;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class HandyPanelController extends ControlledScreenImpl implements Initializable, StartPauseStopView.Listener, StartPauseStopView.Controller {
+public class HandyPanelController extends ControlledScreenBase implements StartPauseStopView.Listener, StartPauseStopView.Controller {
 
     @FXML
     private HBox mainContainer;
@@ -41,7 +38,8 @@ public class HandyPanelController extends ControlledScreenImpl implements Initia
     private double lastSize = -1;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    protected void onSetup() {
+        super.onSetup();
         initSps();
         initTimeController();
         setupZoom();
@@ -68,8 +66,8 @@ public class HandyPanelController extends ControlledScreenImpl implements Initia
             lblTime.widthProperty().addListener((observable, oldValue, newValue) -> {
                 double diff = newValue.doubleValue()-lastSize;
                 lastSize = newValue.doubleValue();
-                HandyWindow.getInstance().getStage().setWidth(
-                        HandyWindow.getInstance().getStage().getWidth()+diff
+                getHandyWindow().getStage().setWidth(
+                        getHandyWindow().getStage().getWidth()+diff
                 );
             });
         });
@@ -118,7 +116,7 @@ public class HandyPanelController extends ControlledScreenImpl implements Initia
 
     @FXML
     void minifyAction(ActionEvent event) {
-        HandyWindow.getInstance().getStage().setIconified(true);
+        getHandyWindow().getStage().setIconified(true);
     }
 
     @Override
@@ -159,5 +157,9 @@ public class HandyPanelController extends ControlledScreenImpl implements Initia
             return MeetingSchedule.getInstance().getList().size()!=0;
         }
         return true;
+    }
+
+    private HandyWindow getHandyWindow() {
+        return (HandyWindow) getWindowData().getWindowsContainer().getAppWindow(WindowType.WIDGET);
     }
 }

@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.app.view.handy;
+package jw.kingdom.hall.kingdomtimer.app.javafx.model.view.widget;
 
 import javafx.event.EventHandler;
 import javafx.scene.Group;

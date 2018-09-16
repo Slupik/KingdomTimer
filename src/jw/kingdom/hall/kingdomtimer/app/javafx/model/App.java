@@ -1,6 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.app.javafx.model;
 
 import javafx.stage.Stage;
+import jw.kingdom.hall.kingdomtimer.app.javafx.model.view.widget.HandyWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.model.window.AppWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.model.window.WindowInput;
 import jw.kingdom.hall.kingdomtimer.app.javafx.model.window.WindowType;
@@ -31,7 +32,7 @@ public class App {
     private void initWindows(Stage primaryStage) {
 //        buildWindow(HeadWindow.class, primaryStage, WindowType.PANEL);
 //        buildWindow(SpeakerWindow.class, new Stage(), WindowType.SPEAKER);
-//        buildWindow(HandyWindow.class, new Stage(), WindowType.WIDGET);
+        buildWindow(HandyWindow.class, primaryStage, WindowType.WIDGET);
     }
 
     private void buildWindow(Class<? extends AppWindow> appWindowClass, Stage stage, WindowType type) {
