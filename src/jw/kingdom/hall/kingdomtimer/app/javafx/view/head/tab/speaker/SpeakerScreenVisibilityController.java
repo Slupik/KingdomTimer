@@ -29,7 +29,7 @@ class SpeakerScreenVisibilityController {
             AppConfig.getInstance().setVisibilitySpeakerScreen(newValue);
             ignore = false;
         });
-//        SpeakerWindow.getInstance().addOnMonitorChangeListener(new SpeakerWindow.Listener() {
+//        SpeakerWindow.getInstance().addOnMonitorChangeListener(new SpeakerWindow.RecordControlListener() {
 //            private String ID = Randomizer.randomStandardString(10);
 //
 //            @Override

@@ -109,7 +109,7 @@ public class StartPauseStopView extends HBox {
         setupForUnPause();
 
         for(Listener listener:listeners) {
-            listener.onUnPause();
+            listener.onResume();
         }
     }
 
@@ -196,7 +196,7 @@ public class StartPauseStopView extends HBox {
     public interface Listener {
         void onStart();
         void onPause();
-        void onUnPause();
+        void onResume();
         void onStop();
     }
 }

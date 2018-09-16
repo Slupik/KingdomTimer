@@ -7,17 +7,13 @@ import jw.kingdom.hall.kingdomtimer.domain.backup.entity.TimeBackupBean;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.domain.record.voice.DefaultVoiceRecorderListener;
-import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
+import jw.kingdom.hall.kingdomtimer.domain.record.voice.DefaultVoiceRecorderRecordControlListener;
+import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingScheduleListener;
 import jw.kingdom.hall.kingdomtimer.domain.utils.FileUtils;
-import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -32,7 +28,7 @@ class TimeBackupMaker {
     private ChangeListener<Boolean> countdownDirectListener = (observable, oldValue, newValue) -> updateDirect(newValue);
     private MeetingTask lastTask = null;
 
-    TimeBackupMaker(){
+    TimeBackupMaker(RecordControl recordControl){
         MeetingSchedule.getInstance().addListener(new MeetingScheduleListener() {
 
             @Override
@@ -104,7 +100,7 @@ class TimeBackupMaker {
                 updateTask(null);
             }
         });
-        VoiceRecorder.getInstance().addListener(new DefaultVoiceRecorderListener() {
+        recordControl.addListener(new DefaultVoiceRecorderRecordControlListener() {
             @Override
             public void onStart() {
                 super.onStart();

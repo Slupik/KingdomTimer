@@ -11,8 +11,9 @@ import jw.kingdom.hall.kingdomtimer.device.local.AutoRAMCleaner;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
 import jw.kingdom.hall.kingdomtimer.domain.backup.BackupManager;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MultimediaPreviewer;
+import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
+import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
 import jw.kingdom.hall.kingdomtimer.log.Log;
-import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 
 public class Main extends Application {
 
@@ -20,7 +21,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         Log.init(new DefaultLogFile());
         AppConfig.init();
-        BackupManager.start();
+        RecordControl recordControl = VoiceRecorder.getInstance();
+        BackupManager.start(recordControl);
         MonitorManager.initialize();
         try {
             new App(new AppInput() {
@@ -30,8 +32,8 @@ public class Main extends Application {
                 }
 
                 @Override
-                public Recorder getRecorder() {
-                    return null;
+                public RecordControl getRecorder() {
+                    return recordControl;
                 }
             }).start(primaryStage);
         } catch (Exception e) {

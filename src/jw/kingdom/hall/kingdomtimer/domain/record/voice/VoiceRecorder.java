@@ -11,57 +11,63 @@ import java.util.List;
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class VoiceRecorder {
+public class VoiceRecorder implements RecordControl {
     private Recorder recorder;
-    private boolean isPause = false;
     private boolean start = false;
-    private final List<Listener> listeners = new ArrayList<>();
+    private final List<RecordControlListener> listeners = new ArrayList<>();
     private int recordingThreads = 0;
 
+    @Override
     public void start(){
         if(!start) {
             start = true;
             recorder.onStart();
-            setPause(false);
-            for(Listener listener:listeners) {
+            for(RecordControlListener listener:listeners) {
                 listener.onStart();
             }
         }
     }
 
+    @Override
     public void stop(){
         recorder.onStop();
-        setPause(false);
         start = false;
-        for(Listener listener:listeners) {
+        for(RecordControlListener listener:listeners) {
             listener.onStop();
         }
     }
 
-    public void pauseChange(){
-        isPause = !isPause;
-        recorder.setPause(isPause);
-    }
-
-    public void setPause(boolean isPause){
-        this.isPause = isPause;
-        recorder.setPause(isPause);
-        for(Listener listener:listeners) {
-            listener.onPause(isPause);
+    @Override
+    public void pause() {
+        recorder.setPause(true);
+        for(RecordControlListener listener:listeners) {
+            listener.onPause();
         }
     }
 
+    @Override
+    public void resume() {
+        recorder.setPause(false);
+        for(RecordControlListener listener:listeners) {
+            listener.onResume();
+        }
+    }
+
+    @Override
     public void addListener(RecordListener recordListener) {
         recorder.addListener(recordListener);
     }
+    @Override
     public void removeListener(RecordListener recordListener) {
         recorder.removeListener(recordListener);
     }
 
-    public void addListener(Listener listener) {
+    @Override
+    public void addListener(RecordControlListener listener) {
         listeners.add(listener);
     }
-    public void removeListener(Listener listener) {
+    @Override
+    public void removeListener(RecordControlListener listener) {
         listeners.remove(listener);
     }
 
@@ -91,13 +97,8 @@ public class VoiceRecorder {
         });
     }
 
+    @Override
     public boolean isRecording() {
         return recordingThreads>0;
-    }
-
-    public interface Listener {
-        void onStart();
-        void onPause(boolean isPause);
-        void onStop();
     }
 }

@@ -142,11 +142,6 @@ public class SpeakerWindow extends AppWindow {
         return false;
     }
 
-    @Override
-    public Stage getStage() {
-        return stage;
-    }
-
     private void autoSelectScreen(){
         MonitorObservableList list = MonitorManager.monitors;
 

@@ -5,7 +5,6 @@ import jw.kingdom.hall.kingdomtimer.app.CrashMaker;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.AppWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowInput;
 import jw.kingdom.hall.kingdomtimer.domain.backup.BackupManager;
-import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
 
 import static jw.kingdom.hall.kingdomtimer.app.javafx.view.head.HeadWindow.Screens.MAIN;
 
@@ -43,7 +42,7 @@ public class HeadWindow extends AppWindow {
         super.onPostShow();
 
         stage.setOnCloseRequest(event -> {
-            if(VoiceRecorder.getInstance().isRecording()) {
+            if(getRecorder().isRecording()) {
                 event.consume();
                 StillRecordingAlert.show();
             } else {
@@ -67,11 +66,6 @@ public class HeadWindow extends AppWindow {
             }
             CrashMaker.crashApp();
         }).start();
-    }
-
-    @Override
-    public Stage getStage() {
-        return stage;
     }
 
     public enum Screens {

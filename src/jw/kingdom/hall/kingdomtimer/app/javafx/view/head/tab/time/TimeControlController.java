@@ -248,7 +248,7 @@ StartPauseStopView.Controller {
     }
 
     @Override
-    public void onUnPause() {
+    public void onResume() {
         getTimer().resume();
     }
 

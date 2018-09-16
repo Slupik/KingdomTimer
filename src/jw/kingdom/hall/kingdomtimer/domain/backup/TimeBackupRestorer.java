@@ -5,7 +5,7 @@ import jw.kingdom.hall.kingdomtimer.domain.backup.entity.OfflineMeetingBean;
 import jw.kingdom.hall.kingdomtimer.domain.backup.entity.TimeBackupBean;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
+import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.utils.FileUtils;
 
@@ -16,9 +16,11 @@ import java.util.List;
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class TimeBackupRestorer {
+    private final RecordControl recordControl;
     private TimeBackupBean bean;
 
-    TimeBackupRestorer(){
+    TimeBackupRestorer(RecordControl recordControl){
+        this.recordControl = recordControl;
         init();
     }
 
@@ -37,7 +39,7 @@ class TimeBackupRestorer {
 
     void restore(){
         if(isAvailable()) {
-            restore(bean);
+            restore(bean, recordControl);
         }
     }
 
@@ -46,15 +48,15 @@ class TimeBackupRestorer {
         FileManager.deleteRootPath();
     }
 
-    private static void restore(TimeBackupBean data) {
+    private static void restore(TimeBackupBean data, RecordControl recordControl) {
         restoreSchedule(data);
         restoreCountdown(data);
-        restoreRecording(data);
+        restoreRecording(data, recordControl);
     }
 
-    private static void restoreRecording(TimeBackupBean data) {
+    private static void restoreRecording(TimeBackupBean data, RecordControl recordControl) {
         if(data.isRecording()) {
-            VoiceRecorder.getInstance().start();
+            recordControl.start();
         }
     }
 

@@ -3,6 +3,8 @@ package jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab;
 import javafx.fxml.Initializable;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowInput;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.container.WindowsContainer;
+import jw.kingdom.hall.kingdomtimer.config.model.Config;
+import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -53,5 +55,13 @@ public abstract class TabPresenter implements TabPresentable, Initializable {
 
     public void onSetup() {
 
+    }
+
+    protected final Config getConfig() {
+        return getWindowData().getConfig();
+    }
+
+    protected final RecordControl getRecorder(){
+        return getWindowData().getRecorder();
     }
 }

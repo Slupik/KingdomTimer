@@ -151,7 +151,7 @@ public class SpeakerScreenController extends TabPresenter {
         }
 
         //TODO repair
-//        SpeakerWindow.getInstance().addOnMonitorChangeListener(new SpeakerWindow.Listener() {
+//        SpeakerWindow.getInstance().addOnMonitorChangeListener(new SpeakerWindow.RecordControlListener() {
 //            private String ID = Randomizer.randomStandardString(10);
 //            private boolean ignore = false;
 //

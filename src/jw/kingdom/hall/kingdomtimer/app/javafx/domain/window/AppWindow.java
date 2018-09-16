@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.loader.DefaultViewManager;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.loader.ViewManager;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.WindowSettings;
+import jw.kingdom.hall.kingdomtimer.config.model.Config;
+import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 
 /**
  * All rights reserved & copyright ©
@@ -67,7 +69,15 @@ public abstract class AppWindow extends StackPane {
 
     }
 
-    public Stage getStage() {
+    public final Stage getStage() {
         return stage;
+    }
+
+    protected final Config getConfig() {
+        return input.getConfig();
+    }
+
+    protected final RecordControl getRecorder(){
+        return input.getRecorder();
     }
 }

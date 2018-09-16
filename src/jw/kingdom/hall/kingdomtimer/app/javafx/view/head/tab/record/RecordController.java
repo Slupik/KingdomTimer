@@ -7,13 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.TabPresenter;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.sps.StartPauseStopView;
+import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.TabPresenter;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.domain.record.voice.DefaultVoiceRecorderListener;
-import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
+import jw.kingdom.hall.kingdomtimer.domain.record.voice.DefaultVoiceRecorderRecordControlListener;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingScheduleListener;
 import jw.kingdom.hall.kingdomtimer.recorder.RecordListenerProxy;
@@ -46,12 +45,12 @@ public class RecordController extends TabPresenter implements StartPauseStopView
 
     @Override
     public void onSetup() {
-        initVoiceRecordInstance();
+        addRecordListener();
 
         spsView = new StartPauseStopView();
         hbControlsContainer.getChildren().add(spsView);
         spsView.addListener(this);
-        VoiceRecorder.getInstance().addListener(new DefaultVoiceRecorderListener() {
+        getRecorder().addListener(new DefaultVoiceRecorderRecordControlListener() {
             @Override
             public void onStart() {
                 super.onStart();
@@ -59,13 +58,15 @@ public class RecordController extends TabPresenter implements StartPauseStopView
             }
 
             @Override
-            public void onPause(boolean isPause) {
-                super.onPause(isPause);
-                if (isPause) {
-                    spsView.setupForPause();
-                } else {
-                    spsView.setupForUnPause();
-                }
+            public void onPause() {
+                super.onPause();
+                spsView.setupForPause();
+            }
+
+            @Override
+            public void onResume() {
+                super.onResume();
+                spsView.setupForUnPause();
             }
 
             @Override
@@ -94,8 +95,8 @@ public class RecordController extends TabPresenter implements StartPauseStopView
             public void onNextTask(int index, MeetingTask task) {
                 super.onNextTask(index, task);
                 if (task != null && (!task.getType().equals(lastType) && lastType != null) && isAutoSeparateOn()) {
-                    VoiceRecorder.getInstance().stop();
-                    VoiceRecorder.getInstance().start();
+                    getRecorder().stop();
+                    getRecorder().start();
                 }
                 if (task == null) {
                     lastType = null;
@@ -136,13 +137,8 @@ public class RecordController extends TabPresenter implements StartPauseStopView
         tfPath.setText(AppConfig.getInstance().getRecordDestPath());
     }
 
-    private void initVoiceRecordInstance() {
-        try {
-            VoiceRecorder.getInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        VoiceRecorder.getInstance().addListener(new RecordListenerProxy() {
+    private void addRecordListener() {
+        getRecorder().addListener(new RecordListenerProxy() {
             @Override
             public void onNewTime(int seconds) {
                 controller.setTime(seconds);
@@ -160,22 +156,22 @@ public class RecordController extends TabPresenter implements StartPauseStopView
 
     @Override
     public void onStart() {
-        VoiceRecorder.getInstance().start();
+        getRecorder().start();
     }
 
     @Override
     public void onPause() {
-        VoiceRecorder.getInstance().setPause(true);
+        getRecorder().pause();
     }
 
     @Override
-    public void onUnPause() {
-        VoiceRecorder.getInstance().setPause(false);
+    public void onResume() {
+        getRecorder().resume();
     }
 
     @Override
     public void onStop() {
-        VoiceRecorder.getInstance().stop();
+        getRecorder().stop();
     }
 
 }

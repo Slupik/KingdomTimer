@@ -1,16 +1,16 @@
 package jw.kingdom.hall.kingdomtimer.app.javafx.domain.app;
 
 import javafx.stage.Stage;
-import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.HeadWindow;
-import jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.SpeakerWindow;
-import jw.kingdom.hall.kingdomtimer.app.javafx.view.widget.HandyWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.AppWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowInput;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowType;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.container.WindowsContainer;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.container.WindowsContainerImpl;
+import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.HeadWindow;
+import jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.SpeakerWindow;
+import jw.kingdom.hall.kingdomtimer.app.javafx.view.widget.HandyWindow;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
-import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
+import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -56,7 +56,7 @@ public class App {
             }
 
             @Override
-            public Recorder getRecorder() {
+            public RecordControl getRecorder() {
                 return appInput.getRecorder();
             }
 

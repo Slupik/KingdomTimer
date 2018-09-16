@@ -142,7 +142,7 @@ public class HandyPanelController extends ControlledScreenBase implements StartP
     }
 
     @Override
-    public void onUnPause() {
+    public void onResume() {
         getTimer().resume();
     }
 
