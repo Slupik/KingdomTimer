@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<!--
+  ~ Created 03.09.18 21:09.
+  ~ Last modified 30.08.18 20:05
+  -->
+
+<VBox fx:id="vbMainContainer" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.app.javafx.model.view.head.tab.record.RecordController">
+   <padding>
+      <Insets bottom="16.0" left="16.0" right="16.0" top="8.0" />
+   </padding>
+   <children>
+      <HBox>
+         <children>
+            <Label fx:id="lblTime" text="12:43:02">
+               <font>
+                  <Font size="53.0" />
+               </font>
+               <tooltip>
+                  <Tooltip text="Czas trwania nagrania." wrapText="true" />
+               </tooltip>
+            </Label>
+            <HBox fx:id="hbControlsContainer" alignment="CENTER_LEFT">
+               <HBox.margin>
+                  <Insets left="16.0" />
+               </HBox.margin>
+            </HBox>
+         </children>
+      </HBox>
+      <CheckBox fx:id="cbAutopilot" mnemonicParsing="false" selected="true" text="Automatyczne nagrywanie zebrania" />
+      <CheckBox fx:id="cbAutoSeparate" mnemonicParsing="false" text="Automatycznie dziel nagranie na części zebrania">
+         <VBox.margin>
+            <Insets top="8.0" />
+         </VBox.margin>
+      </CheckBox>
+      <HBox alignment="CENTER_LEFT">
+         <children>
+            <Label text="Miejsce zapisu: " />
+            <TextField fx:id="tfPath" editable="false" prefWidth="385.0">
+               <HBox.margin>
+                  <Insets left="8.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+         <VBox.margin>
+            <Insets top="16.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>

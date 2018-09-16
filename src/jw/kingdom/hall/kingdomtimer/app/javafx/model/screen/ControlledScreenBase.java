@@ -46,7 +46,7 @@ public abstract class ControlledScreenBase implements ControlledScreen, Initiali
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public final void initialize(URL location, ResourceBundle resources) {
         onPreCreate();
         onCreate(location, resources);
         runSetup();

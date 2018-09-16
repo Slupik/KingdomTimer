@@ -38,16 +38,20 @@ public abstract class TabPresenter implements TabPresentable, Initializable {
 
     private void runPostCreateIfConditionsMet() {
         if(data!=null && windowsContainer!=null) {
-            onStart();
+            onSetup();
         }
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public final void initialize(URL location, ResourceBundle resources) {
         onCreate(location, resources);
     }
 
-    public abstract void onStart();
+    protected void onCreate(URL location, ResourceBundle resources) {
 
-    protected abstract void onCreate(URL location, ResourceBundle resources);
+    }
+
+    public void onSetup() {
+
+    }
 }
