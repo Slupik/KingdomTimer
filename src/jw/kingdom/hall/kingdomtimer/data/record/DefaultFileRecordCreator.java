@@ -3,7 +3,7 @@ package jw.kingdom.hall.kingdomtimer.data.record;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.config.model.ConfigReadable;
 import jw.kingdom.hall.kingdomtimer.data.UniqueFileUtils;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
@@ -20,9 +20,9 @@ public class DefaultFileRecordCreator implements FileRecordCreator {
     private final Config config;
     private MeetingTask lastTask = EMPTY;
 
-    public DefaultFileRecordCreator(Config config, Schedule schedule){
+    public DefaultFileRecordCreator(Config config, Schedule schedule, Countdown countdown){
         this.config = config;
-        TimerCountdown.getInstance().addListener(new TimerCountdownListener() {
+        countdown.addListener(new TimerCountdownListener() {
             @Override
             public void onStart(MeetingTask task) {
                 super.onStart(task);

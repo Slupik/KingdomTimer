@@ -1,5 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.backup;
 
+import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 
@@ -27,17 +28,17 @@ public class BackupManager {
         return false;
     }
 
-    public static void start(RecordControl recordControl, Schedule schedule){
+    public static void start(RecordControl recordControl, Schedule schedule, Countdown countdown){
         if(!running) {
             running = true;
         } else {
             return;
         }
-        init(recordControl, schedule);
+        init(recordControl, schedule, countdown);
     }
 
-    private static void init(RecordControl recordControl, Schedule schedule) {
-        timeRestore = new TimeBackupRestorer(recordControl, schedule);
-        timeBackup = new TimeBackupMaker(recordControl, schedule);
+    private static void init(RecordControl recordControl, Schedule schedule, Countdown countdown) {
+        timeRestore = new TimeBackupRestorer(recordControl, schedule, countdown);
+        timeBackup = new TimeBackupMaker(recordControl, schedule, countdown);
     }
 }

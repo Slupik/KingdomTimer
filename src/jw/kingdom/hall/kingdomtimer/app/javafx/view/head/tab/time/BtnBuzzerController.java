@@ -3,7 +3,7 @@ package jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time;
 
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.Button;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
@@ -14,11 +14,13 @@ import static jw.kingdom.hall.kingdomtimer.app.javafx.utils.ButtonUtils.loadMedi
  */
 public class BtnBuzzerController {
 
+    private final Countdown countdown;
     private Button button;
     private MeetingTask task;
     private final ChangeListener<Boolean> buzzerConditionListener = (observable, oldValue, newValue) -> setImageForVolumeUp(newValue);
 
-    public BtnBuzzerController(Button button) {
+    public BtnBuzzerController(Countdown countdown, Button button) {
+        this.countdown = countdown;
         this.button = button;
         init();
     }
@@ -31,7 +33,7 @@ public class BtnBuzzerController {
                 setImageForCurrentCondition();
             }
         });
-        TimerCountdown.getInstance().addListener(new TimerCountdownListener() {
+        getCountdown().addListener(new TimerCountdownListener() {
             @Override
             public void onStart(MeetingTask task) {
                 super.onStart(task);
@@ -69,5 +71,9 @@ public class BtnBuzzerController {
         } else {
             loadMediumImage(button, "icons/baseline_volume_off_black_48dp.png");
         }
+    }
+
+    private Countdown getCountdown() {
+        return countdown;
     }
 }

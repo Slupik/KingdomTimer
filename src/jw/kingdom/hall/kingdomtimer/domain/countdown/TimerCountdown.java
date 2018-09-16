@@ -13,19 +13,20 @@ import java.util.List;
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 
-public class TimerCountdown extends TimerCountdownBase {
-    private List<Listener> listeners = new ArrayList<>();
+public class TimerCountdown extends TimerCountdownBase implements Countdown {
+    private List<CountdownListener> listeners = new ArrayList<>();
     private MeetingTask task;
     private int addedTime = 0;
     private int startTime = 0;
     private final ChangeListener<Boolean> buzzerConditionListener = (observable, oldValue, newValue) -> setVolumeUp(newValue);
 
+    @Override
     public void start(@NotNull MeetingTask task) {
         startTime = task.getTimeInSeconds();
         addedTime = 0;
         setTask(task);
         super.startTime(task.getTimeInSeconds());
-        for(Listener listener:listeners) {
+        for(CountdownListener listener:listeners) {
             listener.onStart(task);
         }
     }
@@ -38,7 +39,7 @@ public class TimerCountdown extends TimerCountdownBase {
             }
         }
         if(0 == time) {
-            for(Listener listener:listeners) {
+            for(CountdownListener listener:listeners) {
                 listener.onTimeOut();
             }
         }
@@ -63,59 +64,66 @@ public class TimerCountdown extends TimerCountdownBase {
         }
     }
 
+    @Override
     public void stop() {
         super.stop();
         setTask(null);
         setTime(0);
-        for(Listener listener:listeners) {
+        for(CountdownListener listener:listeners) {
             listener.onStop();
         }
     }
 
+    @Override
     public void pause() {
         super.setPause(true);
-        for(Listener listener:listeners) {
+        for(CountdownListener listener:listeners) {
             listener.onPause();
         }
     }
 
     private void setVolumeUp(Boolean value) {
-        for(Listener listener:listeners) {
+        for(CountdownListener listener:listeners) {
             listener.onVolumeChange(value);
         }
     }
 
+    @Override
     public void resume() {
         startTime(getTime());
-        for(Listener listener:listeners) {
+        for(CountdownListener listener:listeners) {
             listener.onResume();
         }
     }
 
+    @Override
     public void addTime(int time) {
         setTime(getTime()+time);
         addedTime += time;
-        for(Listener listener:listeners) {
+        for(CountdownListener listener:listeners) {
             listener.onTimeManipulate(addedTime);
         }
     }
 
+    @Override
     public void removeTime(int time) {
         setTime(getTime()-time);
         addedTime -= time;
-        for(Listener listener:listeners) {
+        for(CountdownListener listener:listeners) {
             listener.onTimeManipulate(addedTime);
         }
     }
 
+    @Override
     public void enforceTime(int time) {
         addedTime=0;
         setTime(time);
-        for(Listener listener:listeners) {
+        for(CountdownListener listener:listeners) {
             listener.onEnforceTime(time);
         }
     }
 
+    @Override
     public MeetingTask getTask() {
         return task;
     }
@@ -143,7 +151,7 @@ public class TimerCountdown extends TimerCountdownBase {
     }
 
     @Override
-    protected void removeController(TimeDisplayController controller) {
+    public void removeController(TimeDisplayController controller) {
         super.removeController(controller);
     }
 
@@ -168,27 +176,18 @@ public class TimerCountdown extends TimerCountdownBase {
     /*
     LISTENERS
      */
-    public void addListener(Listener listener) {
+    @Override
+    public void addListener(CountdownListener listener) {
         listeners.add(listener);
     }
 
-    public void removeListener(Listener listener) {
-        for(Listener item:listeners) {
+    @Override
+    public void removeListener(CountdownListener listener) {
+        for(CountdownListener item:listeners) {
             if(item.getID().equals(listener.getID())) {
                 listeners.remove(item);
             }
         }
-    }
-    public interface Listener {
-        void onStart(MeetingTask task);
-        void onPause();
-        void onResume();
-        void onStop();
-        void onTimeOut();
-        void onTimeManipulate(int totalAdded);
-        void onEnforceTime(int time);
-        void onVolumeChange(boolean isVolumeUp);
-        String getID();
     }
 
     /*

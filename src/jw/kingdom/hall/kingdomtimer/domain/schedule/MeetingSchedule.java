@@ -2,7 +2,7 @@ package jw.kingdom.hall.kingdomtimer.domain.schedule;
 
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.data.schedule.PredefinedTaskList;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class MeetingSchedule extends MeetingScheduleBase {
     private final List<ScheduleListener> listeners = new ArrayList<>();
+    private final Countdown countdown;
 
     @Override
     public void setTasksOnline(Config config, boolean circuit) {
@@ -100,14 +101,15 @@ public class MeetingSchedule extends MeetingScheduleBase {
     Singleton
      */
     private static MeetingSchedule schedule;
-    public static MeetingSchedule getInstance(){
+    public static MeetingSchedule getInstance(Countdown countdown){
         if(null == schedule) {
-            schedule = new MeetingSchedule();
+            schedule = new MeetingSchedule(countdown);
         }
         return schedule;
     }
-    private MeetingSchedule(){
-        TimerCountdown.getInstance().addListener(new TimerCountdownListener() {
+    private MeetingSchedule(Countdown countdown){
+        this.countdown = countdown;
+        getCountdown().addListener(new TimerCountdownListener() {
             @Override
             public void onStop() {
                 super.onStop();
@@ -118,5 +120,9 @@ public class MeetingSchedule extends MeetingScheduleBase {
                 }
             }
         });
+    }
+
+    private Countdown getCountdown() {
+        return countdown;
     }
 }

@@ -6,17 +6,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.TimeDisplayController;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.TabPresenter;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.table.TaskTableController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.BtnTimeDirectBase;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.BtnTimeDirectForInstantController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.BtnTimeDirectForPanel;
-import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.TimeDisplayController;
-import jw.kingdom.hall.kingdomtimer.app.javafx.common.sps.StartPauseStopView;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.NotEnoughTasksException;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 
@@ -99,7 +97,7 @@ StartPauseStopView.Controller {
         spsView.addListener(this);
         spsView.setController(this);
 
-        buzzerController = new BtnBuzzerController(btnBuzzer);
+        buzzerController = new BtnBuzzerController(getCountdown(), btnBuzzer);
 
         timeDirectController = new BtnTimeDirectForPanel(btnCountdownDirect, getConfig());
         timeDirectController.setMedium(false);
@@ -107,12 +105,12 @@ StartPauseStopView.Controller {
         fastDirectController = new BtnTimeDirectForPanel(btnFastDirect, getConfig());
         fastDirectController.setMedium(false);
 
-        instantDirectController = new BtnTimeDirectForInstantController(getConfig(), btnInstantDirect);
+        instantDirectController = new BtnTimeDirectForInstantController(getCountdown(), getConfig(), btnInstantDirect);
         instantDirectController.setMedium(true);
 
         timeDisplay = new TimeDisplayController(lblTime);
         timeDisplay.setTime(0);
-        getTimer().addController(timeDisplay);
+        getCountdown().addController(timeDisplay);
         tableController = new TaskTableController(
                 getSchedule(),
                 getConfig(),
@@ -126,7 +124,7 @@ StartPauseStopView.Controller {
         );
 
         setupInstantDirectController();
-        TimerCountdown.getInstance().addListener(new TimerCountdownListener() {
+        getCountdown().addListener(new TimerCountdownListener() {
             @Override
             public void onStart(MeetingTask task) {
                 super.onStart(task);
@@ -172,7 +170,7 @@ StartPauseStopView.Controller {
         instantDirectController.addListener(new BtnTimeDirectBase.ListenerImpl() {
             @Override
             public void onDirectChange(boolean isDirectDown) {
-//                TimerCountdown.getInstance().setDirectTimeDown(isDirectDown);
+//                getCountdown().setDirectTimeDown(isDirectDown);
             }
         });
     }
@@ -204,7 +202,7 @@ StartPauseStopView.Controller {
             tfFastTime.setSeconds(0);
             task.setCountdownDown(fastDirectController.isDirectDown());
             fastDirectController.reset();
-            getTimer().start(task);
+            getCountdown().start(task);
         });
     }
 
@@ -221,42 +219,38 @@ StartPauseStopView.Controller {
     @FXML
     private void handleAddTime(ActionEvent event) {
         FastPanelController.executeIfSave(tfFastTime.getAllSeconds(), ()->{
-            getTimer().addTime(tfFastTime.getAllSeconds());
+            getCountdown().addTime(tfFastTime.getAllSeconds());
         });
     }
 
     @FXML
     private void handleRemoveTime(ActionEvent event) {
         FastPanelController.executeIfSave(tfFastTime.getAllSeconds(), ()->{
-            getTimer().removeTime(tfFastTime.getAllSeconds());
+            getCountdown().removeTime(tfFastTime.getAllSeconds());
         });
-    }
-
-    private TimerCountdown getTimer() {
-        return TimerCountdown.getInstance();
     }
 
     @Override
     public void onStart() {
         try {
             MeetingTask task = getSchedule().bringOutFirstTask();
-            getTimer().start(task);
+            getCountdown().start(task);
         } catch (NotEnoughTasksException ignore) {}
     }
 
     @Override
     public void onPause() {
-        getTimer().pause();
+        getCountdown().pause();
     }
 
     @Override
     public void onResume() {
-        getTimer().resume();
+        getCountdown().resume();
     }
 
     @Override
     public void onStop() {
-        getTimer().stop();
+        getCountdown().stop();
     }
 
     @Override

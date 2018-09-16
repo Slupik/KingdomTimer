@@ -10,6 +10,7 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.HeadWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.SpeakerWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.widget.HandyWindow;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 
@@ -64,6 +65,11 @@ public class App {
             @Override
             public Schedule getSchedule() {
                 return appInput.getSchedule();
+            }
+
+            @Override
+            public Countdown getCountdown() {
+                return appInput.getCountdown();
             }
 
             @Override

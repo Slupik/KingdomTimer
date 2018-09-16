@@ -6,7 +6,7 @@ import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public abstract class TimerCountdownListener implements TimerCountdown.Listener {
+public abstract class TimerCountdownListener implements CountdownListener {
     private final String ID = Randomizer.randomStandardString(10);
 
     @Override

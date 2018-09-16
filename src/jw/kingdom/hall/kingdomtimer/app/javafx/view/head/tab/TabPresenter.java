@@ -4,6 +4,7 @@ import javafx.fxml.Initializable;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowInput;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.container.WindowsContainer;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 
@@ -68,5 +69,9 @@ public abstract class TabPresenter implements TabPresentable, Initializable {
 
     protected final Schedule getSchedule(){
         return getWindowData().getSchedule();
+    }
+
+    protected final Countdown getCountdown(){
+        return getWindowData().getCountdown();
     }
 }

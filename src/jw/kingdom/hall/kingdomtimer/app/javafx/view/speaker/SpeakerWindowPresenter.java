@@ -49,7 +49,7 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
 
     private void setupGleam() {
         gleammer = new GleamController(mainContainer, timeDisplay);
-        TimerCountdown.getInstance().addListener(new TimerCountdownListener() {
+        getCountdown().addListener(new TimerCountdownListener() {
             @Override
             public void onTimeOut() {
                 super.onTimeOut();
@@ -63,7 +63,7 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
     private void setupTimeView() {
         timeDisplay = new TimeDisplayController(tvTime);
         timeDisplay.setTime(0);
-        TimerCountdown.getInstance().addController(timeDisplay);
+        getCountdown().addController(timeDisplay);
 
         setupBackground();
 

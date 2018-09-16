@@ -10,6 +10,8 @@ import jw.kingdom.hall.kingdomtimer.data.log.DefaultLogFile;
 import jw.kingdom.hall.kingdomtimer.device.local.AutoRAMCleaner;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
 import jw.kingdom.hall.kingdomtimer.domain.backup.BackupManager;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MultimediaPreviewer;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
@@ -23,10 +25,11 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         Log.init(new DefaultLogFile());
         AppConfig config = DefaultAppConfig.getInstance();
-        Schedule schedule = MeetingSchedule.getInstance();
-        RecordControl recordControl = VoiceRecorder.getInstance(config, schedule);
+        Countdown countdown = TimerCountdown.getInstance();
+        Schedule schedule = MeetingSchedule.getInstance(countdown);
+        RecordControl recordControl = VoiceRecorder.getInstance(config, schedule, countdown);
 
-        BackupManager.start(recordControl, schedule);
+        BackupManager.start(recordControl, schedule, countdown);
         MonitorManager.initialize();
         try {
             new App(new AppInput() {
@@ -43,6 +46,11 @@ public class Main extends Application {
                 @Override
                 public Schedule getSchedule() {
                     return schedule;
+                }
+
+                @Override
+                public Countdown getCountdown() {
+                    return countdown;
                 }
             }).start(primaryStage);
         } catch (Exception e) {

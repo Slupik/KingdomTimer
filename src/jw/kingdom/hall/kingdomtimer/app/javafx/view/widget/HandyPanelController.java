@@ -6,15 +6,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import jw.kingdom.hall.kingdomtimer.app.javafx.domain.screen.ControlledScreenBase;
-import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowType;
-import jw.kingdom.hall.kingdomtimer.app.javafx.common.zoom.AnimatedZoomOperator;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.sps.StartPauseStopView;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.zoom.AnimatedZoomOperator;
+import jw.kingdom.hall.kingdomtimer.app.javafx.domain.screen.ControlledScreenBase;
+import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowType;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.NotEnoughTasksException;
 
 /**
@@ -76,7 +74,7 @@ public class HandyPanelController extends ControlledScreenBase implements StartP
     private void initTimeController() {
         timeDisplay = new TimeDisplayController(lblTime);
         timeDisplay.setTime(0);
-        getTimer().addController(timeDisplay);
+        getCountdown().addController(timeDisplay);
     }
 
     private void initSps() {
@@ -85,7 +83,7 @@ public class HandyPanelController extends ControlledScreenBase implements StartP
         spsView.addListener(this);
         spsView.setController(this);
 
-        TimerCountdown.getInstance().addListener(new TimerCountdownListener() {
+        getCountdown().addListener(new TimerCountdownListener() {
             @Override
             public void onStart(MeetingTask task) {
                 super.onStart(task);
@@ -124,31 +122,27 @@ public class HandyPanelController extends ControlledScreenBase implements StartP
         return mainContainer;
     }
 
-    private TimerCountdown getTimer() {
-        return TimerCountdown.getInstance();
-    }
-
     @Override
     public void onStart() {
         try {
             MeetingTask task = getSchedule().bringOutFirstTask();
-            getTimer().start(task);
+            getCountdown().start(task);
         } catch (NotEnoughTasksException ignore) {}
     }
 
     @Override
     public void onPause() {
-        getTimer().pause();
+        getCountdown().pause();
     }
 
     @Override
     public void onResume() {
-        getTimer().resume();
+        getCountdown().resume();
     }
 
     @Override
     public void onStop() {
-        getTimer().stop();
+        getCountdown().stop();
     }
 
     @Override

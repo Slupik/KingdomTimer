@@ -9,6 +9,7 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.domain.loader.DefaultViewManager;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.loader.ViewManager;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.WindowSettings;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 
@@ -84,5 +85,9 @@ public abstract class AppWindow extends StackPane {
 
     protected final Schedule getSchedule(){
         return input.getSchedule();
+    }
+
+    protected final Countdown getCountdown(){
+        return input.getCountdown();
     }
 }
