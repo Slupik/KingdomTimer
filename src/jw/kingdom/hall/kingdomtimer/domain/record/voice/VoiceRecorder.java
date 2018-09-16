@@ -1,6 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.domain.record.voice;
 
 import jw.kingdom.hall.kingdomtimer.recorder.RecordListener;
+import jw.kingdom.hall.kingdomtimer.recorder.RecordListenerProxy;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 import jw.kingdom.hall.kingdomtimer.recorder.xt.XtRecorder;
 
@@ -15,6 +16,7 @@ public class VoiceRecorder {
     private boolean isPause = false;
     private boolean start = false;
     private final List<Listener> listeners = new ArrayList<>();
+    private int recordingThreads = 0;
 
     public void start(){
         if(!start) {
@@ -73,6 +75,24 @@ public class VoiceRecorder {
     private VoiceRecorder(){
         DefaultAudioSettingsBean bean = new DefaultAudioSettingsBean();
         recorder = new XtRecorder(bean);
+        addListener(new RecordListenerProxy() {
+
+            @Override
+            public void onStart() {
+                super.onStart();
+                recordingThreads++;
+            }
+
+            @Override
+            public void onEnd() {
+                super.onEnd();
+                recordingThreads--;
+            }
+        });
+    }
+
+    public boolean isRecording() {
+        return recordingThreads>0;
     }
 
     public interface Listener {

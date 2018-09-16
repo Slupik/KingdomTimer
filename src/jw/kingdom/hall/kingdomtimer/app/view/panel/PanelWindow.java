@@ -9,6 +9,7 @@ import jw.kingdom.hall.kingdomtimer.app.view.loader.StageWindow;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowController;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowSettings;
 import jw.kingdom.hall.kingdomtimer.domain.backup.BackupManager;
+import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -40,8 +41,13 @@ public class PanelWindow implements StageWindow {
         stage.show();
 
         stage.setOnCloseRequest(event -> {
-            BackupManager.delete();
-            System.exit(0);
+            if(VoiceRecorder.getInstance().isRecording()) {
+                event.consume();
+                StillRecordingAlert.show();
+            } else {
+                BackupManager.delete();
+                System.exit(0);
+            }
         });
 
 //        crashOnDemand();
