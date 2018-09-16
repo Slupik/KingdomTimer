@@ -4,8 +4,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -17,7 +15,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class ScreensController extends StackPane {
-//    private static final PanelWindow ControllingWindow = new PanelWindow();
+//    private static final HeadWindow ControllingWindow = new HeadWindow();
     private final StageWindow stageWindow;
 
     private HashMap<String, Node> screens = new HashMap<>();

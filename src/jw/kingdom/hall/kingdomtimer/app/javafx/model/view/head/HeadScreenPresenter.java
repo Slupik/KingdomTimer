@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.app.view.panel;
+package jw.kingdom.hall.kingdomtimer.app.javafx.model.view.head;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,19 +8,17 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
-import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.TabScreens;
+import jw.kingdom.hall.kingdomtimer.app.javafx.model.screen.ControlledScreenBase;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.ScreenPaths;
 import jw.kingdom.hall.kingdomtimer.app.view.loader.ScreenUtils;
+import jw.kingdom.hall.kingdomtimer.app.view.panel.tabs.TabScreens;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class ControllingController extends ControlledScreenImpl implements Initializable {
+public class HeadScreenPresenter extends ControlledScreenBase implements Initializable {
 
     @FXML
     public TabPane mainContainer;
@@ -44,7 +42,8 @@ public class ControllingController extends ControlledScreenImpl implements Initi
     private HBox hbRecording;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    protected void onSetup() {
+        super.onSetup();
         setScreens();
     }
 

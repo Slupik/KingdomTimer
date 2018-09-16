@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.app.view.panel;
+package jw.kingdom.hall.kingdomtimer.app.javafx.model.view.head;
 
 import javafx.scene.control.Alert;
 

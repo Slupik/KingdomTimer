@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import jw.kingdom.hall.kingdomtimer.app.javafx.model.App;
 import jw.kingdom.hall.kingdomtimer.app.javafx.model.AppInput;
-import jw.kingdom.hall.kingdomtimer.app.view.panel.PanelWindow;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.data.log.DefaultLogFile;
@@ -23,9 +22,6 @@ public class Main extends Application {
         AppConfig.init();
         BackupManager.start();
         MonitorManager.initialize();
-        new PanelWindow().build(primaryStage);
-//        HandyWindow.getInstance().build(new Stage());
-//        SpeakerWindow.getInstance().build(new Stage());
         try {
             new App(new AppInput() {
                 @Override
@@ -37,7 +33,7 @@ public class Main extends Application {
                 public Recorder getRecorder() {
                     return null;
                 }
-            }).start(new Stage());
+            }).start(primaryStage);
         } catch (Exception e) {
             e.printStackTrace();
         }
