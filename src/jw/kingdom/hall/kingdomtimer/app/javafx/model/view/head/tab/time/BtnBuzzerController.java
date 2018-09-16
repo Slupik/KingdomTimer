@@ -7,7 +7,7 @@ import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
-import static jw.kingdom.hall.kingdomtimer.app.view.utils.ButtonUtils.loadMediumImage;
+import static jw.kingdom.hall.kingdomtimer.app.javafx.utils.ButtonUtils.loadMediumImage;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".

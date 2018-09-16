@@ -7,8 +7,8 @@ import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
 import java.util.ArrayList;
 import java.util.List;
 
-import static jw.kingdom.hall.kingdomtimer.app.view.utils.ButtonUtils.loadMediumImage;
-import static jw.kingdom.hall.kingdomtimer.app.view.utils.ButtonUtils.loadSmallImage;
+import static jw.kingdom.hall.kingdomtimer.app.javafx.utils.ButtonUtils.loadMediumImage;
+import static jw.kingdom.hall.kingdomtimer.app.javafx.utils.ButtonUtils.loadSmallImage;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".

@@ -6,16 +6,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import static jw.kingdom.hall.kingdomtimer.app.view.utils.ButtonUtils.loadMediumImage;
+import static jw.kingdom.hall.kingdomtimer.app.javafx.utils.ButtonUtils.loadMediumImage;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
