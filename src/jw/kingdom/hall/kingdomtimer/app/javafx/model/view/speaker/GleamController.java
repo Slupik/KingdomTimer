@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.app.view.viewer;
+package jw.kingdom.hall.kingdomtimer.app.javafx.model.view.speaker;
 
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;

@@ -1,28 +1,23 @@
-package jw.kingdom.hall.kingdomtimer.app.view.viewer;
+package jw.kingdom.hall.kingdomtimer.app.javafx.model.view.speaker;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import jw.kingdom.hall.kingdomtimer.app.javafx.model.screen.ControlledScreenBase;
+import jw.kingdom.hall.kingdomtimer.app.view.common.controller.MultimediaPreviewController;
+import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.gleam.GlobalGleamController;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MultimediaPreviewer;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
-import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
-import jw.kingdom.hall.kingdomtimer.app.view.common.controller.MultimediaPreviewController;
-import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
-import jw.kingdom.hall.kingdomtimer.app.view.loader.ScreensController;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class ViewerController extends ControlledScreenImpl implements Initializable, PreviewAndTimeCoordinator.ElementsContainer {
+public class SpeakerWindowPresenter extends ControlledScreenBase implements PreviewAndTimeCoordinator.ElementsContainer {
 
     @FXML
     AnchorPane mainContainer;
@@ -45,7 +40,8 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
     private PreviewAndTimeCoordinator layoutCoordinator;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    protected void onSetup() {
+        super.onSetup();
         setupMultimediaPreview();
         setupTimeView();
         setupGleam();
@@ -85,11 +81,6 @@ public class ViewerController extends ControlledScreenImpl implements Initializa
     private void setupMultimediaPreview() {
         multimediaPreview = new MultimediaPreviewController(imgMultimediaPreview);
         getMultiPreviewer().addController(multimediaPreview);
-    }
-
-    @Override
-    public void setScreenParent(ScreensController screenPage) {
-        super.setScreenParent(screenPage);
     }
 
     @Override

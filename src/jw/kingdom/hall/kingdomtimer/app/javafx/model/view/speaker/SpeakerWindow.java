@@ -1,64 +1,59 @@
-package jw.kingdom.hall.kingdomtimer.app.view.viewer;
+package jw.kingdom.hall.kingdomtimer.app.javafx.model.view.speaker;
 
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import jw.kingdom.hall.kingdomtimer.app.javafx.model.window.AppWindow;
+import jw.kingdom.hall.kingdomtimer.app.javafx.model.window.WindowInput;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorEventHandler;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorObservableList;
-import jw.kingdom.hall.kingdomtimer.app.view.loader.StageWindow;
-import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowSettings;
-import jw.kingdom.hall.kingdomtimer.app.view.loader.Screens;
-import jw.kingdom.hall.kingdomtimer.app.view.loader.WindowController;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jw.kingdom.hall.kingdomtimer.app.javafx.model.view.widget.HandyWindow.Screens.MAIN;
+
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class ViewerWindow implements StageWindow {
-    private static ViewerWindow instance;
-    public final WindowController CONTROLLER;
+public class SpeakerWindow extends AppWindow {
     private static Monitor actualDevice;
 
-    private static Stage stage;
-    private static Scene scene;
-    private static Group root;
-
-    private ViewerWindow() {
-        CONTROLLER = new WindowController(this);
-    }
-    public static ViewerWindow getInstance(){
-        if(null == instance) {
-            instance = new ViewerWindow();
-        }
-        return instance;
+    public void loadScreens() {
+        viewManager.loadScreen(MAIN.name, MAIN.path);
     }
 
-    public void build(Stage primaryStage){
-        stage = primaryStage;
+    @Override
+    protected void setMainView() {
+        viewManager.setScreen(MAIN.name);
+    }
+
+    public SpeakerWindow(Stage stage, WindowInput input) {
+        super(stage, input);
+    }
+
+    @Override
+    protected boolean isToShowAtInit() {
+        return false;
+    }
+
+    @Override
+    protected void onPreInit() {
+        super.onPreInit();
         stage.initStyle(StageStyle.UNDECORATED);
-        root = new Group();
-
-        stage.setTitle(WindowSettings.TITLE);
-
-        loadScreens();
-        root.getChildren().addAll(CONTROLLER.getScreensPane());
-        CONTROLLER.setScreen(Screens.VIEWER);
-
-        scene = new Scene(root);
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.setAlwaysOnTop(true);
-//        stage.show();
+    }
 
+    @Override
+    protected void onPostShow() {
+        super.onPostShow();
         stage.setOnCloseRequest(event -> System.exit(0));
 
         MonitorManager.addListener(new MonitorEventHandler() {
@@ -86,6 +81,7 @@ public class ViewerWindow implements StageWindow {
                 }
             }
         });
+
         MonitorManager.monitors.addListener((ListChangeListener<Monitor>) c -> {
             if(actualDevice==null) {
                 autoSelectScreen();
@@ -95,7 +91,6 @@ public class ViewerWindow implements StageWindow {
         setVisibility(AppConfig.getInstance().isVisibleSpeakerScreen());
         runThreadPreventingByMainMonitor();
     }
-
 
     private void runThreadPreventingByMainMonitor() {
         new Thread(new Runnable() {
@@ -133,10 +128,6 @@ public class ViewerWindow implements StageWindow {
             }
         }
         return null;
-    }
-
-    public void loadScreens() {
-        CONTROLLER.loadScreen(Screens.VIEWER);
     }
 
     public boolean setVisibility(boolean isVisible) {

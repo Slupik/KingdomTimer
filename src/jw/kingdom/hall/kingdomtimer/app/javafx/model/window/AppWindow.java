@@ -39,10 +39,14 @@ public abstract class AppWindow extends StackPane {
 
         stage.setScene(scene);
         onPostLoadViews();
-        stage.show();
+        if(isToShowAtInit()) {
+            stage.show();
+        }
         onPostShow();
         Platform.runLater(()->onPostInit());
     }
+
+    protected abstract boolean isToShowAtInit();
 
     protected abstract void loadScreens();
     protected abstract void setMainView();

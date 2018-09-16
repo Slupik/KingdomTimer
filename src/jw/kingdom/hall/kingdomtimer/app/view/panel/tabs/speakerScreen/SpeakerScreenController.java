@@ -12,15 +12,13 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.gleam.GlobalGleamController;
-import jw.kingdom.hall.kingdomtimer.javafx.custom.AdvancedTextField;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MultimediaPreviewer;
-import jw.kingdom.hall.kingdomtimer.app.view.common.ControlledScreenImpl;
-import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
-import jw.kingdom.hall.kingdomtimer.app.view.viewer.ViewerWindow;
+import jw.kingdom.hall.kingdomtimer.javafx.custom.AdvancedTextField;
 import org.jetbrains.annotations.Nullable;
 
 import java.net.URL;
@@ -146,33 +144,35 @@ public class SpeakerScreenController extends ControlledScreenImpl implements Ini
         if(cbMultimediaScreen.getItems().size()>2) {
             for(int i=0;i<cbMultimediaScreen.getItems().size();i++){
                 Monitor monitor = cbMultimediaScreen.getItems().get(i);
-                Monitor presentation = ViewerWindow.getInstance().getMonitor();
-                if(!monitor.isMain() && (presentation==null || presentation.ID.equals(monitor.ID))) {
-                    cbMultimediaScreen.setValue(monitor);
-                    break;
-                }
+                //TODO repair
+//                Monitor presentation = SpeakerWindow.getInstance().getMonitor();
+//                if(!monitor.isMain() && (presentation==null || presentation.ID.equals(monitor.ID))) {
+//                    cbMultimediaScreen.setValue(monitor);
+//                    break;
+//                }
             }
         }
 
-        ViewerWindow.getInstance().addOnMonitorChangeListener(new ViewerWindow.Listener() {
-            private String ID = Randomizer.randomStandardString(10);
-            private boolean ignore = false;
-
-            @Override
-            public void onMonitorChange(Monitor monitor) {
-                if(monitor==null) {
-                    return;
-                }
-                if(ignore) return;
-                ignore = true;//fire only once
-                cbPreviewScreen.setValue(getMonitorFromList(cbPreviewScreen.getItems(), monitor.ID));
-            }
-
-            @Override
-            public String getId() {
-                return ID;
-            }
-        });
+        //TODO repair
+//        SpeakerWindow.getInstance().addOnMonitorChangeListener(new SpeakerWindow.Listener() {
+//            private String ID = Randomizer.randomStandardString(10);
+//            private boolean ignore = false;
+//
+//            @Override
+//            public void onMonitorChange(Monitor monitor) {
+//                if(monitor==null) {
+//                    return;
+//                }
+//                if(ignore) return;
+//                ignore = true;//fire only once
+//                cbPreviewScreen.setValue(getMonitorFromList(cbPreviewScreen.getItems(), monitor.ID));
+//            }
+//
+//            @Override
+//            public String getId() {
+//                return ID;
+//            }
+//        });
         cbPreviewScreen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             private Monitor lastMonitor;
 
@@ -193,7 +193,8 @@ public class SpeakerScreenController extends ControlledScreenImpl implements Ini
                     alert.showAndWait();
                     returnToLastValue(oldValue);
                 } else {
-                    ViewerWindow.getInstance().setMonitor(monitor);
+                    //TODO repair
+//                    SpeakerWindow.getInstance().setMonitor(monitor);
                     lastMonitor = monitor;
                     AppConfig.getInstance().setSpeakerScreen(monitor);
                 }

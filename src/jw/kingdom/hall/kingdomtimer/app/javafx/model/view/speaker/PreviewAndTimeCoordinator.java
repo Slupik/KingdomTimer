@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.app.view.viewer;
+package jw.kingdom.hall.kingdomtimer.app.javafx.model.view.speaker;
 
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;

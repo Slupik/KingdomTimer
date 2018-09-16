@@ -22,6 +22,11 @@ public class HandyWindow extends AppWindow {
     }
 
     @Override
+    protected boolean isToShowAtInit() {
+        return true;
+    }
+
+    @Override
     protected void loadScreens() {
         viewManager.loadScreen(MAIN.name, MAIN.path);
     }
