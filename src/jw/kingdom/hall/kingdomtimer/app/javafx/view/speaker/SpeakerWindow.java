@@ -6,7 +6,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.AppWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowInput;
-import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorEventHandler;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
@@ -88,7 +87,7 @@ public class SpeakerWindow extends AppWindow {
             }
         });
         autoSelectScreen();
-        setVisibility(AppConfig.getInstance().isVisibleSpeakerScreen());
+        setVisibility(getConfig().isVisibleSpeakerScreen());
         runThreadPreventingByMainMonitor();
     }
 
@@ -111,7 +110,7 @@ public class SpeakerWindow extends AppWindow {
                             Platform.runLater(()-> stage.hide());
                         } else {
                             errorWithMainScreen = false;
-                            Platform.runLater(()-> setVisibility(AppConfig.getInstance().isVisibleSpeakerScreen()));
+                            Platform.runLater(()-> setVisibility(getConfig().isVisibleSpeakerScreen()));
                         }
                     }
                 }
@@ -145,7 +144,7 @@ public class SpeakerWindow extends AppWindow {
     private void autoSelectScreen(){
         MonitorObservableList list = MonitorManager.monitors;
 
-        String fromConfig = AppConfig.getInstance().getSpeakerScreen();
+        String fromConfig = getConfig().getSpeakerScreen();
         if(fromConfig==null || fromConfig.length()<1) {
             if(list.size() < 2){
                 setMonitor(null);
@@ -179,7 +178,7 @@ public class SpeakerWindow extends AppWindow {
                 return;
             }
 
-            setVisibility(AppConfig.getInstance().isVisibleSpeakerScreen());
+            setVisibility(getConfig().isVisibleSpeakerScreen());
             stage.setMaximized(false);
 
             getStage().setWidth(monitor.getDisplayMode().getWidth());

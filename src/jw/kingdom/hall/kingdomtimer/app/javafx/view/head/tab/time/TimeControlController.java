@@ -13,7 +13,6 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.Btn
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.BtnTimeDirectForPanel;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.sps.StartPauseStopView;
-import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
@@ -102,19 +101,21 @@ StartPauseStopView.Controller {
 
         buzzerController = new BtnBuzzerController(btnBuzzer);
 
-        timeDirectController = new BtnTimeDirectForPanel(btnCountdownDirect);
+        timeDirectController = new BtnTimeDirectForPanel(btnCountdownDirect, getConfig());
         timeDirectController.setMedium(false);
 
-        fastDirectController = new BtnTimeDirectForPanel(btnFastDirect);
+        fastDirectController = new BtnTimeDirectForPanel(btnFastDirect, getConfig());
         fastDirectController.setMedium(false);
 
-        instantDirectController = new BtnTimeDirectForInstantController(btnInstantDirect);
+        instantDirectController = new BtnTimeDirectForInstantController(getConfig(), btnInstantDirect);
         instantDirectController.setMedium(true);
 
         timeDisplay = new TimeDisplayController(lblTime);
         timeDisplay.setTime(0);
         getTimer().addController(timeDisplay);
-        tableController = new TaskTableController(tvList,
+        tableController = new TaskTableController(
+                getConfig(),
+                tvList,
                 tcDelete,
                 tcBuzzer,
                 tcDirect,
@@ -156,12 +157,12 @@ StartPauseStopView.Controller {
     }
 
     private void setupTimeToEvaluate() {
-        cbTimeToEvaluate.setSelected(AppConfig.getInstance().getTimeToEvaluate()>=0);
+        cbTimeToEvaluate.setSelected(getConfig().getTimeToEvaluate()>=0);
         cbTimeToEvaluate.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue) {
-                AppConfig.getInstance().setTimeToEvaluate(60);
+                getConfig().setTimeToEvaluate(60);
             } else {
-                AppConfig.getInstance().setTimeToEvaluate(-1);
+                getConfig().setTimeToEvaluate(-1);
             }
         });
     }
@@ -208,12 +209,12 @@ StartPauseStopView.Controller {
 
     @FXML
     private void loadOverseerTasksOnline(ActionEvent event) {
-        MeetingSchedule.getInstance().setTasksOnline(true);
+        MeetingSchedule.getInstance().setTasksOnline(getConfig(), true);
     }
 
     @FXML
     private void loadTasksOnline(ActionEvent event) {
-        MeetingSchedule.getInstance().setTasksOnline(false);
+        MeetingSchedule.getInstance().setTasksOnline(getConfig(), false);
     }
 
     @FXML

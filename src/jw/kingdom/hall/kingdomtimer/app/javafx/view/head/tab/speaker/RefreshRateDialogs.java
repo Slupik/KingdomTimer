@@ -3,7 +3,6 @@ package jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.speaker;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
-import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 
 import java.util.Optional;
 
@@ -11,17 +10,17 @@ import java.util.Optional;
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class RefreshRateDialogs {
-    static void showTooLowValue() {
+    static void showTooLowValue(int minRefRate) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Błąd!!");
-        alert.setHeaderText("Wpisałeś za małą wartość, minimalna ilość milisekund to " + String.valueOf(AppConfig.getInstance().getMinRefreshRate()));
+        alert.setHeaderText("Wpisałeś za małą wartość, minimalna ilość milisekund to " + String.valueOf(minRefRate));
 
         alert.showAndWait();
     }
-    static void showWarning(Runnable onYes, Runnable onNo) {
+    static void showWarning(int warRefRate, Runnable onYes, Runnable onNo) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Uwaga!");
-        alert.setHeaderText("Wpisałeś wartość poniżej zalecanej (" + String.valueOf(AppConfig.getInstance().getWarningRefreshRate()) + ")");
+        alert.setHeaderText("Wpisałeś wartość poniżej zalecanej (" + String.valueOf(warRefRate) + ")");
         alert.setContentText("Czy na pewno chcesz jej użyć?");
 
         ButtonType btnYes = new ButtonType("Tak", ButtonBar.ButtonData.YES);

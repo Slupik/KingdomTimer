@@ -10,7 +10,6 @@ import javafx.scene.layout.VBox;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.TabPresenter;
-import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.DefaultVoiceRecorderRecordControlListener;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
@@ -124,17 +123,17 @@ public class RecordController extends TabPresenter implements StartPauseStopView
 
     private void bindConfig() {
         cbAutopilot.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            AppConfig.getInstance().setEnabledAutopilot(newValue);
+            getConfig().setEnabledAutopilot(newValue);
             cbAutoSeparate.setDisable(!newValue);
         });
         cbAutoSeparate.selectedProperty().addListener((observable, oldValue, newValue) ->
-                AppConfig.getInstance().setEnabledAutoSeparate(newValue));
+                getConfig().setEnabledAutoSeparate(newValue));
     }
 
     private void loadConfig() {
-        cbAutopilot.setSelected(AppConfig.getInstance().isEnabledAutopilot());
-        cbAutoSeparate.setSelected(AppConfig.getInstance().isAutoSeparate());
-        tfPath.setText(AppConfig.getInstance().getRecordDestPath());
+        cbAutopilot.setSelected(getConfig().isEnabledAutopilot());
+        cbAutoSeparate.setSelected(getConfig().isAutoSeparate());
+        tfPath.setText(getConfig().getRecordDestPath());
     }
 
     private void addRecordListener() {

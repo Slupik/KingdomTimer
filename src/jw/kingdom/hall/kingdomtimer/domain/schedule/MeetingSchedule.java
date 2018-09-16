@@ -1,5 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.schedule;
 
+import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.data.schedule.PredefinedTaskList;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
@@ -16,7 +17,7 @@ import java.util.List;
 public class MeetingSchedule extends MeetingScheduleBase {
     private final List<Listener> listeners = new ArrayList<>();
 
-    public void setTasksOnline(boolean circuit) {
+    public void setTasksOnline(Config config, boolean circuit) {
         new Thread(() -> {
             lastTask = null;
             PredefinedTaskList.Callback callback = list -> {
@@ -26,7 +27,7 @@ public class MeetingSchedule extends MeetingScheduleBase {
             if(isWeekend()) {
                 PredefinedTaskList.getWeekendTasks(circuit, callback);
             } else {
-                PredefinedTaskList.getWeekTasks(circuit, callback);
+                PredefinedTaskList.getWeekTasks(config, circuit, callback);
             }
         }).start();
     }

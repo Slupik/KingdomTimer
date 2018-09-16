@@ -6,7 +6,7 @@
 
 package jw.kingdom.hall.kingdomtimer.data.schedule;
 
-import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
+import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleDownloader;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleDownloaderInputBean;
@@ -22,12 +22,12 @@ import java.util.List;
 public class PredefinedTaskList {
     private static final ScheduleDownloader downloader = new ScheduleDownloaderFacade();
 
-    public static void getWeekTasks(boolean circuit, Callback callback){
+    public static void getWeekTasks(Config config, boolean circuit, Callback callback){
         ScheduleDownloaderInputBean data = new ScheduleDownloaderInputBean();
         data.setCircuitVisit(circuit);
         data.setLangCode("pl");
         data.setTranslator(new ScheduleTranslator());
-        data.setTimeToEvaluate(AppConfig.getInstance().getTimeToEvaluate());
+        data.setTimeToEvaluate(config.getTimeToEvaluate());
         downloader.downloadWeek(data, tasks -> {
             List<MeetingTask> list = new ArrayList<>();
             for(ScheduleTask scheduleTask:tasks) {

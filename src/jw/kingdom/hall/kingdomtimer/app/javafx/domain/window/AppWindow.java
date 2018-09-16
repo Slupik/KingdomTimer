@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.loader.DefaultViewManager;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.loader.ViewManager;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.WindowSettings;
-import jw.kingdom.hall.kingdomtimer.config.model.Config;
+import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 
 /**
@@ -73,7 +73,7 @@ public abstract class AppWindow extends StackPane {
         return stage;
     }
 
-    protected final Config getConfig() {
+    protected final AppConfig getConfig() {
         return input.getConfig();
     }
 

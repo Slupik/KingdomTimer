@@ -1,7 +1,8 @@
 package jw.kingdom.hall.kingdomtimer.data.record;
 
+import jw.kingdom.hall.kingdomtimer.config.model.Config;
+import jw.kingdom.hall.kingdomtimer.config.model.ConfigReadable;
 import jw.kingdom.hall.kingdomtimer.data.UniqueFileUtils;
-import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
@@ -16,9 +17,11 @@ import java.io.File;
 public class DefaultFileRecordCreator implements FileRecordCreator {
 
     private static final MeetingTask EMPTY = getEmptyTask();
+    private final Config config;
     private MeetingTask lastTask = EMPTY;
 
-    public DefaultFileRecordCreator(){
+    public DefaultFileRecordCreator(Config config){
+        this.config = config;
         TimerCountdown.getInstance().addListener(new TimerCountdownListener() {
             @Override
             public void onStart(MeetingTask task) {
@@ -53,10 +56,10 @@ public class DefaultFileRecordCreator implements FileRecordCreator {
      */
     private String getBackupFileRawName() {
         String raw;
-        if(AppConfig.getInstance().isAutoSeparate()) {
-            raw = AppConfig.getInstance().getRawFileNameBackupGroups();
+        if(getConfig().isAutoSeparate()) {
+            raw = getConfig().getRawFileNameBackupGroups();
         } else {
-            raw = AppConfig.getInstance().getRawFileNameBackup();
+            raw = getConfig().getRawFileNameBackup();
         }
         return NameParser.getParsedName(raw, lastTask);
     }
@@ -72,10 +75,10 @@ public class DefaultFileRecordCreator implements FileRecordCreator {
      */
     private String getFinalFileRawName() {
         String raw;
-        if(AppConfig.getInstance().isAutoSeparate()) {
-            raw = AppConfig.getInstance().getRawFileNameFinalGroups();
+        if(getConfig().isAutoSeparate()) {
+            raw = getConfig().getRawFileNameFinalGroups();
         } else {
-            raw = AppConfig.getInstance().getRawFileNameFinal();
+            raw = getConfig().getRawFileNameFinal();
         }
         return NameParser.getParsedName(raw, lastTask);
     }
@@ -85,7 +88,7 @@ public class DefaultFileRecordCreator implements FileRecordCreator {
     }
 
     private String getDestPath() {
-        return AppConfig.getInstance().getRecordDestPath();
+        return getConfig().getRecordDestPath();
     }
 
     private static MeetingTask getEmptyTask() {
@@ -93,5 +96,9 @@ public class DefaultFileRecordCreator implements FileRecordCreator {
         empty.setType(MeetingTask.Type.NONE);
         empty.setName("Nagranie poza programem");
         return empty;
+    }
+
+    private ConfigReadable getConfig() {
+        return config;
     }
 }

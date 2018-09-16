@@ -4,8 +4,8 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.app.App;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.app.AppInput;
-import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
+import jw.kingdom.hall.kingdomtimer.data.config.DefaultAppConfig;
 import jw.kingdom.hall.kingdomtimer.data.log.DefaultLogFile;
 import jw.kingdom.hall.kingdomtimer.device.local.AutoRAMCleaner;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
@@ -20,15 +20,15 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         Log.init(new DefaultLogFile());
-        AppConfig.init();
-        RecordControl recordControl = VoiceRecorder.getInstance();
+        AppConfig config = DefaultAppConfig.getInstance();
+        RecordControl recordControl = VoiceRecorder.getInstance(config);
         BackupManager.start(recordControl);
         MonitorManager.initialize();
         try {
             new App(new AppInput() {
                 @Override
-                public Config getConfig() {
-                    return AppConfig.getInstance();
+                public AppConfig getConfig() {
+                    return config;
                 }
 
                 @Override

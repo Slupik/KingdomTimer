@@ -2,18 +2,20 @@ package jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect;
 
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.Button;
-import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
+import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class BtnTimeDirectForObj extends BtnTimeDirectBase {
+    private final Config config;
     private MeetingTask task;
     private final ChangeListener<Boolean> countdownListener = (observable, oldValue, newValue) -> setDirectDown(newValue);
 
-    public BtnTimeDirectForObj(Button button) {
+    public BtnTimeDirectForObj(Config config, Button button) {
         super(button);
+        this.config = config;
         init();
     }
 
@@ -25,7 +27,7 @@ public class BtnTimeDirectForObj extends BtnTimeDirectBase {
     @Override
     public boolean isDirectDown() {
         if(null == task) {
-            return AppConfig.getInstance().isDirectDown();
+            return getConfig().isDirectDown();
         }
         return task.isCountdownDown();
     }
@@ -47,5 +49,9 @@ public class BtnTimeDirectForObj extends BtnTimeDirectBase {
         if(null != this.task) {
             this.task.countdownProperty().addListener(countdownListener);
         }
+    }
+
+    private Config getConfig() {
+        return config;
     }
 }

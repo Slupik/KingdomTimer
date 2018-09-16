@@ -9,7 +9,7 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.container.WindowsCo
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.HeadWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.SpeakerWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.widget.HandyWindow;
-import jw.kingdom.hall.kingdomtimer.config.model.Config;
+import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 
 import java.lang.reflect.Constructor;
@@ -51,7 +51,7 @@ public class App {
     private WindowInput getWindowInput() {
         return new WindowInput() {
             @Override
-            public Config getConfig() {
+            public AppConfig getConfig() {
                 return appInput.getConfig();
             }
 
