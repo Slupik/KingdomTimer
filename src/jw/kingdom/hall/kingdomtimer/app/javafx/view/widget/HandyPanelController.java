@@ -131,7 +131,7 @@ public class HandyPanelController extends ControlledScreenBase implements StartP
     @Override
     public void onStart() {
         try {
-            MeetingTask task = MeetingSchedule.getInstance().bringOutFirstTask();
+            MeetingTask task = getSchedule().bringOutFirstTask();
             getTimer().start(task);
         } catch (NotEnoughTasksException ignore) {}
     }
@@ -154,7 +154,7 @@ public class HandyPanelController extends ControlledScreenBase implements StartP
     @Override
     public boolean isToExecuteSPSAction(StartPauseStopView.ActionType type) {
         if(type==StartPauseStopView.ActionType.START) {
-            return MeetingSchedule.getInstance().getList().size()!=0;
+            return getSchedule().getList().size()!=0;
         }
         return true;
     }

@@ -12,7 +12,6 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.common.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.TabPresenter;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.DefaultVoiceRecorderRecordControlListener;
-import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingScheduleListener;
 import jw.kingdom.hall.kingdomtimer.recorder.RecordListenerProxy;
 
@@ -78,7 +77,7 @@ public class RecordController extends TabPresenter implements StartPauseStopView
         controller = new TimeDisplayController(lblTime);
         controller.setTime(0);
 
-        MeetingSchedule.getInstance().addListener(new MeetingScheduleListener() {
+        getSchedule().addListener(new MeetingScheduleListener() {
             private MeetingTask.Type lastType = null;
 
             @Override

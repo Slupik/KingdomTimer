@@ -9,15 +9,17 @@ import java.util.List;
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-abstract class MeetingScheduleBase {
+abstract class MeetingScheduleBase implements Schedule {
 
     protected final ObservableList<MeetingTask> list = FXCollections.observableArrayList();
     protected MeetingTask lastTask = null;
 
+    @Override
     public MeetingTask bringOutFirstTask() throws NotEnoughTasksException {
         return bringOutTask(0);
     }
 
+    @Override
     public MeetingTask bringOutTask(int index) throws NotEnoughTasksException {
         if(list.size()<=index) {
             throw new NotEnoughTasksException();
@@ -28,16 +30,19 @@ abstract class MeetingScheduleBase {
         return task;
     }
 
+    @Override
     public void addTask(MeetingTask task) {
         list.add(task);
         notifyAboutAddTask(task);
     }
 
+    @Override
     public void addTask(List<MeetingTask> task) {
         addTask(task.toArray(new MeetingTask[0]));
     }
 
 
+    @Override
     public void addTask(MeetingTask... task) {
         list.addAll(task);
         notifyAboutAddTask(task);
@@ -48,16 +53,19 @@ abstract class MeetingScheduleBase {
         notifyAboutRemoveTask(task);
     }
 
+    @Override
     public void removeTask(int index) {
         MeetingTask toRemove = list.get(index);
         list.remove(index);
         notifyAboutRemoveTask(toRemove);
     }
 
+    @Override
     public void clear() {
         list.clear();
     }
 
+    @Override
     public ObservableList<MeetingTask> getList(){
         return list;
     }

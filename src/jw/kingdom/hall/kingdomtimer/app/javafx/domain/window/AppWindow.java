@@ -10,6 +10,7 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.domain.loader.ViewManager;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.WindowSettings;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
+import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 
 /**
  * All rights reserved & copyright ©
@@ -79,5 +80,9 @@ public abstract class AppWindow extends StackPane {
 
     protected final RecordControl getRecorder(){
         return input.getRecorder();
+    }
+
+    protected final Schedule getSchedule(){
+        return input.getSchedule();
     }
 }

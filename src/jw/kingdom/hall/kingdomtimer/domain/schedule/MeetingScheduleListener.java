@@ -5,7 +5,7 @@ import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public abstract class MeetingScheduleListener implements MeetingSchedule.Listener {
+public abstract class MeetingScheduleListener implements ScheduleListener {
     @Override
     public void onMeetingStart() {
 

@@ -114,6 +114,7 @@ StartPauseStopView.Controller {
         timeDisplay.setTime(0);
         getTimer().addController(timeDisplay);
         tableController = new TaskTableController(
+                getSchedule(),
                 getConfig(),
                 tvList,
                 tcDelete,
@@ -192,7 +193,7 @@ StartPauseStopView.Controller {
         task.setCountdownDown(timeDirectController.isDirectDown());
         timeDirectController.reset();
 
-        MeetingSchedule.getInstance().addTask(task);
+        getSchedule().addTask(task);
     }
 
     @FXML
@@ -209,12 +210,12 @@ StartPauseStopView.Controller {
 
     @FXML
     private void loadOverseerTasksOnline(ActionEvent event) {
-        MeetingSchedule.getInstance().setTasksOnline(getConfig(), true);
+        getSchedule().setTasksOnline(getConfig(), true);
     }
 
     @FXML
     private void loadTasksOnline(ActionEvent event) {
-        MeetingSchedule.getInstance().setTasksOnline(getConfig(), false);
+        getSchedule().setTasksOnline(getConfig(), false);
     }
 
     @FXML
@@ -238,7 +239,7 @@ StartPauseStopView.Controller {
     @Override
     public void onStart() {
         try {
-            MeetingTask task = MeetingSchedule.getInstance().bringOutFirstTask();
+            MeetingTask task = getSchedule().bringOutFirstTask();
             getTimer().start(task);
         } catch (NotEnoughTasksException ignore) {}
     }
@@ -261,7 +262,7 @@ StartPauseStopView.Controller {
     @Override
     public boolean isToExecuteSPSAction(StartPauseStopView.ActionType type) {
         if(type==StartPauseStopView.ActionType.START) {
-            return MeetingSchedule.getInstance().getList().size()!=0;
+            return getSchedule().getList().size()!=0;
         }
         return true;
     }

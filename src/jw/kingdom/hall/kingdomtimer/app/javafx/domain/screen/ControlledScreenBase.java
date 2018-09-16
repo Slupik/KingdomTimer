@@ -7,6 +7,9 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.domain.loader.ViewManager;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.AppWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowInput;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.container.WindowsContainer;
+import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
+import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
+import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -101,5 +104,17 @@ public abstract class ControlledScreenBase implements ControlledScreen, Initiali
     @Override
     public WindowInput getWindowData() {
         return data;
+    }
+
+    protected final AppConfig getConfig() {
+        return getWindowData().getConfig();
+    }
+
+    protected final RecordControl getRecorder(){
+        return getWindowData().getRecorder();
+    }
+
+    protected final Schedule getSchedule(){
+        return getWindowData().getSchedule();
     }
 }

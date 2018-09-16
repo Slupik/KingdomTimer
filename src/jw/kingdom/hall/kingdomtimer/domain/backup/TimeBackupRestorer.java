@@ -6,7 +6,7 @@ import jw.kingdom.hall.kingdomtimer.domain.backup.entity.TimeBackupBean;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
-import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
+import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 import jw.kingdom.hall.kingdomtimer.domain.utils.FileUtils;
 
 import java.util.ArrayList;
@@ -17,10 +17,12 @@ import java.util.List;
  */
 class TimeBackupRestorer {
     private final RecordControl recordControl;
+    private final Schedule schedule;
     private TimeBackupBean bean;
 
-    TimeBackupRestorer(RecordControl recordControl){
+    TimeBackupRestorer(RecordControl recordControl, Schedule schedule){
         this.recordControl = recordControl;
+        this.schedule = schedule;
         init();
     }
 
@@ -39,7 +41,7 @@ class TimeBackupRestorer {
 
     void restore(){
         if(isAvailable()) {
-            restore(bean, recordControl);
+            restore(bean, recordControl, schedule);
         }
     }
 
@@ -48,8 +50,8 @@ class TimeBackupRestorer {
         FileManager.deleteRootPath();
     }
 
-    private static void restore(TimeBackupBean data, RecordControl recordControl) {
-        restoreSchedule(data);
+    private static void restore(TimeBackupBean data, RecordControl recordControl, Schedule schedule) {
+        restoreSchedule(data, schedule);
         restoreCountdown(data);
         restoreRecording(data, recordControl);
     }
@@ -60,13 +62,13 @@ class TimeBackupRestorer {
         }
     }
 
-    private static void restoreSchedule(TimeBackupBean data) {
+    private static void restoreSchedule(TimeBackupBean data, Schedule schedule) {
         List<MeetingTask> list = new ArrayList<>();
         for(OfflineMeetingBean bean:data.getSchedule()) {
             list.add(bean.convertToMeetingTask());
         }
-        MeetingSchedule.getInstance().clear();
-        MeetingSchedule.getInstance().addTask(list);
+        schedule.clear();
+        schedule.addTask(list);
     }
 
     private static void restoreCountdown(TimeBackupBean data) {

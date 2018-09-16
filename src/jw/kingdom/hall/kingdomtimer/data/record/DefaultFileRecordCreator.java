@@ -6,7 +6,7 @@ import jw.kingdom.hall.kingdomtimer.data.UniqueFileUtils;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
+import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 import jw.kingdom.hall.kingdomtimer.recorder.common.files.FileRecordCreator;
 
 import java.io.File;
@@ -20,7 +20,7 @@ public class DefaultFileRecordCreator implements FileRecordCreator {
     private final Config config;
     private MeetingTask lastTask = EMPTY;
 
-    public DefaultFileRecordCreator(Config config){
+    public DefaultFileRecordCreator(Config config, Schedule schedule){
         this.config = config;
         TimerCountdown.getInstance().addListener(new TimerCountdownListener() {
             @Override
@@ -32,7 +32,7 @@ public class DefaultFileRecordCreator implements FileRecordCreator {
             @Override
             public void onStop() {
                 super.onStop();
-                if(MeetingSchedule.getInstance().getList().size()==0){
+                if(schedule.getList().size()==0){
                     new Thread(() -> {
                         try {
                             Thread.sleep(1000);

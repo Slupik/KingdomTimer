@@ -10,10 +10,9 @@ import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import jw.kingdom.hall.kingdomtimer.app.javafx.translate.MeetingTaskTrans;
-import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
+import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 
 /**
@@ -22,7 +21,7 @@ import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 public class TaskTableController {
     private static final DataFormat SERIALIZED_MIME_TYPE = new DataFormat("application/x-java-serialized-object");
 
-    private ObservableList<MeetingTask> tableData = MeetingSchedule.getInstance().getList();
+    private ObservableList<MeetingTask> tableData;
 
     private final TableView<MeetingTask> TABLE;
     private TableColumn<MeetingTask, String> tcDelete;
@@ -33,7 +32,8 @@ public class TaskTableController {
     private TableColumn<MeetingTask, String> tcType;
     private AppConfig config;
 
-    public TaskTableController(AppConfig config,
+    public TaskTableController(Schedule schedule,
+                               AppConfig config,
                                TableView<MeetingTask> table,
                                TableColumn<MeetingTask, String> tcDelete,
                                TableColumn<MeetingTask, String> tcBuzzer,
@@ -42,6 +42,7 @@ public class TaskTableController {
                                TableColumn<MeetingTask, TimeField> tcTime,
                                TableColumn<MeetingTask, String> tcType
     ) {
+        tableData = schedule.getList();
         this.config = config;
         TABLE = table;
         this.tcDelete = tcDelete;

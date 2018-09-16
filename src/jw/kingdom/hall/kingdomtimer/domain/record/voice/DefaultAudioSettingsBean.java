@@ -2,6 +2,7 @@ package jw.kingdom.hall.kingdomtimer.domain.record.voice;
 
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.data.record.DefaultFileRecordCreator;
+import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 import jw.kingdom.hall.kingdomtimer.recorder.common.files.FileRecordCreator;
 import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
 
@@ -19,8 +20,8 @@ public class DefaultAudioSettingsBean implements AudioSettingsBean {
     private String deviceName = "";//ignore if(selectDefaultDevice == true)
     private String serviceSetupId = "CONSUMER_AUDIO";
 
-    public DefaultAudioSettingsBean(Config config) {
-        fileRecordCreator = new DefaultFileRecordCreator(config);
+    public DefaultAudioSettingsBean(Config config, Schedule schedule) {
+        fileRecordCreator = new DefaultFileRecordCreator(config, schedule);
     }
 
     @Override

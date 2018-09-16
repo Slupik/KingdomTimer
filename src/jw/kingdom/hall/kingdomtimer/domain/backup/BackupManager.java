@@ -1,6 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.domain.backup;
 
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
+import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -26,17 +27,17 @@ public class BackupManager {
         return false;
     }
 
-    public static void start(RecordControl recordControl){
+    public static void start(RecordControl recordControl, Schedule schedule){
         if(!running) {
             running = true;
         } else {
             return;
         }
-        init(recordControl);
+        init(recordControl, schedule);
     }
 
-    private static void init(RecordControl recordControl) {
-        timeRestore = new TimeBackupRestorer(recordControl);
-        timeBackup = new TimeBackupMaker(recordControl);
+    private static void init(RecordControl recordControl, Schedule schedule) {
+        timeRestore = new TimeBackupRestorer(recordControl, schedule);
+        timeBackup = new TimeBackupMaker(recordControl, schedule);
     }
 }

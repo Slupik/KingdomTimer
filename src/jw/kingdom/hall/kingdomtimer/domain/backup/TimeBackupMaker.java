@@ -9,8 +9,8 @@ import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.DefaultVoiceRecorderRecordControlListener;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
-import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingScheduleListener;
+import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 import jw.kingdom.hall.kingdomtimer.domain.utils.FileUtils;
 
 import java.io.File;
@@ -23,13 +23,15 @@ import java.util.concurrent.Executors;
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class TimeBackupMaker {
+    private final Schedule schedule;
     private TimeBackupBean bean = new TimeBackupBean();
     private ChangeListener<Boolean> buzzerListener = (observable, oldValue, newValue) -> updateBuzzer(newValue);
     private ChangeListener<Boolean> countdownDirectListener = (observable, oldValue, newValue) -> updateDirect(newValue);
     private MeetingTask lastTask = null;
 
-    TimeBackupMaker(RecordControl recordControl){
-        MeetingSchedule.getInstance().addListener(new MeetingScheduleListener() {
+    TimeBackupMaker(RecordControl recordControl, Schedule schedule){
+        this.schedule = schedule;
+        getSchedule().addListener(new MeetingScheduleListener() {
 
             @Override
             public void onRemove(MeetingTask task) {
@@ -172,7 +174,7 @@ class TimeBackupMaker {
 
     private void updateSchedule() {
         new Thread(()->{
-            List<MeetingTask> list = MeetingSchedule.getInstance().getList();
+            List<MeetingTask> list = getSchedule().getList();
             List<OfflineMeetingBean> offlineList = new ArrayList<>();
             for(MeetingTask task:list) {
                 offlineList.add(new OfflineMeetingBean(task));
@@ -192,5 +194,9 @@ class TimeBackupMaker {
 
     private String getDataToSave() {
         return new GsonBuilder().setPrettyPrinting().create().toJson(bean);
+    }
+
+    private Schedule getSchedule() {
+        return schedule;
     }
 }

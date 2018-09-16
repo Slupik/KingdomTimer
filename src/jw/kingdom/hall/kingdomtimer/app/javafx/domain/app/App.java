@@ -11,6 +11,7 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.SpeakerWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.widget.HandyWindow;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
+import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -58,6 +59,11 @@ public class App {
             @Override
             public RecordControl getRecorder() {
                 return appInput.getRecorder();
+            }
+
+            @Override
+            public Schedule getSchedule() {
+                return appInput.getSchedule();
             }
 
             @Override
