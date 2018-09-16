@@ -3,7 +3,7 @@ package jw.kingdom.hall.kingdomtimer.domain.countdown;
 import javafx.beans.value.ChangeListener;
 import jw.kingdom.hall.kingdomtimer.device.sound.Buzzer;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.TimeDisplayController;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

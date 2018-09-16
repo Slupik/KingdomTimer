@@ -1,6 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.countdown;
 
-import jw.kingdom.hall.kingdomtimer.app.view.common.controller.TimeDisplayController;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.TimeDisplayController;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;

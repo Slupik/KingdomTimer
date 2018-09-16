@@ -4,7 +4,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.device.screen.ScreenShotMaker;
-import jw.kingdom.hall.kingdomtimer.app.view.common.controller.MultimediaPreviewController;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.MultimediaPreviewController;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;

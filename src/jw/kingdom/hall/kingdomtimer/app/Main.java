@@ -2,8 +2,8 @@ package jw.kingdom.hall.kingdomtimer.app;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import jw.kingdom.hall.kingdomtimer.app.javafx.model.App;
-import jw.kingdom.hall.kingdomtimer.app.javafx.model.AppInput;
+import jw.kingdom.hall.kingdomtimer.app.javafx.domain.app.App;
+import jw.kingdom.hall.kingdomtimer.app.javafx.domain.app.AppInput;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.data.log.DefaultLogFile;

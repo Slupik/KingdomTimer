@@ -10,11 +10,16 @@
 <?import javafx.scene.text.Font?>
 
 <!--
+  ~ Created 16.09.18 22:19.
+  ~ This file is part of KingdomHallTimer which is released under "no licence".
+  -->
+
+<!--
   ~ Created 03.09.18 21:09.
   ~ Last modified 30.08.18 20:05
   -->
 
-<VBox fx:id="vbMainContainer" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.app.javafx.model.view.head.tab.record.RecordController">
+<VBox fx:id="vbMainContainer" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.record.RecordController">
    <padding>
       <Insets bottom="16.0" left="16.0" right="16.0" top="8.0" />
    </padding>

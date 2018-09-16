@@ -14,7 +14,7 @@
   ~ Last modified 30.08.18 00:09
   -->
 
-<TabPane fx:id="mainContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.app.javafx.model.view.head.HeadScreenPresenter">
+<TabPane fx:id="mainContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.app.javafx.view.head.HeadScreenPresenter">
    <tabs>
       <Tab fx:id="tabTimeControl" closable="false" text="Sterowanie czasem">
         <content>
