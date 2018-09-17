@@ -2,8 +2,6 @@ package jw.kingdom.hall.kingdomtimer.domain.schedule;
 
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.data.schedule.PredefinedTaskList;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownListenerProxy;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
 import java.util.ArrayList;
@@ -16,7 +14,6 @@ import java.util.List;
  */
 public class MeetingSchedule extends MeetingScheduleBase {
     private final List<ScheduleListener> listeners = new ArrayList<>();
-    private final Countdown countdown;
 
     @Override
     public void setTasksOnline(Config config, boolean circuit) {
@@ -39,24 +36,6 @@ public class MeetingSchedule extends MeetingScheduleBase {
         cl.setTime(new Date());
         return (cl.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY ||
                 cl.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY);
-    }
-
-    protected void notifyAboutNextTask(int index, MeetingTask task) {
-        boolean isFirstTask = null == lastTask;
-        lastTask = task;//setting this after notify listeners may be too slow
-        if(isFirstTask) {
-            for(ScheduleListener listener: listeners) {
-                listener.onMeetingStart();
-            }
-        }
-        if(list.size()==0) {
-            for(ScheduleListener listener: listeners) {
-                listener.onMeetingListEnd();
-            }
-        }
-        for(ScheduleListener listener: listeners) {
-            listener.onNextTask(index, task);
-        }
     }
 
     @Override
@@ -102,34 +81,5 @@ public class MeetingSchedule extends MeetingScheduleBase {
     @Override
     public void removeListener(ScheduleListener listener) {
         listeners.remove(listener);
-    }
-
-    /*
-    Singleton
-     */
-    private static MeetingSchedule schedule;
-    public static MeetingSchedule getInstance(Countdown countdown){
-        if(null == schedule) {
-            schedule = new MeetingSchedule(countdown);
-        }
-        return schedule;
-    }
-    private MeetingSchedule(Countdown countdown){
-        this.countdown = countdown;
-        getCountdown().addListener(new CountdownListenerProxy() {
-            @Override
-            public void onStop() {
-                super.onStop();
-                if(list.size()==0) {
-                    for(ScheduleListener listener: listeners) {
-                        listener.onMeetingEnd();
-                    }
-                }
-            }
-        });
-    }
-
-    private Countdown getCountdown() {
-        return countdown;
     }
 }

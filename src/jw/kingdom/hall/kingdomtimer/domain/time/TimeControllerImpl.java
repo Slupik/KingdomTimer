@@ -148,17 +148,8 @@ public class TimeControllerImpl implements TimeController {
 
     private boolean hasMeetingStarted = false;
 
-    //TODO cleanup schedule
     private void initListenerForSchedule() {
         getSchedule().addListener(new ScheduleListener() {
-            @Override
-            public void onMeetingStart() {}
-            @Override
-            public void onNextTask(int index, MeetingTask task) {}
-            @Override
-            public void onMeetingListEnd() {}
-            @Override
-            public void onMeetingEnd() {}
 
             @Override
             public void onRemove(MeetingTask task) {

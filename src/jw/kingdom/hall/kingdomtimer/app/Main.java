@@ -28,7 +28,7 @@ public class Main extends Application {
         Log.init(new DefaultLogFile());
         AppConfig config = DefaultAppConfig.getInstance();
         Countdown countdown = new CountdownImpl();
-        Schedule schedule = MeetingSchedule.getInstance(countdown);
+        Schedule schedule = new MeetingSchedule();
         RecordControl recordControl = VoiceRecorder.getInstance(config, schedule, countdown);
         TimeController time = new TimeControllerImpl(schedule, countdown);
 

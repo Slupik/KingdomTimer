@@ -26,7 +26,6 @@ abstract class MeetingScheduleBase implements Schedule {
         }
         MeetingTask task = list.get(index);
         removeTask(task);
-        notifyAboutNextTask(index, task);
         return task;
     }
 
@@ -79,7 +78,6 @@ abstract class MeetingScheduleBase implements Schedule {
         return list;
     }
 
-    protected abstract void notifyAboutNextTask(int index, MeetingTask task);
     protected abstract void notifyAboutAddTask(MeetingTask task);
     protected abstract void notifyAboutAddTask(MeetingTask... task);
     protected abstract void notifyAboutRemoveTask(MeetingTask task);
