@@ -1,5 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.record.voice;
 
+import jw.kingdom.hall.kingdomtimer.app.javafx.utils.PlatformUtils;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
@@ -24,7 +25,7 @@ public class VoiceRecorder implements RecordControl {
     public void start(){
         if(!start) {
             start = true;
-            recorder.onStart();
+            PlatformUtils.runOnUiThread(()-> recorder.onStart());
             for(RecordControlListener listener:listeners) {
                 listener.onStart();
             }
@@ -33,7 +34,7 @@ public class VoiceRecorder implements RecordControl {
 
     @Override
     public void stop(){
-        recorder.onStop();
+        PlatformUtils.runOnUiThread(()-> recorder.onStop());
         start = false;
         for(RecordControlListener listener:listeners) {
             listener.onStop();
@@ -42,7 +43,7 @@ public class VoiceRecorder implements RecordControl {
 
     @Override
     public void pause() {
-        recorder.setPause(true);
+        PlatformUtils.runOnUiThread(()-> recorder.setPause(true));
         for(RecordControlListener listener:listeners) {
             listener.onPause();
         }
@@ -50,7 +51,7 @@ public class VoiceRecorder implements RecordControl {
 
     @Override
     public void resume() {
-        recorder.setPause(false);
+        PlatformUtils.runOnUiThread(()-> recorder.setPause(false));
         for(RecordControlListener listener:listeners) {
             listener.onResume();
         }
