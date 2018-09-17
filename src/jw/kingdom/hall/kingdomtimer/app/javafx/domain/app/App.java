@@ -13,6 +13,7 @@ import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
+import jw.kingdom.hall.kingdomtimer.domain.time.TimeController;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -70,6 +71,11 @@ public class App {
             @Override
             public Countdown getCountdown() {
                 return appInput.getCountdown();
+            }
+
+            @Override
+            public TimeController getTimeController() {
+                return appInput.getTimeController();
             }
 
             @Override

@@ -7,6 +7,7 @@ import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
+import jw.kingdom.hall.kingdomtimer.domain.time.TimeController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -73,5 +74,9 @@ public abstract class TabPresenter implements TabPresentable, Initializable {
 
     protected final Countdown getCountdown(){
         return getWindowData().getCountdown();
+    }
+
+    protected final TimeController getTimer(){
+        return getWindowData().getTimeController();
     }
 }

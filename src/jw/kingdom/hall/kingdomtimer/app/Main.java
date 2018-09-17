@@ -17,6 +17,8 @@ import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
+import jw.kingdom.hall.kingdomtimer.domain.time.TimeController;
+import jw.kingdom.hall.kingdomtimer.domain.time.TimeControllerImpl;
 import jw.kingdom.hall.kingdomtimer.log.Log;
 
 public class Main extends Application {
@@ -28,6 +30,7 @@ public class Main extends Application {
         Countdown countdown = TimerCountdown.getInstance();
         Schedule schedule = MeetingSchedule.getInstance(countdown);
         RecordControl recordControl = VoiceRecorder.getInstance(config, schedule, countdown);
+        TimeController time = new TimeControllerImpl(schedule, countdown);
 
         BackupManager.start(recordControl, schedule, countdown);
         MonitorManager.initialize();
@@ -51,6 +54,11 @@ public class Main extends Application {
                 @Override
                 public Countdown getCountdown() {
                     return countdown;
+                }
+
+                @Override
+                public TimeController getTimeController() {
+                    return time;
                 }
             }).start(primaryStage);
         } catch (Exception e) {
