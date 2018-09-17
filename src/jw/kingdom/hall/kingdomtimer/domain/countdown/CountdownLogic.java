@@ -53,6 +53,8 @@ public abstract class CountdownLogic implements Countdown {
 
     @Override
     public void stop() {
+        pause = false;
+        start = false;
         eventStop();
     }
 
@@ -60,6 +62,8 @@ public abstract class CountdownLogic implements Countdown {
 
     @Override
     public void pause() {
+        pause = true;
+        start = true;
         eventPause();
     }
 
@@ -67,6 +71,8 @@ public abstract class CountdownLogic implements Countdown {
 
     @Override
     public void resume() {
+        pause = false;
+        start = true;
         eventResume();
     }
 
