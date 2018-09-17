@@ -6,7 +6,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.TimeDisplayController;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.TimeDisplayController;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".

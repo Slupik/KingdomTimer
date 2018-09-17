@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.domain.countdown;
 
-import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.time.TimeDisplay;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -17,8 +17,8 @@ public interface Countdown {
     void removeTime(int time);
     void enforceTime(int time);
     MeetingTask getTask();
-    void addController(TimeDisplayController controller);
-    void removeController(TimeDisplayController controller);
+    void addDisplay(TimeDisplay display);
+    void removeDisplay(TimeDisplay display);
     boolean isPause();
     boolean isStop();
     int getTime();

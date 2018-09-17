@@ -11,7 +11,7 @@ import jw.kingdom.hall.kingdomtimer.device.local.AutoRAMCleaner;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
 import jw.kingdom.hall.kingdomtimer.domain.backup.BackupManager;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownImpl;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MultimediaPreviewer;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
@@ -27,7 +27,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         Log.init(new DefaultLogFile());
         AppConfig config = DefaultAppConfig.getInstance();
-        Countdown countdown = TimerCountdown.getInstance();
+        Countdown countdown = new CountdownImpl();
         Schedule schedule = MeetingSchedule.getInstance(countdown);
         RecordControl recordControl = VoiceRecorder.getInstance(config, schedule, countdown);
         TimeController time = new TimeControllerImpl(schedule, countdown);

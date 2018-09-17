@@ -4,7 +4,7 @@ package jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.Button;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownListenerProxy;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
 import static jw.kingdom.hall.kingdomtimer.app.javafx.utils.ButtonUtils.loadMediumImage;
@@ -33,7 +33,7 @@ public class BtnBuzzerController {
                 setImageForCurrentCondition();
             }
         });
-        getCountdown().addListener(new TimerCountdownListener() {
+        getCountdown().addListener(new CountdownListenerProxy() {
             @Override
             public void onStart(MeetingTask task) {
                 super.onStart(task);

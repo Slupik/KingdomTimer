@@ -5,7 +5,7 @@ import javafx.beans.value.ChangeListener;
 import jw.kingdom.hall.kingdomtimer.domain.backup.entity.OfflineMeetingBean;
 import jw.kingdom.hall.kingdomtimer.domain.backup.entity.TimeBackupBean;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownListenerProxy;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.DefaultVoiceRecorderRecordControlListener;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
@@ -55,7 +55,7 @@ class TimeBackupMaker {
                 updateSchedule();
             }
         });
-        getCountdown().addListener(new TimerCountdownListener() {
+        getCountdown().addListener(new CountdownListenerProxy() {
 
             @Override
             public void onStart(MeetingTask task) {

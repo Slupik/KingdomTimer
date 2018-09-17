@@ -1,9 +1,10 @@
-package jw.kingdom.hall.kingdomtimer.app.javafx.common.controller;
+package jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Paint;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerColor;
+import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.time.TimeDisplay;
 import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.List;
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class TimeDisplayController {
+public class TimeDisplayController implements TimeDisplay {
     private final String ID = Randomizer.randomStandardString(10);
     private final List<Listener> listeners = new ArrayList<>();
 
@@ -27,11 +28,31 @@ public class TimeDisplayController {
         this.text = text;
     }
 
-    public void setColorCode(int paintCode) {
-        if(lastColorCode!=paintCode) {
-            setColor(TimerColor.getColor(paintCode, isLightBackground));
-            lastColorCode = paintCode;
-        }
+    @Override
+    public void display(int startTime, int timeToDisplay, int absoluteTimeLeft) {
+        setTime(timeToDisplay);
+        setColorCode(TimerColor.getColorCode(startTime, absoluteTimeLeft));
+    }
+
+    @Override
+    public void display(int time) {
+        setTime(time);
+    }
+
+    @Override
+    public void reset() {
+        setTime(0);
+        setColorCode(TimerColor.getDefaultColorCode());
+    }
+
+    @Override
+    public void setTask(MeetingTask task) {}
+    @Override
+    public void onTimeOut() {}
+
+    public void setLightBackground(boolean lightBackground) {
+        isLightBackground = lightBackground;
+        setColor(TimerColor.getColor(lastColorCode, isLightBackground));
     }
 
     public void setColor(Paint paint) {
@@ -55,12 +76,10 @@ public class TimeDisplayController {
         }
     }
 
-    private void notifyTextSizeChanged(int length) {
-        if(lastTextSize!=length) {
-            lastTextSize = length;
-            for(Listener listener:listeners) {
-                listener.onTextSizeChanged();
-            }
+    private void setColorCode(int paintCode) {
+        if(lastColorCode!=paintCode) {
+            setColor(TimerColor.getColor(paintCode, isLightBackground));
+            lastColorCode = paintCode;
         }
     }
 
@@ -68,7 +87,14 @@ public class TimeDisplayController {
         this.text.setText(text);
     }
 
-    public static String secondsToText(int time) {
+    private static String getFormattedNumber(int number) {
+        if(number<10) {
+            return "0"+Integer.toString(number);
+        }
+        return Integer.toString(number);
+    }
+
+    private static String secondsToText(int time) {
         boolean isSmallerThanZero = time<0;
         if(isSmallerThanZero) {
             time = Math.abs(time);
@@ -87,20 +113,13 @@ public class TimeDisplayController {
         }
     }
 
-    private static String getFormattedNumber(int number) {
-        if(number<10) {
-            return "0"+Integer.toString(number);
+    private void notifyTextSizeChanged(int length) {
+        if(lastTextSize!=length) {
+            lastTextSize = length;
+            for(Listener listener:listeners) {
+                listener.onTextSizeChanged();
+            }
         }
-        return Integer.toString(number);
-    }
-
-    public void setLightBackground(boolean lightBackground) {
-        isLightBackground = lightBackground;
-        setColor(TimerColor.getColor(lastColorCode, isLightBackground));
-    }
-
-    public String getId(){
-        return ID;
     }
 
     public void addListener(Listener listener) {

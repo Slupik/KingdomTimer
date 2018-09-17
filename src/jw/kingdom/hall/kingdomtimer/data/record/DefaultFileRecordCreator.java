@@ -4,7 +4,7 @@ import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.config.model.ConfigReadable;
 import jw.kingdom.hall.kingdomtimer.data.UniqueFileUtils;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownListenerProxy;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 import jw.kingdom.hall.kingdomtimer.recorder.common.files.FileRecordCreator;
@@ -22,7 +22,7 @@ public class DefaultFileRecordCreator implements FileRecordCreator {
 
     public DefaultFileRecordCreator(Config config, Schedule schedule, Countdown countdown){
         this.config = config;
-        countdown.addListener(new TimerCountdownListener() {
+        countdown.addListener(new CountdownListenerProxy() {
             @Override
             public void onStart(MeetingTask task) {
                 super.onStart(task);

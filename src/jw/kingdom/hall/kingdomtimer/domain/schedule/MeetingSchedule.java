@@ -3,7 +3,7 @@ package jw.kingdom.hall.kingdomtimer.domain.schedule;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.data.schedule.PredefinedTaskList;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownListenerProxy;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
 import java.util.ArrayList;
@@ -116,7 +116,7 @@ public class MeetingSchedule extends MeetingScheduleBase {
     }
     private MeetingSchedule(Countdown countdown){
         this.countdown = countdown;
-        getCountdown().addListener(new TimerCountdownListener() {
+        getCountdown().addListener(new CountdownListenerProxy() {
             @Override
             public void onStop() {
                 super.onStop();

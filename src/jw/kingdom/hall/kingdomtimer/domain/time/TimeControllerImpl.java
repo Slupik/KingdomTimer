@@ -113,15 +113,14 @@ public class TimeControllerImpl implements TimeController {
         countdown.enforceTime(time);
     }
 
-    //TODO implement
     @Override
     public void addDisplay(TimeDisplay display) {
-
+        countdown.addDisplay(display);
     }
 
     @Override
     public void removeDisplay(TimeDisplay display) {
-
+        countdown.removeDisplay(display);
     }
 
     @Override
@@ -146,7 +145,6 @@ public class TimeControllerImpl implements TimeController {
         initListenerForCountdown();
         initListenerForSchedule();
     }
-
 
     //TODO cleanup schedule
     private void initListenerForSchedule() {
@@ -193,16 +191,11 @@ public class TimeControllerImpl implements TimeController {
         });
     }
 
-    //TODO cleanup countdown
     private void initListenerForCountdown() {
         getCountdown().addListener(new CountdownListener() {
 
             @Override
             public void onTimeOut() {}
-            @Override
-            public void onVolumeChange(boolean isVolumeUp) {}
-            @Override
-            public String getID() {return "fwe23";}
 
             @Override
             public void onStart(MeetingTask task) {

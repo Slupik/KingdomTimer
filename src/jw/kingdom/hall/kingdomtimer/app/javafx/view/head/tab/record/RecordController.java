@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.TimeDisplayController;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.TabPresenter;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;

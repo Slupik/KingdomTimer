@@ -13,6 +13,4 @@ public interface CountdownListener {
     void onTimeOut();
     void onTimeManipulate(int totalAdded, int added);
     void onEnforceTime(int time);
-    void onVolumeChange(boolean isVolumeUp);
-    String getID();
 }

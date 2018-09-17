@@ -1,13 +1,11 @@
 package jw.kingdom.hall.kingdomtimer.domain.countdown;
 
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public abstract class TimerCountdownListener implements CountdownListener {
-    private final String ID = Randomizer.randomStandardString(10);
+public abstract class CountdownListenerProxy implements CountdownListener {
 
     @Override
     public void onStart(MeetingTask task) {
@@ -42,15 +40,5 @@ public abstract class TimerCountdownListener implements CountdownListener {
     @Override
     public void onEnforceTime(int time) {
 
-    }
-
-    @Override
-    public void onVolumeChange(boolean isVolumeUp) {
-
-    }
-
-    @Override
-    public String getID() {
-        return ID;
     }
 }

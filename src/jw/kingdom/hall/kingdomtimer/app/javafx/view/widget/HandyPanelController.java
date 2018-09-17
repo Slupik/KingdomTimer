@@ -6,12 +6,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.TimeDisplayController;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.zoom.AnimatedZoomOperator;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.screen.ControlledScreenBase;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowType;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
+import jw.kingdom.hall.kingdomtimer.app.javafx.utils.PlatformUtils;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownListenerProxy;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.NotEnoughTasksException;
 
@@ -74,7 +75,7 @@ public class HandyPanelController extends ControlledScreenBase implements StartP
     private void initTimeController() {
         timeDisplay = new TimeDisplayController(lblTime);
         timeDisplay.setTime(0);
-        getCountdown().addController(timeDisplay);
+        getCountdown().addDisplay(timeDisplay);
     }
 
     private void initSps() {
@@ -83,31 +84,39 @@ public class HandyPanelController extends ControlledScreenBase implements StartP
         spsView.addListener(this);
         spsView.setController(this);
 
-        getCountdown().addListener(new TimerCountdownListener() {
+        getCountdown().addListener(new CountdownListenerProxy() {
             @Override
             public void onStart(MeetingTask task) {
                 super.onStart(task);
-                spsView.setupForStart();
-                lblNow.setText(task.getName());
+                PlatformUtils.runOnUiThread(()->{
+                    spsView.setupForStart();
+                    lblNow.setText(task.getName());
+                });
             }
 
             @Override
             public void onPause() {
                 super.onPause();
-                spsView.setupForPause();
+                PlatformUtils.runOnUiThread(()->{
+                    spsView.setupForPause();
+                });
             }
 
             @Override
             public void onResume() {
                 super.onPause();
-                spsView.setupForUnPause();
+                PlatformUtils.runOnUiThread(()->{
+                    spsView.setupForUnPause();
+                });
             }
 
             @Override
             public void onStop() {
                 super.onStop();
-                spsView.setupForStop();
-                lblNow.setText("");
+                PlatformUtils.runOnUiThread(()->{
+                    spsView.setupForStop();
+                    lblNow.setText("");
+                });
             }
         });
     }

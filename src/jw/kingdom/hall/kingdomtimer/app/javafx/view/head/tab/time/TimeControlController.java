@@ -6,14 +6,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.TimeDisplayController;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.TabPresenter;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.table.TaskTableController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.BtnTimeDirectBase;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.BtnTimeDirectForInstantController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.BtnTimeDirectForPanel;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownListenerProxy;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.NotEnoughTasksException;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
@@ -110,7 +110,7 @@ StartPauseStopView.Controller {
 
         timeDisplay = new TimeDisplayController(lblTime);
         timeDisplay.setTime(0);
-        getCountdown().addController(timeDisplay);
+        getCountdown().addDisplay(timeDisplay);
         tableController = new TaskTableController(
                 getSchedule(),
                 getConfig(),
@@ -124,7 +124,7 @@ StartPauseStopView.Controller {
         );
 
         setupInstantDirectController();
-        getCountdown().addListener(new TimerCountdownListener() {
+        getCountdown().addListener(new CountdownListenerProxy() {
             @Override
             public void onStart(MeetingTask task) {
                 super.onStart(task);
