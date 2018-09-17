@@ -146,6 +146,8 @@ public class TimeControllerImpl implements TimeController {
         initListenerForSchedule();
     }
 
+    private boolean hasMeetingStarted = false;
+
     //TODO cleanup schedule
     private void initListenerForSchedule() {
         getSchedule().addListener(new ScheduleListener() {
@@ -175,11 +177,13 @@ public class TimeControllerImpl implements TimeController {
 
             @Override
             public void onClear() {
+                hasMeetingStarted = false;
                 notifyOnListChange(getSchedule().getList());
             }
 
             @Override
             public void onReset(List<MeetingTask> newList) {
+                hasMeetingStarted = false;
                 notifyOnListChange(newList);
             }
 
@@ -199,6 +203,12 @@ public class TimeControllerImpl implements TimeController {
 
             @Override
             public void onStart(MeetingTask task) {
+                if(!hasMeetingStarted) {
+                    hasMeetingStarted = true;
+                    for(TimeListener listener:listeners) {
+                        listener.onMeetingStart();
+                    }
+                }
                 for(TimeListener listener:listeners) {
                     listener.onStart(task);
                 }
@@ -220,6 +230,11 @@ public class TimeControllerImpl implements TimeController {
 
             @Override
             public void onStop() {
+                if(getSchedule().getList().size()==0) {
+                    for(TimeListener listener:listeners) {
+                        listener.onMeetingEnd();
+                    }
+                }
                 for(TimeListener listener:listeners) {
                     listener.onStop();
                 }
