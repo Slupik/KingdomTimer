@@ -35,7 +35,7 @@ public abstract class TimerCountdownListener implements CountdownListener {
     }
 
     @Override
-    public void onTimeManipulate(int totalAdded) {
+    public void onTimeManipulate(int totalAdded, int added) {
 
     }
 

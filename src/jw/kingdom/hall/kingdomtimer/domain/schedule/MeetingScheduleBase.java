@@ -63,7 +63,16 @@ abstract class MeetingScheduleBase implements Schedule {
     @Override
     public void clear() {
         list.clear();
+        notifyAboutClear();
     }
+
+    @Override
+    public void setList(List<MeetingTask> list) {
+        this.list.clear();
+        this.list.addAll(list);
+        notifyAboutReset(this.list);
+    }
+
 
     @Override
     public ObservableList<MeetingTask> getList(){
@@ -75,4 +84,5 @@ abstract class MeetingScheduleBase implements Schedule {
     protected abstract void notifyAboutAddTask(MeetingTask... task);
     protected abstract void notifyAboutRemoveTask(MeetingTask task);
     protected abstract void notifyAboutClear();
+    protected abstract void notifyAboutReset(List<MeetingTask> list);
 }

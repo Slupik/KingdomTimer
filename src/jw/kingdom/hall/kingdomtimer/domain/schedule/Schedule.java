@@ -22,6 +22,7 @@ public interface Schedule {
     void removeTask(int index);
     void clear();
     ObservableList<MeetingTask> getList();
+    void setList(List<MeetingTask> list);
 
     //TODO delete
     void setTasksOnline(Config config, boolean circuit);

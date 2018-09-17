@@ -101,7 +101,7 @@ public class TimerCountdown extends TimerCountdownBase implements Countdown {
         setTime(getTime()+time);
         addedTime += time;
         for(CountdownListener listener:listeners) {
-            listener.onTimeManipulate(addedTime);
+            listener.onTimeManipulate(addedTime, time);
         }
     }
 
@@ -110,7 +110,7 @@ public class TimerCountdown extends TimerCountdownBase implements Countdown {
         setTime(getTime()-time);
         addedTime -= time;
         for(CountdownListener listener:listeners) {
-            listener.onTimeManipulate(addedTime);
+            listener.onTimeManipulate(addedTime, time);
         }
     }
 

@@ -88,6 +88,13 @@ public class MeetingSchedule extends MeetingScheduleBase {
     }
 
     @Override
+    protected void notifyAboutReset(List<MeetingTask> list) {
+        for(ScheduleListener listener: listeners) {
+            listener.onReset(list);
+        }
+    }
+
+    @Override
     public void addListener(ScheduleListener listener) {
         listeners.add(listener);
     }

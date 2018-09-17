@@ -89,8 +89,8 @@ class TimeBackupMaker {
             }
 
             @Override
-            public void onTimeManipulate(int totalAdded) {
-                super.onTimeManipulate(totalAdded);
+            public void onTimeManipulate(int totalAdded, int added) {
+                super.onTimeManipulate(totalAdded, added);
                 updateTimeAdded(totalAdded);
             }
 
