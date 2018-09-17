@@ -6,12 +6,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import jw.kingdom.hall.kingdomtimer.app.javafx.domain.screen.ControlledScreenBase;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.MultimediaPreviewController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.TimeDisplayController;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownListenerProxy;
+import jw.kingdom.hall.kingdomtimer.app.javafx.domain.screen.ControlledScreenBase;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.gleam.GlobalGleamController;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MultimediaPreviewer;
+import jw.kingdom.hall.kingdomtimer.domain.time.TimeDisplayProxy;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -48,7 +48,7 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
 
     private void setupGleam() {
         gleammer = new GleamController(mainContainer, timeDisplay);
-        getCountdown().addListener(new CountdownListenerProxy() {
+        getTimer().addDisplay(new TimeDisplayProxy() {
             @Override
             public void onTimeOut() {
                 super.onTimeOut();
@@ -62,7 +62,7 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
     private void setupTimeView() {
         timeDisplay = new TimeDisplayController(tvTime);
         timeDisplay.setTime(0);
-        getCountdown().addDisplay(timeDisplay);
+        getTimer().addDisplay(timeDisplay);
 
         setupBackground();
 

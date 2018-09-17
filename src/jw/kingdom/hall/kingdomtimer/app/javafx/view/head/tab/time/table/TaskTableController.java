@@ -12,7 +12,7 @@ import javafx.scene.input.TransferMode;
 import jw.kingdom.hall.kingdomtimer.app.javafx.translate.MeetingTaskTrans;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
+import jw.kingdom.hall.kingdomtimer.domain.time.TimeController;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 
 /**
@@ -32,7 +32,7 @@ public class TaskTableController {
     private TableColumn<MeetingTask, String> tcType;
     private AppConfig config;
 
-    public TaskTableController(Schedule schedule,
+    public TaskTableController(TimeController timer,
                                AppConfig config,
                                TableView<MeetingTask> table,
                                TableColumn<MeetingTask, String> tcDelete,
@@ -42,7 +42,7 @@ public class TaskTableController {
                                TableColumn<MeetingTask, TimeField> tcTime,
                                TableColumn<MeetingTask, String> tcType
     ) {
-        tableData = schedule.getList();
+        tableData = timer.getList();
         this.config = config;
         TABLE = table;
         this.tcDelete = tcDelete;

@@ -12,9 +12,8 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.common.zoom.AnimatedZoomOperator;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.screen.ControlledScreenBase;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowType;
 import jw.kingdom.hall.kingdomtimer.app.javafx.utils.PlatformUtils;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownListenerProxy;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.domain.schedule.NotEnoughTasksException;
+import jw.kingdom.hall.kingdomtimer.domain.time.TimeListenerProxy;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -75,7 +74,7 @@ public class HandyPanelController extends ControlledScreenBase implements StartP
     private void initTimeController() {
         timeDisplay = new TimeDisplayController(lblTime);
         timeDisplay.setTime(0);
-        getCountdown().addDisplay(timeDisplay);
+        getTimer().addDisplay(timeDisplay);
     }
 
     private void initSps() {
@@ -84,7 +83,7 @@ public class HandyPanelController extends ControlledScreenBase implements StartP
         spsView.addListener(this);
         spsView.setController(this);
 
-        getCountdown().addListener(new CountdownListenerProxy() {
+        getTimer().addListener(new TimeListenerProxy() {
             @Override
             public void onStart(MeetingTask task) {
                 super.onStart(task);
@@ -133,31 +132,28 @@ public class HandyPanelController extends ControlledScreenBase implements StartP
 
     @Override
     public void onStart() {
-        try {
-            MeetingTask task = getSchedule().bringOutFirstTask();
-            getCountdown().start(task);
-        } catch (NotEnoughTasksException ignore) {}
+        getTimer().startNext();
     }
 
     @Override
     public void onPause() {
-        getCountdown().pause();
+        getTimer().pause();
     }
 
     @Override
     public void onResume() {
-        getCountdown().resume();
+        getTimer().resume();
     }
 
     @Override
     public void onStop() {
-        getCountdown().stop();
+        getTimer().stop();
     }
 
     @Override
     public boolean isToExecuteSPSAction(StartPauseStopView.ActionType type) {
         if(type==StartPauseStopView.ActionType.START) {
-            return getSchedule().getList().size()!=0;
+            return getTimer().getList().size()!=0;
         }
         return true;
     }

@@ -16,6 +16,7 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.Btn
 import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownListenerProxy;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.NotEnoughTasksException;
+import jw.kingdom.hall.kingdomtimer.domain.time.TimeListenerProxy;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 
 /**
@@ -97,7 +98,7 @@ StartPauseStopView.Controller {
         spsView.addListener(this);
         spsView.setController(this);
 
-        buzzerController = new BtnBuzzerController(getCountdown(), btnBuzzer);
+        buzzerController = new BtnBuzzerController(getTimer(), btnBuzzer);
 
         timeDirectController = new BtnTimeDirectForPanel(btnCountdownDirect, getConfig());
         timeDirectController.setMedium(false);
@@ -105,14 +106,14 @@ StartPauseStopView.Controller {
         fastDirectController = new BtnTimeDirectForPanel(btnFastDirect, getConfig());
         fastDirectController.setMedium(false);
 
-        instantDirectController = new BtnTimeDirectForInstantController(getCountdown(), getConfig(), btnInstantDirect);
+        instantDirectController = new BtnTimeDirectForInstantController(getTimer(), getConfig(), btnInstantDirect);
         instantDirectController.setMedium(true);
 
         timeDisplay = new TimeDisplayController(lblTime);
         timeDisplay.setTime(0);
-        getCountdown().addDisplay(timeDisplay);
+        getTimer().addDisplay(timeDisplay);
         tableController = new TaskTableController(
-                getSchedule(),
+                getTimer(),
                 getConfig(),
                 tvList,
                 tcDelete,
@@ -124,7 +125,7 @@ StartPauseStopView.Controller {
         );
 
         setupInstantDirectController();
-        getCountdown().addListener(new CountdownListenerProxy() {
+        getTimer().addListener(new TimeListenerProxy() {
             @Override
             public void onStart(MeetingTask task) {
                 super.onStart(task);
@@ -191,7 +192,7 @@ StartPauseStopView.Controller {
         task.setCountdownDown(timeDirectController.isDirectDown());
         timeDirectController.reset();
 
-        getSchedule().addTask(task);
+        getTimer().addTask(task);
     }
 
     @FXML
@@ -202,7 +203,7 @@ StartPauseStopView.Controller {
             tfFastTime.setSeconds(0);
             task.setCountdownDown(fastDirectController.isDirectDown());
             fastDirectController.reset();
-            getCountdown().start(task);
+            getTimer().start(task);
         });
     }
 
@@ -219,44 +220,41 @@ StartPauseStopView.Controller {
     @FXML
     private void handleAddTime(ActionEvent event) {
         FastPanelController.executeIfSave(tfFastTime.getAllSeconds(), ()->{
-            getCountdown().addTime(tfFastTime.getAllSeconds());
+            getTimer().addTime(tfFastTime.getAllSeconds());
         });
     }
 
     @FXML
     private void handleRemoveTime(ActionEvent event) {
         FastPanelController.executeIfSave(tfFastTime.getAllSeconds(), ()->{
-            getCountdown().removeTime(tfFastTime.getAllSeconds());
+            getTimer().addTime(Math.negateExact(tfFastTime.getAllSeconds()));
         });
     }
 
     @Override
     public void onStart() {
-        try {
-            MeetingTask task = getSchedule().bringOutFirstTask();
-            getCountdown().start(task);
-        } catch (NotEnoughTasksException ignore) {}
+        getTimer().startNext();
     }
 
     @Override
     public void onPause() {
-        getCountdown().pause();
+        getTimer().pause();
     }
 
     @Override
     public void onResume() {
-        getCountdown().resume();
+        getTimer().resume();
     }
 
     @Override
     public void onStop() {
-        getCountdown().stop();
+        getTimer().stop();
     }
 
     @Override
     public boolean isToExecuteSPSAction(StartPauseStopView.ActionType type) {
         if(type==StartPauseStopView.ActionType.START) {
-            return getSchedule().getList().size()!=0;
+            return getTimer().getList().size()!=0;
         }
         return true;
     }
