@@ -1,6 +1,8 @@
 package jw.kingdom.hall.kingdomtimer.recorder.xt;
 
-import com.xtaudio.xt.*;
+import com.xtaudio.xt.XtAudio;
+import com.xtaudio.xt.XtDevice;
+import com.xtaudio.xt.XtFormat;
 import jw.kingdom.hall.kingdomtimer.recorder.RecordListener;
 import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
@@ -9,12 +11,17 @@ import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.file.FileBuffer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-//TODO get all native recording into one thread using ex. ExecutorService executor = Executors.newSingleThreadExecutor();
 public class XtRecorder implements Recorder, Recording.Listener {
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private final Semaphore threadBlocker = new Semaphore(0);
+
     private static XtFormat format;
     private final AudioSettingsBean settingsBean;
     private Recording recording;
@@ -24,20 +31,30 @@ public class XtRecorder implements Recorder, Recording.Listener {
 
     public XtRecorder(AudioSettingsBean settingsBean){
         this.settingsBean = settingsBean;
-        try {
-            initXtPlatform();
-            XtDevice device = DeviceSelector.getDevice(settingsBean);
-            format = ObjectsFactory.getFormat(settingsBean, device);
+        initXtPlatform(()->{
+            try {
+                XtDevice device = DeviceSelector.getDevice(settingsBean);
+                format = ObjectsFactory.getFormat(settingsBean, device);
 
-            recording = new Recording(device, format);
-            recording.addListener(this);
-        } catch (Exception e) {
+                recording = new Recording(device, format);
+                recording.addListener(this);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            threadBlocker.release();
+        });
+        try {
+            threadBlocker.acquire();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    private void initXtPlatform() {
-        XtAudio audio = new XtAudio(null, null, null, null);
+    private void initXtPlatform(Runnable callback) {
+        executor.execute(()-> {
+            new XtAudio(null, null, null, null);
+            callback.run();
+        });
     }
 
     @Override
@@ -48,16 +65,17 @@ public class XtRecorder implements Recorder, Recording.Listener {
         storage = new FileBuffer(settingsBean.getPaths().getBackupFile(".pcm"));
         saver = ObjectsFactory.getSaver(storage, settingsBean, format);
 
-        recording.start(storage);
         if(storage.isNeedBackup()) {
             backup = new RecordBackup(saver, settingsBean);
             backup.start(60);
         }
+
+        executor.execute(()-> recording.start(storage));
     }
 
     @Override
     public void setPause(boolean isPause) {
-        recording.setPause(isPause);
+        executor.execute(()-> recording.setPause(isPause));
     }
 
     @Override
@@ -65,7 +83,9 @@ public class XtRecorder implements Recorder, Recording.Listener {
         for(RecordListener listener: recordListeners) {
             listener.onStop();
         }
-        if(recording!=null) recording.stop();
+        executor.execute(()->{
+            if(recording!=null) recording.stop();
+        });
         if(backup!=null) backup.stop();
         AudioDataBuffer storageCopy = storage;
         if(saver!=null) saver.finalSave(() -> new Thread(()->{
