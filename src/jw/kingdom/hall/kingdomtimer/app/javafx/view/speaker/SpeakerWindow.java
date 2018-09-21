@@ -15,7 +15,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static jw.kingdom.hall.kingdomtimer.app.javafx.view.widget.HandyWindow.Screens.MAIN;
+import static jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.SpeakerWindow.Screens.MAIN;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -222,5 +222,18 @@ public class SpeakerWindow extends AppWindow {
     public interface Listener {
         void onMonitorChange(Monitor monitor);
         String getId();
+    }
+
+    public enum Screens {
+        MAIN("main", "/layout/window/speaker/main.fxml"),
+        ;
+
+        public final String name;
+        public final String path;
+
+        Screens(String name, String path) {
+            this.name = name;
+            this.path = path;
+        }
     }
 }
