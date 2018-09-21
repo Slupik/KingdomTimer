@@ -1,6 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.recorder.xt;
 
-import com.sun.istack.internal.Nullable;
+import com.sun.istack.Nullable;
 import com.xtaudio.xt.XtAudio;
 import com.xtaudio.xt.XtDevice;
 import com.xtaudio.xt.XtService;
