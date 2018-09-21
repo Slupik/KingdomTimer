@@ -16,7 +16,8 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.view.widget.HandyWindow;
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class HandyPanelView extends ControlledScreenBase implements TimeControlsPresenter.Input, TaskNamePresenter.Input, SizeAdjustmentController.Input {
+public class HandyPanelView extends ControlledScreenBase implements TimeControlsPresenter.Input, TaskNamePresenter.Input,
+        SizeAdjustmentController.Input {
 
     @FXML
     private HBox mainContainer;

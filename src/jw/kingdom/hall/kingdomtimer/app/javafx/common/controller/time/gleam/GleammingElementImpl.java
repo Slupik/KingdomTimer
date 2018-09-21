@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.gleam;
 
 import javafx.scene.layout.Background;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Paint;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.label.TimeLabel;
 
@@ -10,13 +10,13 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.label.Time
  */
 public class GleammingElementImpl implements GleammingElement {
 
-    private final Pane container;
+    private final Region container;
     private final TimeLabel text;
 
     private boolean gleammingMode = false;
     private Background defaultBackground;
 
-    public GleammingElementImpl(Pane background, TimeLabel text) {
+    public GleammingElementImpl(Region background, TimeLabel text) {
         this.container = background;
         this.text = text;
         defaultBackground = container.getBackground();

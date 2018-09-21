@@ -22,7 +22,7 @@ import static jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.SpeakerWindow
  */
 public class SpeakerWindow extends AppWindow {
 
-    public static final boolean DEBUGGING_FORCE_SHOW_ON_SINGLE_MONITOR = false;
+    public static final boolean DEBUGGING_FORCE_SHOW_ON_SINGLE_MONITOR = true;
 
     private static Monitor actualDevice;
 

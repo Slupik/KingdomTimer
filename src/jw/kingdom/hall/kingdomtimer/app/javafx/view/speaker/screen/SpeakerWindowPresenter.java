@@ -1,5 +1,6 @@
-package jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker;
+package jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.screen;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -7,18 +8,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.MultimediaPreviewController;
-import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.gleam.GleamController;
-import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.display.TimeDisplayController;
-import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.label.TimeLabel;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.screen.ControlledScreenBase;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.gleam.GlobalGleamController;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MultimediaPreviewer;
-import jw.kingdom.hall.kingdomtimer.domain.time.TimeDisplayProxy;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class SpeakerWindowPresenter extends ControlledScreenBase implements PreviewAndTimeCoordinator.ElementsContainer {
+public class SpeakerWindowPresenter extends ControlledScreenBase implements PreviewAndTimeCoordinator.ElementsContainer, TimeInfoPresenter.Input {
 
     @FXML
     AnchorPane mainContainer;
@@ -35,53 +31,32 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
     @FXML
     ImageView imgMultimediaPreview;
 
-    private TimeDisplayController timeDisplay;
-    private GleamController gleammer;
     private MultimediaPreviewController multimediaPreview;
     private PreviewAndTimeCoordinator layoutCoordinator;
 
     @Override
     protected void onSetup() {
         super.onSetup();
+        new TimeInfoPresenter(this);
         setupMultimediaPreview();
-        TimeLabel timeLabel = new TimeLabel(tvTime);
-        setupTimeView(timeLabel);
-        setupGleam(timeLabel);
-    }
-
-    private void setupGleam(TimeLabel timeLabel) {
-        gleammer = new GleamController(mainContainer, timeLabel);
-        getTimer().addDisplay(new TimeDisplayProxy() {
-            @Override
-            public void onTimeOut() {
-                super.onTimeOut();
-                if(GlobalGleamController.getInstance().isEnable()) {
-                    gleammer.play();
-                }
-            }
-        });
-    }
-
-    private void setupTimeView(TimeLabel timeLabel) {
-        timeDisplay = new TimeDisplayController(timeLabel);
-        getTimer().addDisplay(timeDisplay);
-
         setupBackground();
 
         layoutCoordinator = new PreviewAndTimeCoordinator(this);
-
-        timeDisplay.addListener(() -> layoutCoordinator.onMultimediaVisibilityChange(multimediaPreview.isShowing()));
-        multimediaPreview.addListener(()-> layoutCoordinator.onMultimediaVisibilityChange(multimediaPreview.isShowing()));
     }
 
     private void setupBackground() {
-        timeDisplay.setLightBackground(false);
         mainContainer.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
     private void setupMultimediaPreview() {
         multimediaPreview = new MultimediaPreviewController(imgMultimediaPreview);
         getMultiPreviewer().addController(multimediaPreview);
+
+        multimediaPreview.addListener(()->
+                layoutCoordinator.onMultimediaVisibilityChange(multimediaPreview.isShowing()));
+        tvTime.widthProperty().addListener((observable, oldValue, newValue) ->
+                Platform.runLater(()->
+                        layoutCoordinator.onMultimediaVisibilityChange(multimediaPreview.isShowing())));
     }
 
     @Override
@@ -116,5 +91,15 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
     @Override
     public MultimediaPreviewController getMultimediaPreviewController() {
         return multimediaPreview;
+    }
+
+    @Override
+    public Label getTimeLbl() {
+        return tvTime;
+    }
+
+    @Override
+    public Region getBackgroundForTime() {
+        return getMainContainer();
     }
 }

@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker;
+package jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.screen;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
