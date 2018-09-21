@@ -185,7 +185,7 @@ public class SpeakerScreenController extends TabPresenter {
                     if(null!=lastMonitor && lastMonitor.ID.equals(monitor.ID)){
                     return;
                 }
-                if(monitor.isMain()) {
+                if(monitor.isMain() && !SpeakerWindow.DEBUGGING_FORCE_SHOW_ON_SINGLE_MONITOR) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error!");
                     alert.setHeaderText("Nie możesz wyświetlić ekranu dla mówcy na swoim głównym ekranie.");

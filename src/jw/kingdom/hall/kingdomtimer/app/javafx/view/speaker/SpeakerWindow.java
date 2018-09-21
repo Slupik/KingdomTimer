@@ -21,6 +21,9 @@ import static jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.SpeakerWindow
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class SpeakerWindow extends AppWindow {
+
+    public static final boolean DEBUGGING_FORCE_SHOW_ON_SINGLE_MONITOR = false;
+
     private static Monitor actualDevice;
 
     public void loadScreens() {
@@ -44,10 +47,14 @@ public class SpeakerWindow extends AppWindow {
     @Override
     protected void onPreInit() {
         super.onPreInit();
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(scene);
         stage.setMaximized(true);
-        stage.setAlwaysOnTop(true);
+        if(!DEBUGGING_FORCE_SHOW_ON_SINGLE_MONITOR) {
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setAlwaysOnTop(true);
+        } else {
+            stage.setMaximized(true);
+        }
+        stage.setScene(scene);
     }
 
     @Override
@@ -96,6 +103,9 @@ public class SpeakerWindow extends AppWindow {
             private boolean errorWithMainScreen = false;
             @Override
             public void run() {
+                if(DEBUGGING_FORCE_SHOW_ON_SINGLE_MONITOR) {
+                    return;
+                }
                 while (stage!=null) {
                     try {
                         Thread.sleep(2000);
@@ -107,7 +117,7 @@ public class SpeakerWindow extends AppWindow {
                         if(stage.getX()==monitor.getDefaultConfiguration().getBounds().getX() &&
                                 stage.getY()==monitor.getDefaultConfiguration().getBounds().getY()) {
                             errorWithMainScreen = true;
-                            Platform.runLater(()-> stage.hide());
+                            Platform.runLater(stage::hide);
                         } else {
                             errorWithMainScreen = false;
                             Platform.runLater(()-> setVisibility(getConfig().isVisibleSpeakerScreen()));
@@ -146,12 +156,12 @@ public class SpeakerWindow extends AppWindow {
 
         String fromConfig = getConfig().getSpeakerScreen();
         if(fromConfig==null || fromConfig.length()<1) {
-            if(list.size() < 2){
+            if(list.size() < 2 && !DEBUGGING_FORCE_SHOW_ON_SINGLE_MONITOR){
                 setMonitor(null);
             } else {
                 for(int i=list.size()-1;i>=0;i--){
                     Monitor monitor = list.get(i);
-                    if(!monitor.isMain()){
+                    if(DEBUGGING_FORCE_SHOW_ON_SINGLE_MONITOR || !monitor.isMain()){
                         setMonitor(monitor);
                         return;
                     }
@@ -161,7 +171,7 @@ public class SpeakerWindow extends AppWindow {
         } else {
             for(int i=list.size()-1;i>=0;i--){
                 Monitor monitor = list.get(i);
-                if(monitor.getIDstring().equals(fromConfig) && !monitor.isMain()){
+                if(monitor.getIDstring().equals(fromConfig) && (!monitor.isMain() || DEBUGGING_FORCE_SHOW_ON_SINGLE_MONITOR)){
                     setMonitor(monitor);
                     return;
                 }
