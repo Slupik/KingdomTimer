@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker;
+package jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.gleam;
 
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
@@ -6,20 +6,22 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.TimeDisplayController;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.label.TimeLabel;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class GleamController {
-    private Pane pane;
-    private TimeDisplayController time;
+    private GleammingElement view;
     private boolean isPlaying = false;
     private Background defaultBackground;
 
-    public GleamController(Pane pane, TimeDisplayController time) {
-        this.pane = pane;
-        this.time = time;
+    public GleamController(Pane pane, TimeLabel label) {
+        this(new GleammingElementImpl(pane, label));
+    }
+
+    public GleamController(GleammingElement element) {
+        this.view = element;
     }
 
     public void play(){
@@ -27,17 +29,23 @@ public class GleamController {
             return;
         }
         isPlaying = true;
-        defaultBackground = pane.getBackground();
+
         new Thread(() -> {
+
+            view.startGleamming();
+            defaultBackground = view.getDefaultBackground();
+
             for(int i=0;i<5;i++) {
-                pane.setBackground(getGleamingBackground());
-                time.setColor(defaultBackground.getFills().get(0).getFill());
+
+                view.applyColors(getGleamingBackground(),
+                        defaultBackground.getFills().get(0).getFill());
                 sleep(250);
-                pane.setBackground(defaultBackground);
-                time.setColor(getGleamingBackground().getFills().get(0).getFill());
+
+                view.applyColors(defaultBackground,
+                        getGleamingBackground().getFills().get(0).getFill());
                 sleep(250);
             }
-            time.resetColorToLast();
+            view.endGleamming();
             isPlaying = false;
         }).start();
     }

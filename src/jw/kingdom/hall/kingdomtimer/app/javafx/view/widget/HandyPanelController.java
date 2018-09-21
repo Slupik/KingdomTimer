@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.TimeDisplayController;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.display.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.zoom.AnimatedZoomOperator;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.screen.ControlledScreenBase;
@@ -73,7 +73,6 @@ public class HandyPanelController extends ControlledScreenBase implements StartP
 
     private void initTimeController() {
         timeDisplay = new TimeDisplayController(lblTime);
-        timeDisplay.setTime(0);
         getTimer().addDisplay(timeDisplay);
     }
 

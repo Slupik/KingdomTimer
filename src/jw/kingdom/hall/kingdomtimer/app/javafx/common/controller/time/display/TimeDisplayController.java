@@ -1,23 +1,24 @@
-package jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time;
+package jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.display;
 
-import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Paint;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.label.TimeLabel;
+import jw.kingdom.hall.kingdomtimer.app.javafx.utils.PlatformUtils;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeDisplay;
-import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.display.TextFormatter.getFormattedTime;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class TimeDisplayController implements TimeDisplay {
-    private final String ID = Randomizer.randomStandardString(10);
     private final List<Listener> listeners = new ArrayList<>();
 
-    private Label text;
+    private TimeLabel text;
 
     private boolean isLightBackground = true;
     private int lastColorCode = -1;
@@ -25,7 +26,12 @@ public class TimeDisplayController implements TimeDisplay {
     private int lastTextSize = -1;
 
     public TimeDisplayController(Label text) {
+        this(new TimeLabel(text));
+    }
+
+    public TimeDisplayController(TimeLabel text) {
         this.text = text;
+        reset();
     }
 
     @Override
@@ -52,65 +58,30 @@ public class TimeDisplayController implements TimeDisplay {
 
     public void setLightBackground(boolean lightBackground) {
         isLightBackground = lightBackground;
-        setColor(TimerColor.getColor(lastColorCode, isLightBackground));
+        setTextColor(TimerColor.getColor(lastColorCode, isLightBackground));
     }
 
-    public void setColor(Paint paint) {
-        text.setTextFill(paint);
-    }
-
-    public void resetColorToLast(){
-        setColor(TimerColor.getColor(lastColorCode, isLightBackground));
-    }
-
-    public void setTime(int seconds){
-        String data = secondsToText(seconds);
-        if(Platform.isFxApplicationThread()) {
+    private void setTime(int seconds){
+        String data = getFormattedTime(seconds);
+        PlatformUtils.runOnUiThread(()->{
             setText(data);
             notifyTextSizeChanged(data.length());
-        } else {
-            Platform.runLater(()-> {
-                setText(data);
-                notifyTextSizeChanged(data.length());
-            });
-        }
+        });
     }
 
     private void setColorCode(int paintCode) {
         if(lastColorCode!=paintCode) {
-            setColor(TimerColor.getColor(paintCode, isLightBackground));
+            setTextColor(TimerColor.getColor(paintCode, isLightBackground));
             lastColorCode = paintCode;
         }
     }
 
+    private void setTextColor(Paint paint) {
+        text.setColor(paint);
+    }
+
     private void setText(String text) {
         this.text.setText(text);
-    }
-
-    private static String getFormattedNumber(int number) {
-        if(number<10) {
-            return "0"+Integer.toString(number);
-        }
-        return Integer.toString(number);
-    }
-
-    private static String secondsToText(int time) {
-        boolean isSmallerThanZero = time<0;
-        if(isSmallerThanZero) {
-            time = Math.abs(time);
-        }
-        int hours = time/3600;
-        int minutes = (time%3600)/60;
-        int seconds = time%60;
-        String basic = getFormattedNumber(hours)+":"+getFormattedNumber(minutes)+":"+getFormattedNumber(seconds);
-        if(basic.startsWith("00:")) {
-            basic = basic.substring(3);
-        }
-        if(isSmallerThanZero) {
-            return "-"+basic;
-        } else {
-            return basic;
-        }
     }
 
     private void notifyTextSizeChanged(int length) {

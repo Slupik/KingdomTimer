@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time;
+package jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.display;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -6,7 +6,7 @@ import javafx.scene.paint.Paint;
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class TimerColor {
+class TimerColor {
     private final static int NORMAL = 0;
     private final static int WARNING = 1;
     private final static int END_OF_TIME = 2;
@@ -39,7 +39,7 @@ public class TimerColor {
         }
     }
 
-    public static Paint getColor(int code, boolean isLightBackground) {
+    static Paint getColor(int code, boolean isLightBackground) {
         switch (code) {
             case END_OF_TIME: {
                 if(isLightBackground) {

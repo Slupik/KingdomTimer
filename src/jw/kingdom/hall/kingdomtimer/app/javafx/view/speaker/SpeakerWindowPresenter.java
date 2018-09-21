@@ -7,7 +7,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.MultimediaPreviewController;
-import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.TimeDisplayController;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.gleam.GleamController;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.display.TimeDisplayController;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.label.TimeLabel;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.screen.ControlledScreenBase;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.gleam.GlobalGleamController;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MultimediaPreviewer;
@@ -42,12 +44,13 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
     protected void onSetup() {
         super.onSetup();
         setupMultimediaPreview();
-        setupTimeView();
-        setupGleam();
+        TimeLabel timeLabel = new TimeLabel(tvTime);
+        setupTimeView(timeLabel);
+        setupGleam(timeLabel);
     }
 
-    private void setupGleam() {
-        gleammer = new GleamController(mainContainer, timeDisplay);
+    private void setupGleam(TimeLabel timeLabel) {
+        gleammer = new GleamController(mainContainer, timeLabel);
         getTimer().addDisplay(new TimeDisplayProxy() {
             @Override
             public void onTimeOut() {
@@ -59,9 +62,8 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
         });
     }
 
-    private void setupTimeView() {
-        timeDisplay = new TimeDisplayController(tvTime);
-        timeDisplay.setTime(0);
+    private void setupTimeView(TimeLabel timeLabel) {
+        timeDisplay = new TimeDisplayController(timeLabel);
         getTimer().addDisplay(timeDisplay);
 
         setupBackground();
