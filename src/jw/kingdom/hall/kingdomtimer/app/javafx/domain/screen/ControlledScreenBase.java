@@ -7,6 +7,7 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.domain.loader.ViewManager;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.AppWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowInput;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.container.WindowsContainer;
+import jw.kingdom.hall.kingdomtimer.app.javafx.utils.SizeBinder;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
@@ -83,17 +84,7 @@ public abstract class ControlledScreenBase implements ControlledScreen, Initiali
         if(getMainContainer()==null) {
             return;
         }
-        getMainContainer().minHeightProperty().bind(
-                window.getStage().heightProperty()
-        );
-        getMainContainer().maxHeightProperty().bind(getMainContainer().minHeightProperty());
-        getMainContainer().prefHeightProperty().bind(getMainContainer().minHeightProperty());
-
-        getMainContainer().minWidthProperty().bind(
-                window.getStage().widthProperty()
-        );
-        getMainContainer().maxWidthProperty().bind(getMainContainer().minWidthProperty());
-        getMainContainer().prefWidthProperty().bind(getMainContainer().minWidthProperty());
+        SizeBinder.bindSize(window.getStage(), getMainContainer());
     }
 
     protected abstract Region getMainContainer();

@@ -57,7 +57,7 @@ public class HandyWindow extends AppWindow {
     @Override
     protected void onPostShow() {
         super.onPostShow();
-        new WindowMovingController(stage, root);
+        new WindowMovingController(stage, this);
     }
 
     @Override

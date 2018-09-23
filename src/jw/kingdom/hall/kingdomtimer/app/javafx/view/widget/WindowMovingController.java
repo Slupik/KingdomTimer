@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.app.javafx.view.widget;
 
 import javafx.event.EventHandler;
-import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -10,11 +10,11 @@ import javafx.stage.Stage;
  */
 class WindowMovingController {
     private final Stage stage;
-    private final Group container;
+    private final Node container;
     private double xOffset;
     private double yOffset;
 
-    WindowMovingController(Stage stage, Group container) {
+    WindowMovingController(Stage stage, Node container) {
         this.stage = stage;
         this.container = container;
         init();

@@ -36,13 +36,15 @@ public abstract class AppWindow extends StackPane {
 
     public void init() {
         onPreInit();
-        stage.setTitle(WindowSettings.TITLE);
 
+        stage.setTitle(WindowSettings.TITLE);
         loadScreens();
         root.getChildren().add(this);
         setMainView();
 
-        stage.setScene(scene);
+        if(stage.getScene()==null) {
+            stage.setScene(scene);
+        }
         onPostLoadViews();
         if(isToShowAtInit()) {
             stage.show();

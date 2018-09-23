@@ -10,8 +10,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import jw.kingdom.hall.kingdomtimer.app.javafx.utils.FontUtils;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.MultimediaPreviewController;
+import jw.kingdom.hall.kingdomtimer.app.javafx.utils.FontUtils;
 
 import static jw.kingdom.hall.kingdomtimer.app.javafx.utils.FontUtils.textHeight;
 
@@ -47,8 +47,10 @@ class PreviewAndTimeCoordinator {
         timeView.setMinWidth(Region.USE_COMPUTED_SIZE);
         timeView.setMaxWidth(Region.USE_COMPUTED_SIZE);
 
-        mainContainer.heightProperty().addListener((observable, oldValue, newValue) ->
-                onMultimediaVisibilityChange(previewController.isShowing()));
+        mainContainer.heightProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(()->
+                onMultimediaVisibilityChange(previewController.isShowing())));
+        mainContainer.widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(()->
+                onMultimediaVisibilityChange(previewController.isShowing())));
         bindTimerContainerSize(previewController.isShowing());
     }
 
@@ -56,7 +58,6 @@ class PreviewAndTimeCoordinator {
         multimediaContainer.minWidthProperty().bind(mainContainer.widthProperty());
         multimediaContainer.minHeightProperty().bind(mainContainer.heightProperty());
 
-        multimediaView.setPreserveRatio(false);
         mainContainer.widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(()->{
             double height = mainContainer.heightProperty().doubleValue();
             double width = mainContainer.widthProperty().doubleValue();

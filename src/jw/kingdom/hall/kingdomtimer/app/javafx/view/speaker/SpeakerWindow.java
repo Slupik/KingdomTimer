@@ -2,6 +2,7 @@ package jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker;
 
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
+import javafx.scene.Parent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.AppWindow;
@@ -32,7 +33,10 @@ public class SpeakerWindow extends AppWindow {
 
     @Override
     protected void setMainView() {
-        viewManager.setScreen(MAIN.name);
+        scene.setRoot((Parent) viewManager.getScreen(MAIN.name));
+
+        //Standard way to set view. It shouldn't be used until somebody will repair bug with additional blank space (~15px left margin)
+//        viewManager.setScreen(MAIN.name);
     }
 
     public SpeakerWindow(Stage stage, WindowInput input) {
@@ -61,6 +65,7 @@ public class SpeakerWindow extends AppWindow {
     protected void onPostShow() {
         super.onPostShow();
         stage.setOnCloseRequest(event -> System.exit(0));
+        stage.show();
 
         MonitorManager.addListener(new MonitorEventHandler() {
             @Override
