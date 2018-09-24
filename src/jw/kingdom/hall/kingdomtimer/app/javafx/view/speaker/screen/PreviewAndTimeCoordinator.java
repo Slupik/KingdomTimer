@@ -12,6 +12,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.MultimediaPreviewController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.utils.FontUtils;
+import jw.kingdom.hall.kingdomtimer.app.javafx.utils.SizeBinder;
+import jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.screen.coordinator.PreviewSizeController;
 
 import static jw.kingdom.hall.kingdomtimer.app.javafx.utils.FontUtils.textHeight;
 
@@ -39,6 +41,8 @@ class PreviewAndTimeCoordinator {
             START INIT
      */
     private void init() {
+        SizeBinder.bindSize(mainContainer, multimediaContainer);
+        new PreviewSizeController(multimediaContainer, multimediaView);
         setupTimerSize();
         setupMultimediaSize();
     }
@@ -68,12 +72,7 @@ class PreviewAndTimeCoordinator {
             double viewSize = heightPropose;
 
             if(widthPropose > width) {
-                multimediaView.setFitWidth(width);
                 viewSize = width/16*9;
-                multimediaView.setFitHeight(viewSize);
-            } else {
-                multimediaView.setFitWidth(widthPropose);
-                multimediaView.setFitHeight(viewSize);
             }
 
             if(previewController.isShowing()) {
