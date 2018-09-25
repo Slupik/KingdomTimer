@@ -28,8 +28,6 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
     @FXML
     VBox vbTimer;
 
-//    @FXML
-//    Rectangle rect;
     @FXML
     ImageView imgMultimediaPreview;
 

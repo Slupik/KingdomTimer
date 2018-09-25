@@ -32,7 +32,7 @@ public class PreviewSizeController {
 
     private void adjustSize() {
         double containerHeight = containerWithDisplay.heightProperty().doubleValue();
-        double containerWidth = containerWithDisplay.widthProperty().doubleValue();//-50;
+        double containerWidth = containerWithDisplay.widthProperty().doubleValue();
 
         double heightPropose = containerHeight*HEIGHT_RATIO;
         double widthPropose = heightPropose* PREVIEW_RATIO;

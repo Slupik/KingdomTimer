@@ -1,5 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.screen;
 
+import com.sun.javafx.tk.Toolkit;
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -14,8 +15,6 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.MultimediaPrevi
 import jw.kingdom.hall.kingdomtimer.app.javafx.utils.FontUtils;
 import jw.kingdom.hall.kingdomtimer.app.javafx.utils.SizeBinder;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.screen.coordinator.PreviewSizeController;
-
-import static jw.kingdom.hall.kingdomtimer.app.javafx.utils.FontUtils.textHeight;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -86,15 +85,15 @@ class PreviewAndTimeCoordinator {
             START LOGIC
      */
     void onMultimediaVisibilityChange(boolean isMultimediaShowing) {
-            updateTimerText(isMultimediaShowing,
-                    ()->bindTimerContainerSize(isMultimediaShowing)
-            );
+        updateTimerText(isMultimediaShowing,
+                ()->bindTimerContainerSize(isMultimediaShowing)
+        );
     }
 
     private void updateTimerText(boolean isShowing, Runnable callbackOnEnd) {
         Platform.runLater(()->{
             if(isShowing) {
-                setupFontForTimerText(mainContainer.heightProperty().get()*0.33);
+                setupFontForTimerText(mainContainer.heightProperty().get()/100*18);
                 timeView.setPadding(new Insets(0,(int)(mainContainer.widthProperty().get()*0.01),0,0));
                 timeContainer.setAlignment(Pos.BOTTOM_CENTER);
             } else {
@@ -109,7 +108,7 @@ class PreviewAndTimeCoordinator {
     private void setupFontForTimerText(double height) {
         int integerHeight = (int) height;
         Font font = timeView.getFont();
-        double newSize = FontUtils.findFontSizeForHeight(font, timeView.getText(), integerHeight);
+        double newSize = FontUtils.findFontSizeForNumberHeight(font, integerHeight);
         Font newFont = new Font(font.getName(), newSize);
 
         if(FontUtils.textWidth(newFont, timeView.getText())>mainContainer.widthProperty().getValue()*0.9) {
@@ -119,19 +118,19 @@ class PreviewAndTimeCoordinator {
         timeView.setFont(newFont);
     }
 
-
     private void bindTimerContainerSize(boolean isShowing) {
         if(isShowing) {
             timeContainer.minWidthProperty().bind(mainContainer.widthProperty());
-            timeContainer.minHeightProperty().bind(mainContainer.heightProperty().add(getMeasuredTimeTextHeight().divide(7)));
+            timeContainer.minHeightProperty().bind(mainContainer.heightProperty().add(getBottomBlankSpace(timeView.getFont())));
+            timeContainer.maxHeightProperty().bind(timeContainer.minHeightProperty());
         } else {
             timeContainer.minWidthProperty().bind(mainContainer.widthProperty());
             timeContainer.minHeightProperty().bind(mainContainer.heightProperty());
         }
     }
 
-    private DoubleProperty getMeasuredTimeTextHeight() {
-        return new SimpleDoubleProperty(textHeight(timeView.getFont(), timeView.getText()));
+    private DoubleProperty getBottomBlankSpace(Font font) {
+        return new SimpleDoubleProperty(Toolkit.getToolkit().getFontLoader().getFontMetrics(font).getMaxDescent());
     }
 
     public interface ElementsContainer extends MultimediaPreviewContainer, TimeInfoContainer {
