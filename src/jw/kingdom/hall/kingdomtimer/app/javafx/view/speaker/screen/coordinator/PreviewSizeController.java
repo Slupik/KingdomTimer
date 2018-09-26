@@ -1,51 +1,59 @@
 package jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.screen.coordinator;
 
-import javafx.application.Platform;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.MultimediaPreviewController;
 
 /**
  * All rights reserved & copyright ©
  */
-public class PreviewSizeController {
+class PreviewSizeController {
 
     private static double PREVIEW_RATIO = 16d/9d;
     private static double HEIGHT_RATIO = 4d/5d;
 
-    private final Region containerWithDisplay;
-    private final ImageView previewView;
+    private final Input input;
 
-    public PreviewSizeController(Region containerWithDisplay, ImageView previewView) {
-        this.containerWithDisplay = containerWithDisplay;
-        this.previewView = previewView;
+    PreviewSizeController(Input input) {
+        this.input = input;
         init();
     }
 
     private void init() {
-        containerWithDisplay.widthProperty().addListener(
-                (observable, oldValue, newValue) -> Platform.runLater(this::adjustSize)
-        );
-        containerWithDisplay.heightProperty().addListener(
-                (observable, oldValue, newValue) -> Platform.runLater(this::adjustSize)
-        );
+        input.getMultimediaContainer().minWidthProperty().bind(input.getMainContainer().widthProperty());
+        input.getMultimediaContainer().minHeightProperty().bind(input.getMainContainer().heightProperty());
     }
 
-    private void adjustSize() {
-        double containerHeight = containerWithDisplay.heightProperty().doubleValue();
-        double containerWidth = containerWithDisplay.widthProperty().doubleValue();
+    void adjustSize(double containerHeight, double containerWidth) {
+        adjustSize(containerHeight, containerWidth, () -> {});
+    }
 
+    void adjustSize(double containerHeight, double containerWidth, Runnable callback) {
         double heightPropose = containerHeight*HEIGHT_RATIO;
         double widthPropose = heightPropose* PREVIEW_RATIO;
 
         double viewSize = heightPropose;
 
         if(widthPropose > containerWidth) {
-            previewView.setFitWidth(containerWidth);
-            viewSize = containerWidth/ PREVIEW_RATIO;
-            previewView.setFitHeight(viewSize);
+            getPreviewView().setFitWidth(containerWidth);
+            viewSize = containerWidth/PREVIEW_RATIO;
+            getPreviewView().setFitHeight(viewSize);
         } else {
-            previewView.setFitWidth(widthPropose);
-            previewView.setFitHeight(viewSize);
+            getPreviewView().setFitWidth(widthPropose);
+            getPreviewView().setFitHeight(viewSize);
         }
+        callback.run();
+    }
+
+    private ImageView getPreviewView() {
+        return input.getPreviewView();
+    }
+
+    interface Input {
+        MultimediaPreviewController getMultimediaPreviewController();
+        ImageView getPreviewView();
+        VBox getMultimediaContainer();
+        Region getMainContainer();
     }
 }

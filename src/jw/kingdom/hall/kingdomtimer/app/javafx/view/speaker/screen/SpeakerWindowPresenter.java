@@ -1,6 +1,5 @@
 package jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.screen;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -9,12 +8,13 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.MultimediaPreviewController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.screen.ControlledScreenBase;
+import jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.screen.coordinator.SpeakerLayoutCoordinator;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MultimediaPreviewer;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class SpeakerWindowPresenter extends ControlledScreenBase implements PreviewAndTimeCoordinator.ElementsContainer, TimeInfoPresenter.Input {
+public class SpeakerWindowPresenter extends ControlledScreenBase implements TimeInfoPresenter.Input, SpeakerLayoutCoordinator.Input {
 
     @FXML
     AnchorPane mainContainer;
@@ -32,17 +32,15 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
     ImageView imgMultimediaPreview;
 
     private MultimediaPreviewController multimediaPreview;
-    private PreviewAndTimeCoordinator layoutCoordinator;
 
     @Override
     protected void onSetup() {
         super.onSetup();
-        new TimeInfoPresenter(this);
-
         setupMultimediaPreview();
         setupBackground();
 
-        layoutCoordinator = new PreviewAndTimeCoordinator(this);
+        new TimeInfoPresenter(this);
+        new SpeakerLayoutCoordinator(this);
     }
 
     private void setupBackground() {
@@ -52,12 +50,11 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
     private void setupMultimediaPreview() {
         multimediaPreview = new MultimediaPreviewController(imgMultimediaPreview);
         getMultiPreviewer().addController(multimediaPreview);
+    }
 
-        multimediaPreview.addListener(()->
-                layoutCoordinator.onMultimediaVisibilityChange(multimediaPreview.isShowing()));
-        tvTime.widthProperty().addListener((observable, oldValue, newValue) ->
-                Platform.runLater(()->
-                        layoutCoordinator.onMultimediaVisibilityChange(multimediaPreview.isShowing())));
+    @Override
+    public VBox getTimeLabelContainer() {
+        return vbTimer;
     }
 
     @Override
@@ -66,12 +63,7 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
     }
 
     @Override
-    public VBox getTimeContainer() {
-        return vbTimer;
-    }
-
-    @Override
-    public Label getTimeView() {
+    public Label getTimeLabel() {
         return tvTime;
     }
 
@@ -80,13 +72,13 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
         return vbMultimediaPreview;
     }
 
-    @Override
-    public ImageView getView() {
-        return imgMultimediaPreview;
-    }
-
     private static MultimediaPreviewer getMultiPreviewer() {
         return MultimediaPreviewer.getInstance();
+    }
+
+    @Override
+    public ImageView getPreviewView() {
+        return imgMultimediaPreview;
     }
 
     @Override
@@ -95,7 +87,7 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Prev
     }
 
     @Override
-    public Label getTimeLbl() {
+    public Label getTimeView() {
         return tvTime;
     }
 

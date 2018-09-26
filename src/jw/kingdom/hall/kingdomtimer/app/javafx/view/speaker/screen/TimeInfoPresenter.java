@@ -51,7 +51,7 @@ class TimeInfoPresenter {
     }
 
     private Label getTimeLbl() {
-        return input.getTimeLbl();
+        return input.getTimeView();
     }
 
     private Region getBackgroundForTime(){
@@ -59,7 +59,7 @@ class TimeInfoPresenter {
     }
 
     interface Input {
-        Label getTimeLbl();
+        Label getTimeView();
         Region getBackgroundForTime();
         TimeController getTimer();
     }
