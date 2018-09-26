@@ -6,12 +6,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.BtnBuzzerController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.display.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowType;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.TabPresenter;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.table.TaskTableController;
-import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.BtnTimeDirectBase;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.BtnTimeDirectForInstantController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.BtnTimeDirectForPanel;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.widget.HandyWindow;
@@ -23,7 +23,7 @@ import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class TimeControlController extends TabPresenter implements Initializable, StartPauseStopView.Listener,
-StartPauseStopView.Controller {
+        StartPauseStopView.Controller, FastPanelController.Input {
 
     @FXML
     private Label lblTime;
@@ -82,11 +82,8 @@ StartPauseStopView.Controller {
     @FXML
     private TableColumn<MeetingTask, String> tcType;
 
-    private TimeDisplayController timeDisplay;
-    private TaskTableController tableController;
-    private BtnBuzzerController buzzerController;
+    private FastPanelController fastPanelController;
     private BtnTimeDirectForPanel timeDirectController;
-    private BtnTimeDirectForInstantController instantDirectController;
     private BtnTimeDirectForPanel fastDirectController;
     private StartPauseStopView spsView;
 
@@ -98,7 +95,7 @@ StartPauseStopView.Controller {
         spsView.addListener(this);
         spsView.setController(this);
 
-        buzzerController = new BtnBuzzerController(getTimer(), btnBuzzer);
+        new BtnBuzzerController(getTimer(), btnBuzzer);
 
         timeDirectController = new BtnTimeDirectForPanel(btnCountdownDirect, getConfig());
         timeDirectController.setMedium(false);
@@ -106,12 +103,12 @@ StartPauseStopView.Controller {
         fastDirectController = new BtnTimeDirectForPanel(btnFastDirect, getConfig());
         fastDirectController.setMedium(false);
 
-        instantDirectController = new BtnTimeDirectForInstantController(getTimer(), getConfig(), btnInstantDirect);
+        BtnTimeDirectForInstantController instantDirectController = new BtnTimeDirectForInstantController(getTimer(), getConfig(), btnInstantDirect);
         instantDirectController.setMedium(true);
 
-        timeDisplay = new TimeDisplayController(lblTime);
+        TimeDisplayController timeDisplay = new TimeDisplayController(lblTime);
         getTimer().addDisplay(timeDisplay);
-        tableController = new TaskTableController(
+        new TaskTableController(
                 getTimer(),
                 getConfig(),
                 tvList,
@@ -123,7 +120,8 @@ StartPauseStopView.Controller {
                 tcType
         );
 
-        setupInstantDirectController();
+        fastPanelController = new FastPanelController(this);
+
         getTimer().addListener(new TimeListenerProxy() {
             @Override
             public void onStart(MeetingTask task) {
@@ -166,15 +164,6 @@ StartPauseStopView.Controller {
         });
     }
 
-    private void setupInstantDirectController() {
-        instantDirectController.addListener(new BtnTimeDirectBase.ListenerImpl() {
-            @Override
-            public void onDirectChange(boolean isDirectDown) {
-//                getCountdown().setDirectTimeDown(isDirectDown);
-            }
-        });
-    }
-
     @FXML
     private void handleAddTask(ActionEvent event) {
         MeetingTask task = new MeetingTask();
@@ -196,14 +185,7 @@ StartPauseStopView.Controller {
 
     @FXML
     private void handleLoadTimeAction(ActionEvent event) {
-        FastPanelController.executeIfSave(tfFastTime.getAllSeconds(), ()->{
-            MeetingTask task = new MeetingTask();
-            task.setTimeInSeconds(tfFastTime.getAllSeconds());
-            tfFastTime.setSeconds(0);
-            task.setCountdownDown(fastDirectController.isDirectDown());
-            fastDirectController.reset();
-            getTimer().start(task);
-        });
+        fastPanelController.handleLoadTimeAction();
     }
 
     @FXML
@@ -218,16 +200,12 @@ StartPauseStopView.Controller {
 
     @FXML
     private void handleAddTime(ActionEvent event) {
-        FastPanelController.executeIfSave(tfFastTime.getAllSeconds(), ()->{
-            getTimer().addTime(tfFastTime.getAllSeconds());
-        });
+        fastPanelController.handleAddTime();
     }
 
     @FXML
     private void handleRemoveTime(ActionEvent event) {
-        FastPanelController.executeIfSave(tfFastTime.getAllSeconds(), ()->{
-            getTimer().addTime(Math.negateExact(tfFastTime.getAllSeconds()));
-        });
+        fastPanelController.handleRemoveTime();
     }
 
     @Override
@@ -256,5 +234,15 @@ StartPauseStopView.Controller {
             return getTimer().getList().size()!=0;
         }
         return true;
+    }
+
+    @Override
+    public TimeField getFastTimeField() {
+        return tfFastTime;
+    }
+
+    @Override
+    public BtnTimeDirectForPanel getFastDirectController() {
+        return fastDirectController;
     }
 }

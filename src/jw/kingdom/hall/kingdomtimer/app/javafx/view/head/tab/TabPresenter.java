@@ -60,23 +60,23 @@ public abstract class TabPresenter implements TabPresentable, Initializable {
 
     }
 
-    protected final AppConfig getConfig() {
+    public final AppConfig getConfig() {
         return getWindowData().getConfig();
     }
 
-    protected final RecordControl getRecorder(){
+    public final RecordControl getRecorder(){
         return getWindowData().getRecorder();
     }
 
-    protected final Schedule getSchedule(){
+    public final Schedule getSchedule(){
         return getWindowData().getSchedule();
     }
 
-    protected final Countdown getCountdown(){
+    public final Countdown getCountdown(){
         return getWindowData().getCountdown();
     }
 
-    protected final TimeController getTimer(){
+    public final TimeController getTimer(){
         return getWindowData().getTimeController();
     }
 }

@@ -28,7 +28,7 @@ public abstract class BtnTimeDirectBase {
     }
 
     protected abstract void changeDirect();
-    protected abstract boolean isDirectDown();
+    public abstract boolean isDirectDown();
 
     protected void updateImage() {
         setImageForArrowDown(isDirectDown());

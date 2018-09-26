@@ -3,6 +3,10 @@ package jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.BtnTimeDirectForPanel;
+import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.time.TimeController;
+import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 
 import java.util.Optional;
 
@@ -10,7 +14,49 @@ import java.util.Optional;
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class FastPanelController {
-    static void executeIfSave(int seconds, Runnable callback) {
+
+    private final Input input;
+
+    FastPanelController(Input input) {
+        this.input = input;
+    }
+
+    void handleLoadTimeAction() {
+        executeIfSave(getFiled().getAllSeconds(), ()->{
+            MeetingTask task = new MeetingTask();
+            task.setTimeInSeconds(getFiled().getAllSeconds());
+            getFiled().setSeconds(0);
+            task.setCountdownDown(getDirectController().isDirectDown());
+            getDirectController().reset();
+            getTimer().start(task);
+        });
+    }
+
+    void handleAddTime() {
+        executeIfSave(getFiled().getAllSeconds(), ()->{
+            getTimer().addTime(getFiled().getAllSeconds());
+        });
+    }
+
+    void handleRemoveTime() {
+        executeIfSave(getFiled().getAllSeconds(), ()->{
+            getTimer().addTime(Math.negateExact(getFiled().getAllSeconds()));
+        });
+    }
+
+    private TimeController getTimer() {
+        return input.getTimer();
+    }
+
+    private TimeField getFiled() {
+        return input.getFastTimeField();
+    }
+
+    private BtnTimeDirectForPanel getDirectController() {
+        return input.getFastDirectController();
+    }
+
+    private void executeIfSave(int seconds, Runnable callback) {
         if(seconds<3600) {
             callback.run();
         } else {
@@ -28,5 +74,11 @@ class FastPanelController {
                 callback.run();
             }
         }
+    }
+
+    interface Input {
+        TimeController getTimer();
+        TimeField getFastTimeField();
+        BtnTimeDirectForPanel getFastDirectController();
     }
 }

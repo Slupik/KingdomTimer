@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time;
+package jw.kingdom.hall.kingdomtimer.app.javafx.common.controller;
 
 
 import javafx.beans.value.ChangeListener;
