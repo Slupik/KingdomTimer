@@ -87,6 +87,7 @@ public abstract class CountdownLogic implements Countdown {
     public void addTime(int time) {
         if(getTask()!=null) {
             addedTime += time;
+            this.time += time;
             eventTimeAdd(addedTime, time);
         }
     }
