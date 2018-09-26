@@ -45,7 +45,7 @@ public class SpeakerWindow extends AppWindow {
 
     @Override
     protected boolean isToShowAtInit() {
-        return false;
+        return DEBUGGING_FORCE_SHOW_ON_SINGLE_MONITOR;
     }
 
     @Override
@@ -65,7 +65,6 @@ public class SpeakerWindow extends AppWindow {
     protected void onPostShow() {
         super.onPostShow();
         stage.setOnCloseRequest(event -> System.exit(0));
-        stage.show();
 
         MonitorManager.addListener(new MonitorEventHandler() {
             @Override
