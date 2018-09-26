@@ -8,11 +8,13 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.display.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.sps.StartPauseStopView;
+import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowType;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.TabPresenter;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.table.TaskTableController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.BtnTimeDirectBase;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.BtnTimeDirectForInstantController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.BtnTimeDirectForPanel;
+import jw.kingdom.hall.kingdomtimer.app.javafx.view.widget.HandyWindow;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeListenerProxy;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
@@ -149,7 +151,7 @@ StartPauseStopView.Controller {
         });
 
         Platform.runLater(()-> new BackupPresenter().run());
-        new WidgetVisibilityController(btnWidgetVisibility);
+        new WidgetVisibilityController((HandyWindow) getWindowsContainer().getAppWindow(WindowType.WIDGET), btnWidgetVisibility);
         setupTimeToEvaluate();
     }
 

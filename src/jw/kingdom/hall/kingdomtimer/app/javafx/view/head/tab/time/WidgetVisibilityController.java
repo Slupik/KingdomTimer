@@ -1,15 +1,18 @@
 package jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time;
 
 import javafx.scene.control.Button;
+import jw.kingdom.hall.kingdomtimer.app.javafx.view.widget.HandyWindow;
 
 /**
  * All rights reserved & copyright ©
  */
 class WidgetVisibilityController {
+    private final HandyWindow window;
     private final Button button;
     private boolean isWidgetVisible = true;
 
-    WidgetVisibilityController(Button btnVisibilityChanger) {
+    WidgetVisibilityController(HandyWindow window, Button btnVisibilityChanger) {
+        this.window = window;
         this.button = btnVisibilityChanger;
         init();
     }
@@ -25,10 +28,9 @@ class WidgetVisibilityController {
 
     private void setupVisibility() {
         if(isWidgetVisible) {
-            //TODO repair
-//            HandyWindow.getInstance().getStage().show();
+            window.getStage().show();
         } else {
-//            HandyWindow.getInstance().getStage().hide();
+            window.getStage().hide();
         }
     }
 
