@@ -1,7 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.model;
 
 import javafx.beans.property.*;
-import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
 
 /**
@@ -13,8 +12,7 @@ public class MeetingTask {
     private StringProperty name = new SimpleStringProperty("???");
     private BooleanProperty countdownDown = new SimpleBooleanProperty(true);
     private ObjectProperty<Type> type = new SimpleObjectProperty<>(Type.UNKNOWN);
-    //Used by javafx in TableView
-    private TimeField tfTime = new TimeField();
+    private int time;
 
     public MeetingTask(){
         this(Randomizer.randomStandardString(16));
@@ -22,14 +20,6 @@ public class MeetingTask {
 
     public MeetingTask(String ID) {
         this.ID = ID;
-    }
-
-    public TimeField getTfTime() {
-        return tfTime;
-    }
-
-    public void setTfTime(TimeField tfTime) {
-        this.tfTime = tfTime;
     }
 
     public BooleanProperty useBuzzerProperty() {
@@ -57,11 +47,11 @@ public class MeetingTask {
     }
 
     public int getTimeInSeconds() {
-        return tfTime.getAllSeconds();
+        return time;
     }
 
     public void setTimeInSeconds(int timeInSeconds) {
-        tfTime.setSeconds(timeInSeconds);
+        time = timeInSeconds;
     }
 
     public BooleanProperty countdownProperty() {

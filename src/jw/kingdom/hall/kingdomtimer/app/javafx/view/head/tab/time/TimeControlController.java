@@ -77,7 +77,7 @@ public class TimeControlController extends TabPresenter implements Initializable
     private TableColumn<MeetingTask, String> tcName;
 
     @FXML
-    private TableColumn<MeetingTask, TimeField> tcTime;
+    private TableColumn<MeetingTask, String> tcTime;
 
     @FXML
     private TableColumn<MeetingTask, String> tcType;

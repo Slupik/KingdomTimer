@@ -13,7 +13,6 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.translate.MeetingTaskTrans;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeController;
-import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -28,7 +27,7 @@ public class TaskTableController {
     private TableColumn<MeetingTask, String> tcBuzzer;
     private TableColumn<MeetingTask, String> tcDirect;
     private TableColumn<MeetingTask, String> tcName;
-    private TableColumn<MeetingTask, TimeField> tcTime;
+    private TableColumn<MeetingTask, String> tcTime;
     private TableColumn<MeetingTask, String> tcType;
     private AppConfig config;
 
@@ -39,7 +38,7 @@ public class TaskTableController {
                                TableColumn<MeetingTask, String> tcBuzzer,
                                TableColumn<MeetingTask, String> tcDirect,
                                TableColumn<MeetingTask, String> tcName,
-                               TableColumn<MeetingTask, TimeField> tcTime,
+                               TableColumn<MeetingTask, String> tcTime,
                                TableColumn<MeetingTask, String> tcType
     ) {
         tableData = timer.getList();
@@ -59,7 +58,7 @@ public class TaskTableController {
         TABLE.setItems(tableData);
 
         tcTime.setEditable(true);
-        tcTime.setCellValueFactory(new PropertyValueFactory<>("tfTime"));
+        tcTime.setCellFactory(new CellTime());
         tcTime.setSortable(false);
 
         tcName.setEditable(true);
