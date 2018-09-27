@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Config/2 Config.iml" filepath="$PROJECT_DIR$/Config/2 Config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JW Downloader/2 Download Schedule.iml" filepath="$PROJECT_DIR$/JW Downloader/2 Download Schedule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CustomViewElements/3 CustomViewElements.iml" filepath="$PROJECT_DIR$/CustomViewElements/3 CustomViewElements.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KingdomTimer.iml" filepath="$PROJECT_DIR$/KingdomTimer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Logger/Logger.iml" filepath="$PROJECT_DIR$/Logger/Logger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Recorder/Recorder.iml" filepath="$PROJECT_DIR$/Recorder/Recorder.iml" />
+    </modules>
+  </component>
+</project>
