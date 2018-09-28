@@ -1,6 +1,5 @@
 package jw.kingdom.hall.kingdomtimer.domain.time;
 
-import javafx.collections.ObservableList;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
@@ -54,7 +53,7 @@ public class TimeControllerImpl implements TimeController {
     }
 
     @Override
-    public ObservableList<MeetingTask> getList() {
+    public List<MeetingTask> getList() {
         return schedule.getList();
     }
 

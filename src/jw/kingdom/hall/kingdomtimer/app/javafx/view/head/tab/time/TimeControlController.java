@@ -109,7 +109,7 @@ public class TimeControlController extends TabPresenter implements Initializable
         TimeDisplayController timeDisplay = new TimeDisplayController(lblTime);
         getTimer().addDisplay(timeDisplay);
         new TaskTableController(
-                getTimer(),
+                getSchedule(),
                 getConfig(),
                 tvList,
                 tcDelete,

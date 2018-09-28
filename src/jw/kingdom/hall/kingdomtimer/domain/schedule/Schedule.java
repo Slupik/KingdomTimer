@@ -1,6 +1,5 @@
 package jw.kingdom.hall.kingdomtimer.domain.schedule;
 
-import javafx.collections.ObservableList;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
@@ -13,6 +12,9 @@ public interface Schedule {
     void addListener(ScheduleListener listener);
     void removeListener(ScheduleListener listener);
 
+    void bindWriteOnly(List<MeetingTask> list);
+    void unbindWriteOnly(List<MeetingTask> list);
+
     MeetingTask bringOutFirstTask() throws NotEnoughTasksException;
     MeetingTask bringOutTask(int index) throws NotEnoughTasksException;
     void addTask(MeetingTask task);
@@ -21,7 +23,8 @@ public interface Schedule {
     void removeTask(MeetingTask task);
     void removeTask(int index);
     void clear();
-    ObservableList<MeetingTask> getList();
+    void moveElement(int elementIndex, int destIndex);
+    List<MeetingTask> getList();
     void setList(List<MeetingTask> list);
 
     //TODO delete

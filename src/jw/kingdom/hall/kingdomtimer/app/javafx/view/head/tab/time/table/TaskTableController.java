@@ -1,6 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.table;
 
 import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -12,7 +13,7 @@ import javafx.scene.input.TransferMode;
 import jw.kingdom.hall.kingdomtimer.app.javafx.translate.MeetingTaskTrans;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.domain.time.TimeController;
+import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -30,8 +31,9 @@ public class TaskTableController {
     private TableColumn<MeetingTask, String> tcTime;
     private TableColumn<MeetingTask, String> tcType;
     private AppConfig config;
+    private final Schedule schedule;
 
-    public TaskTableController(TimeController timer,
+    public TaskTableController(Schedule schedule,
                                AppConfig config,
                                TableView<MeetingTask> table,
                                TableColumn<MeetingTask, String> tcDelete,
@@ -41,7 +43,9 @@ public class TaskTableController {
                                TableColumn<MeetingTask, String> tcTime,
                                TableColumn<MeetingTask, String> tcType
     ) {
-        tableData = timer.getList();
+        this.schedule = schedule;
+        tableData = FXCollections.observableArrayList();
+        schedule.bindWriteOnly(tableData);
         this.config = config;
         TABLE = table;
         this.tcDelete = tcDelete;
@@ -135,6 +139,7 @@ public class TaskTableController {
                     event.setDropCompleted(true);
                     TABLE.getSelectionModel().select(dropIndex);
                     event.consume();
+                    schedule.moveElement(draggedIndex, dropIndex);
                 }
             });
 

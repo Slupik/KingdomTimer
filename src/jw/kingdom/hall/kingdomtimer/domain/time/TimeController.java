@@ -1,6 +1,5 @@
 package jw.kingdom.hall.kingdomtimer.domain.time;
 
-import javafx.collections.ObservableList;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
 import java.util.List;
@@ -16,7 +15,7 @@ public interface TimeController {
 
     void clear();
     void setList(List<MeetingTask> list);
-    ObservableList<MeetingTask> getList();
+    List<MeetingTask> getList();
 
     //Controlling the time
     void startNext();
