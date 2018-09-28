@@ -14,12 +14,19 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 
+import java.beans.PropertyChangeListener;
+
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class TaskTableRow extends TableRow<MeetingTask> {
     private MeetingTask lastTask;
     private Background defaultBackground = null;
+    private PropertyChangeListener listener = evt -> {
+        if(evt.getPropertyName().equals(MeetingTask.PropertyName.TYPE)) {
+            updateRowColors();
+        }
+    };
 
     public TaskTableRow(){
         super();
@@ -29,7 +36,6 @@ public class TaskTableRow extends TableRow<MeetingTask> {
     }
 
     private ChangeListener<MeetingTask.Type> backgroundChanger = (observable, oldValue, newValue) -> {
-        updateRowColors();
     };
 
     @Override
@@ -37,11 +43,11 @@ public class TaskTableRow extends TableRow<MeetingTask> {
         super.updateItem(item, empty);
         Platform.runLater(()->{
             if(lastTask!=null) {
-                lastTask.typeProperty().removeListener(backgroundChanger);
+                lastTask.removePropertyChangeListener(listener);
             }
             lastTask = item;
             if(item!=null) {
-                item.typeProperty().addListener(backgroundChanger);
+                lastTask.addPropertyChangeListener(listener);
             }
             updateRowColors();
         });

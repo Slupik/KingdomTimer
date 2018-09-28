@@ -62,7 +62,7 @@ public class TaskTableController {
         tcTime.setSortable(false);
 
         tcName.setEditable(true);
-        tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tcName.setCellValueFactory(new PropertyValueFactory<>(MeetingTask.PropertyName.NAME));
         tcName.setCellFactory(
                 TextFieldTableCell.forTableColumn());
         tcName.setOnEditCommit(t -> {

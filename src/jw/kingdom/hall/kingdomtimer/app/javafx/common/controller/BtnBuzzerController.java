@@ -1,11 +1,12 @@
 package jw.kingdom.hall.kingdomtimer.app.javafx.common.controller;
 
 
-import javafx.beans.value.ChangeListener;
 import javafx.scene.control.Button;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeController;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeListenerProxy;
+
+import java.beans.PropertyChangeListener;
 
 import static jw.kingdom.hall.kingdomtimer.app.javafx.utils.ButtonUtils.loadMediumImage;
 
@@ -17,7 +18,11 @@ public class BtnBuzzerController {
     private final TimeController timer;
     private Button button;
     private MeetingTask task;
-    private final ChangeListener<Boolean> buzzerConditionListener = (observable, oldValue, newValue) -> setImageForVolumeUp(newValue);
+    private PropertyChangeListener listener = evt -> {
+        if(evt.getPropertyName().equals(MeetingTask.PropertyName.USE_BUZZER)) {
+            setImageForVolumeUp((Boolean) evt.getNewValue());
+        }
+    };
 
     public BtnBuzzerController(TimeController timer, Button button) {
         this.timer = timer;
@@ -52,12 +57,12 @@ public class BtnBuzzerController {
 
     private void loadTask(MeetingTask task) {
         if(null != this.task) {
-            this.task.useBuzzerProperty().removeListener(buzzerConditionListener);
+            this.task.removePropertyChangeListener(listener);
         }
         this.task = task;
         setImageForCurrentCondition();
         if(null != this.task) {
-            this.task.useBuzzerProperty().addListener(buzzerConditionListener);
+            this.task.addPropertyChangeListener(listener);
         }
     }
 

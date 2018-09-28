@@ -171,7 +171,7 @@ public class TimeControlController extends TabPresenter implements Initializable
         task.setName(tfName.getText());
         tfName.clear();
 
-        task.setTimeInSeconds(atfTime.getAllSeconds());
+        task.setTime(atfTime.getAllSeconds());
         atfTime.clear();
 
         task.setUseBuzzer(cbBuzzer.isSelected());

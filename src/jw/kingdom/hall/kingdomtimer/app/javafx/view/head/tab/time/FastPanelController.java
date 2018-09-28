@@ -24,7 +24,7 @@ class FastPanelController {
     void handleLoadTimeAction() {
         executeIfSave(getFiled().getAllSeconds(), ()->{
             MeetingTask task = new MeetingTask();
-            task.setTimeInSeconds(getFiled().getAllSeconds());
+            task.setTime(getFiled().getAllSeconds());
             getFiled().setSeconds(0);
             task.setCountdownDown(getDirectController().isDirectDown());
             getDirectController().reset();

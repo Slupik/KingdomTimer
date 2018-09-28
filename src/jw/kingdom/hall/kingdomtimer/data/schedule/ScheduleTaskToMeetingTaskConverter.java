@@ -14,7 +14,7 @@ class ScheduleTaskToMeetingTaskConverter {
         MeetingTask meeting = new MeetingTask();
         meeting.setName(schedule.getName());
         meeting.setUseBuzzer(schedule.isActiveBuzzer());
-        meeting.setTimeInSeconds(schedule.getTime());
+        meeting.setTime(schedule.getTime());
         switch (schedule.getType()) {
             case UNKNOWN: {
                 meeting.setType(MeetingTask.Type.UNKNOWN);

@@ -1,9 +1,10 @@
 package jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect;
 
-import javafx.beans.value.ChangeListener;
 import javafx.scene.control.Button;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+
+import java.beans.PropertyChangeListener;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -11,7 +12,11 @@ import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 public class BtnTimeDirectForObj extends BtnTimeDirectBase {
     private final Config config;
     private MeetingTask task;
-    private final ChangeListener<Boolean> countdownListener = (observable, oldValue, newValue) -> setDirectDown(newValue);
+    private PropertyChangeListener listener = evt -> {
+        if(evt.getPropertyName().equals(MeetingTask.PropertyName.COUNTDOWN_DOWN)) {
+            setDirectDown((Boolean) evt.getNewValue());
+        }
+    };
 
     public BtnTimeDirectForObj(Config config, Button button) {
         super(button);
@@ -42,12 +47,12 @@ public class BtnTimeDirectForObj extends BtnTimeDirectBase {
 
     public void loadTask(MeetingTask task) {
         if(null != this.task) {
-            this.task.countdownProperty().removeListener(countdownListener);
+            this.task.removePropertyChangeListener(listener);
         }
         this.task = task;
         updateImage();
         if(null != this.task) {
-            this.task.countdownProperty().addListener(countdownListener);
+            this.task.addPropertyChangeListener(listener);
         }
     }
 

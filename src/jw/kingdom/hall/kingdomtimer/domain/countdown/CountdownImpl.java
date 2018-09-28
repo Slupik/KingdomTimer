@@ -22,7 +22,7 @@ public class CountdownImpl extends CountdownLogic {
     @Override
     public void start(@NotNull MeetingTask task) {
         this.task = task;
-        start(task.getTimeInSeconds());
+        start(task.getTime());
     }
 
     @Override

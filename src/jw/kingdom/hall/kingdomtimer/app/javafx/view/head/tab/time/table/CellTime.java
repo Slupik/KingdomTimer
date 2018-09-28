@@ -26,9 +26,9 @@ public class CellTime implements Callback<TableColumn<MeetingTask, String>, Tabl
                 } else {
                     field.textProperty().addListener((observable, oldValue, newValue) -> {
                         MeetingTask task = getTableView().getItems().get(getIndex());
-                        task.setTimeInSeconds(field.getAllSeconds());
+                        task.setTime(field.getAllSeconds());
                     });
-                    field.setSeconds(getTableView().getItems().get(getIndex()).getTimeInSeconds());
+                    field.setSeconds(getTableView().getItems().get(getIndex()).getTime());
                     setGraphic(field);
                     setText(null);
                 }
