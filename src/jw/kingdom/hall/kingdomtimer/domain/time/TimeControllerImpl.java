@@ -156,6 +156,11 @@ public class TimeControllerImpl implements TimeController {
             }
 
             @Override
+            public void onRemove(int index, MeetingTask removed) {
+                notifyOnListChange(getSchedule().getList());
+            }
+
+            @Override
             public void onInsert(MeetingTask task) {
                 notifyOnListChange(getSchedule().getList());
             }
@@ -175,6 +180,11 @@ public class TimeControllerImpl implements TimeController {
             public void onReset(List<MeetingTask> newList) {
                 hasMeetingStarted = false;
                 notifyOnListChange(newList);
+            }
+
+            @Override
+            public void onMove(int elementIndex, int destIndex) {
+                notifyOnListChange(getSchedule().getList());
             }
 
             private void notifyOnListChange(List<MeetingTask> list) {

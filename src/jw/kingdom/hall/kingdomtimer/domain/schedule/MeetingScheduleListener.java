@@ -15,6 +15,11 @@ public abstract class MeetingScheduleListener implements ScheduleListener {
     }
 
     @Override
+    public void onRemove(int index, MeetingTask removed) {
+
+    }
+
+    @Override
     public void onInsert(MeetingTask task) {
 
     }
@@ -31,6 +36,11 @@ public abstract class MeetingScheduleListener implements ScheduleListener {
 
     @Override
     public void onReset(List<MeetingTask> newList) {
+
+    }
+
+    @Override
+    public void onMove(int elementIndex, int destIndex) {
 
     }
 }

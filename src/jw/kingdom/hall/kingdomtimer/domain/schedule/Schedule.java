@@ -12,9 +12,6 @@ public interface Schedule {
     void addListener(ScheduleListener listener);
     void removeListener(ScheduleListener listener);
 
-    void bindWriteOnly(List<MeetingTask> list);
-    void unbindWriteOnly(List<MeetingTask> list);
-
     MeetingTask bringOutFirstTask() throws NotEnoughTasksException;
     MeetingTask bringOutTask(int index) throws NotEnoughTasksException;
     void addTask(MeetingTask task);

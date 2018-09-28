@@ -60,6 +60,13 @@ public class MeetingSchedule extends MeetingScheduleBase {
     }
 
     @Override
+    protected void notifyAboutRemoveTask(int index, MeetingTask removed) {
+        for(ScheduleListener listener: listeners) {
+            listener.onRemove(index, removed);
+        }
+    }
+
+    @Override
     protected void notifyAboutClear() {
         for(ScheduleListener listener: listeners) {
             listener.onClear();
@@ -70,6 +77,13 @@ public class MeetingSchedule extends MeetingScheduleBase {
     protected void notifyAboutReset(List<MeetingTask> list) {
         for(ScheduleListener listener: listeners) {
             listener.onReset(list);
+        }
+    }
+
+    @Override
+    protected void notifyAboutMove(int elementIndex, int destIndex) {
+        for(ScheduleListener listener: listeners) {
+            listener.onMove(elementIndex, destIndex);
         }
     }
 

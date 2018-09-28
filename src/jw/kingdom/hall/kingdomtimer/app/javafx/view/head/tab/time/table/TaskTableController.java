@@ -14,6 +14,7 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.translate.MeetingTaskTrans;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
+import jw.kingdom.hall.kingdomtimer.domain.schedule.TaskListBinder;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -32,6 +33,7 @@ public class TaskTableController {
     private TableColumn<MeetingTask, String> tcType;
     private AppConfig config;
     private final Schedule schedule;
+    private boolean disableEditList = false;
 
     public TaskTableController(Schedule schedule,
                                AppConfig config,
@@ -44,8 +46,7 @@ public class TaskTableController {
                                TableColumn<MeetingTask, String> tcType
     ) {
         this.schedule = schedule;
-        tableData = FXCollections.observableArrayList();
-        schedule.bindWriteOnly(tableData);
+        initList();
         this.config = config;
         TABLE = table;
         this.tcDelete = tcDelete;
@@ -54,10 +55,23 @@ public class TaskTableController {
         this.tcName = tcName;
         this.tcTime = tcTime;
         this.tcType = tcType;
-        init();
+        initTable();
     }
 
-    private void init() {
+    private void initList() {
+        tableData = FXCollections.observableArrayList();
+        schedule.addListener(new TaskListBinder(tableData) {
+            @Override
+            public void onMove(int elementIndex, int destIndex) {
+                if (disableEditList) {
+                    return;
+                }
+                super.onMove(elementIndex, destIndex);
+            }
+        });
+    }
+
+    private void initTable() {
         TABLE.setEditable(true);
         TABLE.setItems(tableData);
 
@@ -139,7 +153,10 @@ public class TaskTableController {
                     event.setDropCompleted(true);
                     TABLE.getSelectionModel().select(dropIndex);
                     event.consume();
+
+                    disableEditList = true;
                     schedule.moveElement(draggedIndex, dropIndex);
+                    disableEditList = false;
                 }
             });
 

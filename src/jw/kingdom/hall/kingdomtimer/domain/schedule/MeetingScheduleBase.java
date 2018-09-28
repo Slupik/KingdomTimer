@@ -12,7 +12,6 @@ import java.util.List;
 abstract class MeetingScheduleBase implements Schedule {
 
     protected final List<MeetingTask> list = new ArrayList<>();
-    protected final List<List<MeetingTask>> binded = new ArrayList<>();
     protected MeetingTask lastTask = null;
 
     @Override
@@ -33,9 +32,6 @@ abstract class MeetingScheduleBase implements Schedule {
     @Override
     public void addTask(MeetingTask task) {
         list.add(task);
-        for(List<MeetingTask> bindedList:binded) {
-            bindedList.add(task);
-        }
         notifyAboutAddTask(task);
     }
 
@@ -48,17 +44,11 @@ abstract class MeetingScheduleBase implements Schedule {
     @Override
     public void addTask(MeetingTask... task) {
         list.addAll(Arrays.asList(task));
-        for(List<MeetingTask> bindedList:binded) {
-            bindedList.addAll(Arrays.asList(task));
-        }
         notifyAboutAddTask(task);
     }
 
     public void removeTask(MeetingTask task) {
         list.remove(task);
-        for(List<MeetingTask> bindedList:binded) {
-            bindedList.remove(task);
-        }
         notifyAboutRemoveTask(task);
     }
 
@@ -66,18 +56,12 @@ abstract class MeetingScheduleBase implements Schedule {
     public void removeTask(int index) {
         MeetingTask toRemove = list.get(index);
         list.remove(index);
-        for(List<MeetingTask> bindedList:binded) {
-            bindedList.remove(index);
-        }
-        notifyAboutRemoveTask(toRemove);
+        notifyAboutRemoveTask(index, toRemove);
     }
 
     @Override
     public void clear() {
         list.clear();
-        for(List<MeetingTask> bindedList:binded) {
-            bindedList.clear();
-        }
         notifyAboutClear();
     }
 
@@ -85,27 +69,14 @@ abstract class MeetingScheduleBase implements Schedule {
     public void setList(List<MeetingTask> list) {
         this.list.clear();
         this.list.addAll(list);
-        for(List<MeetingTask> bindedList:binded) {
-            bindedList.clear();
-            bindedList.addAll(list);
-        }
         notifyAboutReset(this.list);
     }
 
-    //TODO bind this to tied list
     public void moveElement(int elementIndex, int destIndex) {
         MeetingTask task = this.list.get(elementIndex);
         this.list.remove(elementIndex);
         this.list.add(destIndex, task);
-    }
-
-    //TODO Create special object for binding which will be using listeners
-    public void bindWriteOnly(List<MeetingTask> list) {
-        binded.add(list);
-    }
-
-    public void unbindWriteOnly(List<MeetingTask> list) {
-        binded.remove(list);
+        notifyAboutMove(elementIndex, destIndex);
     }
 
     @Override
@@ -116,6 +87,8 @@ abstract class MeetingScheduleBase implements Schedule {
     protected abstract void notifyAboutAddTask(MeetingTask task);
     protected abstract void notifyAboutAddTask(MeetingTask... task);
     protected abstract void notifyAboutRemoveTask(MeetingTask task);
+    protected abstract void notifyAboutRemoveTask(int index, MeetingTask removed);
     protected abstract void notifyAboutClear();
     protected abstract void notifyAboutReset(List<MeetingTask> list);
+    protected abstract void notifyAboutMove(int elementIndex, int destIndex);
 }
