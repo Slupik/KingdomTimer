@@ -9,7 +9,9 @@ import jw.kingdom.hall.kingdomtimer.data.config.DefaultAppConfig;
 import jw.kingdom.hall.kingdomtimer.data.log.DefaultLogFile;
 import jw.kingdom.hall.kingdomtimer.device.local.AutoRAMCleaner;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
+import jw.kingdom.hall.kingdomtimer.device.sound.Buzzer;
 import jw.kingdom.hall.kingdomtimer.domain.backup.BackupManager;
+import jw.kingdom.hall.kingdomtimer.domain.buzzer.BuzzerController;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownImpl;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MultimediaPreviewer;
@@ -31,6 +33,7 @@ public class Main extends Application {
         Schedule schedule = new MeetingSchedule();
         RecordControl recordControl = VoiceRecorder.getInstance(config, schedule, countdown);
         TimeController time = new TimeControllerImpl(schedule, countdown);
+        new BuzzerController(new Buzzer(), time);
 
         BackupManager.start(recordControl, schedule, countdown);
         MonitorManager.initialize();
