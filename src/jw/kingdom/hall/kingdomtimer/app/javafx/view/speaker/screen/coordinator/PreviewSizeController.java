@@ -3,7 +3,7 @@ package jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.screen.coordinator;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.MultimediaPreviewController;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.MultimediaDisplayImpl;
 
 /**
  * All rights reserved & copyright ©
@@ -51,7 +51,7 @@ class PreviewSizeController {
     }
 
     interface Input {
-        MultimediaPreviewController getMultimediaPreviewController();
+        MultimediaDisplayImpl getMultimediaPreviewController();
         ImageView getPreviewView();
         VBox getMultimediaContainer();
         Region getMainContainer();

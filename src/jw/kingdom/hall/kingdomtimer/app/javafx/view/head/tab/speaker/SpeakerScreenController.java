@@ -16,7 +16,6 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.SpeakerWindow;
 import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.gleam.GlobalGleamController;
-import jw.kingdom.hall.kingdomtimer.domain.multimedia.MultimediaPreviewer;
 import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.AdvancedTextField;
 import org.jetbrains.annotations.Nullable;
@@ -129,7 +128,7 @@ public class SpeakerScreenController extends TabPresenter {
     private void setupPreviewHidder() {
         cbShowPreview.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if(oldValue!=newValue) {
-                MultimediaPreviewer.getInstance().showPreviews(newValue);
+                getWindowData().getSpeakerPreviewController().forceChangeDisplaysVisibility(newValue);
             }
         });
     }
@@ -140,7 +139,7 @@ public class SpeakerScreenController extends TabPresenter {
 
         cbMultimediaScreen.getSelectionModel().selectedIndexProperty().addListener((observableValue, oldValue, newValue) -> {
             Monitor monitor = cbPreviewScreen.getItems().get((Integer) newValue);
-            MultimediaPreviewer.getInstance().setMonitor(monitor);
+            getWindowData().getSpeakerPreviewController().setMonitor(monitor);
             getConfig().setMultimediaScreen(monitor);
         });
         if(cbMultimediaScreen.getItems().size()>2) {
@@ -253,7 +252,7 @@ public class SpeakerScreenController extends TabPresenter {
     private void saveInterval() {
         int current = Integer.parseInt(atfRefreshInterval.getSaveText());
         lastSavedInterval = current;
-        MultimediaPreviewer.getInstance().setRefreshInterval(current);
+        getWindowData().getSpeakerPreviewController().setRefreshInterval(current);
         getConfig().setActualRefreshRate(current);
     }
 

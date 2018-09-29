@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.MultimediaPreviewController;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.MultimediaDisplayImpl;
 
 import static jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.screen.coordinator.LabelVersion.SMALL;
 import static jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.screen.coordinator.LabelVersion.UNKNOWN;
@@ -31,7 +31,7 @@ public class SpeakerLayoutCoordinator implements LabelContainerSizeController.In
     private void init() {
         getMainContainer().widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(this::adjustSizeToNewConditions));
         getMainContainer().heightProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(this::adjustSizeToNewConditions));
-        input.getMultimediaPreviewController().addListener(() -> Platform.runLater(this::adjustSizeToNewConditions));
+        input.getMultimediaPreviewController().addListener(isShowing -> Platform.runLater(this::adjustSizeToNewConditions));
     }
 
     private void adjustSizeToNewConditions() {
@@ -87,7 +87,7 @@ public class SpeakerLayoutCoordinator implements LabelContainerSizeController.In
     }
 
     @Override
-    public MultimediaPreviewController getMultimediaPreviewController() {
+    public MultimediaDisplayImpl getMultimediaPreviewController() {
         return input.getMultimediaPreviewController();
     }
 

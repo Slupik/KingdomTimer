@@ -6,14 +6,15 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.MultimediaPreviewController;
+import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.MultimediaDisplayImpl;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.screen.ControlledScreenBase;
+import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowType;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.screen.coordinator.SpeakerLayoutCoordinator;
-import jw.kingdom.hall.kingdomtimer.domain.multimedia.MultimediaPreviewer;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
+//TODO change name to more appropriate
 public class SpeakerWindowPresenter extends ControlledScreenBase implements TimeInfoPresenter.Input, SpeakerLayoutCoordinator.Input {
 
     @FXML
@@ -31,7 +32,7 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Time
     @FXML
     ImageView imgMultimediaPreview;
 
-    private MultimediaPreviewController multimediaPreview;
+    private MultimediaDisplayImpl multimediaPreview;
 
     @Override
     protected void onSetup() {
@@ -48,8 +49,22 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Time
     }
 
     private void setupMultimediaPreview() {
-        multimediaPreview = new MultimediaPreviewController(imgMultimediaPreview);
-        getMultiPreviewer().addController(multimediaPreview);
+        multimediaPreview = new MultimediaDisplayImpl(imgMultimediaPreview);
+        getWindowData().getSpeakerPreviewController().addDisplay(multimediaPreview);
+        multimediaPreview.setShowing(getConfig().isEnabledShowMultimedia());
+
+        handleStageVisibilityChange(getWindowsContainer().getAppWindow(WindowType.SPEAKER).getStage().isShowing());
+        getWindowsContainer().getAppWindow(WindowType.SPEAKER).getStage().showingProperty().addListener(
+                (observable, oldValue, newValue) -> handleStageVisibilityChange(newValue)
+        );
+    }
+
+    private void handleStageVisibilityChange(boolean isShowing) {
+        if(isShowing) {
+            multimediaPreview.setShowing(getConfig().isEnabledShowMultimedia());
+        } else {
+            multimediaPreview.setShowing(false);
+        }
     }
 
     @Override
@@ -72,17 +87,13 @@ public class SpeakerWindowPresenter extends ControlledScreenBase implements Time
         return vbMultimediaPreview;
     }
 
-    private static MultimediaPreviewer getMultiPreviewer() {
-        return MultimediaPreviewer.getInstance();
-    }
-
     @Override
     public ImageView getPreviewView() {
         return imgMultimediaPreview;
     }
 
     @Override
-    public MultimediaPreviewController getMultimediaPreviewController() {
+    public MultimediaDisplayImpl getMultimediaPreviewController() {
         return multimediaPreview;
     }
 

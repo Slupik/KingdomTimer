@@ -11,6 +11,7 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.SpeakerWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.widget.HandyWindow;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
+import jw.kingdom.hall.kingdomtimer.domain.multimedia.MonitorPreviewController;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeController;
@@ -76,6 +77,11 @@ public class App {
             @Override
             public TimeController getTimeController() {
                 return appInput.getTimeController();
+            }
+
+            @Override
+            public MonitorPreviewController getSpeakerPreviewController() {
+                return appInput.getSpeakerPreviewController();
             }
 
             @Override

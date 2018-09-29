@@ -9,12 +9,14 @@ import jw.kingdom.hall.kingdomtimer.data.config.DefaultAppConfig;
 import jw.kingdom.hall.kingdomtimer.data.log.DefaultLogFile;
 import jw.kingdom.hall.kingdomtimer.device.local.AutoRAMCleaner;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
+import jw.kingdom.hall.kingdomtimer.device.screen.ScreenShotMaker;
 import jw.kingdom.hall.kingdomtimer.device.sound.Buzzer;
 import jw.kingdom.hall.kingdomtimer.domain.backup.BackupManager;
 import jw.kingdom.hall.kingdomtimer.domain.buzzer.BuzzerController;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownImpl;
-import jw.kingdom.hall.kingdomtimer.domain.multimedia.MultimediaPreviewer;
+import jw.kingdom.hall.kingdomtimer.domain.multimedia.MonitorPreviewController;
+import jw.kingdom.hall.kingdomtimer.domain.multimedia.MonitorPreviewControllerImpl;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
@@ -34,6 +36,8 @@ public class Main extends Application {
         RecordControl recordControl = VoiceRecorder.getInstance(config, schedule, countdown);
         TimeController time = new TimeControllerImpl(schedule, countdown);
         new BuzzerController(new Buzzer(), time);
+        MonitorPreviewController speakerPreviewController = new MonitorPreviewControllerImpl(new ScreenShotMaker());
+        speakerPreviewController.setPause(false);
 
         BackupManager.start(recordControl, schedule, countdown);
         MonitorManager.initialize();
@@ -63,12 +67,15 @@ public class Main extends Application {
                 public TimeController getTimeController() {
                     return time;
                 }
+
+                @Override
+                public MonitorPreviewController getSpeakerPreviewController() {
+                    return speakerPreviewController;
+                }
             }).start(primaryStage);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        MultimediaPreviewer.getInstance().setPause(false);
         AutoRAMCleaner.run();
     }
 
