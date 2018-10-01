@@ -19,7 +19,7 @@ class TimeBackupRestorer {
     private final RecordControl recordControl;
     private final Schedule schedule;
     private final Countdown countdown;
-    private TimeBackupBean bean;
+    private TimeBackupBean data;
 
     TimeBackupRestorer(RecordControl recordControl, Schedule schedule, Countdown countdown){
         this.recordControl = recordControl;
@@ -32,18 +32,20 @@ class TimeBackupRestorer {
         new Thread(()->{
             String content = FileUtils.getContent(FileManager.getScheduleFile());
             if(content.length()>1) {
-                bean = new Gson().fromJson(content, TimeBackupBean.class);
+                data = new Gson().fromJson(content, TimeBackupBean.class);
             }
         }).start();
     }
 
     boolean isAvailable() {
-        return bean!=null;
+        return data !=null;
     }
 
     void restore(){
         if(isAvailable()) {
-            restore(bean, recordControl, schedule, countdown);
+            restoreSchedule();
+            restoreCountdown();
+            restoreRecording();
         }
     }
 
@@ -52,29 +54,22 @@ class TimeBackupRestorer {
         FileManager.deleteRootPath();
     }
 
-    //TODO make these method not static
-    private static void restore(TimeBackupBean data, RecordControl recordControl, Schedule schedule, Countdown countdown) {
-        restoreSchedule(data, schedule);
-        restoreCountdown(data, countdown);
-        restoreRecording(data, recordControl);
-    }
-
-    private static void restoreRecording(TimeBackupBean data, RecordControl recordControl) {
+    private void restoreRecording() {
         if(data.isRecording()) {
             recordControl.start();
         }
     }
 
-    private static void restoreSchedule(TimeBackupBean data, Schedule schedule) {
+    private void restoreSchedule() {
         List<MeetingTask> list = new ArrayList<>();
-        for(OfflineMeetingBean bean:data.getSchedule()) {
+        for(OfflineMeetingBean bean: data.getSchedule()) {
             list.add(bean.convertToMeetingTask());
         }
         schedule.clear();
         schedule.addTask(list);
     }
 
-    private static void restoreCountdown(TimeBackupBean data, Countdown countdown) {
+    private void restoreCountdown() {
         if(data.getBean()!=null) {
             MeetingTask task = data.getBean().convertToMeetingTask();
             countdown.start(task);
