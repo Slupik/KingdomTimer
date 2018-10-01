@@ -19,6 +19,7 @@ public class SpeakerLayoutCoordinator implements LabelContainerSizeController.In
     private final LabelContainerSizeController labelContainerSizeController;
     private final LabelSizeController labelSizeController;
     private final PreviewSizeController previewSizeController;
+    private final IgnoreFlag ignoreFlag = new IgnoreFlag();
 
     public SpeakerLayoutCoordinator(Input input) {
         this.input = input;
@@ -32,6 +33,20 @@ public class SpeakerLayoutCoordinator implements LabelContainerSizeController.In
         getMainContainer().widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(this::adjustSizeToNewConditions));
         getMainContainer().heightProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(this::adjustSizeToNewConditions));
         input.getMultimediaPreviewController().addListener(isShowing -> Platform.runLater(this::adjustSizeToNewConditions));
+
+        getTimeLabel().widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(this::adjustLabelWidth));
+    }
+
+    private void adjustLabelWidth() {
+        if(ignoreFlag.ignore) {
+            Platform.runLater(() -> {
+                if (!ignoreFlag.ignore) {
+                    adjustSizeToNewConditions();
+                }
+            });
+        } else {
+            adjustSizeToNewConditions();
+        }
     }
 
     private void adjustSizeToNewConditions() {
@@ -47,6 +62,7 @@ public class SpeakerLayoutCoordinator implements LabelContainerSizeController.In
     }
 
     private void adjustTimeInfo() {
+        ignoreFlag.ignore = true;
         short sizeVersion = getSizeVersion();
         double freeHeight;
         if(sizeVersion==SMALL || sizeVersion==UNKNOWN) {
@@ -59,7 +75,10 @@ public class SpeakerLayoutCoordinator implements LabelContainerSizeController.In
                 sizeVersion,
                 freeHeight,
                 getMainContainer().widthProperty().get(),
-                () -> labelContainerSizeController.adjustSize(sizeVersion)
+                () -> labelContainerSizeController.adjustSize(
+                        sizeVersion,
+                        ()->ignoreFlag.ignore = false
+                )
         );
     }
 
