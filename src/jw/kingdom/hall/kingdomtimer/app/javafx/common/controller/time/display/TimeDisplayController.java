@@ -4,7 +4,7 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Paint;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.label.TimeLabel;
 import jw.kingdom.hall.kingdomtimer.app.javafx.utils.PlatformUtils;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeDisplay;
 
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public class TimeDisplayController implements TimeDisplay {
     }
 
     @Override
-    public void setTask(MeetingTask task) {}
+    public void setTask(TaskBean task) {}
     @Override
     public void onTimeOut() {}
 

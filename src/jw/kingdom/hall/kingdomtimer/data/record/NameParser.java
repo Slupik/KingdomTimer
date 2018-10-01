@@ -1,6 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.data.record;
 
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
@@ -10,7 +10,7 @@ import java.util.Date;
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 abstract class NameParser {
-    static String getParsedName(String raw, @NotNull MeetingTask task) {
+    static String getParsedName(String raw, @NotNull TaskBean task) {
         String parsed = raw;
 
         Date date = new Date();
@@ -29,7 +29,7 @@ abstract class NameParser {
         return parsed;
     }
 
-    private static CharSequence getNameOfType(MeetingTask.Type type) {
+    private static CharSequence getNameOfType(TaskBean.Type type) {
         switch (type) {
             case UNKNOWN:
                 return "???";

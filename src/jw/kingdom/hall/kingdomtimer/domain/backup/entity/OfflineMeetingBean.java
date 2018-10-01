@@ -1,6 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.backup.entity;
 
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -11,13 +11,13 @@ public class OfflineMeetingBean {
     private String name;
     private boolean countdownDown;
     private int time;
-    private MeetingTask.Type type;
+    private TaskBean.Type type;
 
     public OfflineMeetingBean() {
-        this(new MeetingTask());
+        this(new TaskBean());
     }
 
-    public OfflineMeetingBean(MeetingTask task) {
+    public OfflineMeetingBean(TaskBean task) {
         ID = task.ID;
         useBuzzer = task.isUseBuzzer();
         name = task.getName();
@@ -26,8 +26,8 @@ public class OfflineMeetingBean {
         type = task.getType();
     }
 
-    public MeetingTask convertToMeetingTask(){
-        MeetingTask task = new MeetingTask(ID);
+    public TaskBean convertToMeetingTask(){
+        TaskBean task = new TaskBean(ID);
         task.setUseBuzzer(useBuzzer);
         task.setName(name);
         task.setCountdownDown(countdownDown);
@@ -68,11 +68,11 @@ public class OfflineMeetingBean {
         this.time = time;
     }
 
-    public MeetingTask.Type getType() {
+    public TaskBean.Type getType() {
         return type;
     }
 
-    public void setType(MeetingTask.Type type) {
+    public void setType(TaskBean.Type type) {
         this.type = type;
     }
 

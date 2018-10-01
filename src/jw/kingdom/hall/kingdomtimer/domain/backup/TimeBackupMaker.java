@@ -5,7 +5,7 @@ import jw.kingdom.hall.kingdomtimer.domain.backup.entity.OfflineMeetingBean;
 import jw.kingdom.hall.kingdomtimer.domain.backup.entity.TimeBackupBean;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownListenerProxy;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.DefaultVoiceRecorderRecordControlListener;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingScheduleListener;
@@ -27,14 +27,14 @@ class TimeBackupMaker {
     private final Countdown countdown;
     private TimeBackupBean bean = new TimeBackupBean();
     private PropertyChangeListener listener = evt -> {
-        if(evt.getPropertyName().equals(MeetingTask.PropertyName.COUNTDOWN_DOWN)) {
+        if(evt.getPropertyName().equals(TaskBean.PropertyName.COUNTDOWN_DOWN)) {
             updateDirect((Boolean) evt.getNewValue());
         }
-        if(evt.getPropertyName().equals(MeetingTask.PropertyName.USE_BUZZER)) {
+        if(evt.getPropertyName().equals(TaskBean.PropertyName.USE_BUZZER)) {
             updateBuzzer((Boolean) evt.getNewValue());
         }
     };
-    private MeetingTask lastTask = null;
+    private TaskBean lastTask = null;
 
     TimeBackupMaker(RecordControl recordControl, Schedule schedule, Countdown countdown){
         this.schedule = schedule;
@@ -42,17 +42,17 @@ class TimeBackupMaker {
         getSchedule().addListener(new MeetingScheduleListener() {
 
             @Override
-            public void onRemove(MeetingTask task) {
+            public void onRemove(TaskBean task) {
                 updateSchedule();
             }
 
             @Override
-            public void onInsert(MeetingTask task) {
+            public void onInsert(TaskBean task) {
                 updateSchedule();
             }
 
             @Override
-            public void onBulkInsert(MeetingTask... task) {
+            public void onBulkInsert(TaskBean... task) {
                 updateSchedule();
             }
 
@@ -64,7 +64,7 @@ class TimeBackupMaker {
         getCountdown().addListener(new CountdownListenerProxy() {
 
             @Override
-            public void onStart(MeetingTask task) {
+            public void onStart(TaskBean task) {
                 super.onStart(task);
                 updateTask(task);
                 if(lastTask!=null) {
@@ -146,7 +146,7 @@ class TimeBackupMaker {
         saveData();
     }
 
-    private void updateTask(MeetingTask task) {
+    private void updateTask(TaskBean task) {
         if(task==null) {
             bean.setBean(null);
         } else {
@@ -178,9 +178,9 @@ class TimeBackupMaker {
 
     private void updateSchedule() {
         new Thread(()->{
-            List<MeetingTask> list = getSchedule().getList();
+            List<TaskBean> list = getSchedule().getList();
             List<OfflineMeetingBean> offlineList = new ArrayList<>();
-            for(MeetingTask task:list) {
+            for(TaskBean task:list) {
                 offlineList.add(new OfflineMeetingBean(task));
             }
             bean.setSchedule(offlineList);

@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import jw.kingdom.hall.kingdomtimer.domain.backup.entity.OfflineMeetingBean;
 import jw.kingdom.hall.kingdomtimer.domain.backup.entity.TimeBackupBean;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 import jw.kingdom.hall.kingdomtimer.domain.utils.FileUtils;
@@ -61,7 +61,7 @@ class TimeBackupRestorer {
     }
 
     private void restoreSchedule() {
-        List<MeetingTask> list = new ArrayList<>();
+        List<TaskBean> list = new ArrayList<>();
         for(OfflineMeetingBean bean: data.getSchedule()) {
             list.add(bean.convertToMeetingTask());
         }
@@ -71,7 +71,7 @@ class TimeBackupRestorer {
 
     private void restoreCountdown() {
         if(data.getBean()!=null) {
-            MeetingTask task = data.getBean().convertToMeetingTask();
+            TaskBean task = data.getBean().convertToMeetingTask();
             countdown.start(task);
             if(data.isPause()) {
                 countdown.pause();

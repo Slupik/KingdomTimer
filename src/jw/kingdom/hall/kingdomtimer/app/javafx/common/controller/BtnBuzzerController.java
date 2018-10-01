@@ -2,7 +2,7 @@ package jw.kingdom.hall.kingdomtimer.app.javafx.common.controller;
 
 
 import javafx.scene.control.Button;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeController;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeListenerProxy;
 
@@ -17,9 +17,9 @@ public class BtnBuzzerController {
 
     private final TimeController timer;
     private Button button;
-    private MeetingTask task;
+    private TaskBean task;
     private PropertyChangeListener listener = evt -> {
-        if(evt.getPropertyName().equals(MeetingTask.PropertyName.USE_BUZZER)) {
+        if(evt.getPropertyName().equals(TaskBean.PropertyName.USE_BUZZER)) {
             setImageForVolumeUp((Boolean) evt.getNewValue());
         }
     };
@@ -40,7 +40,7 @@ public class BtnBuzzerController {
         });
         getTimer().addListener(new TimeListenerProxy() {
             @Override
-            public void onStart(MeetingTask task) {
+            public void onStart(TaskBean task) {
                 super.onStart(task);
                 loadTask(task);
                 setImageForCurrentCondition();
@@ -55,7 +55,7 @@ public class BtnBuzzerController {
         });
     }
 
-    private void loadTask(MeetingTask task) {
+    private void loadTask(TaskBean task) {
         if(null != this.task) {
             this.task.removePropertyChangeListener(listener);
         }

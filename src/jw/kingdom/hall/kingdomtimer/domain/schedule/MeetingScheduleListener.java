@@ -1,6 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.schedule;
 
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 
 import java.util.List;
 
@@ -10,22 +10,22 @@ import java.util.List;
 public abstract class MeetingScheduleListener implements ScheduleListener {
 
     @Override
-    public void onRemove(MeetingTask task) {
+    public void onRemove(TaskBean task) {
 
     }
 
     @Override
-    public void onRemove(int index, MeetingTask removed) {
+    public void onRemove(int index, TaskBean removed) {
 
     }
 
     @Override
-    public void onInsert(MeetingTask task) {
+    public void onInsert(TaskBean task) {
 
     }
 
     @Override
-    public void onBulkInsert(MeetingTask... task) {
+    public void onBulkInsert(TaskBean... task) {
 
     }
 
@@ -35,7 +35,7 @@ public abstract class MeetingScheduleListener implements ScheduleListener {
     }
 
     @Override
-    public void onReset(List<MeetingTask> newList) {
+    public void onReset(List<TaskBean> newList) {
 
     }
 

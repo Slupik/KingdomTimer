@@ -1,6 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.task.provider;
 
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public abstract class TasksProviderCallbackProxy implements TasksProvider.Callba
     }
 
     @Override
-    public void onDownload(List<MeetingTask> taskList) {
+    public void onDownload(List<TaskBean> taskList) {
 
     }
 }

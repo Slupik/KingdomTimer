@@ -5,7 +5,7 @@ import jw.kingdom.hall.kingdomtimer.config.model.ConfigReadable;
 import jw.kingdom.hall.kingdomtimer.data.UniqueFileUtils;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownListenerProxy;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 import jw.kingdom.hall.kingdomtimer.recorder.common.files.FileRecordCreator;
 
@@ -16,15 +16,15 @@ import java.io.File;
  */
 public class DefaultFileRecordCreator implements FileRecordCreator {
 
-    private static final MeetingTask EMPTY = getEmptyTask();
+    private static final TaskBean EMPTY = getEmptyTask();
     private final Config config;
-    private MeetingTask lastTask = EMPTY;
+    private TaskBean lastTask = EMPTY;
 
     public DefaultFileRecordCreator(Config config, Schedule schedule, Countdown countdown){
         this.config = config;
         countdown.addListener(new CountdownListenerProxy() {
             @Override
-            public void onStart(MeetingTask task) {
+            public void onStart(TaskBean task) {
                 super.onStart(task);
                 lastTask = task;
             }
@@ -91,9 +91,9 @@ public class DefaultFileRecordCreator implements FileRecordCreator {
         return getConfig().getRecordDestPath();
     }
 
-    private static MeetingTask getEmptyTask() {
-        MeetingTask empty = new MeetingTask();
-        empty.setType(MeetingTask.Type.NONE);
+    private static TaskBean getEmptyTask() {
+        TaskBean empty = new TaskBean();
+        empty.setType(TaskBean.Type.NONE);
         empty.setName("Nagranie poza programem");
         return empty;
     }

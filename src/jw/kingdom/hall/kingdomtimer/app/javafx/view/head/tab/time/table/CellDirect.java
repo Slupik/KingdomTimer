@@ -6,12 +6,12 @@ import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.BtnTimeDirectForObj;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class CellDirect implements Callback<TableColumn<MeetingTask, String>, TableCell<MeetingTask, String>> {
+public class CellDirect implements Callback<TableColumn<TaskBean, String>, TableCell<TaskBean, String>> {
 
     private final AppConfig config;
 
@@ -20,8 +20,8 @@ public class CellDirect implements Callback<TableColumn<MeetingTask, String>, Ta
     }
 
     @Override
-    public TableCell<MeetingTask, String> call(TableColumn<MeetingTask, String> param) {
-        return new TableCell<MeetingTask, String>() {
+    public TableCell<TaskBean, String> call(TableColumn<TaskBean, String> param) {
+        return new TableCell<TaskBean, String>() {
 
             final Button btn = new Button("Dół");
             BtnTimeDirectForObj controller = new BtnTimeDirectForObj(config, btn);
@@ -33,7 +33,7 @@ public class CellDirect implements Callback<TableColumn<MeetingTask, String>, Ta
                     setGraphic(null);
                     setText(null);
                 } else {
-                    MeetingTask task = getTableView().getItems().get(getIndex());
+                    TaskBean task = getTableView().getItems().get(getIndex());
                     controller.loadTask(task);
                     controller.setMedium(false);
                     setGraphic(btn);

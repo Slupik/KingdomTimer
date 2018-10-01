@@ -1,6 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.time;
 
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 
 import java.util.List;
 
@@ -9,21 +9,21 @@ import java.util.List;
  */
 public interface TimeController {
     //Modify the schedule
-    void addTask(MeetingTask... tasks);
-    void removeTask(MeetingTask... tasks);
+    void addTask(TaskBean... tasks);
+    void removeTask(TaskBean... tasks);
     void removeTask(int index);
 
     void clear();
-    void setList(List<MeetingTask> list);
-    List<MeetingTask> getList();
+    void setList(List<TaskBean> list);
+    List<TaskBean> getList();
 
     //Controlling the time
     void startNext();
-    void start(MeetingTask task);
+    void start(TaskBean task);
     void stop();
     void pause();
     void resume();
-    MeetingTask getActualTask();
+    TaskBean getActualTask();
 
     void addTime(int time);
     int getAddedTime();

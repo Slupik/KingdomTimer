@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import jw.kingdom.hall.kingdomtimer.domain.backup.entity.OfflineMeetingBean;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -16,8 +16,8 @@ public class BackupTest extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        MeetingTask task = new MeetingTask();
-        task.setType(MeetingTask.Type.LIVING);
+        TaskBean task = new TaskBean();
+        task.setType(TaskBean.Type.LIVING);
         task.setName("Cool name");
 
         OfflineMeetingBean bean = new OfflineMeetingBean(task);

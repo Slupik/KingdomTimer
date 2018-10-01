@@ -3,17 +3,17 @@ package jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.table;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class CellTime implements Callback<TableColumn<MeetingTask, String>, TableCell<MeetingTask, String>> {
+public class CellTime implements Callback<TableColumn<TaskBean, String>, TableCell<TaskBean, String>> {
 
     @Override
-    public TableCell<MeetingTask, String> call(TableColumn<MeetingTask, String> param) {
-        return new TableCell<MeetingTask, String>() {
+    public TableCell<TaskBean, String> call(TableColumn<TaskBean, String> param) {
+        return new TableCell<TaskBean, String>() {
 
             final TimeField field = new TimeField();
 
@@ -25,7 +25,7 @@ public class CellTime implements Callback<TableColumn<MeetingTask, String>, Tabl
                     setText(null);
                 } else {
                     field.textProperty().addListener((observable, oldValue, newValue) -> {
-                        MeetingTask task = getTableView().getItems().get(getIndex());
+                        TaskBean task = getTableView().getItems().get(getIndex());
                         task.setTime(field.getAllSeconds());
                     });
                     field.setSeconds(getTableView().getItems().get(getIndex()).getTime());

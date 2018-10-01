@@ -1,6 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.time;
 
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import java.util.List;
  * All rights reserved & copyright ©
  */
 public interface TimeListener {
-    void onStart(MeetingTask task);
+    void onStart(TaskBean task);
     void onPause();
     void onResume();
     void onStop();
@@ -19,5 +19,5 @@ public interface TimeListener {
     void onMeetingStart();
     void onMeetingEnd();
 
-    void onScheduleChange(List<MeetingTask> newList);
+    void onScheduleChange(List<TaskBean> newList);
 }

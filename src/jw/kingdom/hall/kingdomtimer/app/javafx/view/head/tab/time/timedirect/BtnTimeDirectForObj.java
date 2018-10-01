@@ -2,7 +2,7 @@ package jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect;
 
 import javafx.scene.control.Button;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 
 import java.beans.PropertyChangeListener;
 
@@ -11,9 +11,9 @@ import java.beans.PropertyChangeListener;
  */
 public class BtnTimeDirectForObj extends BtnTimeDirectBase {
     private final Config config;
-    private MeetingTask task;
+    private TaskBean task;
     private PropertyChangeListener listener = evt -> {
-        if(evt.getPropertyName().equals(MeetingTask.PropertyName.COUNTDOWN_DOWN)) {
+        if(evt.getPropertyName().equals(TaskBean.PropertyName.COUNTDOWN_DOWN)) {
             setDirectDown((Boolean) evt.getNewValue());
         }
     };
@@ -45,7 +45,7 @@ public class BtnTimeDirectForObj extends BtnTimeDirectBase {
         notifyCountdownDirectChange(isDirectDown);
     }
 
-    public void loadTask(MeetingTask task) {
+    public void loadTask(TaskBean task) {
         if(null != this.task) {
             this.task.removePropertyChangeListener(listener);
         }

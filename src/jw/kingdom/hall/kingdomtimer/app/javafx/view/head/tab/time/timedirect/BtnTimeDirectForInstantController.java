@@ -2,7 +2,7 @@ package jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect;
 
 import javafx.scene.control.Button;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeController;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeListenerProxy;
 
@@ -14,7 +14,7 @@ public class BtnTimeDirectForInstantController extends BtnTimeDirectForObj {
         super(config, button);
         timer.addListener(new TimeListenerProxy() {
             @Override
-            public void onStart(MeetingTask task) {
+            public void onStart(TaskBean task) {
                 super.onStart(task);
                 loadTask(task);
             }

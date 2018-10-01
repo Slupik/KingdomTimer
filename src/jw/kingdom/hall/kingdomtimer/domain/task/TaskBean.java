@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.domain.model;
+package jw.kingdom.hall.kingdomtimer.domain.task;
 
 import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
 
@@ -8,25 +8,24 @@ import java.beans.PropertyChangeSupport;
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-//https://stackoverflow.com/questions/33452847/using-pojos-as-model-layer-in-javafx-application
-public class MeetingTask {
+public class TaskBean {
     public final String ID;
     private String name;
     private boolean useBuzzer;
     private boolean countdownDown;
     private int time;
-    private MeetingTask.Type type;
+    private TaskBean.Type type;
     private final PropertyChangeSupport propertySupport ;
 
-    public MeetingTask() {
-        this(Randomizer.randomStandardString(16), "???", false, true, MeetingTask.Type.UNKNOWN);
+    public TaskBean() {
+        this(Randomizer.randomStandardString(16), "???", false, true, TaskBean.Type.UNKNOWN);
     }
 
-    public MeetingTask(String ID) {
-        this(ID, "???", false, true, MeetingTask.Type.UNKNOWN);
+    public TaskBean(String ID) {
+        this(ID, "???", false, true, TaskBean.Type.UNKNOWN);
     }
 
-    public MeetingTask(String ID, String name, boolean useBuzzer, boolean countdownDown, MeetingTask.Type type) {
+    public TaskBean(String ID, String name, boolean useBuzzer, boolean countdownDown, TaskBean.Type type) {
         this.ID = ID;
         this.name = name ;
         this.useBuzzer = useBuzzer ;
@@ -48,7 +47,7 @@ public class MeetingTask {
         return name;
     }
 
-    public MeetingTask setName(String name) {
+    public TaskBean setName(String name) {
         String oldTitle = this.name;
         this.name = name;
         propertySupport.firePropertyChange("name", oldTitle, name);
@@ -59,7 +58,7 @@ public class MeetingTask {
         return useBuzzer;
     }
 
-    public MeetingTask setUseBuzzer(boolean useBuzzer) {
+    public TaskBean setUseBuzzer(boolean useBuzzer) {
         boolean oldUseBuzzer = this.useBuzzer;
         this.useBuzzer = useBuzzer;
         propertySupport.firePropertyChange("useBuzzer", oldUseBuzzer, useBuzzer);
@@ -70,19 +69,19 @@ public class MeetingTask {
         return countdownDown;
     }
 
-    public MeetingTask setCountdownDown(boolean countdownDown) {
+    public TaskBean setCountdownDown(boolean countdownDown) {
         boolean oldCountdownDown = this.countdownDown;
         this.countdownDown = countdownDown;
         propertySupport.firePropertyChange("countdownDown", oldCountdownDown, countdownDown);
         return this;
     }
 
-    public MeetingTask.Type getType() {
+    public TaskBean.Type getType() {
         return type;
     }
 
-    public MeetingTask setType(MeetingTask.Type type) {
-        MeetingTask.Type oldType = this.type;
+    public TaskBean setType(TaskBean.Type type) {
+        TaskBean.Type oldType = this.type;
         this.type = type;
         propertySupport.firePropertyChange("type", oldType, type);
         return this;
@@ -92,7 +91,7 @@ public class MeetingTask {
         return time;
     }
 
-    public MeetingTask setTime(int time) {
+    public TaskBean setTime(int time) {
         int oldTime = this.time;
         this.time = time;
         propertySupport.firePropertyChange("time", oldTime, time);

@@ -1,6 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.countdown;
 
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeDisplay;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,13 +14,13 @@ import java.util.concurrent.Executors;
  */
 public class CountdownImpl extends CountdownLogic {
 
-    private MeetingTask task = null;
+    private TaskBean task = null;
     private final List<CountdownListener> listeners = new ArrayList<>();
     private final List<TimeDisplay> displays = new ArrayList<>();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Override
-    public void start(@NotNull MeetingTask task) {
+    public void start(@NotNull TaskBean task) {
         this.task = task;
         start(task.getTime());
     }
@@ -31,7 +31,7 @@ public class CountdownImpl extends CountdownLogic {
     }
 
     @Override
-    public MeetingTask getTask() {
+    public TaskBean getTask() {
         return task;
     }
 

@@ -1,12 +1,12 @@
 package jw.kingdom.hall.kingdomtimer.app.javafx.translate;
 
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class MeetingTaskTrans {
-    public static String getForTable(MeetingTask.Type type) {
+    public static String getForTable(TaskBean.Type type) {
         switch (type) {
             case UNKNOWN:
                 return "Nieznany";

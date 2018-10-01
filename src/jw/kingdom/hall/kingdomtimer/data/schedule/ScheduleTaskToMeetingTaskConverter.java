@@ -6,38 +6,38 @@
 
 package jw.kingdom.hall.kingdomtimer.data.schedule;
 
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTask;
 
 class ScheduleTaskToMeetingTaskConverter {
-    static MeetingTask getMeetingTask(ScheduleTask schedule) {
-        MeetingTask meeting = new MeetingTask();
+    static TaskBean getMeetingTask(ScheduleTask schedule) {
+        TaskBean meeting = new TaskBean();
         meeting.setName(schedule.getName());
         meeting.setUseBuzzer(schedule.isActiveBuzzer());
         meeting.setTime(schedule.getTime());
         switch (schedule.getType()) {
             case UNKNOWN: {
-                meeting.setType(MeetingTask.Type.UNKNOWN);
+                meeting.setType(TaskBean.Type.UNKNOWN);
                 break;
             }
             case LIVING: {
-                meeting.setType(MeetingTask.Type.LIVING);
+                meeting.setType(TaskBean.Type.LIVING);
                 break;
             }
             case MINISTRY: {
-                meeting.setType(MeetingTask.Type.MINISTRY);
+                meeting.setType(TaskBean.Type.MINISTRY);
                 break;
             }
             case TREASURES: {
-                meeting.setType(MeetingTask.Type.TREASURES);
+                meeting.setType(TaskBean.Type.TREASURES);
                 break;
             }
             case CIRCUIT: {
-                meeting.setType(MeetingTask.Type.CIRCUIT);
+                meeting.setType(TaskBean.Type.CIRCUIT);
                 break;
             }
             default: {
-                meeting.setType(MeetingTask.Type.UNKNOWN);
+                meeting.setType(TaskBean.Type.UNKNOWN);
                 break;
             }
         }

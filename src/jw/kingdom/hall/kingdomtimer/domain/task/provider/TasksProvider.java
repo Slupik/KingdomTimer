@@ -1,6 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.task.provider;
 
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 
 import java.util.List;
 
@@ -14,6 +14,6 @@ public interface TasksProvider {
     interface Callback {
         void onStart();
         void onProgress(short progress);
-        void onDownload(List<MeetingTask> taskList);
+        void onDownload(List<TaskBean> taskList);
     }
 }

@@ -12,7 +12,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import jw.kingdom.hall.kingdomtimer.app.javafx.translate.MeetingTaskTrans;
 import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.TaskListBinder;
 
@@ -22,28 +22,28 @@ import jw.kingdom.hall.kingdomtimer.domain.schedule.TaskListBinder;
 public class TaskTableController {
     private static final DataFormat SERIALIZED_MIME_TYPE = new DataFormat("application/x-java-serialized-object");
 
-    private ObservableList<MeetingTask> tableData;
+    private ObservableList<TaskBean> tableData;
 
-    private final TableView<MeetingTask> TABLE;
-    private TableColumn<MeetingTask, String> tcDelete;
-    private TableColumn<MeetingTask, String> tcBuzzer;
-    private TableColumn<MeetingTask, String> tcDirect;
-    private TableColumn<MeetingTask, String> tcName;
-    private TableColumn<MeetingTask, String> tcTime;
-    private TableColumn<MeetingTask, String> tcType;
+    private final TableView<TaskBean> TABLE;
+    private TableColumn<TaskBean, String> tcDelete;
+    private TableColumn<TaskBean, String> tcBuzzer;
+    private TableColumn<TaskBean, String> tcDirect;
+    private TableColumn<TaskBean, String> tcName;
+    private TableColumn<TaskBean, String> tcTime;
+    private TableColumn<TaskBean, String> tcType;
     private AppConfig config;
     private final Schedule schedule;
     private boolean disableEditList = false;
 
     public TaskTableController(Schedule schedule,
                                AppConfig config,
-                               TableView<MeetingTask> table,
-                               TableColumn<MeetingTask, String> tcDelete,
-                               TableColumn<MeetingTask, String> tcBuzzer,
-                               TableColumn<MeetingTask, String> tcDirect,
-                               TableColumn<MeetingTask, String> tcName,
-                               TableColumn<MeetingTask, String> tcTime,
-                               TableColumn<MeetingTask, String> tcType
+                               TableView<TaskBean> table,
+                               TableColumn<TaskBean, String> tcDelete,
+                               TableColumn<TaskBean, String> tcBuzzer,
+                               TableColumn<TaskBean, String> tcDirect,
+                               TableColumn<TaskBean, String> tcName,
+                               TableColumn<TaskBean, String> tcTime,
+                               TableColumn<TaskBean, String> tcType
     ) {
         this.schedule = schedule;
         initList();
@@ -80,11 +80,11 @@ public class TaskTableController {
         tcTime.setSortable(false);
 
         tcName.setEditable(true);
-        tcName.setCellValueFactory(new PropertyValueFactory<>(MeetingTask.PropertyName.NAME));
+        tcName.setCellValueFactory(new PropertyValueFactory<>(TaskBean.PropertyName.NAME));
         tcName.setCellFactory(
                 TextFieldTableCell.forTableColumn());
         tcName.setOnEditCommit(t -> {
-            MeetingTask task = t.getTableView().getItems().get(t.getTablePosition().getRow());
+            TaskBean task = t.getTableView().getItems().get(t.getTablePosition().getRow());
             task.setName(t.getNewValue());
         });
         tcName.setSortable(false);
@@ -110,7 +110,7 @@ public class TaskTableController {
 
     private void setRowFactory() {
         TABLE.setRowFactory(tv -> {
-            TableRow<MeetingTask> row = new TaskTableRow();
+            TableRow<TaskBean> row = new TaskTableRow();
 
             row.setOnDragDetected(event -> {
                 if (! row.isEmpty()) {
@@ -138,7 +138,7 @@ public class TaskTableController {
                 Dragboard db = event.getDragboard();
                 if (db.hasContent(SERIALIZED_MIME_TYPE)) {
                     int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE);
-                    MeetingTask draggedItem = TABLE.getItems().remove(draggedIndex);
+                    TaskBean draggedItem = TABLE.getItems().remove(draggedIndex);
 
                     int dropIndex ;
 
@@ -163,7 +163,7 @@ public class TaskTableController {
             final ContextMenu rowMenu = new ContextMenu();
             MenuItem typeHeader = new MenuItem("Wybierz typ:");
             rowMenu.getItems().add(typeHeader);
-            for(MeetingTask.Type type:MeetingTask.Type.values()) {
+            for(TaskBean.Type type: TaskBean.Type.values()) {
                 MenuItem item = new MenuItem("     "+ MeetingTaskTrans.getForTable(type));
                 item.setOnAction(event -> {
                     row.getItem().setType(type);

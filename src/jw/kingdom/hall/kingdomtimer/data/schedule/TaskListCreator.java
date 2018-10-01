@@ -7,7 +7,7 @@
 package jw.kingdom.hall.kingdomtimer.data.schedule;
 
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleDownloader;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleDownloaderInputBean;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTask;
@@ -29,7 +29,7 @@ class TaskListCreator {
         data.setTranslator(new ScheduleTranslator());
         data.setTimeToEvaluate(config.getTimeToEvaluate());
         downloader.downloadWeek(data, tasks -> {
-            List<MeetingTask> list = new ArrayList<>();
+            List<TaskBean> list = new ArrayList<>();
             for(ScheduleTask scheduleTask:tasks) {
                 list.add(ScheduleTaskToMeetingTaskConverter.getMeetingTask(scheduleTask));
             }
@@ -38,16 +38,16 @@ class TaskListCreator {
     }
 
     static void getWeekendTasks(boolean circuit, Callback callback){
-        List<MeetingTask> list = new ArrayList<>();
+        List<TaskBean> list = new ArrayList<>();
 
-        MeetingTask lecture = new MeetingTask();
+        TaskBean lecture = new TaskBean();
         lecture.setName("Wykład publiczny");
         lecture.setTime(30 * 60);
         lecture.setUseBuzzer(false);
-        lecture.setType(MeetingTask.Type.LECTURE);
+        lecture.setType(TaskBean.Type.LECTURE);
         list.add(lecture);
 
-        MeetingTask watchtower = new MeetingTask();
+        TaskBean watchtower = new TaskBean();
         watchtower.setName("Strażnica");
         if(circuit) {
             watchtower.setTime(30 * 60);
@@ -55,16 +55,16 @@ class TaskListCreator {
             watchtower.setTime(60 * 60);
         }
         watchtower.setUseBuzzer(false);
-        watchtower.setType(MeetingTask.Type.WATCHTOWER);
+        watchtower.setType(TaskBean.Type.WATCHTOWER);
         list.add(watchtower);
 
 
         if(circuit) {
-            MeetingTask overseerLecture = new MeetingTask();
+            TaskBean overseerLecture = new TaskBean();
             overseerLecture.setName("Przemówienie nadzorcy obwodu");
             overseerLecture.setTime(30 * 60);
             overseerLecture.setUseBuzzer(false);
-            overseerLecture.setType(MeetingTask.Type.CIRCUIT);
+            overseerLecture.setType(TaskBean.Type.CIRCUIT);
             list.add(overseerLecture);
         }
 
@@ -73,6 +73,6 @@ class TaskListCreator {
 
     @FunctionalInterface
     interface Callback {
-        void onDataReceive(List<MeetingTask> list);
+        void onDataReceive(List<TaskBean> list);
     }
 }

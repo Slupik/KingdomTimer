@@ -12,18 +12,18 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 
 import java.beans.PropertyChangeListener;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class TaskTableRow extends TableRow<MeetingTask> {
-    private MeetingTask lastTask;
+public class TaskTableRow extends TableRow<TaskBean> {
+    private TaskBean lastTask;
     private Background defaultBackground = null;
     private PropertyChangeListener listener = evt -> {
-        if(evt.getPropertyName().equals(MeetingTask.PropertyName.TYPE)) {
+        if(evt.getPropertyName().equals(TaskBean.PropertyName.TYPE)) {
             updateRowColors();
         }
     };
@@ -35,11 +35,11 @@ public class TaskTableRow extends TableRow<MeetingTask> {
         }
     }
 
-    private ChangeListener<MeetingTask.Type> backgroundChanger = (observable, oldValue, newValue) -> {
+    private ChangeListener<TaskBean.Type> backgroundChanger = (observable, oldValue, newValue) -> {
     };
 
     @Override
-    public void updateItem(MeetingTask item, boolean empty) {
+    public void updateItem(TaskBean item, boolean empty) {
         super.updateItem(item, empty);
         Platform.runLater(()->{
             if(lastTask!=null) {
@@ -63,7 +63,7 @@ public class TaskTableRow extends TableRow<MeetingTask> {
         }
     }
 
-    private static void setTextColor(TaskTableRow row, MeetingTask.Type type) {
+    private static void setTextColor(TaskTableRow row, TaskBean.Type type) {
         Paint paint = getTextPaint(type, false);
         setTextColor(row, paint);
     }
@@ -72,12 +72,12 @@ public class TaskTableRow extends TableRow<MeetingTask> {
         row.setTextFill(paint);
         ObservableList<Node> nodes = row.getChildren();
         for(Node node:nodes) {
-            TableCell<MeetingTask, ?> cell = ((TableCell<MeetingTask, ?>) node);
+            TableCell<TaskBean, ?> cell = ((TableCell<TaskBean, ?>) node);
             cell.setTextFill(paint);
         }
     }
 
-    private static Paint getTextPaint(MeetingTask.Type type, boolean isDarkLayout) {
+    private static Paint getTextPaint(TaskBean.Type type, boolean isDarkLayout) {
         if(isDarkLayout) {
             switch (type) {
                 case UNKNOWN: {
@@ -116,11 +116,11 @@ public class TaskTableRow extends TableRow<MeetingTask> {
         }
     }
 
-    private static void setRowColor(TableRow<MeetingTask> row, MeetingTask.Type type) {
+    private static void setRowColor(TableRow<TaskBean> row, TaskBean.Type type) {
         row.setBackground(getRowBackground(type,false));
     }
 
-    private static Background getRowBackground(MeetingTask.Type type, boolean isDarkLayout) {
+    private static Background getRowBackground(TaskBean.Type type, boolean isDarkLayout) {
         Color toFill;
         switch (type) {
             case UNKNOWN: {

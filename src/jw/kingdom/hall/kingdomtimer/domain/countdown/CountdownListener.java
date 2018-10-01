@@ -1,12 +1,12 @@
 package jw.kingdom.hall.kingdomtimer.domain.countdown;
 
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 
 /**
  * All rights reserved & copyright ©
  */
 public interface CountdownListener {
-    void onStart(MeetingTask task);
+    void onStart(TaskBean task);
     void onPause();
     void onResume();
     void onStop();

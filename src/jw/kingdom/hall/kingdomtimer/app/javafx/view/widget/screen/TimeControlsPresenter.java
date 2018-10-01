@@ -3,7 +3,7 @@ package jw.kingdom.hall.kingdomtimer.app.javafx.view.widget.screen;
 import javafx.scene.layout.Pane;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.app.javafx.utils.PlatformUtils;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeController;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeListenerProxy;
 
@@ -30,7 +30,7 @@ class TimeControlsPresenter {
     private void bindSpsToTimer() {
         getTimer().addListener(new TimeListenerProxy() {
             @Override
-            public void onStart(MeetingTask task) {
+            public void onStart(TaskBean task) {
                 super.onStart(task);
                 PlatformUtils.runOnUiThread(()->{
                     spsView.setupForStart();

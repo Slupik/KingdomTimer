@@ -1,6 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.countdown;
 
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -8,7 +8,7 @@ import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 public abstract class CountdownListenerProxy implements CountdownListener {
 
     @Override
-    public void onStart(MeetingTask task) {
+    public void onStart(TaskBean task) {
 
     }
 

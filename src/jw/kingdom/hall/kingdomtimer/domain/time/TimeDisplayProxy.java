@@ -1,13 +1,13 @@
 package jw.kingdom.hall.kingdomtimer.domain.time;
 
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 
 /**
  * All rights reserved & copyright ©
  */
 public abstract class TimeDisplayProxy implements TimeDisplay {
     @Override
-    public void setTask(MeetingTask task) {
+    public void setTask(TaskBean task) {
 
     }
 

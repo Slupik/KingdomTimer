@@ -1,6 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.time;
 
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
 public abstract class TimeListenerProxy implements TimeListener {
 
     @Override
-    public void onStart(MeetingTask task) {
+    public void onStart(TaskBean task) {
 
     }
 
@@ -50,7 +50,7 @@ public abstract class TimeListenerProxy implements TimeListener {
     }
 
     @Override
-    public void onScheduleChange(List<MeetingTask> newList) {
+    public void onScheduleChange(List<TaskBean> newList) {
 
     }
 }

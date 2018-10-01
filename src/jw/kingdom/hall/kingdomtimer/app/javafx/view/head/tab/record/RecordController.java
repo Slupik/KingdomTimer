@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.controller.time.display.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.common.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.TabPresenter;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.DefaultVoiceRecorderRecordControlListener;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeListenerProxy;
 import jw.kingdom.hall.kingdomtimer.recorder.RecordListenerProxy;
@@ -77,7 +77,7 @@ public class RecordController extends TabPresenter implements StartPauseStopView
         controller = new TimeDisplayController(lblTime);
 
         getTimer().addListener(new TimeListenerProxy() {
-            private MeetingTask.Type lastType = null;
+            private TaskBean.Type lastType = null;
 
             @Override
             public void onMeetingStart() {
@@ -89,7 +89,7 @@ public class RecordController extends TabPresenter implements StartPauseStopView
             }
 
             @Override
-            public void onStart(MeetingTask task) {
+            public void onStart(TaskBean task) {
                 super.onStart(task);
                 if (task != null && (!task.getType().equals(lastType) && lastType != null) && isAutoSeparateOn()) {
                     getRecorder().stop();

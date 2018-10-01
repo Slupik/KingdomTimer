@@ -15,7 +15,7 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.table.TaskTabl
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.BtnTimeDirectForInstantController;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.BtnTimeDirectForPanel;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.widget.HandyWindow;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.domain.task.provider.TasksProviderCallbackProxy;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeListenerProxy;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
@@ -65,25 +65,25 @@ public class TimeControlController extends TabPresenter implements Initializable
     private CheckBox cbTimeToEvaluate;
 
     @FXML
-    private TableView<MeetingTask> tvList;
+    private TableView<TaskBean> tvList;
 
     @FXML
-    private TableColumn<MeetingTask, String> tcDelete;
+    private TableColumn<TaskBean, String> tcDelete;
 
     @FXML
-    private TableColumn<MeetingTask, String> tcBuzzer;
+    private TableColumn<TaskBean, String> tcBuzzer;
 
     @FXML
-    private TableColumn<MeetingTask, String> tcDirect;
+    private TableColumn<TaskBean, String> tcDirect;
 
     @FXML
-    private TableColumn<MeetingTask, String> tcName;
+    private TableColumn<TaskBean, String> tcName;
 
     @FXML
-    private TableColumn<MeetingTask, String> tcTime;
+    private TableColumn<TaskBean, String> tcTime;
 
     @FXML
-    private TableColumn<MeetingTask, String> tcType;
+    private TableColumn<TaskBean, String> tcType;
 
     private FastPanelController fastPanelController;
     private BtnTimeDirectForPanel timeDirectController;
@@ -127,7 +127,7 @@ public class TimeControlController extends TabPresenter implements Initializable
 
         getTimer().addListener(new TimeListenerProxy() {
             @Override
-            public void onStart(MeetingTask task) {
+            public void onStart(TaskBean task) {
                 super.onStart(task);
                 spsView.setupForStart();
             }
@@ -169,7 +169,7 @@ public class TimeControlController extends TabPresenter implements Initializable
 
     @FXML
     private void handleAddTask(ActionEvent event) {
-        MeetingTask task = new MeetingTask();
+        TaskBean task = new TaskBean();
 
         task.setName(tfName.getText());
         tfName.clear();
@@ -195,7 +195,7 @@ public class TimeControlController extends TabPresenter implements Initializable
     private void loadOverseerTasksOnline(ActionEvent event) {
         getWindowData().getTasksProvider().getMeetingTasks(true, new TasksProviderCallbackProxy() {
             @Override
-            public void onDownload(List<MeetingTask> taskList) {
+            public void onDownload(List<TaskBean> taskList) {
                 getSchedule().setList(taskList);
             }
         });
@@ -205,7 +205,7 @@ public class TimeControlController extends TabPresenter implements Initializable
     private void loadTasksOnline(ActionEvent event) {
         getWindowData().getTasksProvider().getMeetingTasks(false, new TasksProviderCallbackProxy() {
             @Override
-            public void onDownload(List<MeetingTask> taskList) {
+            public void onDownload(List<TaskBean> taskList) {
                 getSchedule().setList(taskList);
             }
         });

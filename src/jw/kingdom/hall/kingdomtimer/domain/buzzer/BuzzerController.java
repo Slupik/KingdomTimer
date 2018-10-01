@@ -1,6 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.buzzer;
 
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeController;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeDisplayProxy;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeListenerProxy;
@@ -11,14 +11,14 @@ import jw.kingdom.hall.kingdomtimer.domain.time.TimeListenerProxy;
 public class BuzzerController {
 
     private final BuzzerPlayer player;
-    private MeetingTask currentTask;
+    private TaskBean currentTask;
 
     public BuzzerController(BuzzerPlayer player, TimeController timer) {
         this.player = player;
         currentTask = timer.getActualTask();
         timer.addListener(new TimeListenerProxy() {
             @Override
-            public void onStart(MeetingTask task) {
+            public void onStart(TaskBean task) {
                 super.onStart(task);
                 currentTask = task;
             }

@@ -2,7 +2,7 @@ package jw.kingdom.hall.kingdomtimer.domain.time;
 
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownListener;
-import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.NotEnoughTasksException;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.ScheduleListener;
@@ -26,13 +26,13 @@ public class TimeControllerImpl implements TimeController {
     }
 
     @Override
-    public void addTask(MeetingTask... tasks) {
+    public void addTask(TaskBean... tasks) {
         schedule.addTask(tasks);
     }
 
     @Override
-    public void removeTask(MeetingTask... tasks) {
-        for(MeetingTask toRemove:tasks) {
+    public void removeTask(TaskBean... tasks) {
+        for(TaskBean toRemove:tasks) {
             schedule.removeTask(toRemove);
         }
     }
@@ -48,19 +48,19 @@ public class TimeControllerImpl implements TimeController {
     }
 
     @Override
-    public void setList(List<MeetingTask> list) {
+    public void setList(List<TaskBean> list) {
         schedule.setList(list);
     }
 
     @Override
-    public List<MeetingTask> getList() {
+    public List<TaskBean> getList() {
         return schedule.getList();
     }
 
     @Override
     public void startNext() {
         try {
-            MeetingTask task = schedule.bringOutFirstTask();
+            TaskBean task = schedule.bringOutFirstTask();
             countdown.start(task);
         } catch (NotEnoughTasksException e) {
             e.printStackTrace();
@@ -68,7 +68,7 @@ public class TimeControllerImpl implements TimeController {
     }
 
     @Override
-    public void start(MeetingTask task) {
+    public void start(TaskBean task) {
         countdown.start(task);
     }
 
@@ -88,7 +88,7 @@ public class TimeControllerImpl implements TimeController {
     }
 
     @Override
-    public MeetingTask getActualTask() {
+    public TaskBean getActualTask() {
         return countdown.getTask();
     }
 
@@ -151,22 +151,22 @@ public class TimeControllerImpl implements TimeController {
         getSchedule().addListener(new ScheduleListener() {
 
             @Override
-            public void onRemove(MeetingTask task) {
+            public void onRemove(TaskBean task) {
                 notifyOnListChange(getSchedule().getList());
             }
 
             @Override
-            public void onRemove(int index, MeetingTask removed) {
+            public void onRemove(int index, TaskBean removed) {
                 notifyOnListChange(getSchedule().getList());
             }
 
             @Override
-            public void onInsert(MeetingTask task) {
+            public void onInsert(TaskBean task) {
                 notifyOnListChange(getSchedule().getList());
             }
 
             @Override
-            public void onBulkInsert(MeetingTask... task) {
+            public void onBulkInsert(TaskBean... task) {
                 notifyOnListChange(getSchedule().getList());
             }
 
@@ -177,7 +177,7 @@ public class TimeControllerImpl implements TimeController {
             }
 
             @Override
-            public void onReset(List<MeetingTask> newList) {
+            public void onReset(List<TaskBean> newList) {
                 hasMeetingStarted = false;
                 notifyOnListChange(newList);
             }
@@ -187,7 +187,7 @@ public class TimeControllerImpl implements TimeController {
                 notifyOnListChange(getSchedule().getList());
             }
 
-            private void notifyOnListChange(List<MeetingTask> list) {
+            private void notifyOnListChange(List<TaskBean> list) {
                 for(TimeListener listener:listeners) {
                     listener.onScheduleChange(list);
                 }
@@ -202,7 +202,7 @@ public class TimeControllerImpl implements TimeController {
             public void onTimeOut() {}
 
             @Override
-            public void onStart(MeetingTask task) {
+            public void onStart(TaskBean task) {
                 if(!hasMeetingStarted) {
                     hasMeetingStarted = true;
                     for(TimeListener listener:listeners) {
