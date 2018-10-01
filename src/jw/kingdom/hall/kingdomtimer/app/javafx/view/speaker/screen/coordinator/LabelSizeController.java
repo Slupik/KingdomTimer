@@ -14,7 +14,7 @@ import static jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.screen.coordi
  */
 class LabelSizeController {
     private static final double RATIO_LABEL_WIDTH_TO_CONTAINER = 0.9;
-    private static final double RATIO_MARGIN_OF_LABEL_TO_CONTAINER = 0.1;
+    private static final double RATIO_MARGIN_OF_LABEL_TO_CONTAINER = 0.01;
 
     private final Input input;
 
