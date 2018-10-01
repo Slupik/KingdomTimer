@@ -8,35 +8,29 @@ package jw.kingdom.hall.kingdomtimer.device.monitor;
 import com.sun.javafx.collections.ObservableListWrapper;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
-import jw.kingdom.hall.kingdomtimer.domain.model.Monitor;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+import jw.kingdom.hall.kingdomtimer.domain.monitor.Monitor;
+import jw.kingdom.hall.kingdomtimer.domain.monitor.MonitorEventHandler;
+import jw.kingdom.hall.kingdomtimer.domain.monitor.MonitorListManager;
 
 public class MonitorObservableList extends ObservableListWrapper<Monitor> {
+	private final MonitorListManager manager;
 	private boolean ignoreChange;
 
-	MonitorObservableList(){
-		this(new ArrayList<>());
-	}
-
-	private MonitorObservableList(List<Monitor> list) {
-		super(list);
+	MonitorObservableList(MonitorListManager manager) {
+		super(manager.getAll());
+		this.manager = manager;
 		initialize();
 	}
 
 	private void initialize() {
-		MonitorManager.addListener(new MonitorEventHandler() {
+		manager.addListener(new MonitorEventHandler() {
 			@Override
-			public void onPlugIn(GraphicsDevice device) {
-				Monitor monitor = new GraphicsMonitor(device);
+			public void onPlugIn(Monitor monitor) {
                 Platform.runLater(()->add(monitor));
 			}
 
 			@Override
-			public void onPlugOut(GraphicsDevice device) {
-				Monitor monitor = new GraphicsMonitor(device);
+			public void onPlugOut(Monitor monitor) {
                 Platform.runLater(()->remove(monitor.getId()));
 			}
 		});

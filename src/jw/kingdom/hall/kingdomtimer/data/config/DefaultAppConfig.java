@@ -5,7 +5,7 @@ import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.config.model.ConfigWriteable;
 import jw.kingdom.hall.kingdomtimer.config.utils.DefaultConfig;
 import jw.kingdom.hall.kingdomtimer.config.utils.FileUtils;
-import jw.kingdom.hall.kingdomtimer.domain.model.Monitor;
+import jw.kingdom.hall.kingdomtimer.domain.monitor.Monitor;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;

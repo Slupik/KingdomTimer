@@ -6,19 +6,22 @@
 package jw.kingdom.hall.kingdomtimer.device.monitor;
 
 import java.awt.*;
-import java.util.Calendar;
 
 import static java.awt.GraphicsDevice.TYPE_RASTER_SCREEN;
+import static jw.kingdom.hall.kingdomtimer.device.monitor.MonitorUtils.listContains;
 
 class SearchingThread extends Thread {
+	private final MonitorListManagerImpl manager;
 	private Thread t;
 	private String threadName;
 	private static final int START_WAIT_TIME = 100;
 	private static final int SEARCHING_INTERVAL = 5*1000;
 	private static boolean wasInitialized = false;
+	static GraphicsDevice[] lastDevicesList = new GraphicsDevice[0];
 
 
-	SearchingThread() {
+	SearchingThread(MonitorListManagerImpl manager) {
+		this.manager = manager;
 		threadName = "SearchingThread";
 	}
 
@@ -33,16 +36,16 @@ class SearchingThread extends Thread {
 				try {
 					GraphicsDevice[] actDeviceList = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
 					for(GraphicsDevice gp:actDeviceList){
-						if(gp.getType()==TYPE_RASTER_SCREEN && !MonitorManager.isOldListContains(gp)){
-							MonitorManager.firePlugInEvent(gp);
+						if(gp.getType()==TYPE_RASTER_SCREEN && !isOldListContains(gp)){
+							manager.firePlugInEvent(new GraphicsMonitor(gp));
 						}
 					}
-					for(GraphicsDevice gp:MonitorManager.lastDevicesList){
-						if(gp.getType()==TYPE_RASTER_SCREEN && !MonitorManager.listContains(actDeviceList, gp)){
-							MonitorManager.firePlugOutEvent(gp);
+					for(GraphicsDevice gp: lastDevicesList){
+						if(gp.getType()==TYPE_RASTER_SCREEN && !listContains(actDeviceList, gp)){
+							manager.firePlugOutEvent(new GraphicsMonitor(gp));
 						}
 					}
-					MonitorManager.lastDevicesList = actDeviceList;
+					lastDevicesList = actDeviceList;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -61,5 +64,9 @@ class SearchingThread extends Thread {
 			t = new Thread (this, threadName);
 			t.start ();
 		}
+	}
+
+	static boolean isOldListContains(GraphicsDevice gd) {
+		return listContains(lastDevicesList, gd);
 	}
 }

@@ -97,4 +97,9 @@ public abstract class AppWindow extends StackPane {
     protected final TimeController getTimer(){
         return input.getTimeController();
     }
+
+    protected final WindowInput getInput() {
+        return input;
+    }
+
 }

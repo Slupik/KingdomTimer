@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.domain.multimedia;
 
 import javafx.scene.image.Image;
-import jw.kingdom.hall.kingdomtimer.domain.model.Monitor;
+import jw.kingdom.hall.kingdomtimer.domain.monitor.Monitor;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;

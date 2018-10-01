@@ -3,7 +3,7 @@ package jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.speaker;
 import javafx.scene.control.CheckBox;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.SpeakerWindow;
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
-import jw.kingdom.hall.kingdomtimer.domain.model.Monitor;
+import jw.kingdom.hall.kingdomtimer.domain.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
 
 /**

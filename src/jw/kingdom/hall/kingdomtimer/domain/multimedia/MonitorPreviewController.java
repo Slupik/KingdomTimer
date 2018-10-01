@@ -1,6 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.domain.multimedia;
 
-import jw.kingdom.hall.kingdomtimer.domain.model.Monitor;
+import jw.kingdom.hall.kingdomtimer.domain.monitor.Monitor;
 import org.jetbrains.annotations.NotNull;
 
 /**

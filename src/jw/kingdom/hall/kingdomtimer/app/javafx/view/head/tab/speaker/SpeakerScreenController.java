@@ -10,12 +10,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.VBox;
+import jw.kingdom.hall.kingdomtimer.app.javafx.domain.monitor.MonitorFxList;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowType;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.TabPresenter;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.SpeakerWindow;
-import jw.kingdom.hall.kingdomtimer.domain.model.Monitor;
-import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.gleam.GlobalGleamController;
+import jw.kingdom.hall.kingdomtimer.domain.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.AdvancedTextField;
 import org.jetbrains.annotations.Nullable;
@@ -49,10 +49,13 @@ public class SpeakerScreenController extends TabPresenter {
     ChoiceBox<Monitor> cbPreviewScreen;
 
     private int lastSavedInterval = -1;
+    private MonitorFxList monitorList;
 
     @Override
     public void onSetup() {
         super.onSetup();
+        monitorList = new MonitorFxList(getWindowData().getMonitorsManager());
+
         setupScreenSelectors();
         setupPreviewHidder();
         setupGleamController();
@@ -134,8 +137,8 @@ public class SpeakerScreenController extends TabPresenter {
     }
 
     private void setupScreenSelectors() {
-        cbMultimediaScreen.setItems(MonitorManager.monitors);
-        cbPreviewScreen.setItems(MonitorManager.monitors);
+        cbMultimediaScreen.setItems(monitorList);
+        cbPreviewScreen.setItems(monitorList);
 
         cbMultimediaScreen.getSelectionModel().selectedIndexProperty().addListener((observableValue, oldValue, newValue) -> {
             Monitor monitor = cbPreviewScreen.getItems().get((Integer) newValue);

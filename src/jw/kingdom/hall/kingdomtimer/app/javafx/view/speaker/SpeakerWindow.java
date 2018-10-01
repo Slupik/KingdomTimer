@@ -1,16 +1,14 @@
 package jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker;
 
 import javafx.application.Platform;
-import javafx.collections.ListChangeListener;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.AppWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowInput;
-import jw.kingdom.hall.kingdomtimer.device.monitor.*;
-import jw.kingdom.hall.kingdomtimer.domain.model.Monitor;
+import jw.kingdom.hall.kingdomtimer.domain.monitor.Monitor;
+import jw.kingdom.hall.kingdomtimer.domain.monitor.MonitorEventHandler;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,21 +62,19 @@ public class SpeakerWindow extends AppWindow {
         super.onPostShow();
         stage.setOnCloseRequest(event -> System.exit(0));
 
-        MonitorManager.addListener(new MonitorEventHandler() {
+        getInput().getMonitorsManager().addListener(new MonitorEventHandler() {
             @Override
-            public void onPlugIn(GraphicsDevice device) {
-                Monitor monitorIn = new GraphicsMonitor(device);
-                if(actualDevice == null || monitorIn.getId().equals(actualDevice.getId())){
-                    setMonitor(monitorIn);
+            public void onPlugIn(Monitor device) {
+                if(actualDevice == null || device.getId().equals(actualDevice.getId())){
+                    setMonitor(device);
                 } else {
                     autoSelectScreen();
                 }
             }
 
             @Override
-            public void onPlugOut(GraphicsDevice device) {
-                Monitor monitorOut = new GraphicsMonitor(device);
-                if(actualDevice == null || monitorOut.getId().equals(actualDevice.getId())){
+            public void onPlugOut(Monitor device) {
+                if(actualDevice == null || device.getId().equals(actualDevice.getId())){
                     Platform.runLater(()->{
                         if(getStage().isShowing()){
                             getStage().hide();
@@ -90,11 +86,6 @@ public class SpeakerWindow extends AppWindow {
             }
         });
 
-        MonitorManager.monitors.addListener((ListChangeListener<Monitor>) c -> {
-            if(actualDevice==null) {
-                autoSelectScreen();
-            }
-        });
         autoSelectScreen();
         setVisibility(getConfig().isVisibleSpeakerScreen());
         runThreadPreventingByMainMonitor();
@@ -131,7 +122,7 @@ public class SpeakerWindow extends AppWindow {
     }
 
     private Monitor getMainMonitor() {
-        MonitorObservableList list = MonitorManager.monitors;
+        List<Monitor> list = getInput().getMonitorsManager().getAll();
         for(int i=list.size()-1;i>=0;i--){
             Monitor monitor = list.get(i);
             if(monitor.isPrimary()){
@@ -154,7 +145,7 @@ public class SpeakerWindow extends AppWindow {
     }
 
     private void autoSelectScreen(){
-        MonitorObservableList list = MonitorManager.monitors;
+        List<Monitor> list = getInput().getMonitorsManager().getAll();
 
         String fromConfig = getConfig().getSpeakerScreen();
         if(fromConfig==null || fromConfig.length()<1) {

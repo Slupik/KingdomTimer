@@ -9,13 +9,14 @@ import jw.kingdom.hall.kingdomtimer.data.config.DefaultAppConfig;
 import jw.kingdom.hall.kingdomtimer.data.log.DefaultLogFile;
 import jw.kingdom.hall.kingdomtimer.data.schedule.TasksFetcher;
 import jw.kingdom.hall.kingdomtimer.device.local.AutoRAMCleaner;
-import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
+import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorListManagerImpl;
 import jw.kingdom.hall.kingdomtimer.device.screen.ScreenShotMaker;
 import jw.kingdom.hall.kingdomtimer.device.sound.Buzzer;
 import jw.kingdom.hall.kingdomtimer.domain.backup.BackupManager;
 import jw.kingdom.hall.kingdomtimer.domain.buzzer.BuzzerController;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownImpl;
+import jw.kingdom.hall.kingdomtimer.domain.monitor.MonitorListManager;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MonitorPreviewController;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MonitorPreviewControllerImpl;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
@@ -43,7 +44,7 @@ public class Main extends Application {
         TasksProvider tasksProvider = new TasksFetcher(config);
 
         BackupManager.start(recordControl, schedule, countdown);
-        MonitorManager.initialize();
+        MonitorListManager monitorManager = MonitorListManagerImpl.getInstance();
         try {
             new App(new AppInput() {
                 @Override
@@ -79,6 +80,11 @@ public class Main extends Application {
                 @Override
                 public TasksProvider getTasksProvider() {
                     return tasksProvider;
+                }
+
+                @Override
+                public MonitorListManager getMonitorsManager() {
+                    return monitorManager;
                 }
             }).start(primaryStage);
         } catch (Exception e) {
