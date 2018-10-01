@@ -1,23 +1,19 @@
 package jw.kingdom.hall.kingdomtimer.domain.backup;
 
 import com.google.gson.GsonBuilder;
-import javafx.beans.value.ChangeListener;
 import jw.kingdom.hall.kingdomtimer.domain.backup.entity.OfflineMeetingBean;
 import jw.kingdom.hall.kingdomtimer.domain.backup.entity.TimeBackupBean;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdown;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.TimerCountdownListener;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownListenerProxy;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
-import jw.kingdom.hall.kingdomtimer.domain.record.voice.DefaultVoiceRecorderListener;
-import jw.kingdom.hall.kingdomtimer.domain.record.voice.VoiceRecorder;
-import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingSchedule;
+import jw.kingdom.hall.kingdomtimer.domain.record.voice.DefaultVoiceRecorderRecordControlListener;
+import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingScheduleListener;
+import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 import jw.kingdom.hall.kingdomtimer.domain.utils.FileUtils;
-import jw.kingdom.hall.kingdomtimer.recorder.Recorder;
 
-import java.io.BufferedWriter;
+import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -27,13 +23,23 @@ import java.util.concurrent.Executors;
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class TimeBackupMaker {
+    private final Schedule schedule;
+    private final Countdown countdown;
     private TimeBackupBean bean = new TimeBackupBean();
-    private ChangeListener<Boolean> buzzerListener = (observable, oldValue, newValue) -> updateBuzzer(newValue);
-    private ChangeListener<Boolean> countdownDirectListener = (observable, oldValue, newValue) -> updateDirect(newValue);
+    private PropertyChangeListener listener = evt -> {
+        if(evt.getPropertyName().equals(MeetingTask.PropertyName.COUNTDOWN_DOWN)) {
+            updateDirect((Boolean) evt.getNewValue());
+        }
+        if(evt.getPropertyName().equals(MeetingTask.PropertyName.USE_BUZZER)) {
+            updateBuzzer((Boolean) evt.getNewValue());
+        }
+    };
     private MeetingTask lastTask = null;
 
-    TimeBackupMaker(){
-        MeetingSchedule.getInstance().addListener(new MeetingScheduleListener() {
+    TimeBackupMaker(RecordControl recordControl, Schedule schedule, Countdown countdown){
+        this.schedule = schedule;
+        this.countdown = countdown;
+        getSchedule().addListener(new MeetingScheduleListener() {
 
             @Override
             public void onRemove(MeetingTask task) {
@@ -55,18 +61,16 @@ class TimeBackupMaker {
                 updateSchedule();
             }
         });
-        TimerCountdown.getInstance().addListener(new TimerCountdownListener() {
+        getCountdown().addListener(new CountdownListenerProxy() {
 
             @Override
             public void onStart(MeetingTask task) {
                 super.onStart(task);
                 updateTask(task);
                 if(lastTask!=null) {
-                    lastTask.useBuzzerProperty().removeListener(buzzerListener);
-                    lastTask.countdownProperty().removeListener(countdownDirectListener);
+                    lastTask.removePropertyChangeListener(listener);
                 }
-                task.useBuzzerProperty().addListener(buzzerListener);
-                task.countdownProperty().addListener(countdownDirectListener);
+                task.addPropertyChangeListener(listener);
                 lastTask = task;
             }
 
@@ -89,8 +93,8 @@ class TimeBackupMaker {
             }
 
             @Override
-            public void onTimeManipulate(int totalAdded) {
-                super.onTimeManipulate(totalAdded);
+            public void onTimeManipulate(int totalAdded, int added) {
+                super.onTimeManipulate(totalAdded, added);
                 updateTimeAdded(totalAdded);
             }
 
@@ -98,13 +102,12 @@ class TimeBackupMaker {
             public void onStop() {
                 super.onStop();
                 if(lastTask!=null) {
-                    lastTask.useBuzzerProperty().removeListener(buzzerListener);
-                    lastTask.countdownProperty().removeListener(countdownDirectListener);
+                    lastTask.removePropertyChangeListener(listener);
                 }
                 updateTask(null);
             }
         });
-        VoiceRecorder.getInstance().addListener(new DefaultVoiceRecorderListener() {
+        recordControl.addListener(new DefaultVoiceRecorderRecordControlListener() {
             @Override
             public void onStart() {
                 super.onStart();
@@ -118,13 +121,12 @@ class TimeBackupMaker {
             }
         });
         updateSchedule();
-        updateTask(TimerCountdown.getInstance().getTask());
-        updatePause(TimerCountdown.getInstance().isPause());
-        updateTimeAdded(TimerCountdown.getInstance().getAddedTime());
-        lastTask = TimerCountdown.getInstance().getTask();
+        updateTask(getCountdown().getTask());
+        updatePause(getCountdown().isPause());
+        updateTimeAdded(getCountdown().getAddedTime());
+        lastTask = getCountdown().getTask();
         if(lastTask!=null) {
-            lastTask.useBuzzerProperty().addListener(buzzerListener);
-            lastTask.countdownProperty().addListener(countdownDirectListener);
+            lastTask.addPropertyChangeListener(listener);
         }
     }
 
@@ -151,10 +153,10 @@ class TimeBackupMaker {
             bean.setBean(new OfflineMeetingBean(task));
         }
         bean.setPause(false);
-        bean.setAddedTime(TimerCountdown.getInstance().getAddedTime());
+        bean.setAddedTime(getCountdown().getAddedTime());
         if(task!=null) {
             bean.setLastStartTime(System.currentTimeMillis());
-            bean.setLastTime(task.getTimeInSeconds());
+            bean.setLastTime(task.getTime());
         } else {
             bean.setLastStartTime(0);
             bean.setLastTime(0);
@@ -164,19 +166,19 @@ class TimeBackupMaker {
 
     private void updateTime() {
         bean.setLastStartTime(System.currentTimeMillis());
-        bean.setLastTime(TimerCountdown.getInstance().getTime());
+        bean.setLastTime(getCountdown().getTime());
     }
 
     private void updatePause(boolean isPause) {
         bean.setPause(isPause);
         bean.setLastStartTime(System.currentTimeMillis());
-        bean.setLastTime(TimerCountdown.getInstance().getTime()-TimerCountdown.getInstance().getAddedTime());
+        bean.setLastTime(getCountdown().getTime()-getCountdown().getAddedTime());
         saveData();
     }
 
     private void updateSchedule() {
         new Thread(()->{
-            List<MeetingTask> list = MeetingSchedule.getInstance().getList();
+            List<MeetingTask> list = getSchedule().getList();
             List<OfflineMeetingBean> offlineList = new ArrayList<>();
             for(MeetingTask task:list) {
                 offlineList.add(new OfflineMeetingBean(task));
@@ -196,5 +198,13 @@ class TimeBackupMaker {
 
     private String getDataToSave() {
         return new GsonBuilder().setPrettyPrinting().create().toJson(bean);
+    }
+
+    private Schedule getSchedule() {
+        return schedule;
+    }
+
+    private Countdown getCountdown() {
+        return countdown;
     }
 }

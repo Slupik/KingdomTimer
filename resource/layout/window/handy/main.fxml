@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<!--
+  ~ Created 16.09.18 22:19.
+  ~ This file is part of KingdomHallTimer which is released under "no licence".
+  -->
+
+<!--
+  ~ Created 03.09.18 21:09.
+  ~ Last modified 31.08.18 21:18
+  -->
+
+<HBox fx:id="mainContainer" alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.app.javafx.view.widget.screen.HandyPanelView">
+   <children>
+      <VBox>
+         <children>
+            <HBox alignment="CENTER_LEFT" fillHeight="false">
+               <children>
+                  <Label fx:id="lblTime" text="12:43:02">
+                     <font>
+                        <Font size="53.0" />
+                     </font>
+                  </Label>
+                  <HBox fx:id="hbTimeControlsContainer" alignment="CENTER_LEFT" fillHeight="false">
+                     <HBox.margin>
+                        <Insets left="16.0" />
+                     </HBox.margin>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox fillHeight="false">
+               <children>
+                  <Label minWidth="52.0" text="Obecnie:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label fx:id="lblNow" text="Punkt testowy">
+                     <HBox.margin>
+                        <Insets left="8.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+   </padding>
+</HBox>

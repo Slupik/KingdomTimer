@@ -1,6 +1,9 @@
 package jw.kingdom.hall.kingdomtimer.domain.record.voice;
 
+import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.data.record.DefaultFileRecordCreator;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
+import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 import jw.kingdom.hall.kingdomtimer.recorder.common.files.FileRecordCreator;
 import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
 
@@ -8,7 +11,7 @@ import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class DefaultAudioSettingsBean implements AudioSettingsBean {
-    private FileRecordCreator fileRecordCreator = new DefaultFileRecordCreator();
+    private FileRecordCreator fileRecordCreator;
     private boolean readDefaultMixSettings = false;
     private int rate = 44100;//ignore if(readDefaultMixSettings == true)
     private String sample = "INT24";//ignore if(readDefaultMixSettings == true)
@@ -17,6 +20,10 @@ public class DefaultAudioSettingsBean implements AudioSettingsBean {
     private boolean selectDefaultDevice = true;
     private String deviceName = "";//ignore if(selectDefaultDevice == true)
     private String serviceSetupId = "CONSUMER_AUDIO";
+
+    public DefaultAudioSettingsBean(Config config, Schedule schedule, Countdown countdown) {
+        fileRecordCreator = new DefaultFileRecordCreator(config, schedule, countdown);
+    }
 
     @Override
     public int getRate() {

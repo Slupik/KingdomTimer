@@ -11,7 +11,7 @@ public class AppConfigTest {
     Only for tests purposes.
      */
     public static void main(String[] args) {
-        AppConfig cfg = AppConfig.getInstance();
+        DefaultAppConfig cfg = DefaultAppConfig.getInstance();
         System.out.println(cfg.getSpeakerScreen());
         cfg.setSpeakerScreen("test screen");
         try {

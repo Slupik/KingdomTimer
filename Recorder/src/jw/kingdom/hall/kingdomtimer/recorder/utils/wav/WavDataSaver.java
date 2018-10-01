@@ -1,5 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.recorder.utils.wav;
 
+import jw.kingdom.hall.kingdomtimer.recorder.entity.pcm.PcmData;
+
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -10,7 +12,8 @@ import java.io.OutputStream;
 //http://www.onicos.com/staff/iz/formats/wav.html
 //http://www.neurophys.wisc.edu/auditory/riff-format.txt
 public class WavDataSaver {
-    public static void savePCM(OutputStream os, byte[] data, int srate, int channel, int format) throws IOException {
+
+    public static void savePCM(OutputStream os, PcmData data, int srate, int channel, int format) throws IOException {
         byte[] header;
         if(!isFloat(format)) {
             header = new byte[44];
@@ -18,7 +21,7 @@ public class WavDataSaver {
             header = new byte[58];
         }
 
-        long totalDataLen = data.length + header.length -8;
+        long totalDataLen = data.getSize() + header.length -8;
         long bitrate = srate * channel * format;
         int blockAlign = ((channel * format) / 8);
 
@@ -71,12 +74,12 @@ public class WavDataSaver {
             header[37] = 'a';
             header[38] = 't';
             header[39] = 'a';
-            header[40] = (byte) (data.length  & 0xff);
-            header[41] = (byte) ((data.length >> 8) & 0xff);
-            header[42] = (byte) ((data.length >> 16) & 0xff);
-            header[43] = (byte) ((data.length >> 24) & 0xff);
+            header[40] = (byte) (data.getSize()  & 0xff);
+            header[41] = (byte) ((data.getSize() >> 8) & 0xff);
+            header[42] = (byte) ((data.getSize() >> 16) & 0xff);
+            header[43] = (byte) ((data.getSize() >> 24) & 0xff);
         } else {
-            int numberOfSampleFrames = data.length/blockAlign;
+            int numberOfSampleFrames = (int) (data.getSize()/blockAlign);
 
             header[36] = 0;
             header[37] = 0;
@@ -96,14 +99,14 @@ public class WavDataSaver {
             header[51] = 'a';
             header[52] = 't';
             header[53] = 'a';
-            header[54] = (byte) (data.length  & 0xff);
-            header[55] = (byte) ((data.length >> 8) & 0xff);
-            header[56] = (byte) ((data.length >> 16) & 0xff);
-            header[57] = (byte) ((data.length >> 24) & 0xff);
+            header[54] = (byte) (data.getSize()  & 0xff);
+            header[55] = (byte) ((data.getSize() >> 8) & 0xff);
+            header[56] = (byte) ((data.getSize() >> 16) & 0xff);
+            header[57] = (byte) ((data.getSize() >> 24) & 0xff);
         }
 
         os.write(header, 0, header.length);
-        os.write(data);
+        data.appendTo(os);
         os.close();
     }
 

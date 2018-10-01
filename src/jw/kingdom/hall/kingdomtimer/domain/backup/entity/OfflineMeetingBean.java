@@ -22,7 +22,7 @@ public class OfflineMeetingBean {
         useBuzzer = task.isUseBuzzer();
         name = task.getName();
         countdownDown = task.isCountdownDown();
-        time = task.getTimeInSeconds();
+        time = task.getTime();
         type = task.getType();
     }
 
@@ -31,7 +31,7 @@ public class OfflineMeetingBean {
         task.setUseBuzzer(useBuzzer);
         task.setName(name);
         task.setCountdownDown(countdownDown);
-        task.setTimeInSeconds(time);
+        task.setTime(time);
         task.setType(type);
         return task;
     }

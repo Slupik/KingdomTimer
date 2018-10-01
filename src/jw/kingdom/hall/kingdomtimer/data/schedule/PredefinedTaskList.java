@@ -6,7 +6,7 @@
 
 package jw.kingdom.hall.kingdomtimer.data.schedule;
 
-import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
+import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleDownloader;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleDownloaderInputBean;
@@ -22,12 +22,12 @@ import java.util.List;
 public class PredefinedTaskList {
     private static final ScheduleDownloader downloader = new ScheduleDownloaderFacade();
 
-    public static void getWeekTasks(boolean circuit, Callback callback){
+    public static void getWeekTasks(Config config, boolean circuit, Callback callback){
         ScheduleDownloaderInputBean data = new ScheduleDownloaderInputBean();
         data.setCircuitVisit(circuit);
         data.setLangCode("pl");
         data.setTranslator(new ScheduleTranslator());
-        data.setTimeToEvaluate(AppConfig.getInstance().getTimeToEvaluate());
+        data.setTimeToEvaluate(config.getTimeToEvaluate());
         downloader.downloadWeek(data, tasks -> {
             List<MeetingTask> list = new ArrayList<>();
             for(ScheduleTask scheduleTask:tasks) {
@@ -42,7 +42,7 @@ public class PredefinedTaskList {
 
         MeetingTask lecture = new MeetingTask();
         lecture.setName("Wykład publiczny");
-        lecture.setTimeInSeconds(30 * 60);
+        lecture.setTime(30 * 60);
         lecture.setUseBuzzer(false);
         lecture.setType(MeetingTask.Type.LECTURE);
         list.add(lecture);
@@ -50,9 +50,9 @@ public class PredefinedTaskList {
         MeetingTask watchtower = new MeetingTask();
         watchtower.setName("Strażnica");
         if(circuit) {
-            watchtower.setTimeInSeconds(30 * 60);
+            watchtower.setTime(30 * 60);
         } else {
-            watchtower.setTimeInSeconds(60 * 60);
+            watchtower.setTime(60 * 60);
         }
         watchtower.setUseBuzzer(false);
         watchtower.setType(MeetingTask.Type.WATCHTOWER);
@@ -62,7 +62,7 @@ public class PredefinedTaskList {
         if(circuit) {
             MeetingTask overseerLecture = new MeetingTask();
             overseerLecture.setName("Przemówienie nadzorcy obwodu");
-            overseerLecture.setTimeInSeconds(30 * 60);
+            overseerLecture.setTime(30 * 60);
             overseerLecture.setUseBuzzer(false);
             overseerLecture.setType(MeetingTask.Type.CIRCUIT);
             list.add(overseerLecture);

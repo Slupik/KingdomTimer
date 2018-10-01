@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField?>
+
+<!--
+  ~ Created 16.09.18 22:09.
+  ~ This file is part of KingdomHallTimer which is released under "no licence".
+  -->
+
+<!--
+  ~ Created 03.09.18 21:09.
+  ~ Last modified 31.08.18 20:50
+  -->
+
+<VBox prefHeight="400.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.TimeControlController">
+   <HBox prefHeight="100.0" prefWidth="200.0">
+      <children>
+         <VBox>
+            <children>
+               <HBox>
+                  <children>
+                     <Label fx:id="lblTime" text="12:43:02">
+                        <font>
+                           <Font size="53.0" />
+                        </font>
+                     </Label>
+                     <HBox alignment="CENTER_LEFT">
+                        <children>
+                           <HBox fx:id="hbTimeControlsContainer" alignment="CENTER_LEFT">
+                              <HBox.margin>
+                                 <Insets left="16.0" />
+                              </HBox.margin>
+                           </HBox>
+                           <Button fx:id="btnBuzzer" layoutX="147.0" layoutY="36.0" mnemonicParsing="false" text="Dzwonek">
+                              <HBox.margin>
+                                 <Insets left="16.0" />
+                              </HBox.margin>
+                           </Button>
+                           <Button fx:id="btnInstantDirect" mnemonicParsing="false" text="Dół">
+                              <HBox.margin>
+                                 <Insets left="16.0" />
+                              </HBox.margin>
+                           </Button>
+                        </children>
+                     </HBox>
+                  </children>
+               </HBox>
+               <VBox>
+                  <children>
+                     <Label text="Szybkie ustawienie czasu">
+                        <font>
+                           <Font size="16.0" />
+                        </font>
+                     </Label>
+                     <HBox>
+                        <children>
+                           <TimeField fx:id="tfFastTime" />
+                           <Button mnemonicParsing="false" onAction="#handleLoadTimeAction" text="Wczytaj">
+                              <HBox.margin>
+                                 <Insets left="16.0" />
+                              </HBox.margin>
+                           </Button>
+                           <Button layoutX="130.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleAddTime" text="Dodaj">
+                              <HBox.margin>
+                                 <Insets left="8.0" />
+                              </HBox.margin>
+                           </Button>
+                           <Button layoutX="188.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleRemoveTime" text="Odejmij">
+                              <HBox.margin>
+                                 <Insets left="8.0" />
+                              </HBox.margin>
+                           </Button>
+                           <Button fx:id="btnFastDirect" mnemonicParsing="false" text="Dół">
+                              <HBox.margin>
+                                 <Insets left="8.0" />
+                              </HBox.margin>
+                           </Button>
+                        </children>
+                     </HBox>
+                     <Label text="Wczytuje czas poza kolejką (ingoruje tabelkę i obecny czas)">
+                        <padding>
+                           <Insets top="4.0" />
+                        </padding>
+                     </Label>
+                  </children>
+                  <VBox.margin>
+                     <Insets />
+                  </VBox.margin>
+               </VBox>
+            </children>
+         </VBox>
+         <VBox alignment="CENTER_LEFT">
+            <children>
+               <Button fx:id="btnWidgetVisibility" mnemonicParsing="false" text="Ukryj widget" />
+            </children>
+            <HBox.margin>
+               <Insets left="32.0" />
+            </HBox.margin>
+         </VBox>
+      </children>
+   </HBox>
+   <Separator prefWidth="200.0">
+      <VBox.margin>
+         <Insets bottom="8.0" top="8.0" />
+      </VBox.margin>
+   </Separator>
+   <HBox>
+      <children>
+         <VBox>
+            <children>
+               <HBox alignment="CENTER_LEFT">
+                  <children>
+                     <Label text="Nazwa: " />
+                     <TextField fx:id="tfName" prefWidth="500.0" />
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0">
+                  <children>
+                     <Label text="Czas: " />
+                     <TimeField fx:id="atfTime" />
+                  </children>
+                  <VBox.margin>
+                     <Insets top="8.0" />
+                  </VBox.margin>
+               </HBox>
+               <CheckBox fx:id="cbBuzzer" mnemonicParsing="false" text="Włącz sygnał">
+                  <VBox.margin>
+                     <Insets top="8.0" />
+                  </VBox.margin>
+               </CheckBox>
+               <HBox alignment="CENTER_LEFT">
+                  <children>
+                     <Label text="Kierunek odliczania: " />
+                     <Button fx:id="btnCountdownDirect" mnemonicParsing="false" text="Dół" />
+                  </children>
+                  <VBox.margin>
+                     <Insets top="8.0" />
+                  </VBox.margin>
+               </HBox>
+            </children>
+         </VBox>
+         <VBox alignment="CENTER_LEFT">
+            <HBox.margin>
+               <Insets left="8.0" />
+            </HBox.margin>
+            <children>
+               <Button mnemonicParsing="false" onAction="#handleAddTask" text="Dodaj" />
+            </children>
+         </VBox>
+         <VBox alignment="BOTTOM_LEFT">
+            <children>
+               <CheckBox fx:id="cbTimeToEvaluate" mnemonicParsing="false" text="Dodaj czas na ocenę">
+                  <VBox.margin>
+                     <Insets bottom="16.0" left="56.0" />
+                  </VBox.margin>
+               </CheckBox>
+               <HBox>
+                  <children>
+                     <VBox alignment="BOTTOM_CENTER">
+                        <children>
+                           <Button mnemonicParsing="false" onAction="#loadTasksOnline" text="Wczytaj punkty" />
+                        </children>
+                        <HBox.margin>
+                           <Insets left="56.0" />
+                        </HBox.margin>
+                     </VBox>
+                     <VBox alignment="BOTTOM_CENTER">
+                        <children>
+                           <Button mnemonicParsing="false" onAction="#loadOverseerTasksOnline" text="Wczytaj punkty (Obsługa)" />
+                        </children>
+                        <HBox.margin>
+                           <Insets left="8.0" />
+                        </HBox.margin>
+                     </VBox>
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+      </children>
+   </HBox>
+   <TableView fx:id="tvList">
+      <columns>
+         <TableColumn fx:id="tcDelete" minWidth="50.0" prefWidth="-1.0" text="Usuń" />
+         <TableColumn fx:id="tcBuzzer" minWidth="75.0" prefWidth="-1.0" text="Syngał" />
+         <TableColumn fx:id="tcDirect" minWidth="75.0" prefWidth="-1.0" text="Kierunek odliczania" />
+         <TableColumn fx:id="tcTime" minWidth="75.0" prefWidth="-1.0" text="Czas" />
+         <TableColumn fx:id="tcType" editable="false" minWidth="75.0" prefWidth="-1.0" sortable="false" text="Typ" visible="false" />
+         <TableColumn fx:id="tcName" minWidth="100.0" prefWidth="637.0" text="Punkt" />
+      </columns>
+      <VBox.margin>
+         <Insets top="16.0" />
+      </VBox.margin>
+   </TableView>
+   <padding>
+      <Insets bottom="16.0" left="16.0" right="16.0" top="8.0" />
+   </padding>
+</VBox>
