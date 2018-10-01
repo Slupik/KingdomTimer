@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.data.config;
 
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
-import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
+import jw.kingdom.hall.kingdomtimer.domain.model.Monitor;
 
 /**
  * All rights reserved & copyright ©

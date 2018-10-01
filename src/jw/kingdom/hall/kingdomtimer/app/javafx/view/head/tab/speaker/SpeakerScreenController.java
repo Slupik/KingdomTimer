@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowType;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.TabPresenter;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.SpeakerWindow;
-import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
+import jw.kingdom.hall.kingdomtimer.domain.model.Monitor;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.gleam.GlobalGleamController;
 import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
@@ -93,7 +93,7 @@ public class SpeakerScreenController extends TabPresenter {
     private void autoSetupMultimediaScreen() {
         if(getConfig().getMultimediaScreen()==null || getConfig().getMultimediaScreen().length()<1) {
             for(Monitor monitor:cbMultimediaScreen.getItems()) {
-                if(!monitor.isMain() && cbPreviewScreen.getValue()!=null) {
+                if(!monitor.isPrimary() && cbPreviewScreen.getValue()!=null) {
                     cbMultimediaScreen.setValue(monitor);
                     return;
                 }
@@ -146,7 +146,7 @@ public class SpeakerScreenController extends TabPresenter {
             for(int i=0;i<cbMultimediaScreen.getItems().size();i++){
                 Monitor monitor = cbMultimediaScreen.getItems().get(i);
                 Monitor presentation = getSpeakerWindow().getMonitor();
-                if(!monitor.isMain() && (presentation==null || presentation.ID.equals(monitor.ID))) {
+                if(!monitor.isPrimary() && (presentation==null || presentation.getId().equals(monitor.getId()))) {
                     cbMultimediaScreen.setValue(monitor);
                     break;
                 }
@@ -164,7 +164,7 @@ public class SpeakerScreenController extends TabPresenter {
                 }
                 if(ignore) return;
                 ignore = true;//fire only once
-                cbPreviewScreen.setValue(getMonitorFromList(cbPreviewScreen.getItems(), monitor.ID));
+                cbPreviewScreen.setValue(getMonitorFromList(cbPreviewScreen.getItems(), monitor.getId()));
             }
 
             @Override
@@ -181,10 +181,10 @@ public class SpeakerScreenController extends TabPresenter {
                     return;
                 }
                 Monitor monitor = cbPreviewScreen.getItems().get((Integer) newValue);
-                    if(null!=lastMonitor && lastMonitor.ID.equals(monitor.ID)){
+                    if(null!=lastMonitor && lastMonitor.getId().equals(monitor.getId())){
                     return;
                 }
-                if(monitor.isMain() && !SpeakerWindow.DEBUGGING_FORCE_SHOW_ON_SINGLE_MONITOR) {
+                if(monitor.isPrimary() && !SpeakerWindow.DEBUGGING_FORCE_SHOW_ON_SINGLE_MONITOR) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error!");
                     alert.setHeaderText("Nie możesz wyświetlić ekranu dla mówcy na swoim głównym ekranie.");
@@ -213,7 +213,7 @@ public class SpeakerScreenController extends TabPresenter {
     @Nullable
     private Monitor getMonitorFromList(List<Monitor> list, String id) {
         for(Monitor monitor:list){
-            if (monitor.ID.equals(id)) {
+            if (monitor.getId().equals(id)) {
                 return monitor;
             }
         }

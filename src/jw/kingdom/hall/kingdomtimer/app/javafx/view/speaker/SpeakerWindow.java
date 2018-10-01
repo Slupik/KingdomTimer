@@ -7,10 +7,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.AppWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowInput;
-import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
-import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorEventHandler;
-import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
-import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorObservableList;
+import jw.kingdom.hall.kingdomtimer.device.monitor.*;
+import jw.kingdom.hall.kingdomtimer.domain.model.Monitor;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -69,8 +67,8 @@ public class SpeakerWindow extends AppWindow {
         MonitorManager.addListener(new MonitorEventHandler() {
             @Override
             public void onPlugIn(GraphicsDevice device) {
-                Monitor monitorIn = new Monitor(device);
-                if(actualDevice == null || monitorIn.ID.equals(actualDevice.ID)){
+                Monitor monitorIn = new GraphicsMonitor(device);
+                if(actualDevice == null || monitorIn.getId().equals(actualDevice.getId())){
                     setMonitor(monitorIn);
                 } else {
                     autoSelectScreen();
@@ -79,8 +77,8 @@ public class SpeakerWindow extends AppWindow {
 
             @Override
             public void onPlugOut(GraphicsDevice device) {
-                Monitor monitorOut = new Monitor(device);
-                if(actualDevice == null || monitorOut.ID.equals(actualDevice.ID)){
+                Monitor monitorOut = new GraphicsMonitor(device);
+                if(actualDevice == null || monitorOut.getId().equals(actualDevice.getId())){
                     Platform.runLater(()->{
                         if(getStage().isShowing()){
                             getStage().hide();
@@ -118,8 +116,8 @@ public class SpeakerWindow extends AppWindow {
                     }
                     Monitor monitor = getMainMonitor();
                     if(monitor!=null && !errorWithMainScreen) {
-                        if(stage.getX()==monitor.getDefaultConfiguration().getBounds().getX() &&
-                                stage.getY()==monitor.getDefaultConfiguration().getBounds().getY()) {
+                        if(stage.getX()==monitor.getX() &&
+                                stage.getY()==monitor.getY()) {
                             errorWithMainScreen = true;
                             Platform.runLater(stage::hide);
                         } else {
@@ -136,7 +134,7 @@ public class SpeakerWindow extends AppWindow {
         MonitorObservableList list = MonitorManager.monitors;
         for(int i=list.size()-1;i>=0;i--){
             Monitor monitor = list.get(i);
-            if(monitor.isMain()){
+            if(monitor.isPrimary()){
                 return monitor;
             }
         }
@@ -165,7 +163,7 @@ public class SpeakerWindow extends AppWindow {
             } else {
                 for(int i=list.size()-1;i>=0;i--){
                     Monitor monitor = list.get(i);
-                    if(DEBUGGING_FORCE_SHOW_ON_SINGLE_MONITOR || !monitor.isMain()){
+                    if(DEBUGGING_FORCE_SHOW_ON_SINGLE_MONITOR || !monitor.isPrimary()){
                         setMonitor(monitor);
                         return;
                     }
@@ -175,7 +173,7 @@ public class SpeakerWindow extends AppWindow {
         } else {
             for(int i=list.size()-1;i>=0;i--){
                 Monitor monitor = list.get(i);
-                if(monitor.getIDstring().equals(fromConfig) && (!monitor.isMain() || DEBUGGING_FORCE_SHOW_ON_SINGLE_MONITOR)){
+                if(monitor.getId().equals(fromConfig) && (!monitor.isPrimary() || DEBUGGING_FORCE_SHOW_ON_SINGLE_MONITOR)){
                     setMonitor(monitor);
                     return;
                 }
@@ -195,14 +193,14 @@ public class SpeakerWindow extends AppWindow {
             setVisibility(getConfig().isVisibleSpeakerScreen());
             stage.setMaximized(false);
 
-            getStage().setWidth(monitor.getDisplayMode().getWidth());
-            getStage().setHeight(monitor.getDisplayMode().getHeight());
+            getStage().setWidth(monitor.getWidth());
+            getStage().setHeight(monitor.getHeight());
 
             getStage().setX(
-                    monitor.getDefaultConfiguration().getBounds().getX()
+                    monitor.getX()
             );
             getStage().setY(
-                    monitor.getDefaultConfiguration().getBounds().getY()
+                    monitor.getY()
             );
             stage.setMaximized(true);
         });

@@ -5,6 +5,8 @@
 
 package jw.kingdom.hall.kingdomtimer.device.monitor;
 
+import jw.kingdom.hall.kingdomtimer.domain.model.Monitor;
+
 import java.awt.*;
 import java.util.ArrayList;
 

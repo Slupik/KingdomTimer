@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.domain.multimedia;
 
 import javafx.scene.image.Image;
-import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
+import jw.kingdom.hall.kingdomtimer.domain.model.Monitor;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -13,7 +13,6 @@ import java.util.concurrent.Executors;
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-//TODO use interface instead of class to handle Monitor info
 public class MonitorPreviewControllerImpl implements MonitorPreviewController {
     private Thread countdown;
     private boolean pause = true;
@@ -54,7 +53,13 @@ public class MonitorPreviewControllerImpl implements MonitorPreviewController {
     @Override
     public void setMonitor(@NotNull Monitor monitor){
         this.monitor = monitor;
-        Rectangle areaToMakeSS = monitor.getDefaultConfiguration().getBounds();
+        Rectangle areaToMakeSS = new Rectangle();
+        areaToMakeSS.setBounds(
+                ((int) monitor.getX()),
+                ((int) monitor.getY()),
+                ((int) monitor.getWidth()),
+                ((int) monitor.getHeight())
+        );
         screenshotMaker.setArea(areaToMakeSS);
     }
 

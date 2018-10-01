@@ -8,6 +8,7 @@ package jw.kingdom.hall.kingdomtimer.device.monitor;
 import com.sun.javafx.collections.ObservableListWrapper;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
+import jw.kingdom.hall.kingdomtimer.domain.model.Monitor;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -29,14 +30,14 @@ public class MonitorObservableList extends ObservableListWrapper<Monitor> {
 		MonitorManager.addListener(new MonitorEventHandler() {
 			@Override
 			public void onPlugIn(GraphicsDevice device) {
-				Monitor monitor = new Monitor(device);
+				Monitor monitor = new GraphicsMonitor(device);
                 Platform.runLater(()->add(monitor));
 			}
 
 			@Override
 			public void onPlugOut(GraphicsDevice device) {
-				Monitor monitor = new Monitor(device);
-                Platform.runLater(()->remove(monitor.ID));
+				Monitor monitor = new GraphicsMonitor(device);
+                Platform.runLater(()->remove(monitor.getId()));
 			}
 		});
 
@@ -52,7 +53,7 @@ public class MonitorObservableList extends ObservableListWrapper<Monitor> {
 		boolean isRemoved = false;
 		Monitor toRemove = null;
 		for(Monitor monitor:this){
-			if(monitor.ID.equals(ID)){
+			if(monitor.getId().equals(ID)){
 				toRemove = monitor;
 			}
 		}
@@ -65,7 +66,7 @@ public class MonitorObservableList extends ObservableListWrapper<Monitor> {
 
 	public Monitor get(String ID) throws MonitorNotFound {
 		for (Monitor monitor : this) {
-			if (monitor.ID.equals(ID)) {
+			if (monitor.getId().equals(ID)) {
 				return monitor;
 			}
 		}
@@ -75,7 +76,7 @@ public class MonitorObservableList extends ObservableListWrapper<Monitor> {
 	public void set(Monitor newMonitor){
 		for(int i=0;i<size();i++){
 			Monitor monitor = get(i);
-			if(monitor.ID.equals(newMonitor.ID)){
+			if(monitor.getId().equals(newMonitor.getId())){
 				set(i, newMonitor);
 			}
 		}
@@ -96,7 +97,7 @@ public class MonitorObservableList extends ObservableListWrapper<Monitor> {
 			} else if(o1 == null) {
 				return 0;
 			}
-			return Double.compare(o1.getBounds().getX(), o2.getBounds().getX())*(-1);
+			return Double.compare(o1.getX(), o2.getX())*(-1);
 		});
 		for(int i=0;i<size();i++){
 			Monitor monitor = get(i);

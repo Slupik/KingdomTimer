@@ -5,7 +5,7 @@ import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.config.model.ConfigWriteable;
 import jw.kingdom.hall.kingdomtimer.config.utils.DefaultConfig;
 import jw.kingdom.hall.kingdomtimer.config.utils.FileUtils;
-import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
+import jw.kingdom.hall.kingdomtimer.domain.model.Monitor;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -84,11 +84,11 @@ public class DefaultAppConfig extends ConfigBase implements AppConfig {
 
     @Override
     public void setSpeakerScreen(Monitor monitor) {
-        super.setSpeakerScreen(monitor.ID);
+        super.setSpeakerScreen(monitor.getId());
     }
 
     @Override
     public void setMultimediaScreen(Monitor monitor) {
-        super.setMultimediaScreen(monitor.ID);
+        super.setMultimediaScreen(monitor.getId());
     }
 }

@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.AppWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowInput;
-import jw.kingdom.hall.kingdomtimer.device.monitor.Monitor;
+import jw.kingdom.hall.kingdomtimer.domain.model.Monitor;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorManager;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorObservableList;
 
@@ -80,10 +80,10 @@ public class HandyWindow extends AppWindow {
         Monitor monitor = getMainMonitor();
         if(monitor!=null) {
             getStage().setX(
-                    monitor.getDefaultConfiguration().getBounds().getWidth()-getStage().getWidth()-75
+                    monitor.getWidth()-getStage().getWidth()-75
             );
             getStage().setY(
-                    monitor.getDefaultConfiguration().getBounds().getY()+75
+                    monitor.getY()+75
             );
         }
     }
@@ -92,7 +92,7 @@ public class HandyWindow extends AppWindow {
         MonitorObservableList list = MonitorManager.monitors;
         for(int i=list.size()-1;i>=0;i--){
             Monitor monitor = list.get(i);
-            if(monitor.isMain()){
+            if(monitor.isPrimary()){
                 return monitor;
             }
         }
