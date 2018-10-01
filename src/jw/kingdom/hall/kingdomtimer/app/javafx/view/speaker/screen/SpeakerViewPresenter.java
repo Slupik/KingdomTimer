@@ -14,8 +14,7 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.screen.coordinator.S
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-//TODO change name to more appropriate
-public class SpeakerWindowPresenter extends ControlledScreenBase implements TimeInfoPresenter.Input, SpeakerLayoutCoordinator.Input {
+public class SpeakerViewPresenter extends ControlledScreenBase implements TimeInfoPresenter.Input, SpeakerLayoutCoordinator.Input {
 
     @FXML
     AnchorPane mainContainer;
