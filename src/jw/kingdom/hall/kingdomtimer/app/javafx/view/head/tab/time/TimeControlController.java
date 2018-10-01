@@ -16,8 +16,11 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.Btn
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.timedirect.BtnTimeDirectForPanel;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.widget.HandyWindow;
 import jw.kingdom.hall.kingdomtimer.domain.model.MeetingTask;
+import jw.kingdom.hall.kingdomtimer.domain.task.provider.TasksProviderCallbackProxy;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeListenerProxy;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
+
+import java.util.List;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -190,12 +193,22 @@ public class TimeControlController extends TabPresenter implements Initializable
 
     @FXML
     private void loadOverseerTasksOnline(ActionEvent event) {
-        getSchedule().setTasksOnline(getConfig(), true);
+        getWindowData().getTasksProvider().getMeetingTasks(true, new TasksProviderCallbackProxy() {
+            @Override
+            public void onDownload(List<MeetingTask> taskList) {
+                getSchedule().setList(taskList);
+            }
+        });
     }
 
     @FXML
     private void loadTasksOnline(ActionEvent event) {
-        getSchedule().setTasksOnline(getConfig(), false);
+        getWindowData().getTasksProvider().getMeetingTasks(false, new TasksProviderCallbackProxy() {
+            @Override
+            public void onDownload(List<MeetingTask> taskList) {
+                getSchedule().setList(taskList);
+            }
+        });
     }
 
     @FXML

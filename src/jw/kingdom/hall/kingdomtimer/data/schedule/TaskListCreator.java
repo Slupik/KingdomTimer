@@ -19,10 +19,10 @@ import java.util.List;
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class PredefinedTaskList {
+class TaskListCreator {
     private static final ScheduleDownloader downloader = new ScheduleDownloaderFacade();
 
-    public static void getWeekTasks(Config config, boolean circuit, Callback callback){
+    static void getWeekTasks(Config config, boolean circuit, Callback callback){
         ScheduleDownloaderInputBean data = new ScheduleDownloaderInputBean();
         data.setCircuitVisit(circuit);
         data.setLangCode("pl");
@@ -37,7 +37,7 @@ public class PredefinedTaskList {
         });
     }
 
-    public static void getWeekendTasks(boolean circuit, Callback callback){
+    static void getWeekendTasks(boolean circuit, Callback callback){
         List<MeetingTask> list = new ArrayList<>();
 
         MeetingTask lecture = new MeetingTask();
@@ -71,7 +71,8 @@ public class PredefinedTaskList {
         callback.onDataReceive(list);
     }
 
-    public interface Callback {
+    @FunctionalInterface
+    interface Callback {
         void onDataReceive(List<MeetingTask> list);
     }
 }
