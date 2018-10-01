@@ -1,6 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.data.schedule;
 
-import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
+import jw.kingdom.hall.kingdomtimer.domain.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.task.provider.TasksProvider;
 
 import java.util.Calendar;

@@ -8,7 +8,7 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.AppWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.WindowInput;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.container.WindowsContainer;
 import jw.kingdom.hall.kingdomtimer.app.javafx.utils.SizeBinder;
-import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
+import jw.kingdom.hall.kingdomtimer.domain.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;

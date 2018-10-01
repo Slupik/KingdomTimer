@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.data.config;
+package jw.kingdom.hall.kingdomtimer.domain.config;
 
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.domain.monitor.Monitor;

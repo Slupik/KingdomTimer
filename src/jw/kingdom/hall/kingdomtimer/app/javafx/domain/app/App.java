@@ -9,7 +9,7 @@ import jw.kingdom.hall.kingdomtimer.app.javafx.domain.window.container.WindowsCo
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.head.HeadWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.speaker.SpeakerWindow;
 import jw.kingdom.hall.kingdomtimer.app.javafx.view.widget.HandyWindow;
-import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
+import jw.kingdom.hall.kingdomtimer.domain.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.monitor.MonitorListManager;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MonitorPreviewController;

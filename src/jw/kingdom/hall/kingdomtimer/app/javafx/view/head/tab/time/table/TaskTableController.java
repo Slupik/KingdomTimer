@@ -11,7 +11,7 @@ import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import jw.kingdom.hall.kingdomtimer.app.javafx.translate.MeetingTaskTrans;
-import jw.kingdom.hall.kingdomtimer.data.config.AppConfig;
+import jw.kingdom.hall.kingdomtimer.domain.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.TaskListBinder;
