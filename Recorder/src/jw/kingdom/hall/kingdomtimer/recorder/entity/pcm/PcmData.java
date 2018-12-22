@@ -9,7 +9,7 @@ import java.io.OutputStream;
 public interface PcmData {
     /**
      * It is possible that return size is different than real.
-     * It may happen if after return the size, a data is added to the associated buffer
+     * It may happen if after return the size, a datao is added to the associated buffer
      * @return size of a buffer
      */
     long getSize();
