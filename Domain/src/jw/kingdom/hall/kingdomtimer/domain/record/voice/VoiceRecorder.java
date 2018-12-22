@@ -2,6 +2,7 @@ package jw.kingdom.hall.kingdomtimer.domain.record.voice;
 
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
+import jw.kingdom.hall.kingdomtimer.domain.file.FileManager;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 import jw.kingdom.hall.kingdomtimer.recorder.RecordListener;
 import jw.kingdom.hall.kingdomtimer.recorder.RecordListenerProxy;
@@ -75,14 +76,14 @@ public class VoiceRecorder implements RecordControl {
     }
 
     private static VoiceRecorder instance;
-    public static VoiceRecorder getInstance(Config config, Schedule schedule, Countdown countdown) {
+    public static VoiceRecorder getInstance(Config config, Schedule schedule, Countdown countdown, FileManager fileManager) {
         if(null == instance) {
-            instance = new VoiceRecorder(config, schedule, countdown);
+            instance = new VoiceRecorder(config, schedule, countdown, fileManager);
         }
         return instance;
     }
-    private VoiceRecorder(Config config, Schedule schedule, Countdown countdown){
-        DefaultAudioSettingsBean bean = new DefaultAudioSettingsBean(config, schedule, countdown);
+    private VoiceRecorder(Config config, Schedule schedule, Countdown countdown, FileManager fileManager){
+        DefaultAudioSettingsBean bean = new DefaultAudioSettingsBean(fileManager.getFileRecordCreator(config, schedule, countdown));
         recorder = new XtRecorder(bean);
         addListener(new RecordListenerProxy() {
 

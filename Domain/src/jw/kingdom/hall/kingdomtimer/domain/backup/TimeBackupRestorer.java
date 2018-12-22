@@ -4,9 +4,10 @@ import com.google.gson.Gson;
 import jw.kingdom.hall.kingdomtimer.domain.backup.entity.OfflineMeetingBean;
 import jw.kingdom.hall.kingdomtimer.domain.backup.entity.TimeBackupBean;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
-import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
+import jw.kingdom.hall.kingdomtimer.domain.file.FileManager;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.domain.utils.FileUtils;
 
 import java.util.ArrayList;
@@ -19,18 +20,20 @@ class TimeBackupRestorer {
     private final RecordControl recordControl;
     private final Schedule schedule;
     private final Countdown countdown;
+    private final FileManager fileManager;
     private TimeBackupBean data;
 
-    TimeBackupRestorer(RecordControl recordControl, Schedule schedule, Countdown countdown){
+    TimeBackupRestorer(RecordControl recordControl, Schedule schedule, Countdown countdown, FileManager fileManager){
         this.recordControl = recordControl;
         this.schedule = schedule;
         this.countdown = countdown;
+        this.fileManager = fileManager;
         init();
     }
 
     private void init() {
         new Thread(()->{
-            String content = FileUtils.getContent(FileManager.getScheduleFile());
+            String content = FileUtils.getContent(fileManager.getScheduleFile());
             if(content.length()>1) {
                 data = new Gson().fromJson(content, TimeBackupBean.class);
             }
@@ -50,8 +53,8 @@ class TimeBackupRestorer {
     }
 
     void delete() {
-        FileManager.getScheduleFile().delete();
-        FileManager.deleteRootPath();
+        fileManager.getScheduleFile().delete();
+        fileManager.deleteRootPath();
     }
 
     private void restoreRecording() {

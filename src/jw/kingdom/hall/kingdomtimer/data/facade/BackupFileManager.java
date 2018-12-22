@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.domain.backup;
+package jw.kingdom.hall.kingdomtimer.data.facade;
 
 import jw.kingdom.hall.kingdomtimer.data.UniqueFileUtils;
 import jw.kingdom.hall.kingdomtimer.domain.utils.OSValidator;
@@ -10,7 +10,7 @@ import java.io.IOException;
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 //TODO merge with ConfigFiles
-abstract class FileManager {
+abstract class BackupFileManager {
 
     private final static String MAIN_CATALOGUE_NAME = "KingdomHallTimer";
     private final static String BACKUP_CATALOGUE_NAME = "backup";

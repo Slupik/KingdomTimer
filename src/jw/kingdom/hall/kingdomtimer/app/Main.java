@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.app.App;
 import jw.kingdom.hall.kingdomtimer.app.javafx.domain.app.AppInput;
+import jw.kingdom.hall.kingdomtimer.data.facade.FileManagerImpl;
 import jw.kingdom.hall.kingdomtimer.domain.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.data.config.DefaultAppConfig;
 import jw.kingdom.hall.kingdomtimer.data.log.DefaultLogFile;
@@ -16,6 +17,7 @@ import jw.kingdom.hall.kingdomtimer.domain.backup.BackupManager;
 import jw.kingdom.hall.kingdomtimer.domain.buzzer.BuzzerController;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownImpl;
+import jw.kingdom.hall.kingdomtimer.domain.file.FileManager;
 import jw.kingdom.hall.kingdomtimer.domain.monitor.MonitorListManager;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MonitorPreviewController;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MonitorPreviewControllerImpl;
@@ -36,14 +38,15 @@ public class Main extends Application {
         AppConfig config = DefaultAppConfig.getInstance();
         Countdown countdown = new CountdownImpl();
         Schedule schedule = new MeetingSchedule();
-        RecordControl recordControl = VoiceRecorder.getInstance(config, schedule, countdown);
+        FileManager fileManager = new FileManagerImpl();
+        RecordControl recordControl = VoiceRecorder.getInstance(config, schedule, countdown, fileManager);
         TimeController time = new TimeControllerImpl(schedule, countdown);
         new BuzzerController(new Buzzer(), time);
         MonitorPreviewController speakerPreviewController = new MonitorPreviewControllerImpl(new ScreenShotMaker());
         speakerPreviewController.setPause(false);
         TasksProvider tasksProvider = new TasksFetcher(config);
 
-        BackupManager.start(recordControl, schedule, countdown);
+        BackupManager.start(recordControl, schedule, countdown, fileManager);
         MonitorListManager monitorManager = MonitorListManagerImpl.getInstance();
         try {
             new App(new AppInput() {

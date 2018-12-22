@@ -25,6 +25,6 @@
     <orderEntry type="module" module-name="2 Config" exported="" />
     <orderEntry type="module" module-name="Logger" exported="" />
     <orderEntry type="module" module-name="2 Download Schedule" exported="" />
-    <orderEntry type="module" module-name="1 Use Cases" exported="" />
+    <orderEntry type="module" module-name="Domain" exported="" />
   </component>
 </module>
