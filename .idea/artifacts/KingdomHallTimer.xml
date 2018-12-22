@@ -32,16 +32,16 @@
         <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jfxtras/jfxtras-controls/9.0-r1/jfxtras-controls-9.0-r1.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jfxtras/jfxtras-common/9.0-r1/jfxtras-common-9.0-r1.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jfxtras/jfxtras-all/9.0-r1/jfxtras-all-9.0-r1.jar" path-in-jar="/" />
-        <element id="module-output" name="Recorder" />
+        <element id="module-output" name="1 Recorder" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Libraries/JAVE/jave-1.0.2/jave-1.0.2.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Libraries/xt-audio/jna-4.1.0.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Libraries/JLayer1.0.1/jl1.0.1.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Libraries/xt-audio/com.xt-audio.xt-1.0.5.jar" path-in-jar="/" />
-        <element id="module-output" name="Logger" />
+        <element id="module-output" name="1 Logger" />
         <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jsoup/jsoup/1.11.3/jsoup-1.11.3.jar" path-in-jar="/" />
-        <element id="module-output" name="3 CustomViewElements" />
-        <element id="module-output" name="2 Download Schedule" />
-        <element id="module-output" name="2 Config" />
+        <element id="module-output" name="1 CustomViewElements" />
+        <element id="module-output" name="1 Download Schedule" />
+        <element id="module-output" name="1 Config" />
         <element id="module-output" name="1 Use Cases" />
         <element id="extracted-dir" path="$MAVEN_REPOSITORY$/net/java/dev/jna/jna/4.5.2/jna-4.5.2.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jfxtras/jfxtras-icalendaragenda/9.0-r1/jfxtras-icalendaragenda-9.0-r1.jar" path-in-jar="/" />

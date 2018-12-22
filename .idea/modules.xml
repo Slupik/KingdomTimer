@@ -2,16 +2,16 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Config/2 Config.iml" filepath="$PROJECT_DIR$/Config/2 Config.iml" />
-      <module fileurl="file://$PROJECT_DIR$/JW Downloader/2 Download Schedule.iml" filepath="$PROJECT_DIR$/JW Downloader/2 Download Schedule.iml" />
-      <module fileurl="file://$PROJECT_DIR$/CustomViewElements/3 CustomViewElements.iml" filepath="$PROJECT_DIR$/CustomViewElements/3 CustomViewElements.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Data/Data.iml" filepath="$PROJECT_DIR$/Data/Data.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Device/Device.iml" filepath="$PROJECT_DIR$/Device/Device.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Domain/Domain.iml" filepath="$PROJECT_DIR$/Domain/Domain.iml" />
-      <module fileurl="file://$PROJECT_DIR$/JavaFX/JavaFX.iml" filepath="$PROJECT_DIR$/JavaFX/JavaFX.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Config/1 Config.iml" filepath="$PROJECT_DIR$/Config/1 Config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CustomViewElements/1 CustomViewElements.iml" filepath="$PROJECT_DIR$/CustomViewElements/1 CustomViewElements.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JW Downloader/1 Download Schedule.iml" filepath="$PROJECT_DIR$/JW Downloader/1 Download Schedule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Logger/1 Logger.iml" filepath="$PROJECT_DIR$/Logger/1 Logger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Recorder/1 Recorder.iml" filepath="$PROJECT_DIR$/Recorder/1 Recorder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Domain/2 Domain.iml" filepath="$PROJECT_DIR$/Domain/2 Domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Data/3 Data.iml" filepath="$PROJECT_DIR$/Data/3 Data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Device/3 Device.iml" filepath="$PROJECT_DIR$/Device/3 Device.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaFX/3 JavaFX.iml" filepath="$PROJECT_DIR$/JavaFX/3 JavaFX.iml" />
       <module fileurl="file://$PROJECT_DIR$/KingdomTimer.iml" filepath="$PROJECT_DIR$/KingdomTimer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Logger/Logger.iml" filepath="$PROJECT_DIR$/Logger/Logger.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Recorder/Recorder.iml" filepath="$PROJECT_DIR$/Recorder/Recorder.iml" />
     </modules>
   </component>
 </project>
