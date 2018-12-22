@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import jw.kingdom.hall.kingdomtimer.javafx.domain.window.AppWindow;
-import jw.kingdom.hall.kingdomtimer.javafx.domain.window.container.WindowInput;
+import jw.kingdom.hall.kingdomtimer.javafx.domain.window.WindowInput;
 import jw.kingdom.hall.kingdomtimer.domain.monitor.Monitor;
 
 import java.util.List;

@@ -1,7 +1,9 @@
-package jw.kingdom.hall.kingdomtimer.javafx.domain.window.container;
+package jw.kingdom.hall.kingdomtimer.javafx.domain.screen;
 
 import jw.kingdom.hall.kingdomtimer.javafx.domain.loader.ViewManager;
 import jw.kingdom.hall.kingdomtimer.javafx.domain.window.AppWindow;
+import jw.kingdom.hall.kingdomtimer.javafx.domain.window.WindowInput;
+import jw.kingdom.hall.kingdomtimer.javafx.domain.window.container.WindowsContainer;
 
 /**
  * All rights reserved & copyright ©

@@ -4,7 +4,7 @@ import javafx.stage.Stage;
 import jw.kingdom.hall.kingdomtimer.domain.backup.BackupManager;
 import jw.kingdom.hall.kingdomtimer.javafx.CrashMaker;
 import jw.kingdom.hall.kingdomtimer.javafx.domain.window.AppWindow;
-import jw.kingdom.hall.kingdomtimer.javafx.domain.window.container.WindowInput;
+import jw.kingdom.hall.kingdomtimer.javafx.domain.window.WindowInput;
 
 import static jw.kingdom.hall.kingdomtimer.javafx.view.head.HeadWindow.Screens.MAIN;
 

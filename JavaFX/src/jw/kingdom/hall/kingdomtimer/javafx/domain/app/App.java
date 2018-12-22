@@ -2,7 +2,7 @@ package jw.kingdom.hall.kingdomtimer.javafx.domain.app;
 
 import javafx.stage.Stage;
 import jw.kingdom.hall.kingdomtimer.javafx.domain.window.AppWindow;
-import jw.kingdom.hall.kingdomtimer.javafx.domain.window.container.WindowInput;
+import jw.kingdom.hall.kingdomtimer.javafx.domain.window.WindowInput;
 import jw.kingdom.hall.kingdomtimer.javafx.domain.window.WindowType;
 import jw.kingdom.hall.kingdomtimer.javafx.domain.window.container.WindowsContainer;
 import jw.kingdom.hall.kingdomtimer.javafx.domain.window.container.WindowsContainerImpl;

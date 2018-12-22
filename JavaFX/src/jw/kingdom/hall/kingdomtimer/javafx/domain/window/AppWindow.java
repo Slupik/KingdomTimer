@@ -7,7 +7,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import jw.kingdom.hall.kingdomtimer.javafx.domain.loader.DefaultViewManager;
 import jw.kingdom.hall.kingdomtimer.javafx.domain.loader.ViewManager;
-import jw.kingdom.hall.kingdomtimer.javafx.domain.window.container.WindowInput;
 import jw.kingdom.hall.kingdomtimer.javafx.view.WindowSettings;
 import jw.kingdom.hall.kingdomtimer.domain.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;

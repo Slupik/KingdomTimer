@@ -1,7 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.javafx.view.head.tab;
 
 
-import jw.kingdom.hall.kingdomtimer.javafx.domain.window.container.WindowInput;
+import jw.kingdom.hall.kingdomtimer.javafx.domain.window.WindowInput;
 import jw.kingdom.hall.kingdomtimer.javafx.domain.window.container.WindowsContainer;
 
 /**
