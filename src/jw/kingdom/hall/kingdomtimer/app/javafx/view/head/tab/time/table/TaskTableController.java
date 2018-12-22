@@ -2,6 +2,7 @@ package jw.kingdom.hall.kingdomtimer.app.javafx.view.head.tab.time.table;
 
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -12,9 +13,11 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import jw.kingdom.hall.kingdomtimer.app.javafx.translate.MeetingTaskTrans;
 import jw.kingdom.hall.kingdomtimer.domain.config.AppConfig;
-import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.TaskListBinder;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
+
+import java.util.List;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -67,6 +70,16 @@ public class TaskTableController {
                     return;
                 }
                 super.onMove(elementIndex, destIndex);
+            }
+        });
+        tableData.addListener((ListChangeListener<TaskBean>) c -> {
+            while(c.next()){
+                if(c.wasRemoved()) {
+                    List<? extends TaskBean> removed = c.getRemoved();
+                    for(TaskBean item:removed) {
+                        schedule.removeTask(item);
+                    }
+                }
             }
         });
     }
