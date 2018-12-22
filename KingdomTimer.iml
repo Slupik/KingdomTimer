@@ -28,5 +28,6 @@
     <orderEntry type="module" module-name="Domain" exported="" />
     <orderEntry type="module" module-name="Device" exported="" />
     <orderEntry type="module" module-name="Data" exported="" />
+    <orderEntry type="module" module-name="JavaFX" exported="" />
   </component>
 </module>
