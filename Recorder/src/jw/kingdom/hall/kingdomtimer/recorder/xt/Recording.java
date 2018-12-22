@@ -58,8 +58,8 @@ class Recording {
             stream.stop();
             stream = null;
         }
-        //After close device recording again from the same object is impossible
-//        device.close();
+        //After close deviceold recording again from the same object is impossible
+//        deviceold.close();
     }
 
     void setPause(boolean isPause) {
