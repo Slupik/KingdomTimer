@@ -8,7 +8,6 @@ import java.io.File;
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-//FIXME backup don't save condition if schedule was loaded only 1 time
 public class BackupFileControllerImpl extends InstallationCatalogue implements BackupFileController {
 
     private final static String BACKUP_CATALOGUE_NAME = "backup";

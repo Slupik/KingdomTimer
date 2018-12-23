@@ -43,24 +43,8 @@ class TimeBackupMaker {
         this.countdown = countdown;
         this.fileController = fileController;
         getSchedule().addListener(new MeetingScheduleListener() {
-
             @Override
-            public void onRemove(TaskBean task) {
-                updateSchedule();
-            }
-
-            @Override
-            public void onInsert(TaskBean task) {
-                updateSchedule();
-            }
-
-            @Override
-            public void onBulkInsert(TaskBean... task) {
-                updateSchedule();
-            }
-
-            @Override
-            public void onClear() {
+            public void onModifySchedule() {
                 updateSchedule();
             }
         });
