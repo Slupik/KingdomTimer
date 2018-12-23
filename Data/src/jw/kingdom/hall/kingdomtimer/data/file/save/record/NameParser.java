@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.data.record;
+package jw.kingdom.hall.kingdomtimer.data.file.save.record;
 
 import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +32,7 @@ abstract class NameParser {
     private static CharSequence getNameOfType(TaskBean.Type type) {
         switch (type) {
             case UNKNOWN:
-                return "???";
+                return "___";
             case NONE:
                 return "-";
             case TREASURES:
@@ -48,8 +48,8 @@ abstract class NameParser {
             case CIRCUIT:
                 return "Obsługa";
             case OTHER:
-                return "???";
+                return "___";
         }
-        return "???";
+        return "___";
     }
 }

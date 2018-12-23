@@ -1,13 +1,13 @@
 package jw.kingdom.hall.kingdomtimer.domain.record.voice;
 
-import jw.kingdom.hall.kingdomtimer.recorder.common.files.FileRecordCreator;
+import jw.kingdom.hall.kingdomtimer.recorder.common.files.FileRecordProvider;
 import jw.kingdom.hall.kingdomtimer.recorder.common.settings.AudioSettingsBean;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class DefaultAudioSettingsBean implements AudioSettingsBean {
-    private FileRecordCreator fileRecordCreator;
+    private FileRecordProvider fileRecordProvider;
     private boolean readDefaultMixSettings = false;
     private int rate = 44100;//ignore if(readDefaultMixSettings == true)
     private String sample = "INT24";//ignore if(readDefaultMixSettings == true)
@@ -17,8 +17,8 @@ public class DefaultAudioSettingsBean implements AudioSettingsBean {
     private String deviceName = "";//ignore if(selectDefaultDevice == true)
     private String serviceSetupId = "CONSUMER_AUDIO";
 
-    public DefaultAudioSettingsBean(FileRecordCreator creator) {
-        fileRecordCreator = creator;
+    public DefaultAudioSettingsBean(FileRecordProvider creator) {
+        fileRecordProvider = creator;
     }
 
     @Override
@@ -85,12 +85,12 @@ public class DefaultAudioSettingsBean implements AudioSettingsBean {
     }
 
     @Override
-    public FileRecordCreator getPaths() {
-        return fileRecordCreator;
+    public FileRecordProvider getPaths() {
+        return fileRecordProvider;
     }
 
-    public void setPaths(FileRecordCreator fileRecordCreator) {
-        this.fileRecordCreator = fileRecordCreator;
+    public void setPaths(FileRecordProvider fileRecordProvider) {
+        this.fileRecordProvider = fileRecordProvider;
     }
 
     @Override

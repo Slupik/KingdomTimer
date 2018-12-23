@@ -2,12 +2,10 @@ package jw.kingdom.hall.kingdomtimer;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import jw.kingdom.hall.kingdomtimer.javafx.domain.app.App;
-import jw.kingdom.hall.kingdomtimer.javafx.domain.app.AppInput;
-import jw.kingdom.hall.kingdomtimer.data.facade.FileManagerImpl;
-import jw.kingdom.hall.kingdomtimer.domain.config.AppConfig;
-import jw.kingdom.hall.kingdomtimer.data.config.DefaultAppConfig;
-import jw.kingdom.hall.kingdomtimer.data.log.DefaultLogFile;
+import jw.kingdom.hall.kingdomtimer.data.file.config.DefaultAppConfig;
+import jw.kingdom.hall.kingdomtimer.data.file.save.backup.BackupFileControllerImpl;
+import jw.kingdom.hall.kingdomtimer.data.file.save.log.DefaultLogFileProvider;
+import jw.kingdom.hall.kingdomtimer.data.file.save.record.DefaultFileRecordProvider;
 import jw.kingdom.hall.kingdomtimer.data.schedule.TasksFetcher;
 import jw.kingdom.hall.kingdomtimer.device.local.AutoRAMCleaner;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorListManagerImpl;
@@ -15,9 +13,9 @@ import jw.kingdom.hall.kingdomtimer.device.screen.ScreenShotMaker;
 import jw.kingdom.hall.kingdomtimer.device.sound.Buzzer;
 import jw.kingdom.hall.kingdomtimer.domain.backup.BackupManager;
 import jw.kingdom.hall.kingdomtimer.domain.buzzer.BuzzerController;
+import jw.kingdom.hall.kingdomtimer.domain.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownImpl;
-import jw.kingdom.hall.kingdomtimer.domain.file.FileManager;
 import jw.kingdom.hall.kingdomtimer.domain.monitor.MonitorListManager;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MonitorPreviewController;
 import jw.kingdom.hall.kingdomtimer.domain.multimedia.MonitorPreviewControllerImpl;
@@ -28,25 +26,26 @@ import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 import jw.kingdom.hall.kingdomtimer.domain.task.provider.TasksProvider;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeController;
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeControllerImpl;
+import jw.kingdom.hall.kingdomtimer.javafx.domain.app.App;
+import jw.kingdom.hall.kingdomtimer.javafx.domain.app.AppInput;
 import jw.kingdom.hall.kingdomtimer.log.Log;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Log.init(new DefaultLogFile());
+        Log.init(new DefaultLogFileProvider());
         AppConfig config = DefaultAppConfig.getInstance();
         Countdown countdown = new CountdownImpl();
         Schedule schedule = new MeetingSchedule();
-        FileManager fileManager = new FileManagerImpl();
-        RecordControl recordControl = VoiceRecorder.getInstance(config, schedule, countdown, fileManager);
+        RecordControl recordControl = VoiceRecorder.getInstance(new DefaultFileRecordProvider(config, schedule, countdown));
         TimeController time = new TimeControllerImpl(schedule, countdown);
         new BuzzerController(new Buzzer(), time);
         MonitorPreviewController speakerPreviewController = new MonitorPreviewControllerImpl(new ScreenShotMaker());
         speakerPreviewController.setPause(false);
         TasksProvider tasksProvider = new TasksFetcher(config);
 
-        BackupManager.start(recordControl, schedule, countdown, fileManager);
+        BackupManager.start(recordControl, schedule, countdown, new BackupFileControllerImpl());
         MonitorListManager monitorManager = MonitorListManagerImpl.getInstance();
         try {
             new App(new AppInput() {

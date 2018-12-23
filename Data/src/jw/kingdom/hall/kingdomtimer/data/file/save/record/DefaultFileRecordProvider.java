@@ -1,26 +1,26 @@
-package jw.kingdom.hall.kingdomtimer.data.record;
+package jw.kingdom.hall.kingdomtimer.data.file.save.record;
 
 import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.config.model.ConfigReadable;
-import jw.kingdom.hall.kingdomtimer.data.UniqueFileUtils;
+import jw.kingdom.hall.kingdomtimer.data.file.save.UniqueFileUtils;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownListenerProxy;
 import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
-import jw.kingdom.hall.kingdomtimer.recorder.common.files.FileRecordCreator;
+import jw.kingdom.hall.kingdomtimer.recorder.common.files.FileRecordProvider;
 
 import java.io.File;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
-public class DefaultFileRecordCreator implements FileRecordCreator {
+public class DefaultFileRecordProvider implements FileRecordProvider {
 
     private static final TaskBean EMPTY = getEmptyTask();
     private final Config config;
     private TaskBean lastTask = EMPTY;
 
-    public DefaultFileRecordCreator(Config config, Schedule schedule, Countdown countdown){
+    public DefaultFileRecordProvider(Config config, Schedule schedule, Countdown countdown){
         this.config = config;
         countdown.addListener(new CountdownListenerProxy() {
             @Override

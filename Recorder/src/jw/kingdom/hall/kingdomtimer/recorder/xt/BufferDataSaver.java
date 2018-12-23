@@ -4,7 +4,7 @@ import it.sauronsoftware.jave.AudioAttributes;
 import it.sauronsoftware.jave.Encoder;
 import it.sauronsoftware.jave.EncoderException;
 import it.sauronsoftware.jave.EncodingAttributes;
-import jw.kingdom.hall.kingdomtimer.recorder.common.files.FileRecordCreator;
+import jw.kingdom.hall.kingdomtimer.recorder.common.files.FileRecordProvider;
 import jw.kingdom.hall.kingdomtimer.recorder.entity.buffer.AudioDataBuffer;
 import jw.kingdom.hall.kingdomtimer.recorder.utils.wav.WavDataSaver;
 
@@ -19,9 +19,9 @@ class BufferDataSaver {
     private final int srate;
     private final int channel;
     private final int format;
-    private final FileRecordCreator paths;
+    private final FileRecordProvider paths;
 
-    BufferDataSaver(AudioDataBuffer storage, int srate, int channel, int format, FileRecordCreator paths) {
+    BufferDataSaver(AudioDataBuffer storage, int srate, int channel, int format, FileRecordProvider paths) {
         this.storage = storage;
         this.srate = srate;
         this.channel = channel;

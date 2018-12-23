@@ -5,7 +5,7 @@ import jw.kingdom.hall.kingdomtimer.domain.backup.entity.OfflineMeetingBean;
 import jw.kingdom.hall.kingdomtimer.domain.backup.entity.TimeBackupBean;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownListenerProxy;
-import jw.kingdom.hall.kingdomtimer.domain.file.FileManager;
+import jw.kingdom.hall.kingdomtimer.domain.file.BackupFileController;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.DefaultVoiceRecorderRecordControlListener;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.MeetingScheduleListener;
@@ -24,10 +24,9 @@ import java.util.concurrent.Executors;
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 class TimeBackupMaker {
-    private final RecordControl recordControl;
     private final Schedule schedule;
     private final Countdown countdown;
-    private final FileManager fileManager;
+    private final BackupFileController fileController;
     private TimeBackupBean bean = new TimeBackupBean();
     private PropertyChangeListener listener = evt -> {
         if(evt.getPropertyName().equals(TaskBean.PropertyName.COUNTDOWN_DOWN)) {
@@ -39,11 +38,10 @@ class TimeBackupMaker {
     };
     private TaskBean lastTask = null;
 
-    TimeBackupMaker(RecordControl recordControl, Schedule schedule, Countdown countdown, FileManager fileManager){
-        this.recordControl = recordControl;
+    TimeBackupMaker(RecordControl recordControl, Schedule schedule, Countdown countdown, BackupFileController fileController){
         this.schedule = schedule;
         this.countdown = countdown;
-        this.fileManager = fileManager;
+        this.fileController = fileController;
         getSchedule().addListener(new MeetingScheduleListener() {
 
             @Override
@@ -196,7 +194,7 @@ class TimeBackupMaker {
     private ExecutorService executor = Executors.newSingleThreadExecutor();
     private void saveData() {
         executor.execute(()->{
-            File dest = fileManager.getScheduleFile();
+            File dest = fileController.getTimeFile();
             FileUtils.writeToFile(dest, getDataToSave());
         });
     }

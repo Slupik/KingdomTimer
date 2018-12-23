@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import jw.kingdom.hall.kingdomtimer.domain.backup.entity.OfflineMeetingBean;
 import jw.kingdom.hall.kingdomtimer.domain.backup.entity.TimeBackupBean;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
-import jw.kingdom.hall.kingdomtimer.domain.file.FileManager;
+import jw.kingdom.hall.kingdomtimer.domain.file.BackupFileController;
 import jw.kingdom.hall.kingdomtimer.domain.record.voice.RecordControl;
 import jw.kingdom.hall.kingdomtimer.domain.schedule.Schedule;
 import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
@@ -20,20 +20,20 @@ class TimeBackupRestorer {
     private final RecordControl recordControl;
     private final Schedule schedule;
     private final Countdown countdown;
-    private final FileManager fileManager;
+    private final BackupFileController fileController;
     private TimeBackupBean data;
 
-    TimeBackupRestorer(RecordControl recordControl, Schedule schedule, Countdown countdown, FileManager fileManager){
+    TimeBackupRestorer(RecordControl recordControl, Schedule schedule, Countdown countdown, BackupFileController fileController){
         this.recordControl = recordControl;
         this.schedule = schedule;
         this.countdown = countdown;
-        this.fileManager = fileManager;
+        this.fileController = fileController;
         init();
     }
 
     private void init() {
         new Thread(()->{
-            String content = FileUtils.getContent(fileManager.getScheduleFile());
+            String content = FileUtils.getContent(fileController.getTimeFile());
             if(content.length()>1) {
                 data = new Gson().fromJson(content, TimeBackupBean.class);
             }
@@ -53,8 +53,8 @@ class TimeBackupRestorer {
     }
 
     void delete() {
-        fileManager.getScheduleFile().delete();
-        fileManager.deleteRootPath();
+        fileController.getTimeFile().delete();
+        fileController.deleteCatalogue();
     }
 
     private void restoreRecording() {

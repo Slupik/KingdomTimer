@@ -13,7 +13,7 @@ public abstract class Log {
     private static PrintStream sysErr;
     private static PrintStream sysOut;
 
-    public static void init(LogFile file){
+    public static void init(LogFileProvider file){
         if(saver==null) {
             saver = new LogSaver(file);
             saver.printHeader();

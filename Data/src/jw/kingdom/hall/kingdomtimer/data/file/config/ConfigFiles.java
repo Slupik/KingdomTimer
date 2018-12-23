@@ -1,4 +1,4 @@
-package jw.kingdom.hall.kingdomtimer.data.config;
+package jw.kingdom.hall.kingdomtimer.data.file.config;
 
 import jw.kingdom.hall.kingdomtimer.domain.utils.OSValidator;
 

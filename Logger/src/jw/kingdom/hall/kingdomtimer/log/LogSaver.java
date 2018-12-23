@@ -12,9 +12,9 @@ import java.util.Date;
  */
 class LogSaver {
     private static final String ENTER = System.getProperty("line.separator");
-    private final LogFile FILE;
+    private final LogFileProvider FILE;
 
-    LogSaver(LogFile file) {
+    LogSaver(LogFileProvider file) {
         FILE = file;
     }
 
