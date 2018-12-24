@@ -222,4 +222,9 @@ abstract class ConfigBase implements Config {
     public int getTimeToEvaluate() {
         return getConfig().getTimeToEvaluate();
     }
+
+    @Override
+    public String[] getIpOfHardwareTimersControlledByHttp() {
+        return getConfig().getIpOfHardwareTimersControlledByHttp();
+    }
 }

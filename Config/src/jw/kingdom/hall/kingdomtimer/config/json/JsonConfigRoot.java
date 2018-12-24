@@ -29,6 +29,11 @@ class JsonConfigRoot extends ConfigElement {
     @Expose
     private ElementTime countdown;
 
+    @SerializedName("fizyczne_wyswietlacze")
+    @Nullable
+    @Expose
+    private ElementHardwareDisplay hardwareDisplays;
+
     public void applyParentConfig(Config parent) {
         if(speaker!=null) {
             speaker.applyParentConfig(parent);
@@ -41,6 +46,9 @@ class JsonConfigRoot extends ConfigElement {
         }
         if(countdown!=null) {
             countdown.applyParentConfig(parent);
+        }
+        if(hardwareDisplays!=null) {
+            hardwareDisplays.applyParentConfig(parent);
         }
     }
 
@@ -74,5 +82,13 @@ class JsonConfigRoot extends ConfigElement {
 
     public void setCountdown(ElementTime countdown) {
         this.countdown = countdown;
+    }
+
+    public ElementHardwareDisplay getHardwareDisplays() {
+        return hardwareDisplays;
+    }
+
+    public void setHardwareDisplays(ElementHardwareDisplay hardwareDisplays) {
+        this.hardwareDisplays = hardwareDisplays;
     }
 }

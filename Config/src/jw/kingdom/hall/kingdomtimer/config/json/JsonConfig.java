@@ -2,14 +2,12 @@ package jw.kingdom.hall.kingdomtimer.config.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.config.ConfigUtils;
+import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.config.model.ConfigWriteable;
 import jw.kingdom.hall.kingdomtimer.config.utils.FileUtils;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 import static jw.kingdom.hall.kingdomtimer.config.ConfigUtils.BACKBONE;
@@ -245,6 +243,16 @@ public class JsonConfig implements ConfigWriteable {
         } catch (Exception e) {
             e.printStackTrace();
             return ConfigUtils.DEFAULT.getTimeToEvaluate();
+        }
+    }
+
+    @Override
+    public String[] getIpOfHardwareTimersControlledByHttp() {
+        try {
+            return config.getHardwareDisplays().getControlledByHttp();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ConfigUtils.DEFAULT.getIpOfHardwareTimersControlledByHttp();
         }
     }
 

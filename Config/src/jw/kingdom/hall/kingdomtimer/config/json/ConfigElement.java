@@ -24,6 +24,9 @@ public abstract class ConfigElement {
         }
         return !isCorrect(value, type);
     }
+    protected boolean isCallingParent(String[] values) {
+        return null == values || values.length == 0;
+    }
 
     private boolean isCorrect(String value, ConfigFieldType type) {
         try {

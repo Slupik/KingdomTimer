@@ -108,6 +108,11 @@ public class DefaultConfig implements ConfigWriteable {
         return -1;
     }
 
+    @Override
+    public String[] getIpOfHardwareTimersControlledByHttp() {
+        return new String[0];
+    }
+
 
     @Override
     public void setSpeakerScreen(String screen) {}

@@ -25,4 +25,6 @@ public interface ConfigReadable {
 
     boolean isDirectDown();
     int getTimeToEvaluate();
+
+    String[] getIpOfHardwareTimersControlledByHttp();
 }
