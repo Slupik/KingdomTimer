@@ -16,6 +16,16 @@ import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 public class ScreenShotMaker implements MonitorScreenshotMaker {
+    private static Robot robot;
+
+    static {
+        try {
+            robot = new Robot();
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
+    }
+
     private static final String CURSOR_IMG_PATH = "images/cursor.png";
     private Rectangle resolution = new Rectangle(-1, -1);
     private Rectangle area = new Rectangle(-1, -1);
@@ -44,18 +54,18 @@ public class ScreenShotMaker implements MonitorScreenshotMaker {
     public BufferedImage getBufferedImage() {
         try {
             return getSS(area);
-        } catch (AWTException | IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return new BufferedImage(area.width, area.height, TYPE_INT_ARGB);
         }
     }
 
-    public static BufferedImage getTestSS() throws AWTException, IOException {
+    public static BufferedImage getTestSS() throws IOException {
         return getSS(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
     }
 
-    public static BufferedImage getSS(Rectangle size) throws AWTException, IOException {
-        BufferedImage capture = new Robot().createScreenCapture(size);
+    public static BufferedImage getSS(Rectangle size) throws IOException {
+        BufferedImage capture = robot.createScreenCapture(size);
 
         Point mousePos = new Point(0, 0);
         try {
