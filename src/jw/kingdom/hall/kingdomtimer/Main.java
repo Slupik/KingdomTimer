@@ -7,6 +7,8 @@ import jw.kingdom.hall.kingdomtimer.data.file.save.backup.BackupFileControllerIm
 import jw.kingdom.hall.kingdomtimer.data.file.save.log.DefaultLogFileProvider;
 import jw.kingdom.hall.kingdomtimer.data.file.save.record.DefaultFileRecordProvider;
 import jw.kingdom.hall.kingdomtimer.data.schedule.TasksFetcher;
+import jw.kingdom.hall.kingdomtimer.device.external.timer.http.ServerForHttpDisplays;
+import jw.kingdom.hall.kingdomtimer.device.external.timer.http.ServerForHttpDisplaysImpl;
 import jw.kingdom.hall.kingdomtimer.device.local.AutoRAMCleaner;
 import jw.kingdom.hall.kingdomtimer.device.monitor.MonitorListManagerImpl;
 import jw.kingdom.hall.kingdomtimer.device.screen.ScreenShotMaker;
@@ -44,6 +46,8 @@ public class Main extends Application {
         MonitorPreviewController speakerPreviewController = new MonitorPreviewControllerImpl(new ScreenShotMaker());
         speakerPreviewController.setPause(false);
         TasksProvider tasksProvider = new TasksFetcher(config);
+
+        configureHttpDisplaysController(time, config);
 
         BackupManager.start(recordControl, schedule, countdown, new BackupFileControllerImpl());
         MonitorListManager monitorManager = MonitorListManagerImpl.getInstance();
@@ -93,6 +97,13 @@ public class Main extends Application {
             e.printStackTrace();
         }
         AutoRAMCleaner.run();
+    }
+
+    private void configureHttpDisplaysController(TimeController time, AppConfig config) {
+        ServerForHttpDisplays controller = new ServerForHttpDisplaysImpl(time);
+        for(String ip:config.getIpOfHardwareTimersControlledByHttp()) {
+            controller.add(ip);
+        }
     }
 
 

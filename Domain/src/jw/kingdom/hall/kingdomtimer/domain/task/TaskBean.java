@@ -15,7 +15,7 @@ public class TaskBean {
     private boolean countdownDown;
     private int time;
     private TaskBean.Type type;
-    private final PropertyChangeSupport propertySupport ;
+    private final PropertyChangeSupport propertySupport;
 
     public TaskBean() {
         this(Randomizer.randomStandardString(16), "???", false, true, TaskBean.Type.UNKNOWN);
