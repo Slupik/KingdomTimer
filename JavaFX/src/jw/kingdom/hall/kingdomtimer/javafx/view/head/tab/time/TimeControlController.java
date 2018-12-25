@@ -65,6 +65,12 @@ public class TimeControlController extends TabPresenter implements Initializable
     private CheckBox cbTimeToEvaluate;
 
     @FXML
+    private HBox hbLoadScheduleContainer;
+
+    @FXML
+    private ProgressIndicator piLoadingTask;
+
+    @FXML
     private TableView<TaskBean> tvList;
 
     @FXML
@@ -154,6 +160,13 @@ public class TimeControlController extends TabPresenter implements Initializable
         Platform.runLater(()-> new BackupPresenter().run());
         new WidgetVisibilityController((HandyWindow) getWindowsContainer().getAppWindow(WindowType.WIDGET), btnWidgetVisibility);
         setupTimeToEvaluate();
+
+        setupScheduleLoadingIndicator();
+    }
+
+    private void setupScheduleLoadingIndicator() {
+        piLoadingTask.setProgress(-1);//Constant waiting
+        showLoadingIndicator(false);
     }
 
     private void setupTimeToEvaluate() {
@@ -193,22 +206,40 @@ public class TimeControlController extends TabPresenter implements Initializable
 
     @FXML
     private void loadOverseerTasksOnline(ActionEvent event) {
+        showLoadingIndicator(true);
+        showScheduleDownloadButtons(false);
         getWindowData().getTasksProvider().getMeetingTasks(true, new TasksProviderCallbackProxy() {
             @Override
             public void onDownload(List<TaskBean> taskList) {
                 getSchedule().setList(taskList);
+                showLoadingIndicator(false);
+                showScheduleDownloadButtons(true);
             }
         });
     }
 
     @FXML
     private void loadTasksOnline(ActionEvent event) {
+        showLoadingIndicator(true);
+        showScheduleDownloadButtons(false);
         getWindowData().getTasksProvider().getMeetingTasks(false, new TasksProviderCallbackProxy() {
             @Override
             public void onDownload(List<TaskBean> taskList) {
                 getSchedule().setList(taskList);
+                showLoadingIndicator(false);
+                showScheduleDownloadButtons(true);
             }
         });
+    }
+
+    private void showLoadingIndicator(boolean show) {
+        piLoadingTask.setVisible(show);
+        piLoadingTask.setManaged(show);
+    }
+
+    private void showScheduleDownloadButtons(boolean show) {
+        hbLoadScheduleContainer.setVisible(show);
+        hbLoadScheduleContainer.setManaged(show);
     }
 
     @FXML
