@@ -15,5 +15,6 @@ public interface TasksProvider {
         void onStart();
         void onProgress(short progress);
         void onDownload(List<TaskBean> taskList);
+        void onConnectionError();
     }
 }

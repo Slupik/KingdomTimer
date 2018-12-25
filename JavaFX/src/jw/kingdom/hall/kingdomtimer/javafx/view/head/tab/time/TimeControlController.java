@@ -6,19 +6,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
+import jw.kingdom.hall.kingdomtimer.domain.task.provider.TasksProviderCallbackProxy;
+import jw.kingdom.hall.kingdomtimer.domain.time.TimeListenerProxy;
 import jw.kingdom.hall.kingdomtimer.javafx.common.controller.BtnBuzzerController;
 import jw.kingdom.hall.kingdomtimer.javafx.common.controller.time.display.TimeDisplayController;
 import jw.kingdom.hall.kingdomtimer.javafx.common.sps.StartPauseStopView;
+import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 import jw.kingdom.hall.kingdomtimer.javafx.domain.window.WindowType;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.TabPresenter;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.time.table.TaskTableController;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.time.timedirect.BtnTimeDirectForInstantController;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.time.timedirect.BtnTimeDirectForPanel;
 import jw.kingdom.hall.kingdomtimer.javafx.view.widget.HandyWindow;
-import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
-import jw.kingdom.hall.kingdomtimer.domain.task.provider.TasksProviderCallbackProxy;
-import jw.kingdom.hall.kingdomtimer.domain.time.TimeListenerProxy;
-import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 
 import java.util.List;
 
@@ -215,6 +215,13 @@ public class TimeControlController extends TabPresenter implements Initializable
                 showLoadingIndicator(false);
                 showScheduleDownloadButtons(true);
             }
+
+            @Override
+            public void onConnectionError() {
+                showLoadingIndicator(false);
+                showScheduleDownloadButtons(true);
+                showConnectionErrorDialog();
+            }
         });
     }
 
@@ -229,6 +236,29 @@ public class TimeControlController extends TabPresenter implements Initializable
                 showLoadingIndicator(false);
                 showScheduleDownloadButtons(true);
             }
+
+            @Override
+            public void onConnectionError() {
+                showLoadingIndicator(false);
+                showScheduleDownloadButtons(true);
+                showConnectionErrorDialog();
+            }
+        });
+    }
+
+    private void showConnectionErrorDialog() {
+        Platform.runLater(()->{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Błąd!");
+            alert.setHeaderText("Wykryto problemy z połączeniem.");
+            alert.setContentText("Nie można było pobrać grafiku zebrania, " +
+                    "ponieważ albo program nie ma dostępu do internetu albo strona wol.jw.org jest niedostępna.\n" +
+                    "Spróbuj wykonać poniższe czynności:\n" +
+                    "\t1. Sprawdź czy masz połączenie z internetem, jeżeli nie to należy je przywrócić.\n" +
+                    "\t2. Sprawdź czy antywirus lub inny program nie blokuje dostępu do internetu dla programu.\n" +
+                    "\t3. Sprawdź czy strona wol.jw.org działa, jeżeli nie, to poczekaj i spróbuj ponownie.");
+
+            alert.showAndWait();
         });
     }
 

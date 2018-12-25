@@ -28,12 +28,20 @@ class TaskListCreator {
         data.setLangCode("pl");
         data.setTranslator(new ScheduleTranslator());
         data.setTimeToEvaluate(config.getTimeToEvaluate());
-        downloader.downloadWeek(data, tasks -> {
-            List<TaskBean> list = new ArrayList<>();
-            for(ScheduleTask scheduleTask:tasks) {
-                list.add(ScheduleTaskToMeetingTaskConverter.getMeetingTask(scheduleTask));
+        downloader.downloadWeek(data, new ScheduleDownloader.DownloadCallback() {
+            @Override
+            public void onDownload(List<ScheduleTask> tasks) {
+                List<TaskBean> list = new ArrayList<>();
+                for(ScheduleTask scheduleTask:tasks) {
+                    list.add(ScheduleTaskToMeetingTaskConverter.getMeetingTask(scheduleTask));
+                }
+                callback.onDataReceive(list);
             }
-            callback.onDataReceive(list);
+
+            @Override
+            public void onConnectionError() {
+                callback.onConnectionError();
+            }
         });
     }
 
@@ -71,8 +79,8 @@ class TaskListCreator {
         callback.onDataReceive(list);
     }
 
-    @FunctionalInterface
     interface Callback {
         void onDataReceive(List<TaskBean> list);
+        void onConnectionError();
     }
 }

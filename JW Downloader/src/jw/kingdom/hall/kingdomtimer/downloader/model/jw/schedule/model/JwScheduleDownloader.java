@@ -10,6 +10,7 @@ package jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleDownloader;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 
 public class JwScheduleDownloader implements ScheduleDownloader {
 
@@ -18,7 +19,16 @@ public class JwScheduleDownloader implements ScheduleDownloader {
      */
     @Override
     public void getUrlForToday(String languageCode, UrlCallback callback) {
-        new Thread(() -> callback.onReturnUrl(new UrlDownloader().getUrl(languageCode))).start();
+        new Thread(() -> {
+            String url = "";
+            try {
+                url = new UrlDownloader().getUrl(languageCode);
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+                callback.onConnectionError();
+            }
+            callback.onReturnUrl(url);
+        }).start();
     }
 
     @Override
@@ -29,7 +39,13 @@ public class JwScheduleDownloader implements ScheduleDownloader {
                 if(data.getDestUrl()!=null && data.getDestUrl().length()>0) {
                     url = data.getDestUrl();
                 } else {
-                    url = new UrlDownloader().getUrl(data.getLangCode());
+                    try {
+                        url = new UrlDownloader().getUrl(data.getLangCode());
+                    } catch (UnknownHostException e) {
+                        e.printStackTrace();
+                        callback.onConnectionError();
+                        return;
+                    }
                 }
                 callback.onDownload(new Downloader().getTasks(data, url));
             } catch (IOException e) {

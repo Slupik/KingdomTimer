@@ -10,6 +10,11 @@ import java.util.List;
 public abstract class TasksProviderCallbackProxy implements TasksProvider.Callback {
 
     @Override
+    public void onConnectionError() {
+
+    }
+
+    @Override
     public void onStart() {
 
     }

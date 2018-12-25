@@ -14,6 +14,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 
 class UrlDownloader {
 
@@ -24,11 +25,13 @@ class UrlDownloader {
      * @param languageCode compatible with the standard ISO 639
      * @return url with meeting schedule
      */
-    String getUrl(String languageCode){
+    String getUrl(String languageCode) throws UnknownHostException {
         try {
             String startUrl = BASE_URL+"/"+languageCode;
             Document doc = Jsoup.connect(startUrl).get();
             return BASE_URL + getUrlEnd(doc);
+        } catch (UnknownHostException e) {
+            throw e;
         } catch (IOException e) {
             e.printStackTrace();
         }

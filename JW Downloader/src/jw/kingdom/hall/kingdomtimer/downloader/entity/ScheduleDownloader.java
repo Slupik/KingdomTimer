@@ -19,10 +19,12 @@ public interface ScheduleDownloader {
 
     interface DownloadCallback {
         void onDownload(List<ScheduleTask> tasks);
+        void onConnectionError();
     }
 
     interface UrlCallback {
         void onReturnUrl(String url);
+        void onConnectionError();
     }
 
     interface InputData {
