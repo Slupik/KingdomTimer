@@ -11,4 +11,7 @@ public interface TimeDisplay {
     void display(int time);
     void onTimeOut();
     void reset();
+    default boolean isClock() {
+        return false;
+    }
 }

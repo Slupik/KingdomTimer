@@ -1,5 +1,7 @@
 package jw.kingdom.hall.kingdomtimer.domain.time;
 
+import jw.kingdom.hall.kingdomtimer.domain.clock.Clock;
+import jw.kingdom.hall.kingdomtimer.domain.clock.ClockImpl;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.Countdown;
 import jw.kingdom.hall.kingdomtimer.domain.countdown.CountdownListener;
 import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
@@ -17,11 +19,14 @@ public class TimeControllerImpl implements TimeController {
 
     private final Schedule schedule;
     private final Countdown countdown;
+    private final Clock clock;
     private final List<TimeListener> listeners = new ArrayList<>();
 
     public TimeControllerImpl(Schedule schedule, Countdown countdown) {
         this.schedule = schedule;
         this.countdown = countdown;
+        this.clock = new ClockImpl();
+        clock.start();
         initListeners();
     }
 
@@ -115,11 +120,13 @@ public class TimeControllerImpl implements TimeController {
     @Override
     public void addDisplay(TimeDisplay display) {
         countdown.addDisplay(display);
+        clock.addDisplay(display);
     }
 
     @Override
     public void removeDisplay(TimeDisplay display) {
         countdown.removeDisplay(display);
+        clock.removeDisplay(display);
     }
 
     @Override
@@ -205,6 +212,7 @@ public class TimeControllerImpl implements TimeController {
             public void onStart(TaskBean task) {
                 if(!hasMeetingStarted) {
                     hasMeetingStarted = true;
+                    clock.stop();
                     for(TimeListener listener:listeners) {
                         listener.onMeetingStart();
                     }
@@ -234,6 +242,7 @@ public class TimeControllerImpl implements TimeController {
                     for(TimeListener listener:listeners) {
                         listener.onMeetingEnd();
                     }
+                    clock.start();
                 }
                 for(TimeListener listener:listeners) {
                     listener.onStop();

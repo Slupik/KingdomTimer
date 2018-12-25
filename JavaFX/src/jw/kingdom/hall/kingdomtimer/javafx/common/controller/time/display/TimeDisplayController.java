@@ -19,6 +19,7 @@ public class TimeDisplayController implements TimeDisplay {
     private final List<Listener> listeners = new ArrayList<>();
 
     private TimeLabel text;
+    private final boolean isClock;
 
     private boolean isLightBackground = true;
     private int lastColorCode = -1;
@@ -30,7 +31,12 @@ public class TimeDisplayController implements TimeDisplay {
     }
 
     public TimeDisplayController(TimeLabel text) {
+        this(text, false);
+    }
+
+    public TimeDisplayController(TimeLabel text, boolean isClock) {
         this.text = text;
+        this.isClock = isClock;
         reset();
     }
 
@@ -49,6 +55,11 @@ public class TimeDisplayController implements TimeDisplay {
     public void reset() {
         setTime(0);
         setColorCode(TimerColor.getDefaultColorCode());
+    }
+
+    @Override
+    public boolean isClock() {
+        return isClock;
     }
 
     @Override

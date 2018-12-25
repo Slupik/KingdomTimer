@@ -28,7 +28,7 @@ class TimeInfoPresenter {
     }
 
     private void setupTimeDisplay(TimeLabel timeLabel) {
-        TimeDisplayController timeDisplay = new TimeDisplayController(timeLabel);
+        TimeDisplayController timeDisplay = new TimeDisplayController(timeLabel, true);
         timeDisplay.setLightBackground(false);
         getTimer().addDisplay(timeDisplay);
     }
