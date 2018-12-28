@@ -8,5 +8,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="1 Config" exported="" />
+    <orderEntry type="module" module-name="1 CustomViewElements" exported="" />
   </component>
 </module>
