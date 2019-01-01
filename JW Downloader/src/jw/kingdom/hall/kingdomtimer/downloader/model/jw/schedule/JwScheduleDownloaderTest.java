@@ -13,6 +13,8 @@ import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTask;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTranslator;
 import jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model.JwScheduleDownloader;
 
+import java.util.List;
+
 public class JwScheduleDownloaderTest {
 
     private static final boolean CHECK_SPECIFIC_LINK = true;
@@ -48,9 +50,17 @@ public class JwScheduleDownloaderTest {
                 public int getTimeToEvaluate() {
                     return 60;
                 }
-            }, tasks -> {
-                for (ScheduleTask task : tasks) {
-                    System.out.println(task.getName() + " (" + task.getTime() + ") buzzer: "+task.isActiveBuzzer());
+            }, new ScheduleDownloader.DownloadCallback() {
+                @Override
+                public void onDownload(List<ScheduleTask> tasks) {
+                    for (ScheduleTask task : tasks) {
+                        System.out.println(task.getName() + " (" + task.getTime() + ") buzzer: "+task.isActiveBuzzer());
+                    }
+                }
+
+                @Override
+                public void onConnectionError() {
+                    System.err.println("Conn error");
                 }
             });
         } else {
@@ -89,9 +99,17 @@ public class JwScheduleDownloaderTest {
                             return 60;
                         }
                     };
-                    new JwScheduleDownloader().downloadWeek(data, tasks -> {
-                        for (ScheduleTask task : tasks) {
-                            System.out.println(task.getName() + " (" + task.getTime() + ") buzzer: "+task.isActiveBuzzer());
+                    new JwScheduleDownloader().downloadWeek(data, new ScheduleDownloader.DownloadCallback() {
+                        @Override
+                        public void onDownload(List<ScheduleTask> tasks) {
+                            for (ScheduleTask task : tasks) {
+                                System.out.println(task.getName() + " (" + task.getTime() + ") buzzer: "+task.isActiveBuzzer());
+                            }
+                        }
+
+                        @Override
+                        public void onConnectionError() {
+                            System.err.println("Conn error");
                         }
                     });
                 }
