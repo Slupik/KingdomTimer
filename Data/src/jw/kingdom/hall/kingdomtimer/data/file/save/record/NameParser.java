@@ -4,6 +4,7 @@ import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -25,8 +26,20 @@ abstract class NameParser {
 
         parsed = parsed.replace("{blok}", getNameOfType(task.getType()));
         parsed = parsed.replace("{punkt}", task.getName());
+        parsed = parsed.replace("{typ}", getWeekPart());
 
         return parsed;
+    }
+
+    private static String getWeekPart() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+        if(dayOfWeek==Calendar.SATURDAY || dayOfWeek==Calendar.SUNDAY) {
+            return "weekend";
+        } else {
+            return "week";
+        }
     }
 
     private static CharSequence getNameOfType(TaskBean.Type type) {
