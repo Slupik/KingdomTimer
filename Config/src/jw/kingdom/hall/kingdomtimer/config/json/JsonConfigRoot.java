@@ -35,21 +35,26 @@ class JsonConfigRoot extends ConfigElement {
     private ElementHardwareDisplay hardwareDisplays;
 
     public void applyParentConfig(Config parent) {
-        if(speaker!=null) {
-            speaker.applyParentConfig(parent);
+        if(speaker==null) {
+            speaker = new ElementSpeaker();
         }
-        if(multimedia!=null) {
-            multimedia.applyParentConfig(parent);
+        if(multimedia==null) {
+            multimedia = new ElementMultimedia();
         }
-        if(recording!=null) {
-            recording.applyParentConfig(parent);
+        if(recording==null) {
+            recording = new ElementRecording();
         }
-        if(countdown!=null) {
-            countdown.applyParentConfig(parent);
+        if(countdown==null) {
+            countdown = new ElementTime();
         }
-        if(hardwareDisplays!=null) {
-            hardwareDisplays.applyParentConfig(parent);
+        if(hardwareDisplays==null) {
+            hardwareDisplays = new ElementHardwareDisplay();
         }
+        speaker.applyParentConfig(parent);
+        multimedia.applyParentConfig(parent);
+        recording.applyParentConfig(parent);
+        countdown.applyParentConfig(parent);
+        hardwareDisplays.applyParentConfig(parent);
     }
 
     public ElementSpeaker getSpeaker() {

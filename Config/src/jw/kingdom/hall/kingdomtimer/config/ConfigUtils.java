@@ -9,7 +9,7 @@ import jw.kingdom.hall.kingdomtimer.config.utils.DefaultConfig;
 public abstract class ConfigUtils {
     public final static String PARENT_VALUE_LINK = "{parent}";
     public final static Config DEFAULT = new DefaultConfig();
-    public final static String BACKBONE = "{\"mowca\":{},\"multimedia\":{},\"nagrania\":{},\"czas\":{}}";
+    public final static String BACKBONE = "{\"mowca\":{},\"multimedia\":{},\"nagrania\":{},\"czas\":{},\"fizyczne_wyswietlacze\":{}}";
 
     private ConfigUtils(){}
 }
