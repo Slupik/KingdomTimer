@@ -13,12 +13,20 @@ public abstract class InstallationCatalogue {
     private final static String MAIN_CATALOGUE_NAME = "KingdomHallTimer";
 
     protected File getFileAndCreate(String fullName) {
-        File file = new File(getTaskPath()+File.separator+fullName);
-        generate(file);
+        String path = getTaskPath();
+        File file = new File(path+File.separator+fullName);
+        generatePath(new File(path));
+        generateFile(file);
         return file;
     }
 
-    private void generate(File file) {
+    private void generatePath(File path) {
+        if(!path.exists()) {
+            path.mkdirs();
+        }
+    }
+
+    private void generateFile(File file) {
         if(!file.exists()) {
             try {
                 file.createNewFile();
