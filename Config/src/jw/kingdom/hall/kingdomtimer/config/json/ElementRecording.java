@@ -79,7 +79,7 @@ class ElementRecording extends ConfigElement {
     }
 
     public String getRawFileNameBackup() {
-        if(isCallingParent(rawFileNameBackup, ConfigFieldType.INTEGER)) {
+        if(isCallingParent(rawFileNameBackup, ConfigFieldType.STRING)) {
             return parent.getRawFileNameBackup();
         }
         return rawFileNameBackup;
@@ -90,7 +90,7 @@ class ElementRecording extends ConfigElement {
     }
 
     public String getRawFileNameBackupGroups() {
-        if(isCallingParent(rawFileNameBackupGroups, ConfigFieldType.INTEGER)) {
+        if(isCallingParent(rawFileNameBackupGroups, ConfigFieldType.STRING)) {
             return parent.getRawFileNameBackupGroups();
         }
         return rawFileNameBackupGroups;
@@ -101,7 +101,7 @@ class ElementRecording extends ConfigElement {
     }
 
     public String getRawFileNameFinal() {
-        if(isCallingParent(rawFileNameFinal, ConfigFieldType.INTEGER)) {
+        if(isCallingParent(rawFileNameFinal, ConfigFieldType.STRING)) {
             return parent.getRawFileNameFinal();
         }
         return rawFileNameFinal;
@@ -112,7 +112,7 @@ class ElementRecording extends ConfigElement {
     }
 
     public String getRawFileNameFinalGroups() {
-        if(isCallingParent(rawFileNameFinalGroups, ConfigFieldType.INTEGER)) {
+        if(isCallingParent(rawFileNameFinalGroups, ConfigFieldType.STRING)) {
             return parent.getRawFileNameFinalGroups();
         }
         return rawFileNameFinalGroups;
