@@ -20,11 +20,18 @@ class TaskNamePresenter {
 
     private void init() {
         getLabelWithName().setText("");
+        getLabelWithNameOfNext().setText("");
         getTimer().addListener(new TimeListenerProxy() {
             @Override
             public void onStart(TaskBean task) {
                 super.onStart(task);
                 PlatformUtils.runOnUiThread(()-> getLabelWithName().setText(task.getName()));
+                if(getTimer().getList().size()>0) {
+                    PlatformUtils.runOnUiThread(()-> getLabelWithNameOfNext().setText(
+                            getTimer().getList().get(0).getName()));
+                } else {
+                    PlatformUtils.runOnUiThread(()-> getLabelWithNameOfNext().setText(""));
+                }
             }
 
             @Override
@@ -39,12 +46,17 @@ class TaskNamePresenter {
         return input.getLabelWithName();
     }
 
+    private Label getLabelWithNameOfNext() {
+        return input.getLabelWithNameOfNext();
+    }
+
     private TimeController getTimer() {
         return input.getTimer();
     }
 
     interface Input {
         Label getLabelWithName();
+        Label getLabelWithNameOfNext();
         TimeController getTimer();
     }
 }
