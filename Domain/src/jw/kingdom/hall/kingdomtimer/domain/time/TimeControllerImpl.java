@@ -242,6 +242,7 @@ public class TimeControllerImpl implements TimeController {
                     for(TimeListener listener:listeners) {
                         listener.onMeetingEnd();
                     }
+                    hasMeetingStarted = false;
                     clock.start();
                 }
                 for(TimeListener listener:listeners) {
