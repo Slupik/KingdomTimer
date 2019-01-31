@@ -11,6 +11,7 @@ import jw.kingdom.hall.kingdomtimer.domain.task.provider.TasksProviderCallbackPr
 import jw.kingdom.hall.kingdomtimer.domain.time.TimeListenerProxy;
 import jw.kingdom.hall.kingdomtimer.javafx.common.controller.BtnBuzzerController;
 import jw.kingdom.hall.kingdomtimer.javafx.common.controller.time.display.TimeDisplayController;
+import jw.kingdom.hall.kingdomtimer.javafx.common.controller.time.display.TotalTimeControl;
 import jw.kingdom.hall.kingdomtimer.javafx.common.sps.StartPauseStopView;
 import jw.kingdom.hall.kingdomtimer.javafx.custom.TimeField;
 import jw.kingdom.hall.kingdomtimer.javafx.domain.window.WindowType;
@@ -30,6 +31,9 @@ public class TimeControlController extends TabPresenter implements Initializable
 
     @FXML
     private Label lblTime;
+
+    @FXML
+    private Label lblTimeTotal;
 
     @FXML
     private Button btnFastDirect;
@@ -128,6 +132,8 @@ public class TimeControlController extends TabPresenter implements Initializable
                 tcTime,
                 tcType
         );
+
+        new TotalTimeControl(new TimeDisplayController(lblTimeTotal), getTimer());
 
         fastPanelController = new FastPanelController(this);
 
