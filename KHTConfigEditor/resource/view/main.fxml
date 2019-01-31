@@ -11,6 +11,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import jw.kingdom.hall.kingdomtimer.javafx.custom.config.ConfigArrayProperty?>
+<?import jw.kingdom.hall.kingdomtimer.javafx.custom.config.ConfigFieldProperty?>
+<?import jw.kingdom.hall.kingdomtimer.javafx.custom.config.ConfigListProperty?>
 
 <!--
   ~ Created 27.12.18 19:45.
@@ -127,7 +130,12 @@
         <panes>
           <TitledPane animated="false" text="Czas">
             <content>
-              <VBox minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <VBox minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ConfigArrayProperty />
+                        <ConfigFieldProperty />
+                        <ConfigListProperty />
+                     </children></VBox>
             </content>
           </TitledPane>
           <TitledPane animated="false" text="Ekran mówcy">

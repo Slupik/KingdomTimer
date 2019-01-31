@@ -2,7 +2,8 @@
   <artifact type="jar" name="CustomViewElements:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/CustomViewElements_jar</output-path>
     <root id="archive" name="CustomViewElements.jar">
-      <element id="module-output" name="CustomViewElements" />
+      <element id="module-output" name="1 CustomViewElements" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

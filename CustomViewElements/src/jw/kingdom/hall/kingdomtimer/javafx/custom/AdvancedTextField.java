@@ -33,7 +33,7 @@ public class AdvancedTextField extends TextField {
 			public void changed(ObservableValue<? extends String> observableValue, String s, String s1) {
 				if (ignore)
 					return;
-				if(s1.length()==0){
+				if(s1==null || s1.length()==0){
 					ignore = true;
 					setText("");
 					ignore = false;
