@@ -28,34 +28,46 @@
       <children>
          <VBox>
             <children>
-               <HBox>
+               <VBox>
                   <children>
-                     <Label fx:id="lblTime" text="12:43:02">
-                        <font>
-                           <Font size="53.0" />
-                        </font>
-                     </Label>
-                     <HBox alignment="CENTER_LEFT">
+                     <HBox>
                         <children>
-                           <HBox fx:id="hbTimeControlsContainer" alignment="CENTER_LEFT">
-                              <HBox.margin>
-                                 <Insets left="16.0" />
-                              </HBox.margin>
+                           <Label fx:id="lblTime" text="12:43:02">
+                              <font>
+                                 <Font size="53.0" />
+                              </font>
+                           </Label>
+                           <HBox alignment="CENTER_LEFT">
+                              <children>
+                                 <HBox fx:id="hbTimeControlsContainer" alignment="CENTER_LEFT">
+                                    <HBox.margin>
+                                       <Insets left="16.0" />
+                                    </HBox.margin>
+                                 </HBox>
+                                 <Button fx:id="btnBuzzer" layoutX="147.0" layoutY="36.0" mnemonicParsing="false" text="Dzwonek">
+                                    <HBox.margin>
+                                       <Insets left="16.0" />
+                                    </HBox.margin>
+                                 </Button>
+                                 <Button fx:id="btnInstantDirect" mnemonicParsing="false" text="Dół">
+                                    <HBox.margin>
+                                       <Insets left="16.0" />
+                                    </HBox.margin>
+                                 </Button>
+                              </children>
                            </HBox>
-                           <Button fx:id="btnBuzzer" layoutX="147.0" layoutY="36.0" mnemonicParsing="false" text="Dzwonek">
-                              <HBox.margin>
-                                 <Insets left="16.0" />
-                              </HBox.margin>
-                           </Button>
-                           <Button fx:id="btnInstantDirect" mnemonicParsing="false" text="Dół">
-                              <HBox.margin>
-                                 <Insets left="16.0" />
-                              </HBox.margin>
-                           </Button>
                         </children>
                      </HBox>
+                     <Label fx:id="lblTimeTotal" text="12:43:02" textAlignment="CENTER">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                        <VBox.margin>
+                           <Insets bottom="10.0" top="-10.0" />
+                        </VBox.margin>
+                     </Label>
                   </children>
-               </HBox>
+               </VBox>
                <VBox>
                   <children>
                      <Label text="Szybkie ustawienie czasu">

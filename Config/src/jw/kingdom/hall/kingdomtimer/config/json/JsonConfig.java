@@ -247,6 +247,16 @@ public class JsonConfig implements ConfigWriteable {
     }
 
     @Override
+    public int getMeetingTime() {
+        try {
+            return config.getCountdown().getMeetingTime();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ConfigUtils.DEFAULT.getMeetingTime();
+        }
+    }
+
+    @Override
     public String[] getIpOfHardwareTimersControlledByHttp() {
         try {
             return config.getHardwareDisplays().getControlledByHttp();
@@ -379,6 +389,13 @@ public class JsonConfig implements ConfigWriteable {
     public void setTimeToEvaluate(int seconds) {
         if(config.getCountdown()!=null) {
             config.getCountdown().setTimeToEvaluate(seconds);
+        }
+    }
+
+    @Override
+    public void setMeetingTime(int seconds) {
+        if(config.getCountdown()!=null) {
+            config.getCountdown().setMeetingTime(seconds);
         }
     }
 }

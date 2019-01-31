@@ -109,6 +109,11 @@ public class DefaultConfig implements ConfigWriteable {
     }
 
     @Override
+    public int getMeetingTime() {
+        return 95*60;
+    }
+
+    @Override
     public String[] getIpOfHardwareTimersControlledByHttp() {
         return new String[0];
     }
@@ -167,4 +172,7 @@ public class DefaultConfig implements ConfigWriteable {
 
     @Override
     public void setTimeToEvaluate(int seconds) {}
+
+    @Override
+    public void setMeetingTime(int seconds) {}
 }

@@ -25,4 +25,5 @@ public interface ConfigEditable {
 
     void setDirectDown(boolean isDirectDown);
     void setTimeToEvaluate(int seconds);
+    void setMeetingTime(int seconds);
 }
