@@ -133,7 +133,7 @@ public class TimeControlController extends TabPresenter implements Initializable
                 tcType
         );
 
-        new TotalTimeControl(new TimeDisplayController(lblTimeTotal), getTimer());
+        new TotalTimeControl(new TimeDisplayController(lblTimeTotal), getTimer(), getConfig());
 
         fastPanelController = new FastPanelController(this);
 

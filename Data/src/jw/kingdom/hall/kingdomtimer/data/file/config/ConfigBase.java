@@ -134,6 +134,12 @@ abstract class ConfigBase implements Config {
     }
 
     @Override
+    public void setMeetingTime(int seconds) {
+        getConfig().setMeetingTime(seconds);
+        autoSave();
+    }
+
+    @Override
     public String getSpeakerScreen() {
         return getConfig().getSpeakerScreen();
     }
@@ -221,6 +227,11 @@ abstract class ConfigBase implements Config {
     @Override
     public int getTimeToEvaluate() {
         return getConfig().getTimeToEvaluate();
+    }
+
+    @Override
+    public int getMeetingTime() {
+        return getConfig().getMeetingTime();
     }
 
     @Override

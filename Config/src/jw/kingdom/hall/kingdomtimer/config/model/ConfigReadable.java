@@ -25,6 +25,7 @@ public interface ConfigReadable {
 
     boolean isDirectDown();
     int getTimeToEvaluate();
+    int getMeetingTime();
 
     String[] getIpOfHardwareTimersControlledByHttp();
 }
