@@ -29,6 +29,9 @@ public class HandyPanelView extends ControlledScreenBase implements TimeControls
     private Label lblNow;
 
     @FXML
+    private Label lblNext;
+
+    @FXML
     private HBox hbTimeControlsContainer;
 
     @Override
@@ -65,6 +68,11 @@ public class HandyPanelView extends ControlledScreenBase implements TimeControls
     @Override
     public Label getLabelWithName() {
         return lblNow;
+    }
+
+    @Override
+    public Label getLabelWithNameOfNext() {
+        return lblNext;
     }
 
     @Override

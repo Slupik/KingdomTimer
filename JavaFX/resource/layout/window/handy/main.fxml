@@ -10,13 +10,12 @@
   ~ Created 16.09.18 22:19.
   ~ This file is part of KingdomHallTimer which is released under "no licence".
   -->
-
 <!--
   ~ Created 03.09.18 21:09.
   ~ Last modified 31.08.18 21:18
   -->
 
-<HBox fx:id="mainContainer" alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.javafx.view.widget.screen.HandyPanelView">
+<HBox fx:id="mainContainer" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="80.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.javafx.view.widget.screen.HandyPanelView">
    <children>
       <VBox>
          <children>
@@ -41,6 +40,23 @@
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
                   <Label fx:id="lblNow" text="Punkt testowy">
+                     <HBox.margin>
+                        <Insets left="8.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets top="-10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox fillHeight="false">
+               <children>
+                  <Label minWidth="52.0" text="Za chwilę:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblNext" text="Punkt testowy">
                      <HBox.margin>
                         <Insets left="8.0" />
                      </HBox.margin>
