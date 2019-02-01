@@ -17,15 +17,18 @@ class MonitorSelectionController {
 
     private final Input input;
 
-    //TODO improve action on second monitor plugout
     MonitorSelectionController(Input input) {
         this.input = input;
         loadConfig();
         setupScreenSelectors();
-        autoSetupMultimediaScreen();
 
-        getSpeakerWindow().setMonitor(getPreviewSelector().getSelected());
-        getWindowData().getSpeakerPreviewController().setMonitor(getMultimediaSelector().getSelected());
+        autoSelectScreens();
+        try {
+            getSpeakerWindow().setMonitor(getPreviewSelector().getSelected());
+            getWindowData().getSpeakerPreviewController().setMonitor(getMultimediaSelector().getSelected());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadConfig() {
@@ -33,12 +36,27 @@ class MonitorSelectionController {
         getPreviewSelector().setSelection(getConfig().getSpeakerScreen());
     }
 
-    //TODO improve autoselect
-    private void autoSetupMultimediaScreen() {
+    private void autoSelectScreens() {
+        autoSelectSpeakerScreen();
+        autoSelectMultimediaScreen();
+    }
+
+    private void autoSelectSpeakerScreen() {
+        if(getConfig().getSpeakerScreen()==null || getConfig().getSpeakerScreen().length()<1) {
+            List<Monitor> connected = getWindowData().getMonitorsManager().getAll();
+            for(Monitor monitor:connected) {
+                if(!monitor.isPrimary()) {
+                    getPreviewSelector().setSelection(monitor.getId());
+                }
+            }
+        }
+    }
+
+    private void autoSelectMultimediaScreen() {
         if(getConfig().getMultimediaScreen()==null || getConfig().getMultimediaScreen().length()<1) {
             List<Monitor> connected = getWindowData().getMonitorsManager().getAll();
             for(Monitor monitor:connected) {
-                if(!monitor.isPrimary() && !monitor.getId().equals(getPreviewSelector().getId())) {
+                if((connected.size()<=2 || !monitor.isPrimary()) && !monitor.getId().equals(getPreviewSelector().getId())) {
                     getMultimediaSelector().setSelection(monitor.getId());
                     return;
                 }

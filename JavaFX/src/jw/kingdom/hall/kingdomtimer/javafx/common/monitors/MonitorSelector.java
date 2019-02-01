@@ -18,7 +18,6 @@ public class MonitorSelector extends AnchorPane {
     private final List<MonitorRepresentation> mRepresentations = new ArrayList<>();
 
     private Monitor mSelected;
-    private Monitor mLastSelected;
 
     public MonitorSelector(MonitorListManager monitorListManager) {
         monitorListManager.addListener(new MonitorEventHandler() {
@@ -44,7 +43,6 @@ public class MonitorSelector extends AnchorPane {
             rect.setOnMouseClicked(event -> {
                 if(mSelected==null || !monitor.getId().equals(mSelected.getId())){
                     setSelection(monitor);
-                    notifySelectNew(monitor, mLastSelected);
                 }
             });
 
@@ -60,6 +58,7 @@ public class MonitorSelector extends AnchorPane {
         for(MonitorRepresentation representation:mRepresentations) {
             if (representation.getMonitor().getId().equals(monitorId)) {
                 setSelection(representation.getMonitor());
+                return;
             }
         }
     }
@@ -73,8 +72,10 @@ public class MonitorSelector extends AnchorPane {
                 representation.select(false);
             }
         }
-        mLastSelected = mSelected;
+        Monitor lastSelected = mSelected;
         mSelected = monitor;
+
+        notifySelectNew(monitor, lastSelected);
     }
 
     public void addListener(MonitorSelectorListener listener) {
