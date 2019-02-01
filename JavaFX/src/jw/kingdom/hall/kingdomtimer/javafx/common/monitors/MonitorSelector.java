@@ -1,5 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.javafx.common.monitors;
 
+import javafx.application.Platform;
 import javafx.scene.layout.AnchorPane;
 import jw.kingdom.hall.kingdomtimer.domain.monitor.Monitor;
 import jw.kingdom.hall.kingdomtimer.domain.monitor.MonitorEventHandler;
@@ -16,18 +17,19 @@ public class MonitorSelector extends AnchorPane {
     private final List<MonitorSelectorListener> mListeners = new ArrayList<>();
     private final List<MonitorRepresentation> mRepresentations = new ArrayList<>();
 
-    private String selected;
+    private Monitor mSelected;
+    private Monitor mLastSelected;
 
     public MonitorSelector(MonitorListManager monitorListManager) {
         monitorListManager.addListener(new MonitorEventHandler() {
             @Override
             public void onPlugIn(Monitor device) {
-                reloadList(monitorListManager.getAll());
+                Platform.runLater(()-> reloadList(monitorListManager.getAll()));
             }
 
             @Override
             public void onPlugOut(Monitor device) {
-                reloadList(monitorListManager.getAll());
+                Platform.runLater(()-> reloadList(monitorListManager.getAll()));
             }
         });
         reloadList(monitorListManager.getAll());
@@ -40,9 +42,9 @@ public class MonitorSelector extends AnchorPane {
         for(Monitor monitor:monitors) {
             MonitorRepresentation rect = new MonitorRepresentation(monitor);
             rect.setOnMouseClicked(event -> {
-                if(!monitor.getId().equals(selected)){
-                    setSelection(monitor.getId());
-                    notifySelectNew(monitor);
+                if(mSelected==null || !monitor.getId().equals(mSelected.getId())){
+                    setSelection(monitor);
+                    notifySelectNew(monitor, mLastSelected);
                 }
             });
 
@@ -56,14 +58,23 @@ public class MonitorSelector extends AnchorPane {
 
     public void setSelection(String monitorId) {
         for(MonitorRepresentation representation:mRepresentations) {
-            if(representation.getMonitor().getId().equals(monitorId)) {
+            if (representation.getMonitor().getId().equals(monitorId)) {
+                setSelection(representation.getMonitor());
+            }
+        }
+    }
+
+    public void setSelection(Monitor monitor) {
+        for(MonitorRepresentation representation:mRepresentations) {
+            if(representation.getMonitor().getId().equals(monitor.getId())) {
                 representation.select(true);
                 representation.toFront();
-                selected = monitorId;
             } else {
                 representation.select(false);
             }
         }
+        mLastSelected = mSelected;
+        mSelected = monitor;
     }
 
     public void addListener(MonitorSelectorListener listener) {
@@ -74,9 +85,13 @@ public class MonitorSelector extends AnchorPane {
         mListeners.remove(listener);
     }
 
-    private void notifySelectNew(Monitor monitor) {
+    private void notifySelectNew(Monitor newMonitor, Monitor oldMonitor) {
         for(MonitorSelectorListener listener:mListeners) {
-            listener.onSelectNewMonitor(monitor);
+            listener.onSelectNewMonitor(newMonitor, oldMonitor);
         }
+    }
+
+    public Monitor getSelected() {
+        return mSelected;
     }
 }

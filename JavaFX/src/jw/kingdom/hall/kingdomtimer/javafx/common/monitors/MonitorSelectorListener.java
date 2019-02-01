@@ -8,5 +8,5 @@ import jw.kingdom.hall.kingdomtimer.domain.monitor.Monitor;
 @FunctionalInterface
 public interface MonitorSelectorListener {
 
-    void onSelectNewMonitor(Monitor monitor);
+    void onSelectNewMonitor(Monitor newMonitor, Monitor oldMonitor);
 }
