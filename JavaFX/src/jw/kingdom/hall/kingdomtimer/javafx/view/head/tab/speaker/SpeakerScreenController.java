@@ -9,15 +9,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import jw.kingdom.hall.kingdomtimer.domain.countdown.gleam.GlobalGleamController;
+import jw.kingdom.hall.kingdomtimer.domain.monitor.Monitor;
+import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
+import jw.kingdom.hall.kingdomtimer.javafx.common.monitors.MonitorSelector;
+import jw.kingdom.hall.kingdomtimer.javafx.custom.AdvancedTextField;
 import jw.kingdom.hall.kingdomtimer.javafx.domain.monitor.MonitorFxList;
 import jw.kingdom.hall.kingdomtimer.javafx.domain.window.WindowType;
 import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.TabPresenter;
 import jw.kingdom.hall.kingdomtimer.javafx.view.speaker.SpeakerWindow;
-import jw.kingdom.hall.kingdomtimer.domain.countdown.gleam.GlobalGleamController;
-import jw.kingdom.hall.kingdomtimer.domain.monitor.Monitor;
-import jw.kingdom.hall.kingdomtimer.domain.utils.Randomizer;
-import jw.kingdom.hall.kingdomtimer.javafx.custom.AdvancedTextField;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -48,6 +50,9 @@ public class SpeakerScreenController extends TabPresenter {
     @FXML
     ChoiceBox<Monitor> cbPreviewScreen;
 
+    @FXML
+    private HBox hbTest;
+
     private int lastSavedInterval = -1;
     private MonitorFxList monitorList;
 
@@ -65,6 +70,18 @@ public class SpeakerScreenController extends TabPresenter {
         loadConfig();
 
         lastSavedInterval = Integer.parseInt(atfRefreshInterval.getSaveText());
+
+
+        startTest();
+    }
+
+    private void startTest() {
+        MonitorSelector selector = new MonitorSelector(getWindowData().getMonitorsManager());
+        hbTest.getChildren().add(selector);
+        selector.setSelection(getConfig().getMultimediaScreen());
+        selector.addListener(monitor -> {
+
+        });
     }
 
     private void setupHidingController() {

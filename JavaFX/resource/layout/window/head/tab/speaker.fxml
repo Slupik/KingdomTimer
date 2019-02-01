@@ -13,7 +13,6 @@
   ~ Created 16.09.18 22:08.
   ~ This file is part of KingdomHallTimer which is released under "no licence".
   -->
-
 <!--
   ~ Created 03.09.18 21:09.
   ~ Last modified 30.08.18 22:06
@@ -72,5 +71,6 @@
             <Insets top="8.0" />
          </VBox.margin>
       </HBox>
+      <HBox fx:id="hbTest" />
    </children>
 </VBox>
