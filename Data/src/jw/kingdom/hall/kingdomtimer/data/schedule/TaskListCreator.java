@@ -28,6 +28,10 @@ class TaskListCreator {
         data.setLangCode("pl");
         data.setTranslator(new ScheduleTranslator());
         data.setTimeToEvaluate(config.getTimeToEvaluate());
+
+        //For tests purposes
+//        data.setDestUrl("https://wol.jw.org/pl/wol/dt/r12/lp-p/2019/2/4");
+
         downloader.downloadWeek(data, new ScheduleDownloader.DownloadCallback() {
             @Override
             public void onDownload(List<ScheduleTask> tasks) {

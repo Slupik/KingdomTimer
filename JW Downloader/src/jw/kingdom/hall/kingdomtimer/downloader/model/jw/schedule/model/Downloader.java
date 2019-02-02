@@ -95,7 +95,11 @@ class Downloader {
             try {
                 String s = Jsoup.parse(probablyTask.html()).text();
                 ScheduleTask task = RawTaskParser.getParsed(s);
-                task.setActiveBuzzer(!RawTaskParser.isContainsVideo(probablyTask));
+
+                if(task.getTime()<10*60) {//Really long tasks shouldn't have a buzzer
+                    task.setActiveBuzzer(!RawTaskParser.isContainsVideo(probablyTask));
+                }
+
                 list.add(task);
             } catch (WrongElementException ignore) {}
         }
