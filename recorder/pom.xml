@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright (c) 2019. by Sebastian Witasik
-  ~ All rights reserved. No part of this application may be reproduced or be part of other software, without the prior written permission of the publisher. For permission requests, write to the author(WitasikSebastian@gmail.com).
-  -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -15,6 +11,25 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>recorder</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>io.github.sjoerdvankreel</groupId>
+            <artifactId>xtaudio</artifactId>
+            <version>1.0.5</version>
+        </dependency>
 
+        <dependency>
+            <groupId>it.sauronsoftware</groupId>
+            <artifactId>jave</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/net.java.dev.jna/jna -->
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+    </dependencies>
 
 </project>

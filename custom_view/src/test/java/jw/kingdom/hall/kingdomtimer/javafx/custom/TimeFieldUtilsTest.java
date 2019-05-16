@@ -1,9 +1,11 @@
 package jw.kingdom.hall.kingdomtimer.javafx.custom;
 
-import org.junit.Assert;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -77,19 +79,19 @@ public class TimeFieldUtilsTest {
                         Integer.toString((time%3600)/(60))+":"+
                         Integer.toString(time%(60));
         int returnTime = TimeFieldUtils.getAllSeconds(asText);
-        Assert.assertEquals(time, returnTime);
+        assertEquals(time, returnTime);
     }
 
     @Test
     public void isNormalInt() {
-        Assert.assertTrue(TimeFieldUtils.isNormalInt("0"));
-        Assert.assertTrue(TimeFieldUtils.isNormalInt("01"));
-        Assert.assertTrue(TimeFieldUtils.isNormalInt("010"));
-        Assert.assertTrue(TimeFieldUtils.isNormalInt("-10"));
-        Assert.assertTrue(TimeFieldUtils.isNormalInt("-010"));
+        assertTrue(TimeFieldUtils.isNormalInt("0"));
+        assertTrue(TimeFieldUtils.isNormalInt("01"));
+        assertTrue(TimeFieldUtils.isNormalInt("010"));
+        assertTrue(TimeFieldUtils.isNormalInt("-10"));
+        assertTrue(TimeFieldUtils.isNormalInt("-010"));
 
-        Assert.assertFalse(TimeFieldUtils.isNormalInt("0.1"));//double
-        Assert.assertFalse(TimeFieldUtils.isNormalInt("0,1"));// , instead of .
-        Assert.assertFalse(TimeFieldUtils.isNormalInt("0a10"));//wrong character
+        assertFalse(TimeFieldUtils.isNormalInt("0.1"));//double
+        assertFalse(TimeFieldUtils.isNormalInt("0,1"));// , instead of .
+        assertFalse(TimeFieldUtils.isNormalInt("0a10"));//wrong character
     }
 }

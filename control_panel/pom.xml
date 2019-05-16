@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright (c) 2019. by Sebastian Witasik
-  ~ All rights reserved. No part of this application may be reproduced or be part of other software, without the prior written permission of the publisher. For permission requests, write to the author(WitasikSebastian@gmail.com).
-  -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -14,7 +10,34 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>control_panel</artifactId>
 
+    <artifactId>control_panel</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>jw.kingdom.hall.timer</groupId>
+            <artifactId>data</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jw.kingdom.hall.timer</groupId>
+            <artifactId>domain</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jw.kingdom.hall.timer</groupId>
+            <artifactId>device</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jw.kingdom.hall.timer</groupId>
+            <artifactId>logger</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jw.kingdom.hall.timer</groupId>
+            <artifactId>javafx</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

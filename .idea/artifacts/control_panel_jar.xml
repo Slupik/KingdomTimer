@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="control_panel:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/control_panel_jar</output-path>
+    <root id="archive" name="control_panel.jar">
+      <element id="module-output" name="control_panel" />
+      <element id="module-output" name="data" />
+      <element id="module-output" name="config" />
+      <element id="module-output" name="recorder" />
+      <element id="module-output" name="domain" />
+      <element id="module-output" name="device" />
+      <element id="module-output" name="logger" />
+      <element id="module-output" name="javafx" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/annotations/16.0.2/annotations-16.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar" path-in-jar="/" />
+      <element id="module-output" name="KHT" />
+    </root>
+  </artifact>
+</component>

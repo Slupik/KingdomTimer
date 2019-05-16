@@ -1,11 +1,11 @@
 package jw.kingdom.hall.kingdomtimer.config.json;
 
-import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.config.ConfigUtils;
 import jw.kingdom.hall.kingdomtimer.config.TestUtils;
 import jw.kingdom.hall.kingdomtimer.config.common.DataParseException;
+import jw.kingdom.hall.kingdomtimer.config.model.Config;
 import jw.kingdom.hall.kingdomtimer.config.utils.ConfigFieldType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
