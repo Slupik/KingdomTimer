@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="CustomViewElements:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/CustomViewElements_jar</output-path>
-    <root id="archive" name="CustomViewElements.jar">
-      <element id="module-output" name="CustomViewElements" />
-    </root>
-  </artifact>
-</component>
