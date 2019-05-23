@@ -15,20 +15,20 @@
         <dependency>
             <groupId>io.github.sjoerdvankreel</groupId>
             <artifactId>xtaudio</artifactId>
-            <version>1.0.5</version>
+            <version>${xtaudioVersion}</version>
         </dependency>
 
         <dependency>
             <groupId>it.sauronsoftware</groupId>
             <artifactId>jave</artifactId>
-            <version>1.0.2</version>
+            <version>${javeVersion}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/net.java.dev.jna/jna -->
         <dependency>
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna</artifactId>
-            <version>4.1.0</version>
+            <version>${jnaVersion}</version>
         </dependency>
     </dependencies>
 

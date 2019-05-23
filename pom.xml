@@ -26,6 +26,15 @@
     <properties>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
+
+        <junitVersion>5.3.1</junitVersion>
+        <gsonVersion>2.8.5</gsonVersion>
+        <xtaudioVersion>1.0.5</xtaudioVersion>
+        <javeVersion>1.0.2</javeVersion>
+        <jnaVersion>4.1.0</jnaVersion>
+        <jsopVersion>1.11.3</jsopVersion>
+        <guavaVersion>18.0</guavaVersion>
+        <jetbrainsAnnotations>16.0.2</jetbrainsAnnotations>
     </properties>
 
     <repositories>
