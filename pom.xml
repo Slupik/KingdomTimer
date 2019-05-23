@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>jw.kingdom.hall.timer</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
 
     <modules>
         <module>config</module>
@@ -44,6 +42,104 @@
         <guavaVersion>18.0</guavaVersion>
         <jetbrainsAnnotations>16.0.2</jetbrainsAnnotations>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guavaVersion}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <version>${jetbrainsAnnotations}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gsonVersion}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsopVersion}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/net.java.dev.jna/jna -->
+            <dependency>
+                <groupId>net.java.dev.jna</groupId>
+                <artifactId>jna</artifactId>
+                <version>${jnaVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.sauronsoftware</groupId>
+                <artifactId>jave</artifactId>
+                <version>${javeVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.sjoerdvankreel</groupId>
+                <artifactId>xtaudio</artifactId>
+                <version>${xtaudioVersion}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>jw.kingdom.hall.timer</groupId>
+                <artifactId>config</artifactId>
+                <version>3.0.0-SNAPSHOT</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>jw.kingdom.hall.timer</groupId>
+                <artifactId>custom_view</artifactId>
+                <version>3.0.0-SNAPSHOT</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>jw.kingdom.hall.timer</groupId>
+                <artifactId>logger</artifactId>
+                <version>3.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>jw.kingdom.hall.timer</groupId>
+                <artifactId>recorder</artifactId>
+                <version>3.0.0-SNAPSHOT</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>jw.kingdom.hall.timer</groupId>
+                <artifactId>schedule_downloader</artifactId>
+                <version>3.0.0-SNAPSHOT</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>jw.kingdom.hall.timer</groupId>
+                <artifactId>domain</artifactId>
+                <version>3.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>jw.kingdom.hall.timer</groupId>
+                <artifactId>data</artifactId>
+                <version>3.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>jw.kingdom.hall.timer</groupId>
+                <artifactId>device</artifactId>
+                <version>3.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>jw.kingdom.hall.timer</groupId>
+                <artifactId>javafx</artifactId>
+                <version>3.0.0-SNAPSHOT</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 
     <!-- GLOBAL DEPENDENCIES -->
     <dependencies>
