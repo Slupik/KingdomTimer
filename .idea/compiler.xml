@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <option name="DEFAULT_COMPILER" value="Javac" />
-    <resourceExtensions />
-    <wildcardResourcePatterns>
-      <entry name="!?*.java" />
-      <entry name="!?*.form" />
-      <entry name="!?*.class" />
-      <entry name="!?*.groovy" />
-      <entry name="!?*.scala" />
-      <entry name="!?*.flex" />
-      <entry name="!?*.kt" />
-      <entry name="!?*.clj" />
-    </wildcardResourcePatterns>
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="false">
-        <processorPath useClasspath="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="1 Config" />
+        <module name="1 JavaFx Custom Elements" />
+        <module name="1 Logger" />
+        <module name="1 Recorder" />
+        <module name="1 Schedule Downloader" />
+        <module name="2 Domain" />
+        <module name="3 Data" />
+        <module name="3 Device" />
+        <module name="3 JavaFX" />
+        <module name="4 Config Editor" />
+        <module name="4 Control Panel" />
       </profile>
     </annotationProcessing>
   </component>
 </project>
-
