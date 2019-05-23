@@ -9,6 +9,7 @@
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
     <modules>
         <module>config</module>
         <module>recorder</module>
@@ -27,6 +28,13 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
 
+
+        <!-- VERSIONS OF MODULES -->
+        <configEditorModuleVersion>0.1.0</configEditorModuleVersion>
+        <controlPanelModuleVersion>3.0.0</controlPanelModuleVersion>
+
+
+        <!-- VERSIONS OF LIBRARIES -->
         <junitVersion>5.3.1</junitVersion>
         <gsonVersion>2.8.5</gsonVersion>
         <xtaudioVersion>1.0.5</xtaudioVersion>
@@ -36,6 +44,20 @@
         <guavaVersion>18.0</guavaVersion>
         <jetbrainsAnnotations>16.0.2</jetbrainsAnnotations>
     </properties>
+
+    <!-- GLOBAL DEPENDENCIES -->
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junitVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junitVersion}</version>
+        </dependency>
+    </dependencies>
 
     <repositories>
         <repository>
