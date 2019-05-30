@@ -31,6 +31,10 @@
             <groupId>jw.kingdom.hall.timer</groupId>
             <artifactId>javafx</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jw.kingdom.hall.timer</groupId>
+            <artifactId>webview_ui</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
