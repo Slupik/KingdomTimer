@@ -9,13 +9,18 @@ import jw.kingdom.hall.kingdomtimer.domain.time.TimeListenerProxy;
  * All rights reserved & copyright ©
  */
 public class BuzzerController {
-
     private final BuzzerPlayer player;
+
     private TaskBean currentTask;
+    private final TimeController timer;
 
     public BuzzerController(BuzzerPlayer player, TimeController timer) {
         this.player = player;
         currentTask = timer.getActualTask();
+        this.timer = timer;
+    }
+
+    public void init() {
         timer.addListener(new TimeListenerProxy() {
             @Override
             public void onStart(TaskBean task) {
