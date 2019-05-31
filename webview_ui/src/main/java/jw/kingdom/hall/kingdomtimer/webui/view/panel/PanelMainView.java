@@ -4,12 +4,12 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
-import jw.kingdom.hall.kingdomtimer.webui.domain.page.PageAsMonolithLoader;
-import jw.kingdom.hall.kingdomtimer.webui.domain.page.PageLoadException;
-import jw.kingdom.hall.kingdomtimer.webui.domain.page.PageLoader;
 import jw.kingdom.hall.kingdomtimer.webui.domain.screen.ControlledScreenBase;
 
+import java.net.URL;
+
 public class PanelMainView extends ControlledScreenBase {
+    private final static String PAGE_PATH = "layout/window/panel/page/index.html";
 
     @FXML
     private StackPane mainContainer;
@@ -22,16 +22,15 @@ public class PanelMainView extends ControlledScreenBase {
         super.onSetup();
 
         wvUI.getEngine().setJavaScriptEnabled(true);
-        loadGUI(new PageAsMonolithLoader());
+        loadGUI();
     }
 
-    private void loadGUI(PageLoader loader) {
-        try {
-            String parsedPage = loader.getParsedPage("layout/window/panel/page/");
-            wvUI.getEngine().loadContent(parsedPage);
-        } catch (PageLoadException e) {
-            e.printStackTrace();
-            wvUI.getEngine().loadContent(e.getAsText());
+    private void loadGUI() {
+        URL resource = getClass().getClassLoader().getResource(PAGE_PATH);
+        if(resource!=null) {
+            wvUI.getEngine().load(resource.toExternalForm());
+        } else {
+            wvUI.getEngine().loadContent("Required resource is unavailable at specific address ("+PAGE_PATH+").");
         }
     }
 
