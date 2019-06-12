@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.web.WebView?>
 
 
-<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.webui.view.panel.PanelMainView">
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jw.kingdom.hall.kingdomtimer.webui.view.panel.PanelMainView">
    <children>
-      <WebView fx:id="wvUI" prefHeight="200.0" prefWidth="200.0" />
+      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+
+         </top>
+         <center>
+            <WebView fx:id="wvUI" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER" />
+         </center>
+         <bottom>
+            <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <buttons>
+                <Button fx:id="checkButton" mnemonicParsing="false" onAction="#checkAction" text="check()" />
+                  <Button mnemonicParsing="false" onAction="#testAction" text="test()" />
+                  <Button mnemonicParsing="false" onAction="#printDateAction" text="printDate()" />
+              </buttons>
+            </ButtonBar>
+         </bottom>
+      </BorderPane>
    </children>
-</StackPane>
+</AnchorPane>

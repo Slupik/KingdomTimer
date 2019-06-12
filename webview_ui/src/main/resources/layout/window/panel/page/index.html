@@ -1,15 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <script src="scripts/main.js"></script>
-        <title>Title</title>
-    </head>
-    <body>
-        <div id="test">It works... but this label shouldn't be visible</div>
+<html lang="en-US">
+<head>
+    <meta charset=utf-8>
+    <title>Hello Java-Buddy! 2</title>
 
-        <script>
-                check();
-        </script>
-    </body>
+    <script>
+
+function updateHello(user){
+  document.getElementById("helloprompt").innerHTML="Hello Mordo!" + user;
+}
+
+function clearHello(user){
+  document.getElementById("helloprompt").innerHTML="Hello <a href='http://java-buddy.blogspot.com/'>Java-Buddy</a>";
+}
+
+function check() {
+    app.callFromJavascript("Check callback");
+}
+
+
+function test() {
+   document.getElementById("helloprompt").innerHTML="Hello Mordo!";
+}
+
+function printObject(object) {
+     console.log(object);
+}
+
+function callJavaFX(){
+    var msg = document.getElementById("textto").value;
+    console.log(msg);
+    console.log("Test log");
+    app.callFromJavascript("XDDDDD");
+}
+</script>
+
+</head>
+<body>
+<img src="http://2.bp.blogspot.com/-Ol8pLJcc9oo/TnZY6R8YJ5I/AAAAAAAACSI/YDxcIHCZhy4/s150/duke_44x80.png"/>
+<p id="helloprompt">Hello <a href="http://java-buddy.blogspot.com/">Java-Buddy 2</a></p>
+<p><textarea id="textto"> </textarea></p>
+<p><input type="button" value="Click to send message to Javascript" onclick="callJavaFX()"></p>
+</body>
 </html>
