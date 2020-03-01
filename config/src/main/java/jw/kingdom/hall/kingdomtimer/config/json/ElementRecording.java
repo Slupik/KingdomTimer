@@ -45,8 +45,13 @@ class ElementRecording extends ConfigElement {
     @Expose
     private String rawFileNameFinalGroups;
 
+    @SerializedName("ostateczny_bit_rate")
+    @Nullable
+    @Expose
+    private String finalBitRate;
+
     public String getPath() {
-        if(isCallingParent(path)) {
+        if (isCallingParent(path)) {
             return parent.getRecordDestPath();
         }
         return path;
@@ -57,7 +62,7 @@ class ElementRecording extends ConfigElement {
     }
 
     public boolean getAutopilot() throws DataParseException {
-        if(isCallingParent(autopilot, ConfigFieldType.BOOLEAN)) {
+        if (isCallingParent(autopilot, ConfigFieldType.BOOLEAN)) {
             return parent.isEnabledAutopilot();
         }
         return toBoolean(autopilot);
@@ -68,7 +73,7 @@ class ElementRecording extends ConfigElement {
     }
 
     public boolean getAutoSeparate() throws DataParseException {
-        if(isCallingParent(autoSeparate, ConfigFieldType.BOOLEAN)) {
+        if (isCallingParent(autoSeparate, ConfigFieldType.BOOLEAN)) {
             return parent.isAutoSeparate();
         }
         return toBoolean(autoSeparate);
@@ -79,7 +84,7 @@ class ElementRecording extends ConfigElement {
     }
 
     public String getRawFileNameBackup() {
-        if(isCallingParent(rawFileNameBackup, ConfigFieldType.STRING)) {
+        if (isCallingParent(rawFileNameBackup, ConfigFieldType.STRING)) {
             return parent.getRawFileNameBackup();
         }
         return rawFileNameBackup;
@@ -90,7 +95,7 @@ class ElementRecording extends ConfigElement {
     }
 
     public String getRawFileNameBackupGroups() {
-        if(isCallingParent(rawFileNameBackupGroups, ConfigFieldType.STRING)) {
+        if (isCallingParent(rawFileNameBackupGroups, ConfigFieldType.STRING)) {
             return parent.getRawFileNameBackupGroups();
         }
         return rawFileNameBackupGroups;
@@ -101,7 +106,7 @@ class ElementRecording extends ConfigElement {
     }
 
     public String getRawFileNameFinal() {
-        if(isCallingParent(rawFileNameFinal, ConfigFieldType.STRING)) {
+        if (isCallingParent(rawFileNameFinal, ConfigFieldType.STRING)) {
             return parent.getRawFileNameFinal();
         }
         return rawFileNameFinal;
@@ -112,7 +117,7 @@ class ElementRecording extends ConfigElement {
     }
 
     public String getRawFileNameFinalGroups() {
-        if(isCallingParent(rawFileNameFinalGroups, ConfigFieldType.STRING)) {
+        if (isCallingParent(rawFileNameFinalGroups, ConfigFieldType.STRING)) {
             return parent.getRawFileNameFinalGroups();
         }
         return rawFileNameFinalGroups;
@@ -121,4 +126,12 @@ class ElementRecording extends ConfigElement {
     public void setRawFileNameFinalGroups(String rawFileNameFinalGroups) {
         this.rawFileNameFinalGroups = rawFileNameFinalGroups;
     }
+
+    public int getOutputBitRate() throws DataParseException {
+        if (isCallingParent(finalBitRate, ConfigFieldType.INTEGER)) {
+            return parent.getOutputBitRate();
+        }
+        return toInteger(finalBitRate);
+    }
+
 }

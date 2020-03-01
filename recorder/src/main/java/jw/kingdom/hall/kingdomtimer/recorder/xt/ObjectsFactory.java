@@ -34,7 +34,7 @@ class ObjectsFactory {
         } else {
             mix = new XtMix(bean.getRate(), getSampleById(bean.getSample()));
         }
-        return new BufferDataSaver(storage, mix.rate, bean.getInputs(), XtAudio.getSampleAttributes(mix.sample).size*8, bean.getPaths());
+        return new BufferDataSaver(storage, bean.getOutputBitRate(), mix.rate, bean.getInputs(), XtAudio.getSampleAttributes(mix.sample).size*8, bean.getPaths());
     }
 
 }

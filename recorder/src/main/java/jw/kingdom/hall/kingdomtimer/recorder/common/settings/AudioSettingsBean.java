@@ -11,9 +11,10 @@ public interface AudioSettingsBean {
     int getRate();
     String getSample();
     int getInputs();
-    int getSampleSize();
+    int getOutputBitRate();
 
     boolean isToSelectDefaultDevice();
     String getDeviceName();
     String getServiceSetupID();
+
 }

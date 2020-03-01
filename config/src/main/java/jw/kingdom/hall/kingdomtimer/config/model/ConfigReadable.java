@@ -16,6 +16,7 @@ public interface ConfigReadable {
     String getRawFileNameBackupGroups();
     String getRawFileNameFinal();
     String getRawFileNameFinalGroups();
+    int getOutputBitRate();
 
     String getMultimediaScreen();
     int getMinRefreshRate();

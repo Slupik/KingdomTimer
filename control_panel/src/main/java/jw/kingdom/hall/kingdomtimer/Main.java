@@ -40,7 +40,7 @@ public class Main extends Application {
         AppConfig config = DefaultAppConfig.getInstance();
         Countdown countdown = new CountdownImpl();
         Schedule schedule = new MeetingSchedule();
-        RecordControl recordControl = VoiceRecorder.getInstance(new DefaultFileRecordProvider(config, schedule, countdown));
+        RecordControl recordControl = VoiceRecorder.getInstance(new DefaultFileRecordProvider(config, schedule, countdown), config);
         TimeController time = new TimeControllerImpl(schedule, countdown);
         new BuzzerController(new Buzzer(), time);
         MonitorPreviewController speakerPreviewController = new MonitorPreviewControllerImpl(new ScreenShotMaker());
