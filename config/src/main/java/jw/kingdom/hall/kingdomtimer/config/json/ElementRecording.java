@@ -45,10 +45,10 @@ class ElementRecording extends ConfigElement {
     @Expose
     private String rawFileNameFinalGroups;
 
-    @SerializedName("ostateczny_bit_rate")
+    @SerializedName("ostateczny_bitrate")
     @Nullable
     @Expose
-    private String finalBitRate;
+    private String finalBitrate;
 
     public String getPath() {
         if (isCallingParent(path)) {
@@ -127,11 +127,11 @@ class ElementRecording extends ConfigElement {
         this.rawFileNameFinalGroups = rawFileNameFinalGroups;
     }
 
-    public int getOutputBitRate() throws DataParseException {
-        if (isCallingParent(finalBitRate, ConfigFieldType.INTEGER)) {
-            return parent.getOutputBitRate();
+    public int getOutputBitrate() throws DataParseException {
+        if (isCallingParent(finalBitrate, ConfigFieldType.INTEGER)) {
+            return parent.getOutputBitrate();
         }
-        return toInteger(finalBitRate);
+        return toInteger(finalBitrate);
     }
 
 }

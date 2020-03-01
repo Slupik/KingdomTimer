@@ -82,7 +82,7 @@ public class VoiceRecorder implements RecordControl {
     }
     private VoiceRecorder(FileRecordProvider provider, AppConfig config){
         DefaultAudioSettingsBean bean = new DefaultAudioSettingsBean(provider);
-        bean.setOutputBitRate(config.getOutputBitRate());
+        bean.setOutputBitrate(config.getOutputBitrate());
         recorder = new XtRecorder(bean);
         addListener(new RecordListenerProxy() {
 

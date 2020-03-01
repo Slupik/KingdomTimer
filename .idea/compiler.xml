@@ -7,17 +7,17 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="device" />
-        <module name="config_editor" />
         <module name="control_panel" />
-        <module name="data" />
-        <module name="webview_ui" />
-        <module name="custom_view" />
-        <module name="javafx" />
-        <module name="logger" />
-        <module name="schedule_downloader" />
-        <module name="recorder" />
-        <module name="domain" />
         <module name="config" />
+        <module name="webview_ui" />
+        <module name="domain" />
+        <module name="javafx" />
+        <module name="data" />
+        <module name="schedule_downloader" />
+        <module name="logger" />
+        <module name="recorder" />
+        <module name="custom_view" />
+        <module name="config_editor" />
       </profile>
     </annotationProcessing>
   </component>

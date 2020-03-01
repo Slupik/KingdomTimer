@@ -179,12 +179,12 @@ public class JsonConfig implements ConfigWriteable {
     }
 
     @Override
-    public int getOutputBitRate() {
+    public int getOutputBitrate() {
         try {
-            return config.getRecording().getOutputBitRate();
+            return config.getRecording().getOutputBitrate();
         } catch (Exception e) {
             e.printStackTrace();
-            return ConfigUtils.DEFAULT.getOutputBitRate();
+            return ConfigUtils.DEFAULT.getOutputBitrate();
         }
     }
 

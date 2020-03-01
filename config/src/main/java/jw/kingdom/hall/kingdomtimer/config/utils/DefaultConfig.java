@@ -74,7 +74,7 @@ public class DefaultConfig implements ConfigWriteable {
     }
 
     @Override
-    public int getOutputBitRate() {
+    public int getOutputBitrate() {
         return 128000;
     }
 
