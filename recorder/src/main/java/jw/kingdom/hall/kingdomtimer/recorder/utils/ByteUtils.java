@@ -14,12 +14,16 @@ public class ByteUtils {
             arrayToSave = (byte[]) array;
         } else if (array instanceof float[]) {
             float[] data = (float[]) array;
-            arrayToSave = FloatArray2ByteArray(data);
+            arrayToSave = convertFloatArray2ByteArray(data);
+        } else if (array instanceof short[]) {
+            short[] data = (short[]) array;
+            arrayToSave = convertShortArray2ByteArray(data);
         }
+
         return arrayToSave;
     }
 
-    public static byte[] FloatArray2ByteArray(float[] values){
+    public static byte[] convertFloatArray2ByteArray(float[] values){
         ByteBuffer buffer = ByteBuffer.allocate(4 * values.length).order(ByteOrder.LITTLE_ENDIAN);
 
         for (float value : values){
@@ -29,13 +33,14 @@ public class ByteUtils {
         return buffer.array();
     }
 
-    public static byte [] long2ByteArray (long value)
-    {
-        return ByteBuffer.allocate(8).putLong(value).array();
+    public static byte[] convertShortArray2ByteArray(short[] values){
+        ByteBuffer buffer = ByteBuffer.allocate(2 * values.length).order(ByteOrder.LITTLE_ENDIAN);
+
+        for (short value : values){
+            buffer.putShort(value);
+        }
+
+        return buffer.array();
     }
 
-    public static byte [] float2ByteArray (float value)
-    {
-        return ByteBuffer.allocate(4).putFloat(value).array();
-    }
 }
