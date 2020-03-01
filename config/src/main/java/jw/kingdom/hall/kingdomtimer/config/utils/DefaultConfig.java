@@ -74,6 +74,11 @@ public class DefaultConfig implements ConfigWriteable {
     }
 
     @Override
+    public int getOutputBitRate() {
+        return 128000;
+    }
+
+    @Override
     public String getMultimediaScreen() {
         return null;
     }

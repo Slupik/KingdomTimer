@@ -225,6 +225,11 @@ abstract class ConfigBase implements Config {
     }
 
     @Override
+    public int getOutputBitRate() {
+        return getConfig().getOutputBitRate();
+    }
+
+    @Override
     public int getTimeToEvaluate() {
         return getConfig().getTimeToEvaluate();
     }
