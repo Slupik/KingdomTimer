@@ -10,9 +10,8 @@ public class DefaultAudioSettingsBean implements AudioSettingsBean {
     private FileRecordProvider fileRecordProvider;
     private boolean readDefaultMixSettings = false;
     private int rate = 44100;//ignore if(readDefaultMixSettings == true)
-    private int outputBitRate = 128000;//ignore if(readDefaultMixSettings == true) or if sample is set
+    private int outputBitRate = 128000;
     private String sample = "INT24";//ignore if(readDefaultMixSettings == true)
-    private int sampleSize = 3;//ignore if(readDefaultMixSettings == true) or if sample is set
     private int inputs = 1;
     private boolean selectDefaultDevice = true;
     private String deviceName = "";//ignore if(selectDefaultDevice == true)
@@ -50,21 +49,12 @@ public class DefaultAudioSettingsBean implements AudioSettingsBean {
     }
 
     @Override
-    public int getSampleSize() {
-        return sampleSize;
-    }
-
-    @Override
     public int getOutputBitRate() {
         return outputBitRate;
     }
 
     public void setOutputBitRate(int outputBitRate) {
         this.outputBitRate = outputBitRate;
-    }
-
-    public void setSampleSize(int sampleSize) {
-        this.sampleSize = sampleSize;
     }
 
     @Override
