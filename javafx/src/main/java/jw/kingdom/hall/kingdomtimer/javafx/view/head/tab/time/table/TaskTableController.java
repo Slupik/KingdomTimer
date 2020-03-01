@@ -63,7 +63,18 @@ public class TaskTableController {
 
     private void initList() {
         tableData = FXCollections.observableArrayList();
-        schedule.addListener(new TaskListBinder(tableData) {
+        TaskListBinder.Callback editionCallback = new TaskListBinder.Callback() {
+            @Override
+            public void onEditionStart() {
+                disableEditList = true;
+            }
+
+            @Override
+            public void onEditionEnd() {
+                disableEditList = false;
+            }
+        };
+        schedule.addListener(new TaskListBinder(tableData, editionCallback) {
             @Override
             public void onMove(int elementIndex, int destIndex) {
                 if (disableEditList) {
@@ -73,6 +84,9 @@ public class TaskTableController {
             }
         });
         tableData.addListener((ListChangeListener<TaskBean>) c -> {
+            if (disableEditList) {
+                return;
+            }
             while(c.next()){
                 if(c.wasRemoved()) {
                     List<? extends TaskBean> removed = c.getRemoved();
@@ -150,6 +164,7 @@ public class TaskTableController {
             row.setOnDragDropped(event -> {
                 Dragboard db = event.getDragboard();
                 if (db.hasContent(SERIALIZED_MIME_TYPE)) {
+                    disableEditList = true;
                     int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE);
                     TaskBean draggedItem = TABLE.getItems().remove(draggedIndex);
 
@@ -166,8 +181,6 @@ public class TaskTableController {
                     event.setDropCompleted(true);
                     TABLE.getSelectionModel().select(dropIndex);
                     event.consume();
-
-                    disableEditList = true;
                     schedule.moveElement(draggedIndex, dropIndex);
                     disableEditList = false;
                 }

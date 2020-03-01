@@ -12,7 +12,6 @@ import java.util.List;
 abstract class MeetingScheduleBase implements Schedule {
 
     protected final List<TaskBean> list = new ArrayList<>();
-    protected TaskBean lastTask = null;
 
     @Override
     public TaskBean bringOutFirstTask() throws NotEnoughTasksException {
