@@ -19,13 +19,15 @@ import java.io.OutputStream;
 class BufferDataSaver {
     private AudioDataBuffer storage;
 
+    private final int bitRate;
     private final int srate;
     private final int channel;
     private final int format;
     private final FileRecordProvider paths;
 
-    BufferDataSaver(AudioDataBuffer storage, int srate, int channel, int format, FileRecordProvider paths) {
+    BufferDataSaver(AudioDataBuffer storage, int bitRate, int srate, int channel, int format, FileRecordProvider paths) {
         this.storage = storage;
+        this.bitRate = bitRate;
         this.srate = srate;
         this.channel = channel;
         this.format = format;
@@ -85,9 +87,9 @@ class BufferDataSaver {
     private void convertToMp3(File source, File target) throws EncoderException {
         AudioAttributes audio = new AudioAttributes();
         audio.setCodec("libmp3lame");
-        audio.setBitRate(new Integer(128000));
-        audio.setChannels(new Integer(channel));
-        audio.setSamplingRate(new Integer(srate));
+        audio.setBitRate(bitRate);
+        audio.setChannels(channel);
+        audio.setSamplingRate(srate);
         EncodingAttributes attrs = new EncodingAttributes();
         attrs.setFormat("mp3");
         attrs.setAudioAttributes(audio);
