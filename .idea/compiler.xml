@@ -6,32 +6,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="3 JavaFX" />
-        <module name="recorder" />
-        <module name="1 Recorder" />
-        <module name="config_editor" />
-        <module name="domain" />
-        <module name="3 Data" />
-        <module name="4 Control Panel" />
-        <module name="1 Config" />
         <module name="device" />
-        <module name="1 JavaFx Custom Elements" />
+        <module name="config_editor" />
         <module name="control_panel" />
-        <module name="schedule_downloader" />
-        <module name="1 Schedule Downloader" />
-        <module name="logger" />
-        <module name="3 Device" />
-        <module name="1 Logger" />
         <module name="data" />
-        <module name="2 Domain" />
+        <module name="webview_ui" />
         <module name="custom_view" />
-        <module name="config" />
         <module name="javafx" />
-        <module name="4 Config Editor" />
+        <module name="logger" />
+        <module name="schedule_downloader" />
+        <module name="recorder" />
+        <module name="domain" />
+        <module name="config" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="webview_ui" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
