@@ -90,7 +90,7 @@ class Downloader {
 
     private List<ScheduleTask> getTasksFromElement(Element source) {
         List<ScheduleTask> list = new ArrayList<>();
-        Elements probablyTasks = source.getElementsByClass("su");
+        Elements probablyTasks = source.getElementsByClass("so");
         for(Element probablyTask:probablyTasks) {
             try {
                 String s = Jsoup.parse(probablyTask.html()).text();
