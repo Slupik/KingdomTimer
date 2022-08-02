@@ -6,18 +6,23 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="device" />
-        <module name="control_panel" />
-        <module name="config" />
         <module name="webview_ui" />
-        <module name="domain" />
-        <module name="javafx" />
+      </profile>
+      <profile name="Annotation profile for parent" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-sources/apt-test" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="recorder" />
         <module name="data" />
         <module name="schedule_downloader" />
+        <module name="domain" />
         <module name="logger" />
-        <module name="recorder" />
-        <module name="custom_view" />
         <module name="config_editor" />
+        <module name="javafx" />
+        <module name="control_panel" />
+        <module name="config" />
+        <module name="device" />
+        <module name="custom_view" />
       </profile>
     </annotationProcessing>
   </component>

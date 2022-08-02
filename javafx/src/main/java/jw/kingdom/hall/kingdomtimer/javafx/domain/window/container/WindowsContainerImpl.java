@@ -1,6 +1,6 @@
 package jw.kingdom.hall.kingdomtimer.javafx.domain.window.container;
 
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.Nullable;
 import jw.kingdom.hall.kingdomtimer.javafx.domain.window.AppWindow;
 import jw.kingdom.hall.kingdomtimer.javafx.domain.window.WindowType;
 
