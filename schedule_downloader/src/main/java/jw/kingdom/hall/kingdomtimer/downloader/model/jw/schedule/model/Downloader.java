@@ -24,7 +24,7 @@ class Downloader {
     List<ScheduleTask> getTasks(ScheduleDownloader.InputData data, String url) throws IOException {
         List<ScheduleTask> list = new ArrayList<>();
         Document doc = Jsoup.connect(url).get();
-        Element partWithSchedule = doc.getElementsByClass("bodyTxt").get(1);
+        Element partWithSchedule = doc.getElementsByClass("bodyTxt").get(0);
 
         list.addAll(getOpeningComments(partWithSchedule));
         list.addAll(getFromTreasures(partWithSchedule, data));
