@@ -6,6 +6,7 @@ import jw.kingdom.hall.kingdomtimer.data.file.config.DefaultAppConfig;
 import jw.kingdom.hall.kingdomtimer.data.file.save.backup.BackupFileControllerImpl;
 import jw.kingdom.hall.kingdomtimer.data.file.save.log.DefaultLogFileProvider;
 import jw.kingdom.hall.kingdomtimer.data.file.save.record.DefaultFileRecordProvider;
+import jw.kingdom.hall.kingdomtimer.data.schedule.BackupTasksProvider;
 import jw.kingdom.hall.kingdomtimer.data.schedule.TasksFetcher;
 import jw.kingdom.hall.kingdomtimer.device.external.timer.http.ServerForHttpDisplays;
 import jw.kingdom.hall.kingdomtimer.device.external.timer.http.ServerForHttpDisplaysImpl;
@@ -45,7 +46,8 @@ public class Main extends Application {
         new BuzzerController(new Buzzer(), time);
         MonitorPreviewController speakerPreviewController = new MonitorPreviewControllerImpl(new ScreenShotMaker());
         speakerPreviewController.setPause(false);
-        TasksProvider tasksProvider = new TasksFetcher(config);
+        TasksProvider onlineTasksProvider = new TasksFetcher(config);
+        TasksProvider backupTasksProvider = new BackupTasksProvider(config);
 
         configureHttpDisplaysController(time, config);
 
@@ -84,8 +86,13 @@ public class Main extends Application {
                 }
 
                 @Override
-                public TasksProvider getTasksProvider() {
-                    return tasksProvider;
+                public TasksProvider getOnlineTasksProvider() {
+                    return onlineTasksProvider;
+                }
+
+                @Override
+                public TasksProvider getBackupTasksProvider() {
+                    return backupTasksProvider;
                 }
 
                 @Override

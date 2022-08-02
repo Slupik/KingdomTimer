@@ -22,6 +22,7 @@ import jw.kingdom.hall.kingdomtimer.javafx.view.head.tab.time.timedirect.BtnTime
 import jw.kingdom.hall.kingdomtimer.javafx.view.widget.HandyWindow;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -214,7 +215,7 @@ public class TimeControlController extends TabPresenter implements Initializable
     private void loadOverseerTasksOnline(ActionEvent event) {
         showLoadingIndicator(true);
         showScheduleDownloadButtons(false);
-        getWindowData().getTasksProvider().getMeetingTasks(true, new TasksProviderCallbackProxy() {
+        getWindowData().getOnlineTasksProvider().getMeetingTasks(true, new TasksProviderCallbackProxy() {
             @Override
             public void onDownload(List<TaskBean> taskList) {
                 getSchedule().setList(taskList);
@@ -226,7 +227,7 @@ public class TimeControlController extends TabPresenter implements Initializable
             public void onConnectionError() {
                 showLoadingIndicator(false);
                 showScheduleDownloadButtons(true);
-                showConnectionErrorDialog();
+                showConnectionErrorDialog(true);
             }
         });
     }
@@ -235,7 +236,7 @@ public class TimeControlController extends TabPresenter implements Initializable
     private void loadTasksOnline(ActionEvent event) {
         showLoadingIndicator(true);
         showScheduleDownloadButtons(false);
-        getWindowData().getTasksProvider().getMeetingTasks(false, new TasksProviderCallbackProxy() {
+        getWindowData().getOnlineTasksProvider().getMeetingTasks(false, new TasksProviderCallbackProxy() {
             @Override
             public void onDownload(List<TaskBean> taskList) {
                 getSchedule().setList(taskList);
@@ -247,24 +248,45 @@ public class TimeControlController extends TabPresenter implements Initializable
             public void onConnectionError() {
                 showLoadingIndicator(false);
                 showScheduleDownloadButtons(true);
-                showConnectionErrorDialog();
+                showConnectionErrorDialog(false);
             }
         });
     }
 
-    private void showConnectionErrorDialog() {
+    private void showConnectionErrorDialog(boolean circuit) {
         Platform.runLater(()->{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Błąd!");
             alert.setHeaderText("Wykryto problemy z połączeniem.");
-            alert.setContentText("Nie można było pobrać grafiku zebrania, " +
-                    "ponieważ albo program nie ma dostępu do internetu albo strona wol.jw.org jest niedostępna.\n" +
-                    "Spróbuj wykonać poniższe czynności:\n" +
-                    "\t1. Sprawdź czy masz połączenie z internetem, jeżeli nie to należy je przywrócić.\n" +
-                    "\t2. Sprawdź czy antywirus lub inny program nie blokuje dostępu do internetu dla programu.\n" +
-                    "\t3. Sprawdź czy strona wol.jw.org działa, jeżeli nie, to poczekaj i spróbuj ponownie.");
+            alert.setContentText("Program nie może wczytać aktualnego programu zebrania. Problem może polegać na braku " +
+                    "połączenia ze stroną wol.jw.org lub innego problemu technicznego. Możesz wczytać zapasowy program " +
+                    "na ten dzień, ale pamiętaj go dostosować do realnego programu zebrania.\n" +
+                    "Jeżeli strona wol.jw.org działa poprawnie w przeglądarce to zaistniały problem zgłoś KUSKowi.\n" +
+                    "Zarówno wczytując zapasowy program jak i rezygnując z tej opcji system będzie działał stabilnie i " +
+                    "dalej możesz korzystać z tego narzędzia. Po prostu będzie odrobinkę mniej wygodne :)");
 
-            alert.showAndWait();
+
+            ButtonType btnApplyDefaultSchedule = new ButtonType("Wczytaj zapasowy program", ButtonBar.ButtonData.APPLY);
+            ButtonType btnClose = new ButtonType("Zamknij", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            alert.getButtonTypes().setAll(btnApplyDefaultSchedule, btnClose);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == btnApplyDefaultSchedule){
+                getWindowData().getBackupTasksProvider().getMeetingTasks(circuit, new TasksProviderCallbackProxy() {
+                    @Override
+                    public void onDownload(List<TaskBean> taskList) {
+                        getSchedule().setList(taskList);
+                        showLoadingIndicator(false);
+                        showScheduleDownloadButtons(true);
+                    }
+
+                    @Override
+                    public void onConnectionError() {
+                        System.err.println("Error during downloading default schedule. This should not happen.");
+                    }
+                });
+            }
         });
     }
 

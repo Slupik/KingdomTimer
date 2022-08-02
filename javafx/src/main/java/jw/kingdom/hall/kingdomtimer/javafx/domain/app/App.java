@@ -87,8 +87,13 @@ public class App {
             }
 
             @Override
-            public TasksProvider getTasksProvider() {
-                return appInput.getTasksProvider();
+            public TasksProvider getOnlineTasksProvider() {
+                return appInput.getOnlineTasksProvider();
+            }
+
+            @Override
+            public TasksProvider getBackupTasksProvider() {
+                return appInput.getBackupTasksProvider();
             }
 
             @Override
