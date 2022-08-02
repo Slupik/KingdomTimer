@@ -19,6 +19,7 @@ public interface AppInput {
     Countdown getCountdown();
     TimeController getTimeController();
     MonitorPreviewController getSpeakerPreviewController();
-    TasksProvider getTasksProvider();
+    TasksProvider getOnlineTasksProvider();
+    TasksProvider getBackupTasksProvider();
     MonitorListManager getMonitorsManager();
 }

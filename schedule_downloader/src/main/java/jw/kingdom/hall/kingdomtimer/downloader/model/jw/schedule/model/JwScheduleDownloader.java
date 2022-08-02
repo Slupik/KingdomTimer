@@ -9,7 +9,6 @@ package jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model;
 
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleDownloader;
 
-import java.io.IOException;
 import java.net.UnknownHostException;
 
 public class JwScheduleDownloader implements ScheduleDownloader {
@@ -48,8 +47,9 @@ public class JwScheduleDownloader implements ScheduleDownloader {
                     }
                 }
                 callback.onDownload(new Downloader().getTasks(data, url));
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
+                callback.onConnectionError();
             }
         }).start();
     }

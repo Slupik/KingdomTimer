@@ -2,7 +2,7 @@ package jw.kingdom.hall.kingdomtimer.config.json;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.Nullable;
 import jw.kingdom.hall.kingdomtimer.config.common.DataParseException;
 
 /**

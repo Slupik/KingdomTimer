@@ -9,11 +9,11 @@ import java.util.List;
 /**
  * All rights reserved & copyright ©
  */
-public class TasksFetcher implements TasksProvider {
+public class BackupTasksProvider implements TasksProvider {
 
     private final AppConfig config;
 
-    public TasksFetcher(AppConfig config) {
+    public BackupTasksProvider(AppConfig config) {
         this.config = config;
     }
 
@@ -24,22 +24,13 @@ public class TasksFetcher implements TasksProvider {
 
     @Override
     public void getMeetingTasks(boolean isCircuit, long forTimeInMillis, Callback callback) {
-        TaskListCreator.Callback callbackForFactory = new TaskListCreator.Callback() {
-            @Override
-            public void onDataReceive(List<TaskBean> list) {
-                callback.onDownload(list);
-            }
-
-            @Override
-            public void onConnectionError() {
-                callback.onConnectionError();
-            }
-        };
         callback.onStart();
+        List<TaskBean> list;
         if(TaskProviderUtils.isWeekend(forTimeInMillis)) {
-            TaskListCreator.getWeekendTasks(isCircuit, callbackForFactory);
+            list = StaticTasksProvider.getForWeekend(isCircuit);
         } else {
-            TaskListCreator.getWeekTasks(config, isCircuit, callbackForFactory);
+            list = StaticTasksProvider.getForWeek(config, isCircuit);
         }
+        callback.onDownload(list);
     }
 }

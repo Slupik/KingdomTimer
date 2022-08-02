@@ -22,7 +22,7 @@ import java.util.List;
 class TaskListCreator {
     private static final ScheduleDownloader downloader = new ScheduleDownloaderFacade();
 
-    static void getWeekTasks(Config config, boolean circuit, Callback callback){
+    static void getWeekTasks(Config config, boolean circuit, Callback callback) {
         ScheduleDownloaderInputBean data = new ScheduleDownloaderInputBean();
         data.setCircuitVisit(circuit);
         data.setLangCode("pl");
@@ -36,7 +36,7 @@ class TaskListCreator {
             @Override
             public void onDownload(List<ScheduleTask> tasks) {
                 List<TaskBean> list = new ArrayList<>();
-                for(ScheduleTask scheduleTask:tasks) {
+                for (ScheduleTask scheduleTask : tasks) {
                     list.add(ScheduleTaskToMeetingTaskConverter.getMeetingTask(scheduleTask));
                 }
                 callback.onDataReceive(list);
@@ -49,42 +49,13 @@ class TaskListCreator {
         });
     }
 
-    static void getWeekendTasks(boolean circuit, Callback callback){
-        List<TaskBean> list = new ArrayList<>();
-
-        TaskBean lecture = new TaskBean();
-        lecture.setName("Wykład publiczny");
-        lecture.setTime(30 * 60);
-        lecture.setUseBuzzer(false);
-        lecture.setType(TaskBean.Type.LECTURE);
-        list.add(lecture);
-
-        TaskBean watchtower = new TaskBean();
-        watchtower.setName("Strażnica");
-        if(circuit) {
-            watchtower.setTime(30 * 60);
-        } else {
-            watchtower.setTime(60 * 60);
-        }
-        watchtower.setUseBuzzer(false);
-        watchtower.setType(TaskBean.Type.WATCHTOWER);
-        list.add(watchtower);
-
-
-        if(circuit) {
-            TaskBean overseerLecture = new TaskBean();
-            overseerLecture.setName("Przemówienie nadzorcy obwodu");
-            overseerLecture.setTime(30 * 60);
-            overseerLecture.setUseBuzzer(false);
-            overseerLecture.setType(TaskBean.Type.CIRCUIT);
-            list.add(overseerLecture);
-        }
-
-        callback.onDataReceive(list);
+    static void getWeekendTasks(boolean circuit, Callback callback) {
+        callback.onDataReceive(StaticTasksProvider.getForWeekend(circuit));
     }
 
     interface Callback {
         void onDataReceive(List<TaskBean> list);
+
         void onConnectionError();
     }
 }
