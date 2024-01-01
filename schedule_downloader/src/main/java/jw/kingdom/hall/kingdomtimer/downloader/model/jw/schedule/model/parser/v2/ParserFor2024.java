@@ -11,6 +11,7 @@ package jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model.parser.v
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleDownloader;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTask;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTaskType;
+import jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model.PredefinedTask;
 import jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model.parser.OnlineScheduleParser;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -69,6 +70,11 @@ public class ParserFor2024 implements OnlineScheduleParser {
             }
         }
 
+        if (data.isCircuitVisit()) {
+            list.remove(list.size() - 2);
+            list.add(getCircuitLectureTask(data));
+        }
+
         return list;
     }
 
@@ -104,12 +110,11 @@ public class ParserFor2024 implements OnlineScheduleParser {
     }
 
     private ScheduleTask getEvaluationTask(ScheduleDownloader.InputData data) {
-        ScheduleTask task = new ScheduleTask();
-        task.setType(ScheduleTaskType.MINISTRY);
-        task.setActiveBuzzer(false);
-        task.setTime(data.getTimeToEvaluate());
-        task.setName(data.getTranslator().evaluate());
-        return task;
+        return PredefinedTask.getTaskToEvaluate(data.getTranslator(), data.getTimeToEvaluate());
+    }
+
+    private ScheduleTask getCircuitLectureTask(ScheduleDownloader.InputData data) {
+        return PredefinedTask.getCircuitLecture(data.getTranslator());
     }
 
     private boolean isExercise(ScheduleTaskType taskType, int time) {
