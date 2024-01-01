@@ -1,17 +1,26 @@
 
 /*
+ * Feel free to use
+ */
+
+/*
+ * Feel free to use
+ */
+
+/*
  * Created 05.09.18 01:16.
  * Last modified 05.09.18 01:16
  * This file is part of KingdomHallTimer which is released under "no licence".
  */
 
-package jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model;
+package jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model.parser.v1;
 
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTask;
+import jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model.WrongElementException;
 import org.jsoup.nodes.Element;
 
 class RawTaskParser {
-    static boolean isContainsVideo(Element elementSu){
+    public static boolean isContainsVideo(Element elementSu){
         Element parent = elementSu.parent();
         for(Element toCheck:parent.getAllElements()) {
             if(toCheck.children().size()>0) {

@@ -38,7 +38,7 @@ public class JwScheduleDownloaderTest {
 
                 @Override
                 public String getDestUrl() {
-                    return "https://wol.jw.org/pl/wol/dt/r12/lp-p/2019/1/8";
+                    return "https://wol.jw.org/pl/wol/meetings/r12/lp-p/2024/01";
                 }
 
                 @Override
