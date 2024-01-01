@@ -30,7 +30,10 @@ class TaskListCreator {
         data.setTimeToEvaluate(config.getTimeToEvaluate());
 
         //For tests purposes
-//        data.setDestUrl("https://wol.jw.org/pl/wol/dt/r12/lp-p/2019/2/4");
+        //2023
+//        data.setDestUrl("https://wol.jw.org/pl/wol/meetings/r12/lp-p/2023/51");
+        //2024
+//        data.setDestUrl("https://wol.jw.org/pl/wol/meetings/r12/lp-p/2024/02");
 
         downloader.downloadWeek(data, new ScheduleDownloader.DownloadCallback() {
             @Override

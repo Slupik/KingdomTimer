@@ -17,7 +17,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -35,7 +35,7 @@ public class ParserFor2024 implements OnlineScheduleParser {
     }};
 
     @Override
-    public boolean supports(LocalDateTime date) {
+    public boolean supports(LocalDate date) {
         return date.getYear() == 2024;
     }
 

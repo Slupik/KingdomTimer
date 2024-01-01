@@ -16,19 +16,22 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class Downloader {
 
     List<ScheduleTask> getTasks(ScheduleDownloader.InputData data, String url) throws IOException {
-        List<ScheduleTask> list = new ArrayList<>();
         Document doc = Jsoup.connect(url).get();
+        LocalDate targetDate = parseURL(url);
         return getParsers().stream()
-                //TODO use real time of URL
-                .filter(parser -> parser.supports(LocalDateTime.now()))
+                .filter(parser -> parser.supports(targetDate))
                 .findAny()
                 .map(parser -> parser.parse(data, doc))
                 .orElse(new ArrayList<>());
@@ -36,6 +39,28 @@ class Downloader {
 
     private List<OnlineScheduleParser> getParsers(){
         return Arrays.asList(new ParserFor2023(), new ParserFor2024());
+    }
+
+    private static LocalDate parseURL(String url) {
+        Pattern pattern = Pattern.compile(".*/(\\d{4})/(\\d+)$");
+        Matcher matcher = pattern.matcher(url);
+
+        if (matcher.find()) {
+            int year = Integer.parseInt(matcher.group(1));
+            int week = Integer.parseInt(matcher.group(2));
+
+            return getStartOfWeek(year, week);
+        } else {
+            return LocalDate.now();
+        }
+    }
+
+    public static LocalDate getStartOfWeek(int year, int week) {
+        return LocalDate.now()
+                .withYear(year)
+                .with(TemporalAdjusters.firstDayOfYear())
+                .with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY))
+                .plusWeeks(week - 1); // Subtract 1 because we start counting weeks from 0
     }
 
 }
