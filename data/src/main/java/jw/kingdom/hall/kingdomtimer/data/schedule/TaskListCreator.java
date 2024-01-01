@@ -36,7 +36,7 @@ class TaskListCreator {
         //2024
 //        data.setDestUrl("https://wol.jw.org/pl/wol/meetings/r12/lp-p/2024/02");
 //        data.setDestUrl("https://wol.jw.org/uk/wol/meetings/r15/lp-k/2024/1");
-        data.setDestUrl("https://wol.jw.org/pl/wol/meetings/r12/lp-p/2024/04");
+//        data.setDestUrl("https://wol.jw.org/pl/wol/meetings/r12/lp-p/2024/04");
 
         downloader.downloadWeek(data, new ScheduleDownloader.DownloadCallback() {
             @Override
