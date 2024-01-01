@@ -17,7 +17,10 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -59,40 +62,57 @@ public class ParserFor2024 implements OnlineScheduleParser {
                         // it's probably a song
                         continue;
                     }
-                    list.add(parseTask(child, nextChild, TASK_TYPE_FOR_INDEX.get(part)));
+                    list.addAll(parseTask(child, nextChild, TASK_TYPE_FOR_INDEX.get(part), data));
                 }
             } else if (Objects.equals(tagName, "div") && child.getElementsByTag("h3").size() != 0) {
-                parseNestedTask(child, TASK_TYPE_FOR_INDEX.get(part)).ifPresent(list::add);
+                list.addAll(parseNestedTask(child, TASK_TYPE_FOR_INDEX.get(part), data));
             }
         }
 
         return list;
     }
 
-    private Optional<ScheduleTask> parseNestedTask(Element element, ScheduleTaskType taskType) {
+    private List<ScheduleTask> parseNestedTask(Element element, ScheduleTaskType taskType, ScheduleDownloader.InputData data) {
         Elements children = element.children();
         for (int i = 0; i < children.size(); i++) {
             Element child = children.get(i);
             String tagName = child.tagName();
             if (Objects.equals(tagName, "h3")) {
-                return Optional.of(parseTask(child, children.get(i+1), taskType));
+                return parseTask(child, children.get(i + 1), taskType, data);
             }
         }
-        return Optional.empty();
+        return Collections.emptyList();
     }
 
-    private ScheduleTask parseTask(Element child, Element element, ScheduleTaskType taskType) {
+    private List<ScheduleTask> parseTask(Element child, Element element, ScheduleTaskType taskType, ScheduleDownloader.InputData data) {
         int time = extractMinutes(element.text());
+        boolean isExercise = isExercise(taskType, time);
 
         ScheduleTask task = new ScheduleTask();
         task.setType(taskType);
-        task.setActiveBuzzer(isBuzzerActive(taskType, time));
+        task.setActiveBuzzer(isExercise);
         task.setTime(time);
         task.setName(child.text());
+
+        List<ScheduleTask> list = new ArrayList<>();
+        list.add(task);
+        if (isExercise && data.getTimeToEvaluate() > 0) {
+            list.add(getEvaluationTask(data));
+        }
+
+        return list;
+    }
+
+    private ScheduleTask getEvaluationTask(ScheduleDownloader.InputData data) {
+        ScheduleTask task = new ScheduleTask();
+        task.setType(ScheduleTaskType.MINISTRY);
+        task.setActiveBuzzer(false);
+        task.setTime(data.getTimeToEvaluate());
+        task.setName(data.getTranslator().evaluate());
         return task;
     }
 
-    private boolean isBuzzerActive(ScheduleTaskType taskType, int time) {
+    private boolean isExercise(ScheduleTaskType taskType, int time) {
         if (!ScheduleTaskType.MINISTRY.equals(taskType)) {
             return false;
         }
