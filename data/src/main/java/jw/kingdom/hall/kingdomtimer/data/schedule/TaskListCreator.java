@@ -15,7 +15,6 @@ import jw.kingdom.hall.kingdomtimer.downloader.model.ScheduleDownloaderFacade;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -56,7 +55,7 @@ class TaskListCreator {
     }
 
     private static String getLandCode() {
-        return Locale.getDefault().getLanguage();
+        return "pl";//Locale.getDefault().getLanguage();
     }
 
     static void getWeekendTasks(boolean circuit, Callback callback) {
