@@ -49,8 +49,7 @@ public class ParserFor2024 implements OnlineScheduleParser {
         for (int i = 0; i < children.size(); i++) {
             Element child = children.get(i);
             String tagName = child.tagName();
-            if (Objects.equals(tagName, "h2") ||
-                    (Objects.equals(tagName, "div") && child.getElementsByTag("h2").size() != 0)) {
+            if (isNewSection(child, tagName, children)) {
                 part++;
             } else if (Objects.equals(tagName, "h3")) {
                 if (list.size() == 0) {
@@ -76,6 +75,19 @@ public class ParserFor2024 implements OnlineScheduleParser {
         }
 
         return list;
+    }
+
+    private boolean isNewSection(Element child, String tagName, Elements children) {
+        if (Objects.equals(tagName, "h2")) {
+            return true;
+        }
+        boolean containsAnyImmediateHeader = child.children().stream()
+                .map(Element::tagName)
+                .anyMatch("h2"::equalsIgnoreCase);
+        if (Objects.equals(tagName, "div") && containsAnyImmediateHeader) {
+            return true;
+        }
+        return false;
     }
 
     private List<ScheduleTask> parseNestedTask(Element element, ScheduleTaskType taskType, ScheduleDownloader.InputData data) {

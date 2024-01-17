@@ -14,17 +14,77 @@ import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTranslator;
 import jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model.JwScheduleDownloader;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class JwScheduleDownloaderTest {
 
     private static final boolean CHECK_SPECIFIC_LINK = true;
 
     public static void main(String[] args) {
-        testDownloadingTasks();
+//        testDownloadingTasks();
+        runMassTest();
+    }
+
+    private static void runMassTest() {
+        IntStream.range(1, 19)
+                .forEach(weekIndex -> {
+                    try {
+                        checkWeek(weekIndex);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println("FATAL ERROR for week " + weekIndex);
+                    }
+                });
+    }
+
+    private static void checkWeek(int weekIndex) {
+        new JwScheduleDownloader().downloadWeek(new ScheduleDownloader.InputData() {
+            @Override
+            public boolean isCircuitVisit() {
+                return false;
+            }
+
+            @Override
+            public String getLangCode() {
+                return "pl";
+            }
+
+            @Override
+            public String getDestUrl() {
+                return "https://wol.jw.org/pl/wol/meetings/r12/lp-p/2024/" + weekIndex;
+            }
+
+            @Override
+            public ScheduleTranslator getTranslator() {
+                return new DefaultScheduleTranslator();
+            }
+
+            @Override
+            public int getTimeToEvaluate() {
+                return 60;
+            }
+        }, new ScheduleDownloader.DownloadCallback() {
+            @Override
+            public void onDownload(List<ScheduleTask> tasks) {
+                int amountOfSections = tasks.stream()
+                        .map(ScheduleTask::getType)
+                        .collect(Collectors.toSet())
+                        .size();
+                if (amountOfSections != 3) {
+                    System.out.println("ERROR for week " + weekIndex + ", detected only " + amountOfSections + "sections");
+                }
+            }
+
+            @Override
+            public void onConnectionError() {
+                System.err.println("Conn error (week " + weekIndex + ")");
+            }
+        });
     }
 
     private static void testDownloadingTasks() {
-        if(CHECK_SPECIFIC_LINK) {
+        if (CHECK_SPECIFIC_LINK) {
             new JwScheduleDownloader().downloadWeek(new ScheduleDownloader.InputData() {
                 @Override
                 public boolean isCircuitVisit() {
@@ -38,7 +98,7 @@ public class JwScheduleDownloaderTest {
 
                 @Override
                 public String getDestUrl() {
-                    return "https://wol.jw.org/pl/wol/meetings/r12/lp-p/2024/01";
+                    return "https://wol.jw.org/pl/wol/meetings/r12/lp-p/2024/1";
                 }
 
                 @Override
@@ -54,7 +114,7 @@ public class JwScheduleDownloaderTest {
                 @Override
                 public void onDownload(List<ScheduleTask> tasks) {
                     for (ScheduleTask task : tasks) {
-                        System.out.println(task.getName() + " (" + task.getTime() + ") buzzer: "+task.isActiveBuzzer());
+                        System.out.println(task.getName() + " (" + task.getTime() + ") buzzer: " + task.isActiveBuzzer());
                     }
                 }
 
@@ -64,7 +124,7 @@ public class JwScheduleDownloaderTest {
                 }
             });
         } else {
-            new JwScheduleDownloader().getUrlForToday("ru", new ScheduleDownloader.UrlCallback() {
+            new JwScheduleDownloader().getUrlForToday("pl", new ScheduleDownloader.UrlCallback() {
                 @Override
                 public void onReturnUrl(String url) {
 //            url = "https://wol.jw.org/pl/wol/dt/r12/lp-p/2018/9/4";
@@ -103,7 +163,7 @@ public class JwScheduleDownloaderTest {
                         @Override
                         public void onDownload(List<ScheduleTask> tasks) {
                             for (ScheduleTask task : tasks) {
-                                System.out.println(task.getName() + " (" + task.getTime() + ") buzzer: "+task.isActiveBuzzer());
+                                System.out.println(task.getName() + " (" + task.getTime() + ") buzzer: " + task.isActiveBuzzer());
                             }
                         }
 
