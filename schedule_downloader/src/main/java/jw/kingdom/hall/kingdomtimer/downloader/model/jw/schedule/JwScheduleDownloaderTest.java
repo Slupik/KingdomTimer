@@ -74,6 +74,12 @@ public class JwScheduleDownloaderTest {
                 if (amountOfSections != 3) {
                     System.out.println("ERROR for week " + weekIndex + ", detected only " + amountOfSections + "sections");
                 }
+                boolean allHasAssignedTime = tasks.stream()
+                        .map(ScheduleTask::getTime)
+                        .allMatch(time -> time > 0);
+                if (!allHasAssignedTime) {
+                    System.out.println("ERROR for week " + weekIndex + ", detected item without time");
+                }
             }
 
             @Override

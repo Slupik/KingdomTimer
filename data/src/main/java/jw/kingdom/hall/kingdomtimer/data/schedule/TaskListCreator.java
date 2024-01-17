@@ -15,6 +15,7 @@ import jw.kingdom.hall.kingdomtimer.downloader.model.ScheduleDownloaderFacade;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * This file is part of KingdomHallTimer which is released under "no licence".
@@ -33,9 +34,8 @@ class TaskListCreator {
         //2023
 //        data.setDestUrl("https://wol.jw.org/pl/wol/meetings/r12/lp-p/2023/51");
         //2024
-//        data.setDestUrl("https://wol.jw.org/pl/wol/meetings/r12/lp-p/2024/02");
-//        data.setDestUrl("https://wol.jw.org/uk/wol/meetings/r15/lp-k/2024/1");
 //        data.setDestUrl("https://wol.jw.org/pl/wol/meetings/r12/lp-p/2024/04");
+//        data.setDestUrl("https://wol.jw.org/uk/wol/meetings/r15/lp-k/2024/03");
 
         downloader.downloadWeek(data, new ScheduleDownloader.DownloadCallback() {
             @Override
@@ -55,7 +55,7 @@ class TaskListCreator {
     }
 
     private static String getLandCode() {
-        return "pl";//Locale.getDefault().getLanguage();
+        return Locale.getDefault().getLanguage();
     }
 
     static void getWeekendTasks(boolean circuit, Callback callback) {
