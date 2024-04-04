@@ -7,6 +7,7 @@ package jw.kingdom.hall.kingdomtimer.data.schedule;
 import jw.kingdom.hall.kingdomtimer.domain.config.AppConfig;
 import jw.kingdom.hall.kingdomtimer.domain.task.TaskBean;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTask;
+import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTaskType;
 import jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model.PredefinedTask;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ abstract class StaticTasksProvider {
         task4.setUseBuzzer(true);
         task4.setType(TaskBean.Type.TREASURES);
         list.add(task4);
-        getTaskToEvaluate(config).ifPresent(list::add);
+        getTaskToEvaluate(config, ScheduleTaskType.TREASURES).ifPresent(list::add);
 
         TaskBean task5 = new TaskBean();
         task5.setName("Punkt ćwiczebny 1");
@@ -53,7 +54,7 @@ abstract class StaticTasksProvider {
         task5.setUseBuzzer(true);
         task5.setType(TaskBean.Type.MINISTRY);
         list.add(task5);
-        getTaskToEvaluate(config).ifPresent(list::add);
+        getTaskToEvaluate(config, ScheduleTaskType.MINISTRY).ifPresent(list::add);
 
         TaskBean task6 = new TaskBean();
         task6.setName("Punkt ćwiczebny 2");
@@ -61,7 +62,7 @@ abstract class StaticTasksProvider {
         task6.setUseBuzzer(true);
         task6.setType(TaskBean.Type.MINISTRY);
         list.add(task6);
-        getTaskToEvaluate(config).ifPresent(list::add);
+        getTaskToEvaluate(config, ScheduleTaskType.MINISTRY).ifPresent(list::add);
 
         TaskBean task7 = new TaskBean();
         task7.setName("Punkt ćwiczebny 3");
@@ -69,7 +70,7 @@ abstract class StaticTasksProvider {
         task7.setUseBuzzer(true);
         task7.setType(TaskBean.Type.MINISTRY);
         list.add(task7);
-        getTaskToEvaluate(config).ifPresent(list::add);
+        getTaskToEvaluate(config, ScheduleTaskType.MINISTRY).ifPresent(list::add);
 
         TaskBean task8 = new TaskBean();
         task8.setName("Punkt 1");
@@ -110,10 +111,10 @@ abstract class StaticTasksProvider {
         return list;
     }
 
-    private static Optional<TaskBean> getTaskToEvaluate(AppConfig config) {
+    private static Optional<TaskBean> getTaskToEvaluate(AppConfig config, ScheduleTaskType type) {
         int timeToEvaluate = config.getTimeToEvaluate();
         if (timeToEvaluate >= 0) {
-            return Optional.of(PredefinedTask.getTaskToEvaluate(new ScheduleTranslator(), timeToEvaluate))
+            return Optional.of(PredefinedTask.getTaskToEvaluate(new ScheduleTranslator(), timeToEvaluate, type))
                     .map(ScheduleTaskToMeetingTaskConverter::getMeetingTask);
         }
         return Optional.empty();

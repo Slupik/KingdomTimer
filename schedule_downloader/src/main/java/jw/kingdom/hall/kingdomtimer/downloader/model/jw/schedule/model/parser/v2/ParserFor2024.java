@@ -18,10 +18,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -115,14 +112,14 @@ public class ParserFor2024 implements OnlineScheduleParser {
         List<ScheduleTask> list = new ArrayList<>();
         list.add(task);
         if (isExercise && data.getTimeToEvaluate() > 0) {
-            list.add(getEvaluationTask(data));
+            list.add(getEvaluationTask(data, task.getType()));
         }
 
         return list;
     }
 
-    private ScheduleTask getEvaluationTask(ScheduleDownloader.InputData data) {
-        return PredefinedTask.getTaskToEvaluate(data.getTranslator(), data.getTimeToEvaluate());
+    private ScheduleTask getEvaluationTask(ScheduleDownloader.InputData data, ScheduleTaskType type) {
+        return PredefinedTask.getTaskToEvaluate(data.getTranslator(), data.getTimeToEvaluate(), type);
     }
 
     private ScheduleTask getCircuitLectureTask(ScheduleDownloader.InputData data) {
@@ -130,7 +127,7 @@ public class ParserFor2024 implements OnlineScheduleParser {
     }
 
     private boolean isExercise(ScheduleTaskType taskType, int time) {
-        if (!ScheduleTaskType.MINISTRY.equals(taskType)) {
+        if (!Arrays.asList(ScheduleTaskType.MINISTRY, ScheduleTaskType.TREASURES).contains(taskType)) {
             return false;
         }
         // If short, it's probably a exercise

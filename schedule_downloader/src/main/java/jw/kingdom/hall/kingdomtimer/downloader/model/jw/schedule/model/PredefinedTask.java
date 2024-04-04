@@ -7,6 +7,7 @@
 package jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model;
 
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTask;
+import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTaskType;
 import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTranslator;
 
 import static jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTaskType.CIRCUIT;
@@ -23,12 +24,12 @@ public class PredefinedTask {
         return task;
     }
 
-    public static ScheduleTask getTaskToEvaluate(ScheduleTranslator translator, int seconds) {
+    public static ScheduleTask getTaskToEvaluate(ScheduleTranslator translator, int seconds, ScheduleTaskType type) {
         ScheduleTask task = new ScheduleTask();
         task.setName(translator.evaluate());
         task.setTime(seconds);
         task.setActiveBuzzer(false);
-        task.setType(MINISTRY);
+        task.setType(type);
         return task;
     }
 }

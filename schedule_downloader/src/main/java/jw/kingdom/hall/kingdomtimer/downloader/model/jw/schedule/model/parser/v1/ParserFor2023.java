@@ -61,7 +61,9 @@ public class ParserFor2023 implements OnlineScheduleParser {
         }
         list.get(list.size()-1).setActiveBuzzer(true);
         if(data.getTimeToEvaluate()>=0) {
-            ScheduleTask evaluation = PredefinedTask.getTaskToEvaluate(data.getTranslator(), data.getTimeToEvaluate());
+            ScheduleTask evaluation = PredefinedTask.getTaskToEvaluate(data.getTranslator(),
+                    data.getTimeToEvaluate(),
+                    ScheduleTaskType.TREASURES);
             evaluation.setType(ScheduleTaskType.TREASURES);
             list.add(evaluation);
         }
@@ -76,7 +78,9 @@ public class ParserFor2023 implements OnlineScheduleParser {
             task.setType(ScheduleTaskType.MINISTRY);
             finalList.add(task);
             if(task.isActiveBuzzer() && data.getTimeToEvaluate()>=0) {
-                finalList.add(PredefinedTask.getTaskToEvaluate(data.getTranslator(), data.getTimeToEvaluate()));
+                finalList.add(PredefinedTask.getTaskToEvaluate(data.getTranslator(),
+                        data.getTimeToEvaluate(),
+                        ScheduleTaskType.MINISTRY));
             }
         }
         return finalList;
