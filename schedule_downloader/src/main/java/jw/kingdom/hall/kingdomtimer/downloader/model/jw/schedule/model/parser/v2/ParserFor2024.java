@@ -153,7 +153,7 @@ public class ParserFor2024 implements OnlineScheduleParser {
     }
 
     private static int extractMinutes(String text) {
-        Pattern pattern = Pattern.compile("\\((\\d+) ([a-zA-Zа-яА-Яє-їЄ-Ї]+)\\)");
+        Pattern pattern = Pattern.compile("\\((\\d+) ([a-zA-Zа-яА-Яє-їЄ-Ї.]+)\\)");
         Matcher matcher = pattern.matcher(text);
 
         if (matcher.find()) {

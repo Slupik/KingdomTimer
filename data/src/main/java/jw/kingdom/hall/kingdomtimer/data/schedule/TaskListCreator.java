@@ -26,7 +26,7 @@ class TaskListCreator {
     static void getWeekTasks(Config config, boolean circuit, Callback callback) {
         ScheduleDownloaderInputBean data = new ScheduleDownloaderInputBean();
         data.setCircuitVisit(circuit);
-        data.setLangCode(getLandCode());
+        data.setLangCode(getLangCode());
         data.setTranslator(new ScheduleTranslator());
         data.setTimeToEvaluate(config.getTimeToEvaluate());
 
@@ -54,7 +54,7 @@ class TaskListCreator {
         });
     }
 
-    private static String getLandCode() {
+    private static String getLangCode() {
         return Locale.getDefault().getLanguage();
     }
 
