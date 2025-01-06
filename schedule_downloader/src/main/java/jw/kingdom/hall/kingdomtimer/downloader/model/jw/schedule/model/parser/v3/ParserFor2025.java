@@ -38,7 +38,7 @@ public class ParserFor2025 implements OnlineScheduleParser {
 
     @Override
     public List<ScheduleTask> parse(ScheduleDownloader.InputData data, Document doc) {
-        Element partWithSchedule = doc.getElementsByClass("bodyTxt").get(1);
+        Element partWithSchedule = doc.getElementsByClass("bodyTxt").get(0);
         List<ScheduleTask> list = new ArrayList<>();
 
         Elements children = partWithSchedule.children();
@@ -46,7 +46,7 @@ public class ParserFor2025 implements OnlineScheduleParser {
         for (int i = 0; i < children.size(); i++) {
             Element child = children.get(i);
             String tagName = child.tagName();
-            if (isNewSection(child, tagName, children)) {
+            if (isNewSection(child)) {
                 part++;
             } else if (Objects.equals(tagName, "h3")) {
                 if (list.size() == 0) {
@@ -74,17 +74,13 @@ public class ParserFor2025 implements OnlineScheduleParser {
         return list;
     }
 
-    private boolean isNewSection(Element child, String tagName, Elements children) {
-        if (Objects.equals(tagName, "h2")) {
-            return true;
+    private boolean isNewSection(Element child) {
+        String tagName = child.tagName();
+        if (!Objects.equals(tagName, "div")) {
+            return false;
         }
-        boolean containsAnyImmediateHeader = child.children().stream()
-                .map(Element::tagName)
-                .anyMatch("h2"::equalsIgnoreCase);
-        if (Objects.equals(tagName, "div") && containsAnyImmediateHeader) {
-            return true;
-        }
-        return false;
+        return child.hasClass("dc-icon--gem") || child.hasClass("dc-icon--wheat")
+                || child.hasClass("dc-icon--sheep");
     }
 
     private List<ScheduleTask> parseNestedTask(Element element, ScheduleTaskType taskType, ScheduleDownloader.InputData data) {
@@ -138,8 +134,8 @@ public class ParserFor2025 implements OnlineScheduleParser {
         ScheduleTask task = new ScheduleTask();
         task.setType(ScheduleTaskType.TREASURES);
         task.setActiveBuzzer(false);
-        task.setTime(extractMinutes(element.children().get(2).text()));
         task.setName(extractTextAfterPipe(element.child(1).text()));
+        task.setTime(extractMinutes(element.children().get(2).text()));
         return task;
     }
 
@@ -147,8 +143,8 @@ public class ParserFor2025 implements OnlineScheduleParser {
         ScheduleTask task = new ScheduleTask();
         task.setType(ScheduleTaskType.LIVING);
         task.setActiveBuzzer(false);
-        task.setTime(extractMinutes(element.child(1).text()));
         task.setName(element.child(0).text());
+        task.setTime(extractMinutes(element.child(1).text()));
         return task;
     }
 

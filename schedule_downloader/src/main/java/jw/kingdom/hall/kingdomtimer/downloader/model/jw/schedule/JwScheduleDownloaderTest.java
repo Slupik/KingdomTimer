@@ -104,7 +104,7 @@ public class JwScheduleDownloaderTest {
 
                 @Override
                 public String getDestUrl() {
-                    return "https://wol.jw.org/pl/wol/meetings/r12/lp-p/2025/1";
+                    return "https://wol.jw.org/pl/wol/meetings/r12/lp-p/2025/2";
                 }
 
                 @Override
