@@ -12,6 +12,7 @@ import jw.kingdom.hall.kingdomtimer.downloader.entity.ScheduleTask;
 import jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model.parser.OnlineScheduleParser;
 import jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model.parser.v1.ParserFor2023;
 import jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model.parser.v2.ParserFor2024;
+import jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model.parser.v3.ParserFor2025;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -38,7 +39,7 @@ class Downloader {
     }
 
     private List<OnlineScheduleParser> getParsers(){
-        return Arrays.asList(new ParserFor2023(), new ParserFor2024());
+        return Arrays.asList(new ParserFor2023(), new ParserFor2024(), new ParserFor2025());
     }
 
     private static LocalDate parseURL(String url) {

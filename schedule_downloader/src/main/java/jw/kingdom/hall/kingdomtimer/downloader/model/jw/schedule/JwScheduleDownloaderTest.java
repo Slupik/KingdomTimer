@@ -22,8 +22,8 @@ public class JwScheduleDownloaderTest {
     private static final boolean CHECK_SPECIFIC_LINK = true;
 
     public static void main(String[] args) {
-//        testDownloadingTasks();
-        runMassTest();
+        testDownloadingTasks();
+//        runMassTest();
     }
 
     private static void runMassTest() {
@@ -104,7 +104,7 @@ public class JwScheduleDownloaderTest {
 
                 @Override
                 public String getDestUrl() {
-                    return "https://wol.jw.org/pl/wol/meetings/r12/lp-p/2024/1";
+                    return "https://wol.jw.org/pl/wol/meetings/r12/lp-p/2025/1";
                 }
 
                 @Override
@@ -119,6 +119,9 @@ public class JwScheduleDownloaderTest {
             }, new ScheduleDownloader.DownloadCallback() {
                 @Override
                 public void onDownload(List<ScheduleTask> tasks) {
+                    if (tasks.isEmpty()) {
+                        System.err.println("No tasks in the list");
+                    }
                     for (ScheduleTask task : tasks) {
                         System.out.println(task.getName() + " (" + task.getTime() + ") buzzer: " + task.isActiveBuzzer());
                     }
