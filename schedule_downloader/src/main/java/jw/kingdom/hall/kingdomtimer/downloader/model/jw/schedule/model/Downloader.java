@@ -13,7 +13,6 @@ import jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model.parser.On
 import jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model.parser.v1.ParserFor2023;
 import jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model.parser.v2.ParserFor2024;
 import jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model.parser.v3.ParserFor2025;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
@@ -29,7 +28,7 @@ import java.util.regex.Pattern;
 class Downloader {
 
     List<ScheduleTask> getTasks(ScheduleDownloader.InputData data, String url) throws IOException {
-        Document doc = Jsoup.connect(url).get();
+        Document doc = new ConnectionCreator().create(url).get();
         LocalDate targetDate = parseURL(url);
         return getParsers().stream()
                 .filter(parser -> parser.supports(targetDate))

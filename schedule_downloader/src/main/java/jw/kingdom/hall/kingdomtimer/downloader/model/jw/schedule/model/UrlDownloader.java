@@ -7,7 +7,6 @@
 
 package jw.kingdom.hall.kingdomtimer.downloader.model.jw.schedule.model;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -28,7 +27,7 @@ class UrlDownloader {
     String getUrl(String languageCode) throws UnknownHostException {
         try {
             String startUrl = BASE_URL+"/"+languageCode;
-            Document doc = Jsoup.connect(startUrl).get();
+            Document doc = new ConnectionCreator().create(startUrl).get();
             return BASE_URL + getUrlEnd(doc);
         } catch (UnknownHostException e) {
             throw e;
